@@ -46,7 +46,7 @@ export const App = () => {
               // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
             }
           >
-            <Route
+            {/* <Route
               index
               path="/month/:currentDate"
               element={
@@ -62,7 +62,7 @@ export const App = () => {
                 // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
               }
             />
-          </Route>
+          </Route> */}
         </Route>
 
         <Route path="*" element={<h1>not found page</h1>} />
