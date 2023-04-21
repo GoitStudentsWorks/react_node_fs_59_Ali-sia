@@ -6,7 +6,7 @@ export const theme = {
   },
 
   space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
-  
+
   borders: {
     none: 'none',
     normal: '1px solid',
@@ -27,7 +27,7 @@ export const theme = {
   },
 
   fonts: {
-    main: 'Inter', 
+    main: 'Inter',
     secondary: 'Coolvetica',
   },
 
@@ -64,11 +64,12 @@ export const theme = {
   borderStyles: {},
 
   borderWidths: {},
-  
+
   transitions: {},
 
   zIndices: {},
 
+  // #TODO
   // З кольорами до кінця розберусь, коли зроблю перемикач теми
 
   colors: {
@@ -95,26 +96,24 @@ export const theme = {
   light: {
     textMain: 'rgba(17, 17, 17, 1)',
     userPanelText: 'rgba(126, 125, 130, 1)',
-  
+
     bgcMain: 'rgba(247, 246, 249, 1)',
     bgcSecondary: 'rgba(255, 255, 255, 1)',
-  
+
     bgcInput: 'rgba(246, 246, 246, 1)',
-  
+
     taskBorder: 'rgba(220, 227, 229, 0.8)',
   },
 
   dark: {
     textMain: 'rgba(255, 255, 255, 1)',
     userPanelText: 'rgba(250, 250, 250, 0.3)',
-  
+
     bgcMain: 'rgba(23, 24, 32, 1)',
     bgcSecondary: 'rgba(33, 34, 44, 1)',
-  
+
     bgcInput: 'rgba(255, 255, 255, 0.15)',
-  
+
     taskBorder: 'rgba(255, 255, 255, 0.15)',
-  }
+  },
 };
-
-
