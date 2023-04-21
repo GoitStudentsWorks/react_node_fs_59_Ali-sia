@@ -28,10 +28,6 @@ export const App = () => {
               // />
             }
           />
-        </Route>
-        <Route>
-          {/* path="/" element={<h2>main layout</h2>} */}
-          <Route index element={<h2>main layout</h2>} />
           <Route
             path="/account"
             element={
