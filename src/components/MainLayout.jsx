@@ -3,7 +3,7 @@ import { Toaster } from 'react-hot-toast';
 // import { AppBar1 } from './AppBar/AppBar';
 import { Suspense } from 'react';
 
-export const Layout = () => {
+export const MainLayout = () => {
   return (
     <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 16px' }}>
       {/* <AppBar1 /> */}

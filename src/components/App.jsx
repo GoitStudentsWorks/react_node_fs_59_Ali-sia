@@ -1,12 +1,12 @@
 import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
-import { Layout } from './Layout';
+import { MainLayout } from './MainLayout';
 
 export const App = () => {
   return (
     <BrowserRouter basename="goose-track-team-4">
       {/* <Suspense fallback={null}> */}
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<MainLayout />}>
           {/* routes for authorization */}
           <Route
             path="/register"
@@ -61,8 +61,8 @@ export const App = () => {
                 <h2>calendar day</h2>
                 // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
               }
-            />
-          </Route> */}
+            />*/}
+          </Route>
         </Route>
 
         <Route path="*" element={<h1>not found page</h1>} />
