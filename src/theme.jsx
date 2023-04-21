@@ -15,10 +15,6 @@ export const theme = {
     addTaskBTN: '1px dashed #3E85F3',
   },
 
-  borderStyles: {},
-
-  borderWidths: {},
-
   radii: {
     none: '0',
     light: '8px',
@@ -41,7 +37,7 @@ export const theme = {
     s: '14px',
     m: '16px',
     l: '18px',
-    xl: '',
+
     logo: '24px',
     heading: '32',
   },
@@ -57,13 +53,7 @@ export const theme = {
     black: 900,
   },
 
-  lineHeights: {
-    xs: '12px',
-    s: '14px',
-    m: '16px',
-    l: '18px',
-    xl: '24px',
-  },
+  lineHeights: {},
 
   letterSpacings: {},
 
@@ -71,6 +61,10 @@ export const theme = {
 
   sizes: {},
 
+  borderStyles: {},
+
+  borderWidths: {},
+  
   transitions: {},
 
   zIndices: {},
