@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -14,17 +14,6 @@ import storage from 'redux-persist/lib/storage';
 import { tasksReducer } from './tasks/tasks.slice';
 import { authReducer } from './auth/auth.slice';
 
-import { applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-
-const customMiddleware = ({ dispatch, getState }) => {
-  return applyMiddleware(
-    thunkMiddleware({
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    })
-  )({ dispatch, getState });
-};
-
 // Persisting token field from auth slice to local storage
 const authPersistConfig = {
   key: 'auth',
@@ -38,7 +27,11 @@ export const store = configureStore({
     tasks: tasksReducer,
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(customMiddleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
   devTools: process.env.NODE_ENV === 'development',
 });
 
