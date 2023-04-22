@@ -1,6 +1,7 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { InitialElement } from './InitialElement';
 import MainLayout from './MainLayout';
+import AccountPage from './../pages/AccountPage';
 
 export const App = () => {
   return (
@@ -34,7 +35,7 @@ export const App = () => {
             <Route
               path="/account"
               element={
-                <h2>account</h2>
+                <AccountPage />
                 // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
               }
             />
