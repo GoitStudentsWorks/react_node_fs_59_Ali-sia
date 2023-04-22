@@ -1,11 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 
-// #TODО - підключити пакети
-// $ yarn add formik
-// $ yarn add yup
+// import { register } from '../../redux/auth/auth.operations';
 
 // #TODO - дописати в redux-auth-operations
 
@@ -30,22 +28,26 @@ const initialValues = {
 };
 
 export const RegisterForm = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   const form = e.currentTarget;
+  //   dispatch(
+  //     register({
+  //       name: form.elements.name.value,
+  //       email: form.elements.email.value,
+  //       password: form.elements.password.value,
+  //     })
+  //   );
+  //   form.reset();
+  // };
 
-    const form = e.currentTarget;
-
-    dispatch(
-      register({
-        name: form.elements.name.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
-
-    form.reset();
+  const handleSubmit = (values, { setSubmitting }) => {
+    setTimeout(() => {
+      alert(JSON.stringify(values, null, 2));
+      setSubmitting(false);
+    }, 400);
   };
 
   return (
@@ -58,33 +60,40 @@ export const RegisterForm = () => {
         onSubmit={handleSubmit}
         autoComplete="off"
       >
-        <Form>
-          <label htmlFor="name">Name</label>
-          <Field
-            id="name"
-            name="name"
-            placeholder="Enter your name"
-            type="text"
-          />
+        {({ errors, touched }) => (
+          <Form>
+            <label htmlFor="name">Name</label>
+            <Field
+              id="name"
+              name="name"
+              placeholder="Enter your name"
+              type="text"
+            />
+            {/* If this field has been touched, and it contains an error, display it
+             */}
+            {touched.name && errors.name && <div>{errors.name}</div>}
 
-          <label htmlFor="email">Email</label>
-          <Field
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            type="email"
-          />
+            <label htmlFor="email">Email</label>
+            <Field
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              type="email"
+            />
+            {touched.email && errors.email && <div>{errors.email}</div>}
 
-          <label htmlFor="password">Password</label>
-          <Field
-            id="password"
-            name="password"
-            placeholder="Enter your password"
-            type="password"
-          />
+            <label htmlFor="password">Password</label>
+            <Field
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              type="password"
+            />
+            {touched.password && errors.password && <div>{errors.password}</div>}
 
-          <button type="submit">Sign Up</button>
-        </Form>
+            <button type="submit">Sign Up</button>
+          </Form>
+        )}
       </Formik>
     </div>
   );
