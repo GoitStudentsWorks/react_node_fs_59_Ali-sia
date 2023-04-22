@@ -1,12 +1,12 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import { MainLayout } from './MainLayout';
+import { InitialElement } from './InitialElement';
 
 export const App = () => {
   return (
     <BrowserRouter basename="goose-track-team-4">
       {/* <Suspense fallback={null}> */}
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        <Route path="/" element={<InitialElement />}>
           {/* routes for authorization */}
           <Route
             path="/register"
@@ -28,6 +28,7 @@ export const App = () => {
               // />
             }
           />
+
           <Route
             path="/account"
             element={
