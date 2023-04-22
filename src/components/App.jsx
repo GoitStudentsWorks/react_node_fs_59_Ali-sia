@@ -1,12 +1,13 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import { MainLayout } from './MainLayout';
+import { InitialElement } from './InitialElement';
+import MainLayout from './MainLayout';
 
 export const App = () => {
   return (
     <BrowserRouter basename="goose-track-team-4">
       {/* <Suspense fallback={null}> */}
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        <Route path="/" element={<InitialElement />}>
           {/* routes for authorization */}
           <Route
             path="/register"
@@ -28,21 +29,23 @@ export const App = () => {
               // />
             }
           />
-          <Route
-            path="/account"
-            element={
-              <h2>account</h2>
-              // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
-            }
-          />
-          <Route
-            path="/calendar"
-            element={
-              <h2>calendar</h2>
-              // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
-            }
-          >
-            {/* <Route
+
+          <Route element={<MainLayout />}>
+            <Route
+              path="/account"
+              element={
+                <h2>account</h2>
+                // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
+              }
+            />
+            <Route
+              path="/calendar"
+              element={
+                <h2>calendar</h2>
+                // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
+              }
+            >
+              {/* <Route
               index
               path="/month/:currentDate"
               element={
@@ -58,6 +61,7 @@ export const App = () => {
                 // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
               }
             />*/}
+            </Route>
           </Route>
         </Route>
 

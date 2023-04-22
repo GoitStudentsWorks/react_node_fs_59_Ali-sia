@@ -17,7 +17,7 @@ export const tasksInitState = {
 };
 
 const tasksSlice = createSlice({
-  name: 'contacts',
+  name: 'tasks',
   initialState: tasksInitState,
   extraReducers: builder => {
     builder
