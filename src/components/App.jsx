@@ -1,5 +1,6 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { InitialElement } from './InitialElement';
+import MainLayout from './MainLayout';
 
 export const App = () => {
   return (
@@ -29,21 +30,22 @@ export const App = () => {
             }
           />
 
-          <Route
-            path="/account"
-            element={
-              <h2>account</h2>
-              // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
-            }
-          />
-          <Route
-            path="/calendar"
-            element={
-              <h2>calendar</h2>
-              // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
-            }
-          >
-            {/* <Route
+          <Route element={<MainLayout />}>
+            <Route
+              path="/account"
+              element={
+                <h2>account</h2>
+                // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
+              }
+            />
+            <Route
+              path="/calendar"
+              element={
+                <h2>calendar</h2>
+                // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
+              }
+            >
+              {/* <Route
               index
               path="/month/:currentDate"
               element={
@@ -59,6 +61,7 @@ export const App = () => {
                 // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
               }
             />*/}
+            </Route>
           </Route>
         </Route>
 
