@@ -1,7 +1,16 @@
 import React from 'react';
 // import { useDispatch } from 'react-redux';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+
+import {
+  FormHeader,
+  StyledContainer,
+  InputContainer,
+  StyledLabel,
+  StyledField,
+  StyledButton,
+} from './RegisterForm.styled';
 
 // import { register } from '../../redux/auth/auth.operations';
 
@@ -51,8 +60,8 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
+    <StyledContainer>
+      <FormHeader>Sign Up</FormHeader>
 
       <Formik
         initialValues={initialValues}
@@ -62,39 +71,47 @@ export const RegisterForm = () => {
       >
         {({ errors, touched }) => (
           <Form>
-            <label htmlFor="name">Name</label>
-            <Field
-              id="name"
-              name="name"
-              placeholder="Enter your name"
-              type="text"
-            />
-            {/* If this field has been touched, and it contains an error, display it
-             */}
-            {touched.name && errors.name && <div>{errors.name}</div>}
+            <InputContainer>
+              <StyledLabel htmlFor="name">Name</StyledLabel>
+              <StyledField
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                type="text"
+              />
+              {/* If this field has been touched, and it contains an error, display it
+               */}
+              {touched.name && errors.name && <div>{errors.name}</div>}
+            </InputContainer>
 
-            <label htmlFor="email">Email</label>
-            <Field
-              id="email"
-              name="email"
-              placeholder="Enter your email"
-              type="email"
-            />
-            {touched.email && errors.email && <div>{errors.email}</div>}
+            <InputContainer>
+              <StyledLabel htmlFor="email">Email</StyledLabel>
+              <StyledField
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                type="email"
+              />
+              {touched.email && errors.email && <div>{errors.email}</div>}
+            </InputContainer>
 
-            <label htmlFor="password">Password</label>
-            <Field
-              id="password"
-              name="password"
-              placeholder="Enter your password"
-              type="password"
-            />
-            {touched.password && errors.password && <div>{errors.password}</div>}
+            <InputContainer>
+              <StyledLabel htmlFor="password">Password</StyledLabel>
+              <StyledField
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                type="password"
+              />
+              {touched.password && errors.password && (
+                <div>{errors.password}</div>
+              )}
+            </InputContainer>
 
-            <button type="submit">Sign Up</button>
+            <StyledButton type="submit">Sign Up</StyledButton>
           </Form>
         )}
       </Formik>
-    </div>
+    </StyledContainer>
   );
 };
