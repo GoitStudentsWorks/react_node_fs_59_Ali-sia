@@ -1,7 +1,7 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { InitialElement } from './InitialElement';
-import MainLayout from './MainLayout';
-import AccountPage from './../pages/AccountPage';
+import MainLayout from './MainLayout/MainLayout';
+import AccountPage from '../pages/AccountPage/AccountPage';
 
 export const App = () => {
   return (
