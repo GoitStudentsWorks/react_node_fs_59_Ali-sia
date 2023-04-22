@@ -6,6 +6,8 @@ const MainLayout = () => {
   return (
     <>
       <h2>main layout with header and sidebar</h2>
+      <p>header</p>
+      <p>sidebar</p>
       <Suspense fallback={null}>
         <Outlet />
       </Suspense>
