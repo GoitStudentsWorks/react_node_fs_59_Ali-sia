@@ -2,6 +2,7 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { InitialElement } from './InitialElement';
 import MainLayout from './MainLayout';
 import AccountPage from './../pages/AccountPage';
+import RegisterPage from 'pages/RegisterPage';
 
 export const App = () => {
   return (
@@ -13,7 +14,8 @@ export const App = () => {
           <Route
             path="/register"
             element={
-              <h2>register</h2>
+              <RegisterPage />
+              // <h2>register</h2>
               // <RestrictedRoute
               //   redirectTo="/contacts"
               //   component={<RegisterPage />}
