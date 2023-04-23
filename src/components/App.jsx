@@ -5,6 +5,7 @@ import MainLayout from './MainLayout/MainLayout';
 import AccountPage from '../pages/AccountPage/AccountPage';
 import CalendarPage from 'pages/CalendarPage/CalendarPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
+import LoginPage from '../pages/LoginPage/LoginPage';
 
 export const App = () => {
   return (
@@ -27,7 +28,8 @@ export const App = () => {
           <Route
             path="/login"
             element={
-              <h2>login</h2>
+              <LoginPage />
+              // <h2>login</h2>
               // <RestrictedRoute
               //   redirectTo="/contacts"
               //   component={<LoginPage />}
