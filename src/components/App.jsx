@@ -1,10 +1,9 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { InitialElement } from './InitialElement';
 
-import MainLayout from './MainLayout';
-import AccountPage from './../pages/AccountPage';
-import RegisterPage from 'pages/RegisterPage/RegisterPage';
-
+import MainLayout from './MainLayout/MainLayout';
+import AccountPage from '../pages/AccountPage/AccountPage';
+import RegisterPage from '../pages/RegisterPage/RegisterPage';
 
 export const App = () => {
   return (
