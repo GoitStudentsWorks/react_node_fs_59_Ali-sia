@@ -1,7 +1,8 @@
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
 import { InitialElement } from './InitialElement';
 import MainLayout from './MainLayout/MainLayout';
 import AccountPage from '../pages/AccountPage/AccountPage';
+import CalendarPage from 'pages/CalendarPage/CalendarPage';
 
 export const App = () => {
   return (
@@ -42,11 +43,14 @@ export const App = () => {
             <Route
               path="/calendar"
               element={
-                <h2>calendar</h2>
-                // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
+                <Navigate to={`/calendar/month/${Date.now()}`} replace />
               }
-            >
-              {/* <Route
+            />
+            <Route
+              path="/calendar/month/:currentDay"
+              element={<CalendarPage />}
+            />
+            {/* <Route
               index
               path="/month/:currentDate"
               element={
@@ -62,7 +66,6 @@ export const App = () => {
                 // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
               }
             />*/}
-            </Route>
           </Route>
         </Route>
 
