@@ -48,6 +48,7 @@ export const App = () => {
               element={
                 <Navigate to={`/calendar/month/${Date.now()}`} replace />
               }
+            />
             <Route
               path="/calendar/month/:currentDay"
               element={<CalendarPage />}
