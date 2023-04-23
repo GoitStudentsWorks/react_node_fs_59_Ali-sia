@@ -43,7 +43,7 @@ export const theme = {
     l: '18px',
 
     logo: '24px',
-    heading: '32',
+    heading: '32px',
   },
 
   fontWeights: {
