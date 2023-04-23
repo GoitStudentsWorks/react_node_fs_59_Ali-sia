@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Field } from 'formik';
+import { Field, Form } from 'formik';
 
 export const StyledContainer = styled.div`
   max-width: 335px;
@@ -10,18 +10,19 @@ export const StyledContainer = styled.div`
 
   margin-left: auto;
   margin-right: auto;
-  padding: 40px 24px;
+  padding: ${p => p.theme.space[8]}px ${p => p.theme.space[6]}px;
 
   border-radius: ${props => props.theme.radii.light};
 
   font-family: ${props => props.theme.fonts.main};
 
   @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    max-width: 480px;
   }
 `;
 
 export const FormHeader = styled.h2`
-  margin-bottom: 32px;
+  margin-bottom: ${p => p.theme.space[7]}px;
 
   font-weight: ${props => props.theme.fontWeights.semibold};
   font-size: ${props => props.theme.fontSizes.l};
@@ -31,25 +32,37 @@ export const FormHeader = styled.h2`
   color: ${props => props.theme.colors.primary};
 `;
 
-export const InputContainer = styled.div`
+export const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    width: 100%;
+  }
+`;
+
+export const InputContainer = styled.div`
+  margin-bottom: ${p => p.theme.space[6]}px;
 
   color: ${props => props.theme.colors.black};
+
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    width: 90%;
+  }
 `;
 
 export const StyledLabel = styled.label`
-  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
 
   font-weight: ${props => props.theme.fontWeights.semibold};
   font-size: ${props => props.theme.fontSizes.xs};
 `;
 
 export const StyledField = styled(Field)`
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 24px;
-  padding: 14px;
+  margin-top: ${p => p.theme.space[3]}px;
+  padding: ${p => p.theme.space[4]}px;
 
   border: ${props => props.theme.borders.input};
   border-radius: ${props => props.theme.radii.light};
@@ -66,10 +79,10 @@ export const StyledButton = styled.button`
   align-items: center;
   justify-content: center;
 
-  margin-top: 32px;
+  margin-top: ${p => p.theme.space[7]}px;
   margin-left: auto;
   margin-right: auto;
-  padding: 14px;
+  padding: ${p => p.theme.space[4]}px;
 
   border: ${props => props.theme.borders.none};
   border-radius: ${props => props.theme.radii.normal};
@@ -77,6 +90,8 @@ export const StyledButton = styled.button`
   background-color: ${props => props.theme.colors.primary};
   box-shadow: ${props => props.theme.shadows.loginBtn};
 
+  cursor: pointer;
+  
   font-weight: ${props => props.theme.fontWeights.semibold};
   font-size: ${props => props.theme.fontSizes.s};
 
