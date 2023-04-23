@@ -70,6 +70,16 @@ export const StyledField = styled(Field)`
 
   font-weight: ${props => props.theme.fontWeights.normal};
   font-size: ${props => props.theme.fontSizes.m};
+
+  background-color: ${props => props.theme.colors.white};
+
+  &:hover{
+    background-color: ${props => props.theme.colors.bgcLogin};
+  }
+
+  &:focus{
+    background-color: ${props => props.theme.colors.bgcLogin};
+  }
 `;
 
 export const StyledButton = styled.button`
@@ -91,7 +101,7 @@ export const StyledButton = styled.button`
   box-shadow: ${props => props.theme.shadows.loginBtn};
 
   cursor: pointer;
-  
+
   font-weight: ${props => props.theme.fontWeights.semibold};
   font-size: ${props => props.theme.fontSizes.s};
 

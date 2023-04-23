@@ -1,7 +1,9 @@
 import React from 'react';
 // import { useDispatch } from 'react-redux';
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
+
+// import { register } from '../../redux/auth/auth.operations';
 
 import {
   StyledContainer,
@@ -12,8 +14,6 @@ import {
   StyledField,
   StyledButton,
 } from './RegisterForm.styled';
-
-// import { register } from '../../redux/auth/auth.operations';
 
 // #TODO - дописати в redux-auth-operations
 
@@ -54,6 +54,8 @@ export const RegisterForm = () => {
   // };
 
   const handleSubmit = (values, { setSubmitting }) => {
+    console.log(setSubmitting );
+
     setTimeout(() => {
       alert(JSON.stringify(values, null, 2));
       setSubmitting(false);
