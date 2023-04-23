@@ -8,7 +8,7 @@ import axios from 'axios';
 //   privateApi,
 // } from 'http/http';
 
-axios.defaults.baseURL = 'https://localhost:3000';
+axios.defaults.baseURL = 'https://goose-track-backend-8txo.onrender.com';
 
 const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -18,7 +18,6 @@ const setAuthHeader = token => {
  * POST @ /users/signup
  * body: { name, email, password }
  */
-
 
 export const register = createAsyncThunk(
   'auth/register',
