@@ -13,6 +13,7 @@ export const theme = {
     medium: '2px solid',
 
     addTaskBTN: '1px dashed #3E85F3',
+    input: '1px solid rgba(220, 227, 229, 0.6)',
   },
 
   radii: {
@@ -24,6 +25,9 @@ export const theme = {
 
   shadows: {
     box: '0px 4px 16px rgba(17, 17, 17, 0.1)',
+    loginBtn: '4px 2px 16px rgba(136, 165, 191, 0.48);',
+    headerText:
+      '0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);',
   },
 
   fonts: {

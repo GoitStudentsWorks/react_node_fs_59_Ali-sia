@@ -1,8 +1,10 @@
 import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
 import { InitialElement } from './InitialElement';
+
 import MainLayout from './MainLayout/MainLayout';
 import AccountPage from '../pages/AccountPage/AccountPage';
 import CalendarPage from 'pages/CalendarPage/CalendarPage';
+import RegisterPage from '../pages/RegisterPage/RegisterPage';
 
 export const App = () => {
   return (
@@ -14,7 +16,8 @@ export const App = () => {
           <Route
             path="/register"
             element={
-              <h2>register</h2>
+              <RegisterPage />
+              // <h2>register</h2>
               // <RestrictedRoute
               //   redirectTo="/contacts"
               //   component={<RegisterPage />}
@@ -45,7 +48,6 @@ export const App = () => {
               element={
                 <Navigate to={`/calendar/month/${Date.now()}`} replace />
               }
-            />
             <Route
               path="/calendar/month/:currentDay"
               element={<CalendarPage />}
