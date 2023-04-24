@@ -1,13 +1,25 @@
-import { UserName, UserMenuButton } from './UserInfo.styled';
+import { useSelector } from 'react-redux';
+
+import { selectUser } from 'redux/auth/auth.selectors'; 
+
+import { UserName, UserMenuButton, UserMenuButtonChar } from './UserInfo.styled';
 
 const UserInfo = () => {
+    const { name } = useSelector(selectUser);
+    
+    const userName = name?.trim().split(' ')[0];
+
     return (
         <>
             <UserName>
-                UserName
+                {userName}
             </UserName>
             <UserMenuButton>
-                <p style={{fontSize: "24px", margin: "0", padding: "0"}} >U</p>
+                {
+                    !true
+                        ? "+"
+                        : <UserMenuButtonChar >{userName?.charAt(0).toUpperCase()}</UserMenuButtonChar>
+                }
             </UserMenuButton>
         </>
     );
