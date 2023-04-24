@@ -5,10 +5,6 @@ import signUpSpeak from './SVG/signUpSpeak.svg';
 export const PageContainer = styled.div`
   position: fixed;
 
-  display: flexbox;
-  align-items: center;
-  justify-content: center;
-
   top: 0;
   left: 0;
 
@@ -18,8 +14,40 @@ export const PageContainer = styled.div`
   background-color: ${props => props.theme.colors.bgcLogin};
 `;
 
+export const INeedMoreContainers = styled.div`
+  position: relative;
+  background-color: transparent;
+
+  display: flexbox;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+`;
+
+export const PositionContainer = styled.div`
+  position: absolute;
+`;
+
+export const PositionImgContainer = styled.div`
+  position: absolute;
+
+  top: 50%;
+  left: 3%;
+`;
+
 export const GooseContainer = styled.div`
-  @media (max-width: ${props => props.theme.breakpoints.laptop}) {
+  position: relative;
+
+  width: 450px;
+  height: 450px;
+
+  display: flexbox;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 1439px) {
     visibility: hidden;
   }
 `;
@@ -27,13 +55,11 @@ export const GooseContainer = styled.div`
 export const Goose = styled.div`
   position: absolute;
 
-  width: 340px;
-  height: 340px;
-  left: 5%;
-  top: 60%;
+  width: 355px;
+  height: 330px;
 
   background: url(${signUpGoose});
-  transform: rotate(-8deg);
+  transform: rotate(-9deg);
 
   background-repeat: no-repeat;
   background-size: contain;
@@ -41,12 +67,17 @@ export const Goose = styled.div`
 
 export const Speak = styled.div`
   position: absolute;
-  width: 200px;
-  height: 130px;
-  left: 5%;
-  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  transform: rotate(-5deg);
+  width: 175px;
+  height: 125px;
+
+  left: 14%;
+  top: 4%;
+
+  transform: rotate(-9deg);
 
   background: url(${signUpSpeak});
   background-repeat: no-repeat;
@@ -55,16 +86,14 @@ export const Speak = styled.div`
 
 export const TextContainer = styled.div`
   position: absolute;
-  width: 200px;
-  height: 48px;
-  left: 5.5%;
-  top: 54%;
+
+  left: 10%;
 
   font-family: 'Inter';
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
 
   color: #111111;
 
-  transform: rotate(-30deg);
+  transform: rotate(-27deg);
 `;
