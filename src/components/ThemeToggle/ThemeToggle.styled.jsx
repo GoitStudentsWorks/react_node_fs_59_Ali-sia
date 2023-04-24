@@ -9,6 +9,11 @@ export const ButtonStyled = styled.button`
     padding: 0;
 
     cursor: pointer;
+
+    &:hover,
+    &:focus {
+        box-shadow: 0 0 4px ${props => props.theme.colors.textHeaderTheme};
+    };
 `
 
 const SVGStyled = imageSVG => {

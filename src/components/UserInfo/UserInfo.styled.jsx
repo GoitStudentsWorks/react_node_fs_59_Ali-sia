@@ -21,7 +21,7 @@ export const UserMenuButton = styled.button`
     width: 32px;
     height: 32px;
 
-    background-color: transparent;
+    background-color: ${props => props.theme.colors.white});
     border: 1.8px solid #3E85F3;
     padding: 0;
 

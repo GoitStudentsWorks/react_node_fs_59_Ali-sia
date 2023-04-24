@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 import { register, logIn, logOut, refreshUser } from './auth.operations';
+import THEME_CONTEXT from 'context/ThemeContext';
 
 const initialState = {
   user: { name: null, email: null },
@@ -7,7 +8,10 @@ const initialState = {
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
+  theme: localStorage.getItem("theme") ? localStorage.getItem("theme") : THEME_CONTEXT.LIGHT,
 };
+
+export const toggleTheme = createAction('toggleTheme');
 
 const authSlice = createSlice({
   name: 'auth',
@@ -39,6 +43,10 @@ const authSlice = createSlice({
       })
       .addCase(refreshUser.rejected, (state, { payload }) => {
         state.isRefreshing = false;
+      })
+      .addCase(toggleTheme, (state, action) => {
+        state.theme = state.theme === THEME_CONTEXT.LIGHT ? THEME_CONTEXT.DARK : THEME_CONTEXT.LIGHT;
+        localStorage.setItem("theme", state.theme);
       });
   },
 });

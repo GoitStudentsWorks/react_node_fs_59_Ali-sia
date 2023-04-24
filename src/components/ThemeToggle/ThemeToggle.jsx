@@ -1,21 +1,22 @@
+import { useDispatch, useSelector } from 'react-redux';
+
 import { ButtonStyled, MoonSVGStyled, SunSVGStyled } from './ThemeToggle.styled';
-import { ThemeHandleContext } from 'context/ThemeContext';
+import THEME_CONTEXT from 'context/ThemeContext';
+import { toggleTheme } from 'redux/auth/auth.slice';
+import { selectTheme } from 'redux/auth/auth.selectors';
 
 const ThemeToggle = () => {
+    const dispatch = useDispatch();
+    const currentTheme = useSelector(selectTheme);
+
     return (
-        <ThemeHandleContext.Consumer>
-            {({currentTheme, setCurrentTheme}) => (
-                <ButtonStyled onClick={() => {
-                    currentTheme === "light"
-                        ? setCurrentTheme("dark")
-                        : setCurrentTheme("light");
-                    localStorage.setItem("theme", currentTheme);
-                }}>
-                    <MoonSVGStyled style={{display: currentTheme === "light" ? "block" : "none"}}/>
-                    <SunSVGStyled style={{display: currentTheme === "dark" ? "block" : "none"}} />
-                </ButtonStyled>
-            )}
-        </ThemeHandleContext.Consumer>
+        <ButtonStyled onClick={(event) => {
+            dispatch(toggleTheme());
+            event.currentTarget.blur();
+        }}>
+            <MoonSVGStyled style={{display: currentTheme === THEME_CONTEXT.LIGHT ? "block" : "none"}}/>
+            <SunSVGStyled style={{display: currentTheme === THEME_CONTEXT.DARK ? "block" : "none"}} />
+        </ButtonStyled>
     );
 };
   
