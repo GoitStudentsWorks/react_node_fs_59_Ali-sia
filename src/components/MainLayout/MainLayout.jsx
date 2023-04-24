@@ -3,7 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import { Suspense } from 'react';
 
 import Header from '../Header/Header';
-import { SideBar } from '../SideBar/SideBar';
+// import { SideBar } from '../SideBar/SideBar';
 
 
 const MainLayout = () => {
