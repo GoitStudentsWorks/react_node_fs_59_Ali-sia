@@ -6,8 +6,6 @@ export const StyledContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  margin-left: auto;
-  margin-right: auto;
   padding: ${p => p.theme.space[8]}px ${p => p.theme.space[6]}px;
 
   border-radius: ${props => props.theme.radii.light};

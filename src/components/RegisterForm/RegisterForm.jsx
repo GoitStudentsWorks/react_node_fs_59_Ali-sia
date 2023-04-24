@@ -1,9 +1,9 @@
 import React from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-// import { register } from '../../redux/auth/auth.operations';
+import { register } from '../../redux/auth/auth.operations';
 
 import {
   StyledContainer,
@@ -38,29 +38,29 @@ const initialValues = {
 };
 
 export const RegisterForm = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   const form = e.currentTarget;
-  //   dispatch(
-  //     register({
-  //       name: form.elements.name.value,
-  //       email: form.elements.email.value,
-  //       password: form.elements.password.value,
-  //     })
-  //   );
-  //   form.reset();
-  // };
-
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log(setSubmitting );
-
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 400);
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    dispatch(
+      register({
+        name: form.elements.name.value,
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
+    );
+    form.reset();
   };
+
+  // const handleSubmit = (values, { setSubmitting }) => {
+  //   console.log(setSubmitting );
+
+  //   setTimeout(() => {
+  //     alert(JSON.stringify(values, null, 2));
+  //     setSubmitting(false);
+  //   }, 400);
+  // };
 
   return (
     <StyledContainer>
