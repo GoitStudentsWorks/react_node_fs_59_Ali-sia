@@ -6,7 +6,6 @@ const ThemeToggle = () => {
         <ThemeHandleContext.Consumer>
             {({currentTheme, setCurrentTheme}) => (
                 <ButtonStyled onClick={() => {
-                    console.log(currentTheme);
                     currentTheme === "light"
                         ? setCurrentTheme("dark")
                         : setCurrentTheme("light");
