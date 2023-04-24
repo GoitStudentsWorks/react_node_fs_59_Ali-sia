@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+
 import { register } from '../../redux/auth/auth.operations';
 import {
   StyledContainer,
