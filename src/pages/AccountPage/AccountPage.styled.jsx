@@ -4,7 +4,7 @@ import { between, greaterThan } from "./../../helpers/breakpoints.styled";
 export const Main = styled.main`
     margin-left: auto;
     margin-right: auto;
-    padding: 36px 20px 40px;
+    padding: 0 20px 40px;
 
     background: #F7F6F9;
 
