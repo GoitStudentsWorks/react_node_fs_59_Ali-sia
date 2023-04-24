@@ -1,9 +1,9 @@
 import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
 import { InitialElement } from './InitialElement';
-import { useState } from 'react';
+import { useSelector} from 'react-redux';
+import { selectTheme } from 'redux/auth/auth.selectors';
 import { ThemeProvider } from 'styled-components';
 import { theme, light, dark } from 'theme';
-import { ThemeHandleContext } from 'context/ThemeContext'; 
 
 import MainLayout from './MainLayout/MainLayout';
 import AccountPage from '../pages/AccountPage/AccountPage';
@@ -12,15 +12,11 @@ import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 
 export const App = () => {
-  const [currentTheme, setCurrentTheme] = useState(localStorage.getItem("theme")
-                                                  ? localStorage.getItem("theme")
-                                                  : "light");
-
+  const currentTheme = useSelector(selectTheme);
   const themeGlobal = { ...theme, colors: {light, dark}[currentTheme] };
 
   return (
-    <ThemeHandleContext.Provider value={{ currentTheme, setCurrentTheme }}>
-      <ThemeProvider theme={themeGlobal}>
+    <ThemeProvider theme={themeGlobal}>
     <BrowserRouter basename="goose-track-team-4">
       {/* <Suspense fallback={null}> */}
       <Routes>
@@ -91,6 +87,5 @@ export const App = () => {
       {/* </Suspense> */}
     </BrowserRouter>
     </ThemeProvider>
-    </ThemeHandleContext.Provider>
   );
 };

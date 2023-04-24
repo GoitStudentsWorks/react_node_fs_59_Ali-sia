@@ -97,6 +97,8 @@ export const light = {
   textMainTheme: 'rgba(17, 17, 17, 1)',
   userPanelTextTheme: 'rgba(126, 125, 130, 1)',
 
+  textHeaderTheme: '#111111',
+
   bgcMainTheme: 'rgba(247, 246, 249, 1)',
   bgcSecondaryTheme: 'rgba(255, 255, 255, 1)',
 
@@ -127,6 +129,8 @@ export const dark = {
 
   textMainTheme: 'rgba(255, 255, 255, 1)',
   userPanelTextTheme: 'rgba(250, 250, 250, 0.3)',
+
+  textHeaderTheme: '#FFFFFF',
 
   bgcMainTheme: 'rgba(23, 24, 32, 1)',
   bgcSecondaryTheme: 'rgba(33, 34, 44, 1)',

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ButtonStyled, MoonSVGStyled, SunSVGStyled } from './ThemeToggle.styled';
-import { LIGHT, DARK } from 'context/ThemeContext';
+import THEME_CONTEXT from 'context/ThemeContext';
 import { toggleTheme } from 'redux/auth/auth.slice';
 import { selectTheme } from 'redux/auth/auth.selectors';
 
@@ -13,8 +13,8 @@ const ThemeToggle = () => {
         <ButtonStyled onClick={() => {
             dispatch(toggleTheme());
         }}>
-            <MoonSVGStyled style={{display: currentTheme === LIGHT ? "block" : "none"}}/>
-            <SunSVGStyled style={{display: currentTheme === DARK ? "block" : "none"}} />
+            <MoonSVGStyled style={{display: currentTheme === THEME_CONTEXT.LIGHT ? "block" : "none"}}/>
+            <SunSVGStyled style={{display: currentTheme === THEME_CONTEXT.DARK ? "block" : "none"}} />
         </ButtonStyled>
     );
 };

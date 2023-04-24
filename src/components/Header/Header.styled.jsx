@@ -16,7 +16,8 @@ export const HeaderStyled = styled.header`
     margin-left: auto;
     margin-right: auto;
 
-    background-color: ${props => props.theme.colors.bgcMainTheme};
+    background-color: transparent;
+    color: ${props => props.theme.colors.textHeaderTheme};
 
     @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
         max-width: 704px;
@@ -58,8 +59,6 @@ export const PageName =styled.p`
     padding: 0;
     margin: 0;
     line-height: 1;
-
-    color: ${props => props.theme.colors.black};
 
     text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
     
