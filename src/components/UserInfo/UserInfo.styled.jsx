@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { theme } from 'theme';
-
 export const UserName = styled.p`
     margin: 0px;
     margin-right: 14px;
@@ -11,7 +9,7 @@ export const UserName = styled.p`
     font-size: 14px;
     line-height: 1.29;
 
-    @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
         font-size: 18px;
         line-height: 1;
     };
@@ -30,7 +28,7 @@ export const UserMenuButton = styled.button`
     border-radius: 50%;
     overflow: hidden;
 
-    @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
         width: 44px;
         height: 44px;
     };

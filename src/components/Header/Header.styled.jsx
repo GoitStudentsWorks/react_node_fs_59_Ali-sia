@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { theme } from 'theme';
-
 import {ReactComponent as BurgerSVG} from './burger.svg';
 
 export const HeaderStyled = styled.header`
@@ -18,16 +16,16 @@ export const HeaderStyled = styled.header`
     margin-left: auto;
     margin-right: auto;
 
-    background-color: transparent;
+    background-color: ${props => props.theme.colors.bgcMainTheme};
 
-    @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
         max-width: 704px;
         
         margin-top: 24px;
         margin-bottom: 64px;
     };
 
-    @media screen and (min-width: ${theme.breakpoints.laptop}) {
+    @media screen and (min-width: ${props => props.theme.breakpoints.laptop}) {
         max-width: 100%;
         
         margin-top: 40px;
@@ -46,7 +44,7 @@ export const ButtonStyled = styled.button`
 
     display: block;
     
-    @media screen and (min-width: ${theme.breakpoints.laptop}) {
+    @media screen and (min-width: ${props => props.theme.breakpoints.laptop}) {
         display: none;
     };
 `
@@ -61,11 +59,11 @@ export const PageName =styled.p`
     margin: 0;
     line-height: 1;
 
-    color: ${theme.colors.black};
+    color: ${props => props.theme.colors.black};
 
     text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
     
-    @media screen and (min-width: ${theme.breakpoints.laptop}) {
+    @media screen and (min-width: ${props => props.theme.breakpoints.laptop}) {
         display: block;
     };
 `
@@ -74,7 +72,7 @@ export const BurgerSVGStyled = styled(BurgerSVG)`
     width: 24px;
     height: 24px;
 
-    @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
         width: 32px;
         height: 32px;
     };

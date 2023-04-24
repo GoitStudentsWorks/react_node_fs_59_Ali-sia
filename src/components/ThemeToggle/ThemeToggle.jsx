@@ -1,11 +1,22 @@
 import { ButtonStyled, MoonSVGStyled, SunSVGStyled } from './ThemeToggle.styled';
+import { ThemeHandleContext } from 'context/ThemeContext';
 
 const ThemeToggle = () => {
     return (
-        <ButtonStyled>
-            <MoonSVGStyled />
-            {/* <SunSVGStyled /> */}
-        </ButtonStyled>
+        <ThemeHandleContext.Consumer>
+            {({currentTheme, setCurrentTheme}) => (
+                <ButtonStyled onClick={() => {
+                    console.log(currentTheme);
+                    currentTheme === "light"
+                        ? setCurrentTheme("dark")
+                        : setCurrentTheme("light");
+                    localStorage.setItem("theme", currentTheme);
+                }}>
+                    <MoonSVGStyled style={{display: currentTheme === "light" ? "block" : "none"}}/>
+                    <SunSVGStyled style={{display: currentTheme === "dark" ? "block" : "none"}} />
+                </ButtonStyled>
+            )}
+        </ThemeHandleContext.Consumer>
     );
 };
   

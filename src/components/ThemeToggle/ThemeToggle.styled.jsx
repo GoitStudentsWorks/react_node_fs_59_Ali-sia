@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { theme } from 'theme';
-
 import {ReactComponent as MoonSVG} from './moon.svg';
 import {ReactComponent as SunSVG} from './sun.svg';
 
@@ -18,7 +16,7 @@ const SVGStyled = imageSVG => {
         width: 24px;
         height: 24px;
 
-        @media screen and (min-width: ${theme.breakpoints.tablet}) {
+        @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
             width: 32px;
             height: 32px;
         };

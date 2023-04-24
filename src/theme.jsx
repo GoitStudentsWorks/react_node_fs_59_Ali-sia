@@ -1,4 +1,4 @@
-export const theme = {
+export const base = {
   breakpoints: {
     mobile: '375px',
     tablet: '768px',
@@ -72,52 +72,66 @@ export const theme = {
   transitions: {},
 
   zIndices: {},
+};
 
-  // #TODO
-  // З кольорами до кінця розберусь, коли зроблю перемикач теми
+export const light = {
+  white: '#FFFFFF',
+  black: '#111111',
 
-  colors: {
-    white: '#FFFFFF',
-    black: '#111111',
+  bgcLogin: 'rgba(220, 235, 247, 1)',
 
-    bgcLogin: 'rgba(220, 235, 247, 1)',
+  primary: 'rgba(62, 133, 243, 1)',
+  secondary: '#E3F3FF',
 
-    primary: 'rgba(62, 133, 243, 1)',
-    secondary: '#E3F3FF',
+  taskMainLow: 'rgba(114, 194, 248, 1)',
+  taskMainMedium: 'rgba(243, 178, 73, 1)',
+  taskMainHigh: 'rgba(234, 61, 101, 1)',
 
-    taskMainLow: 'rgba(114, 194, 248, 1)',
-    taskMainMedium: 'rgba(243, 178, 73, 1)',
-    taskMainHigh: 'rgba(234, 61, 101, 1)',
+  taskSecondaryLow: 'rgba(206, 238, 253, 1)',
+  taskSecondaryMedium: 'rgba(252, 240, 212, 1)',
+  taskSecondaryHigh: 'rgba(255, 210, 221, 1)',
 
-    taskSecondaryLow: 'rgba(206, 238, 253, 1)',
-    taskSecondaryMedium: 'rgba(252, 240, 212, 1)',
-    taskSecondaryHigh: 'rgba(255, 210, 221, 1)',
+  btnMain: 'rgba(227, 243, 255, 1)',
+  btnAccent: 'rgba(202, 232, 255, 1)',
 
-    btnMain: 'rgba(227, 243, 255, 1)',
-    btnAccent: 'rgba(202, 232, 255, 1)',
-  },
+  textMainTheme: 'rgba(17, 17, 17, 1)',
+  userPanelTextTheme: 'rgba(126, 125, 130, 1)',
 
-  light: {
-    textMain: 'rgba(17, 17, 17, 1)',
-    userPanelText: 'rgba(126, 125, 130, 1)',
+  bgcMainTheme: 'rgba(247, 246, 249, 1)',
+  bgcSecondaryTheme: 'rgba(255, 255, 255, 1)',
 
-    bgcMain: 'rgba(247, 246, 249, 1)',
-    bgcSecondary: 'rgba(255, 255, 255, 1)',
+  bgcInputTheme: 'rgba(246, 246, 246, 1)',
 
-    bgcInput: 'rgba(246, 246, 246, 1)',
+  taskBorderTheme: 'rgba(220, 227, 229, 0.8)',
+};
 
-    taskBorder: 'rgba(220, 227, 229, 0.8)',
-  },
+export const dark = {
+  white: '#FFFFFF',
+  black: '#111111',
 
-  dark: {
-    textMain: 'rgba(255, 255, 255, 1)',
-    userPanelText: 'rgba(250, 250, 250, 0.3)',
+  bgcLogin: 'rgba(220, 235, 247, 1)',
 
-    bgcMain: 'rgba(23, 24, 32, 1)',
-    bgcSecondary: 'rgba(33, 34, 44, 1)',
+  primary: 'rgba(62, 133, 243, 1)',
+  secondary: '#E3F3FF',
 
-    bgcInput: 'rgba(255, 255, 255, 0.15)',
+  taskMainLow: 'rgba(114, 194, 248, 1)',
+  taskMainMedium: 'rgba(243, 178, 73, 1)',
+  taskMainHigh: 'rgba(234, 61, 101, 1)',
 
-    taskBorder: 'rgba(255, 255, 255, 0.15)',
-  },
+  taskSecondaryLow: 'rgba(206, 238, 253, 1)',
+  taskSecondaryMedium: 'rgba(252, 240, 212, 1)',
+  taskSecondaryHigh: 'rgba(255, 210, 221, 1)',
+
+  btnMain: 'rgba(227, 243, 255, 1)',
+  btnAccent: 'rgba(202, 232, 255, 1)',
+
+  textMainTheme: 'rgba(255, 255, 255, 1)',
+  userPanelTextTheme: 'rgba(250, 250, 250, 0.3)',
+
+  bgcMainTheme: 'rgba(23, 24, 32, 1)',
+  bgcSecondaryTheme: 'rgba(33, 34, 44, 1)',
+
+  bgcInputTheme: 'rgba(255, 255, 255, 0.15)',
+
+  taskBorderTheme: 'rgba(255, 255, 255, 0.15)',
 };
