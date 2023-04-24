@@ -2,17 +2,17 @@ import styled from "styled-components";
 import { between, greaterThan } from "./../../helpers/breakpoints.styled";
 
 export const Main = styled.main`
-    max-width: 375px;
     margin-left: auto;
     margin-right: auto;
+    padding: 36px 20px 40px;
 
     background: #F7F6F9;
 
     ${between('mobile', 'tablet', `
-        max-width: 768px;
+        padding: 0 32px 38px;
     `)}
 
     ${greaterThan('tablet', `
-        max-width: 1200px;
+        padding: 0 32px 38px;
     `)}
 `;

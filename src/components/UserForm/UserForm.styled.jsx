@@ -10,19 +10,20 @@ export const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 40px 20px;
+    max-width: 335px;
+    margin: 0 auto;
     padding: 40px 18px;
 
     background-color: #fff;
     border-radius: 16px;
 
-    ${between('mobile', 'tablet', `
+    ${between('mobile', 'laptop', `
         max-width: 704px;
-        margin: 38px auto;
         padding-top: 268px;
     `)}
 
-    ${greaterThan('tablet', `
+    ${greaterThan('laptop', `
+        max-width: 1087px;
         padding-top: 268px;
     `)}
 `;
@@ -104,15 +105,13 @@ export const LabelPhotoSelection = styled.label`
 `;
 
 export const Wrapper = styled.div`
-    ${greaterThan('tablet', `
+    ${greaterThan('laptop', `
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 50px;
         justify-content: center;
         width: 785px;
-        margin: 32px;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto;
     `)}
 `
 
@@ -123,6 +122,7 @@ export const SelectionIcon = styled(HiPlus)`
     transform: translate(-50%, -50%);
     width: 8px;
     height: 8px;
+
     color: #fff;
 
     ${greaterThan('mobile', `
@@ -138,22 +138,22 @@ export const Label = styled.label`
     justify-content: center;
     margin-bottom: 18px;
 
-    ${between('mobile', 'tablet', `
-        width: 354px;
-        margin-left: auto;
-        margin-right: auto;
+    ${between('mobile', 'laptop', `
+        max-width: 354px;
+        margin: 0 auto 24px;
     `)}
 `;
 
 export const LabelName = styled.span`
     margin-bottom: 8px;
+    
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 1.3;
 
     ${greaterThan('mobile', `
-        font-size: 12px;
+        font-size: 14px;
     `)}
 `;
 
@@ -184,7 +184,7 @@ export const Input = styled.input`
 `;
 
 export const StyledDatePicker = styled(DatePicker)`   
-    width: calc(100% - 28px);
+    width: 100%;
     padding: 12px 14px;
 
     font-weight: 600;
@@ -222,8 +222,7 @@ export const StyledDatePicker = styled(DatePicker)`
 export const Button = styled.button`
     width: 58%;
     height: 46px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 22px auto 0;
 
     cursor: pointer;
     font-weight: 600;
@@ -238,8 +237,15 @@ export const Button = styled.button`
         box-shadow: rgba(0, 0, 0, 0.7) 0px 5px 15px;
     }
 
-    ${greaterThan('mobile', `
+    ${between('mobile', 'laptop', `
         width: 226px;
         height: 48px;
+        margin: 16px auto 0;
+    `)}
+
+    ${greaterThan('laptop', `
+        width: 226px;
+        height: 48px;
+        margin: 70px auto 60px;
     `)}
 `;
