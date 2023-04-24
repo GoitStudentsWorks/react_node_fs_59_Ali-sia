@@ -4,7 +4,7 @@ import {
 
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import UserInfo from "components/UserInfo/UserInfo";
-import { HeaderStyled, ButtonStyled, PageName, BurgerSVGStyled, UserMenu, UserName, UserMenuButton } from './Header.styled';
+import { HeaderStyled, ButtonStyled, PageName, BurgerSVGStyled, UserMenu } from './Header.styled';
 
 const Header = () => {
     const { pathname } = useLocation();

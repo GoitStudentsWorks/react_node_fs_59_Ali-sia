@@ -2,7 +2,7 @@ import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
 import { InitialElement } from './InitialElement';
 import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { base, light, dark } from 'theme';
+import { theme, light, dark } from 'theme';
 import { ThemeHandleContext } from 'context/ThemeContext'; 
 
 import MainLayout from './MainLayout/MainLayout';
@@ -16,11 +16,11 @@ export const App = () => {
                                                   ? localStorage.getItem("theme")
                                                   : "light");
 
-  const theme = { ...base, colors: {light, dark}[currentTheme] };
+  const themeGlobal = { ...theme, colors: {light, dark}[currentTheme] };
 
   return (
     <ThemeHandleContext.Provider value={{ currentTheme, setCurrentTheme }}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeGlobal}>
     <BrowserRouter basename="goose-track-team-4">
       {/* <Suspense fallback={null}> */}
       <Routes>
