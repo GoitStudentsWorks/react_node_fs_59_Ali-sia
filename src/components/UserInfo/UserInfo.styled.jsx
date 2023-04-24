@@ -1,16 +1,15 @@
 import styled from "styled-components";
 
 export const UserName = styled.p`
-    margin: 0px;
     margin-right: 14px;
     margin-left: 14px;
 
-    font-weight: 700;
-    font-size: 14px;
+    font-weight: ${props => props.theme.fontWeights.bold};
+    font-size: ${props => props.theme.fontSizes.s};
     line-height: 1.29;
 
     @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-        font-size: 18px;
+        font-size: ${props => props.theme.fontSizes.l};
         line-height: 1;
     };
 `
@@ -21,15 +20,34 @@ export const UserMenuButton = styled.button`
     width: 32px;
     height: 32px;
 
-    background-color: ${props => props.theme.colors.white});
+    background-color: ${props => props.theme.colors.textHeaderTheme};
     border: 1.8px solid #3E85F3;
     padding: 0;
 
     border-radius: 50%;
     overflow: hidden;
 
+    &:hover,
+    &:focus {
+        box-shadow: 0 0 4px ${props => props.theme.colors.textHeaderTheme};
+    };
+
     @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
         width: 44px;
         height: 44px;
+    };
+`
+
+export const UserMenuButtonAvatar = styled.img`
+    object-fit: cover;
+`
+
+export const UserMenuButtonChar = styled.p`
+    color: ${prop => prop.theme.colors.bgcMainTheme};
+    font-weight: ${props => props.theme.fontWeights.bold};
+    font-size: ${props => props.theme.fontSizes.logo};
+
+    @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+        font-size: ${props => props.theme.fontSizes.heading};
     };
 `

@@ -1,10 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Formik } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-
 import { register } from '../../redux/auth/auth.operations';
-
 import {
   StyledContainer,
   FormHeader,
@@ -15,52 +13,39 @@ import {
   StyledButton,
 } from './RegisterForm.styled';
 
-// #TODO - дописати в redux-auth-operations
-
-const SignupSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-
-  email: Yup.string().email('Invalid email').required('Required'),
-
-  password: Yup.string()
-    .min(6, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-});
-
-const initialValues = {
-  name: '',
-  email: '',
-  password: '',
-};
-
 export const RegisterForm = () => {
-  const dispatch = useDispatch();
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    dispatch(
-      register({
-        name: form.elements.name.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
-    form.reset();
+  const initialValues = {
+    name: '',
+    email: '',
+    password: '',
   };
 
-  // const handleSubmit = (values, { setSubmitting }) => {
-  //   console.log(setSubmitting );
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required('Name is required'),
+    email: Yup.string()
+      .email('Invalid email address')
+      .required('Email is required'),
+    password: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .required('Password is required'),
+  });
 
-  //   setTimeout(() => {
-  //     alert(JSON.stringify(values, null, 2));
-  //     setSubmitting(false);
-  //   }, 400);
-  // };
+  const dispatch = useDispatch();
+
+  const handleSubmit = (values, { setSubmitting, resetForm }) => {
+    dispatch(register(values))
+      .unwrap()
+      .then(data => {
+        // console.log('Registration success:', data);
+        resetForm();
+      })
+      .catch(error => {
+        console.error('Registration error:', error.message);
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
+  };
 
   return (
     <StyledContainer>
@@ -68,11 +53,10 @@ export const RegisterForm = () => {
 
       <Formik
         initialValues={initialValues}
-        validationSchema={SignupSchema}
+        validationSchema={validationSchema}
         onSubmit={handleSubmit}
-        autoComplete="off"
       >
-        {({ errors, touched }) => (
+        {({ isSubmitting }) => (
           <StyledForm>
             <InputContainer>
               <StyledLabel htmlFor="name">
@@ -83,9 +67,7 @@ export const RegisterForm = () => {
                   placeholder="Enter your name"
                   type="text"
                 />
-                {/* If this field has been touched, and it contains an error, display it
-                 */}
-                {touched.name && errors.name && <div>{errors.name}</div>}
+                <ErrorMessage name="name" component="div" />
               </StyledLabel>
             </InputContainer>
 
@@ -98,7 +80,7 @@ export const RegisterForm = () => {
                   placeholder="Enter your email"
                   type="email"
                 />
-                {touched.email && errors.email && <div>{errors.email}</div>}
+                <ErrorMessage name="email" component="div" />
               </StyledLabel>
             </InputContainer>
 
@@ -111,13 +93,13 @@ export const RegisterForm = () => {
                   placeholder="Enter your password"
                   type="password"
                 />
-                {touched.password && errors.password && (
-                  <div>{errors.password}</div>
-                )}
+                <ErrorMessage name="password" component="div" />
               </StyledLabel>
             </InputContainer>
 
-            <StyledButton type="submit">Sign Up</StyledButton>
+            <StyledButton type="submit" disabled={isSubmitting}>
+              Sign Up
+            </StyledButton>
           </StyledForm>
         )}
       </Formik>

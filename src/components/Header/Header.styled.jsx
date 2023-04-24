@@ -10,10 +10,10 @@ export const HeaderStyled = styled.header`
     padding-top: 24px;
     padding-left: 20px;
     padding-right: 20px;
+    padding-bottom: 64px;
 
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 64px;
 
     max-width: ${props => props.theme.breakpoints.mobile};
 
@@ -30,18 +30,24 @@ export const HeaderStyled = styled.header`
     @media screen and (min-width: ${props => props.theme.breakpoints.laptop}) {
         max-width: ${props => props.theme.breakpoints.laptop};
 
-        margin-bottom: 32px
+        padding-bottom: 32px;
     };
 `;
 
 export const ButtonStyled = styled.button`
     background-color: transparent;
     border: 0;
-    padding: 0;
+    padding: 4px;
 
     cursor: pointer;
 
     display: block;
+
+    &:hover,
+    &:focus {
+        box-shadow: 0 0 4px ${props => props.theme.colors.textHeaderTheme};
+        border-radius: 50%;
+    };
     
     @media screen and (min-width: ${props => props.theme.breakpoints.laptop}) {
         display: none;
@@ -51,14 +57,12 @@ export const ButtonStyled = styled.button`
 export const PageName =styled.p`
     display: none;
 
-    font-weight: 700;
-    font-size: 32px;
+    font-weight: ${props => props.theme.fontWeights.bold};
+    font-size: ${props => props.theme.fontSizes.heading};
 
-    padding: 0;
-    margin: 0;
     line-height: 1;
 
-    text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
+    text-shadow: ${props => props.theme.shadows.headerText};
     
     @media screen and (min-width: ${props => props.theme.breakpoints.laptop}) {
         display: block;
@@ -66,6 +70,7 @@ export const PageName =styled.p`
 `
 
 export const BurgerSVGStyled = styled(BurgerSVG)`
+    display: block;
     width: 24px;
     height: 24px;
     color: ${props => props.theme.colors.textHeaderTheme};
