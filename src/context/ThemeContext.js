@@ -1,3 +1,4 @@
-import { createContext } from 'react';
-  
-export const ThemeHandleContext = createContext()
+export const THEME_CONTEXT = {
+    LIGHT: "light",
+    DARK: "dark",
+};
