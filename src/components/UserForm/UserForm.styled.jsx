@@ -17,7 +17,7 @@ export const StyledForm = styled.form`
     background-color: #fff;
     border-radius: 16px;
 
-    ${between('mobile', 'laptop', `
+    ${between('tablet', 'laptop', `
         max-width: 704px;
         padding-top: 268px;
     `)}
@@ -40,7 +40,7 @@ export const Photo = styled.img`
     border: 2px solid #3E85F3;
     border-radius: 50%;
 
-    ${greaterThan('mobile', `
+    ${greaterThan('tablet', `
         top: 100px; 
         width: 124px;
         height: 124px;
@@ -63,7 +63,7 @@ export const Plug = styled.div`
     border: 2px solid #3E85F3;
     border-radius: 50%;
 
-    ${greaterThan('mobile', `
+    ${greaterThan('tablet', `
         top: 100px;
         width: 124px;
         height: 124px;
@@ -96,7 +96,7 @@ export const LabelPhotoSelection = styled.label`
         box-shadow: rgba(0, 0, 0, 7) 0px 5px 15px;
     }
 
-    ${greaterThan('mobile', `
+    ${greaterThan('tablet', `
         top: 160px;
         left: calc(50% + 28px);
         width: 24px;
@@ -125,7 +125,7 @@ export const SelectionIcon = styled(HiPlus)`
 
     color: #fff;
 
-    ${greaterThan('mobile', `
+    ${greaterThan('tablet', `
         width: 16px;
         height: 16px;
     `)}
@@ -138,7 +138,7 @@ export const Label = styled.label`
     justify-content: center;
     margin-bottom: 18px;
 
-    ${between('mobile', 'laptop', `
+    ${between('tablet', 'laptop', `
         max-width: 354px;
         margin: 0 auto 24px;
     `)}
@@ -152,7 +152,7 @@ export const LabelName = styled.span`
     font-size: 12px;
     line-height: 1.3;
 
-    ${greaterThan('mobile', `
+    ${greaterThan('tablet', `
         font-size: 14px;
     `)}
 `;
@@ -178,7 +178,7 @@ export const Input = styled.input`
         text-decoration-thickness: 2px;
     }
 
-    ${greaterThan('mobile', `
+    ${greaterThan('tablet', `
         font-size: 16px;
     `)}
 `;
@@ -214,7 +214,7 @@ export const StyledDatePicker = styled(DatePicker)`
         border-radius: 16px !important;
     }
 
-    ${greaterThan('mobile', `
+    ${greaterThan('tablet', `
         font-size: 16px;
     `)}
 `;
@@ -237,7 +237,7 @@ export const Button = styled.button`
         box-shadow: rgba(0, 0, 0, 0.7) 0px 5px 15px;
     }
 
-    ${between('mobile', 'laptop', `
+    ${between('tablet', 'laptop', `
         width: 226px;
         height: 48px;
         margin: 16px auto 0;
