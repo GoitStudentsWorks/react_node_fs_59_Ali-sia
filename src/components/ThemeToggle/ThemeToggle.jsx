@@ -10,8 +10,9 @@ const ThemeToggle = () => {
     const currentTheme = useSelector(selectTheme);
 
     return (
-        <ButtonStyled onClick={() => {
+        <ButtonStyled onClick={(event) => {
             dispatch(toggleTheme());
+            event.currentTarget.blur();
         }}>
             <MoonSVGStyled style={{display: currentTheme === THEME_CONTEXT.LIGHT ? "block" : "none"}}/>
             <SunSVGStyled style={{display: currentTheme === THEME_CONTEXT.DARK ? "block" : "none"}} />

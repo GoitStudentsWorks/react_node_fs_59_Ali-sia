@@ -7,32 +7,30 @@ export const HeaderStyled = styled.header`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0px;
+    padding-top: 24px;
+    padding-left: 20px;
+    padding-right: 20px;
 
-    max-width: 335px;
-    
-    margin-top: 20px;
-    margin-bottom: 95px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 64px;
+
+    max-width: ${props => props.theme.breakpoints.mobile};
 
     background-color: transparent;
     color: ${props => props.theme.colors.textHeaderTheme};
 
     @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-        max-width: 704px;
-        
-        margin-top: 24px;
-        margin-bottom: 64px;
+        max-width: ${props => props.theme.breakpoints.tablet};
+
+        padding-left: 32px;
+        padding-right: 32px;
     };
 
     @media screen and (min-width: ${props => props.theme.breakpoints.laptop}) {
-        max-width: 100%;
-        
-        margin-top: 40px;
-        margin-bottom: 32px;
-        margin-left: 32px;
-        margin-right: 32px;
+        max-width: ${props => props.theme.breakpoints.laptop};
+
+        margin-bottom: 32px
     };
 `;
 
@@ -70,6 +68,7 @@ export const PageName =styled.p`
 export const BurgerSVGStyled = styled(BurgerSVG)`
     width: 24px;
     height: 24px;
+    color: ${props => props.theme.colors.textHeaderTheme};
 
     @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
         width: 32px;
