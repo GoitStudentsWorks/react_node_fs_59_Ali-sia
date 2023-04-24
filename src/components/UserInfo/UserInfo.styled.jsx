@@ -27,6 +27,11 @@ export const UserMenuButton = styled.button`
     border-radius: 50%;
     overflow: hidden;
 
+    &:hover,
+    &:focus {
+        box-shadow: 0 0 4px ${props => props.theme.colors.textHeaderTheme};
+    };
+
     @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
         width: 44px;
         height: 44px;

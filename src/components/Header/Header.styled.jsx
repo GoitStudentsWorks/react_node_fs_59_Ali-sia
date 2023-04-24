@@ -37,11 +37,17 @@ export const HeaderStyled = styled.header`
 export const ButtonStyled = styled.button`
     background-color: transparent;
     border: 0;
-    padding: 0;
+    padding: 4px;
 
     cursor: pointer;
 
     display: block;
+
+    &:hover,
+    &:focus {
+        box-shadow: 0 0 4px ${props => props.theme.colors.textHeaderTheme};
+        border-radius: 50%;
+    };
     
     @media screen and (min-width: ${props => props.theme.breakpoints.laptop}) {
         display: none;
@@ -64,6 +70,7 @@ export const PageName =styled.p`
 `
 
 export const BurgerSVGStyled = styled(BurgerSVG)`
+    display: block;
     width: 24px;
     height: 24px;
     color: ${props => props.theme.colors.textHeaderTheme};
