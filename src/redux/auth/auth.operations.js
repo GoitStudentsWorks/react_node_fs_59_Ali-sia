@@ -20,15 +20,13 @@ const setAuthHeader = token => {
  */
 
 export const register = createAsyncThunk(
-  'auth/register',
-  async (credentials, thunkAPI) => {
+  'users/register',
+  async (formData, { rejectWithValue }) => {
     try {
-      const res = await axios.post('/users/signup', credentials);
-      // After successful registration, add the token to the HTTP header
-      setAuthHeader(res.data.token);
-      return res.data;
+      const { data } = await axios.post('/api/users/register', formData);
+      return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.response.data);
     }
   }
 );

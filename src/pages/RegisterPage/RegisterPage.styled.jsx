@@ -48,7 +48,8 @@ export const GooseContainer = styled.div`
   justify-content: center;
 
   @media (max-width: 1439px) {
-    visibility: hidden;
+    /* visibility: hidden; */
+    display: none;
   }
 `;
 
