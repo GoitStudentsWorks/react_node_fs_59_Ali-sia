@@ -33,6 +33,10 @@ export const UserMenuButton = styled.button`
     };
 `
 
+export const UserMenuButtonAvatar = styled.img`
+    object-fit: cover;
+`
+
 export const UserMenuButtonChar = styled.p`
     color: ${prop => prop.theme.colors.bgcMainTheme};
     font-weight: ${props => props.theme.fontWeights.bold};
