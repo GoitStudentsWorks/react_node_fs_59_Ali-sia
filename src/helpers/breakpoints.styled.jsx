@@ -22,12 +22,11 @@ export const between = (firstBreakpoint, secondBreakpoint, styles) => css`
     ${styles}
   }
 `;
-
-// ${between(
-//   'sm',
+// ${prop => between(
+//   'md',
 //   'lg',
-//   `background-color: blue; display: flex;
-// justify-content: space-between;`
+//   `background-color: prop.theme.colors.yellow;
+// `
 // )}
 
 export const greaterThan = (breakpoint, styles) => css`
@@ -35,9 +34,9 @@ export const greaterThan = (breakpoint, styles) => css`
     ${styles}
   }
 `;
-// ${greaterThan(
+// ${prop => greaterThan(
 //   'md',
-//   `background-color: yellow;
+//   `background-color: prop.theme.colors.yellow;
 // `
 // )}
 
@@ -46,8 +45,8 @@ export const lesserThan = (breakpoint, styles) => css`
     ${styles}
   }
 `;
-// ${lesserThan(
+// ${prop => lesserThan(
 //   'md',
-//   `background-color: red;
-// text-weight:900`
+//   `background-color: prop.theme.colors.yellow;
+// `
 // )}
