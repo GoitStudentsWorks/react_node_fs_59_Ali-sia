@@ -1,5 +1,5 @@
-import { UserForm } from '../../components/UserForm/UserForm';
-import { Main } from './AccountPage.styled';
+import { UserForm } from "../../components/UserForm/UserForm";
+import { Main } from "./AccountPage.styled";
 
 const AccountPage = () => {
   return (

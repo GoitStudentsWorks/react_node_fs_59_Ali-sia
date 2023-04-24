@@ -5,7 +5,7 @@ export const base = {
     laptop: '1440px',
   },
 
-  space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
+  space: [0, 2, 4, 8, 14, 16, 24, 32, 40, 64, 128],
 
   borders: {
     none: 'none',
@@ -43,7 +43,7 @@ export const base = {
     l: '18px',
 
     logo: '24px',
-    heading: '32',
+    heading: '32px',
   },
 
   fontWeights: {

@@ -8,7 +8,7 @@ import axios from 'axios';
 //   privateApi,
 // } from 'http/http';
 
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+axios.defaults.baseURL = 'https://goose-track-backend-8txo.onrender.com';
 
 const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -18,7 +18,6 @@ const setAuthHeader = token => {
  * POST @ /users/signup
  * body: { name, email, password }
  */
-
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -41,16 +40,14 @@ export const register = createAsyncThunk(
 export const logIn = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
-    // try {
-    return 0;
-
-    // const res = await publicApi.post('/users/login', credentials);
-    // // After successful login, add the token to the HTTP header
-    // setAuthHeader(res.data.token);
-    // return res.data;
-    // } catch (error) {
-    //   return thunkAPI.rejectWithValue(error.message);
-    // }
+    try {
+      const res = await axios.post('/users/login', credentials);
+      // After successful login, add the token to the HTTP header
+      setAuthHeader(res.data.token);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
 
