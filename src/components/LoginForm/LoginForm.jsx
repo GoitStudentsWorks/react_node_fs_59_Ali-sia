@@ -16,7 +16,7 @@ import {
 } from './LoginForm.styled';
 
 // #TODO коли кнопка буде готова, перемістити її в потрібний файл
-import { LogoutBtn } from '../LogoutBtn/LogoutBtn';
+import { LogoutBtn } from '../Buttons/LogoutBtn/LogoutBtn';
 
 export const LoginForm = () => {
   const initialValues = {
@@ -49,10 +49,9 @@ export const LoginForm = () => {
 
   return (
     <StyledContainer>
-
       {/* #TODO коли кнопка буде готова, перемістити її в потрібний файл */}
       <LogoutBtn />
-      
+
       <FormHeader>Log In</FormHeader>
 
       <Formik

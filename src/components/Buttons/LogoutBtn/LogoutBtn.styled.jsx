@@ -4,20 +4,27 @@ export const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
   padding: ${p => p.theme.space[4]}px ${p => p.theme.space[6] + 4}px;
+
   border: ${props => props.theme.borders.none};
   border-radius: ${props => props.theme.radii.normal};
+
   background-color: ${props => props.theme.colors.primary};
   box-shadow: ${props => props.theme.shadows.loginBtn};
+
   font-weight: ${props => props.theme.fontWeights.semibold};
   font-size: ${props => props.theme.fontSizes.s};
   cursor: pointer;
   color: ${props => props.theme.colors.white};
+
   img {
     margin-left: ${p => p.theme.space[3]}px;
   }
+
   @media (min-width: ${props => props.theme.breakpoints.tablet}) {
     padding: ${p => p.theme.space[5]}px ${p => p.theme.space[6]}px;
+
     img {
       margin-left: ${p => p.theme.space[4] + 1}px;
     }
