@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import toast from 'react-hot-toast';
 
 import { logIn } from '../../redux/auth/auth.operations';
 import { LoginRegisterBtn } from '../Buttons/LoginRegisterBtn/LoginRegisterBtn';
@@ -15,6 +16,11 @@ import {
   StyledLabel,
   StyledField,
 } from './LoginForm.styled';
+
+// #TODO: check
+// toast() API
+// Call it to create a toast from anywhere, even outside React.
+// Make sure you add the <Toaster/> component to your app first.
 
 export const LoginForm = () => {
   const initialValues = {
@@ -35,11 +41,13 @@ export const LoginForm = () => {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       const data = await dispatch(logIn(values)).unwrap();
-      console.log('Login successfull:', data);
+      // console.log('Login successfull:', data);
       resetForm();
-      navigate.push('/calendar/month');
+      navigate('/calendar/month');
     } catch (error) {
-      console.error('Login error:', error.message);
+      const errorNotify = () => toast.error(`${error.message}`);
+      errorNotify();
+      // console.error('Login error:', error.message);
     } finally {
       setSubmitting(false);
     }

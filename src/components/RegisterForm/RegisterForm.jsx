@@ -38,7 +38,7 @@ export const RegisterForm = () => {
     dispatch(register(values))
       .unwrap()
       .then(data => {
-        // console.log('Registration success:', data);
+        console.log('Registration success:', data);
         resetForm();
       })
       .catch(error => {
