@@ -11,6 +11,9 @@ import CalendarPage from 'pages/CalendarPage/CalendarPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 
+import { RestrictedRoute } from './RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute';
+
 export const App = () => {
   const currentTheme = useSelector(selectTheme);
   const themeGlobal = { ...theme, colors: { light, dark }[currentTheme] };
@@ -22,6 +25,7 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<InitialElement />}>
             {/* routes for authorization */}
+            <Route index element={<Navigate to="/login" />} />
             <Route
               path="/register"
               element={
@@ -44,43 +48,27 @@ export const App = () => {
                 // />
               }
             />
-
-            <Route element={<MainLayout />}>
-              <Route
-                path="/account"
-                element={
-                  <AccountPage />
-                  // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
-                }
-              />
-              <Route
-                path="/calendar"
-                element={
-                  <Navigate to={`/calendar/month/${Date.now()}`} replace />
-                }
-              />
-              <Route
-                path="/calendar/month/:currentDay"
-                element={<CalendarPage />}
-              />
-              {/* <Route
-              index
-              path="/month/:currentDate"
+          </Route>
+          <Route element={<MainLayout />}>
+            <Route
+              path="/account"
               element={
-                <h2>calendar month</h2>
+                <AccountPage />
                 // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
               }
             />
             <Route
-              index
-              path="/day/:currentDate"
+              path="/calendar"
               element={
-                <h2>calendar day</h2>
-                // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
+                <Navigate to={`/calendar/month/${Date.now()}`} replace />
               }
-            />*/}
-            </Route>
+            />
+            <Route
+              path="/calendar/month/:currentDay"
+              element={<CalendarPage />}
+            />
           </Route>
+          {/* </Route> */}
 
           <Route path="*" element={<h1>not found page</h1>} />
         </Routes>
