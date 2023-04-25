@@ -93,6 +93,7 @@ export const light = {
 
   btnMain: 'rgba(227, 243, 255, 1)',
   btnAccent: 'rgba(202, 232, 255, 1)',
+  btnLogout: "#3E85F3",
 
   btnCloseSideBarTheme: '#343434',
 
@@ -101,7 +102,7 @@ export const light = {
 
   textHeaderTheme: '#111111',
 
-  textLogoTheme: "#3E85F3",
+  textLogoTheme: '#3E85F3',
 
   bgcMainTheme: 'rgba(247, 246, 249, 1)',
   bgcSecondaryTheme: 'rgba(255, 255, 255, 1)',
@@ -111,6 +112,14 @@ export const light = {
   bgcSideBarTheme: '#FFFFFF',
 
   taskBorderTheme: 'rgba(220, 227, 229, 0.8)',
+
+  calendarDayNameAtMonth: 'rgba(97, 97, 97, 1)',
+  calendarDayNumbers: 'rgba(52, 52, 52, 1)',
+  borderDayMonthSelector: 'rgba(62, 133, 243, 0.2)',
+  bgDayMonthSelector: 'rgba(227, 243, 255, 1)',
+  bgActiveBtnDayMonthSelector: 'rgba(202, 232, 255, 1)',
+  textActiveDayMonthSelector: 'rgba(62, 133, 243, 1)',
+  moreTaskLabel: 'grey',
 };
 
 export const dark = {
@@ -132,6 +141,7 @@ export const dark = {
 
   btnMain: 'rgba(227, 243, 255, 1)',
   btnAccent: 'rgba(202, 232, 255, 1)',
+  btnLogout: "#3E85F3",
 
   btnCloseSideBarTheme: '#FFFFFF',
 
@@ -140,7 +150,7 @@ export const dark = {
 
   textHeaderTheme: '#FFFFFF',
 
-  textLogoTheme: "#E3F3FF",
+  textLogoTheme: '#E3F3FF',
 
   bgcMainTheme: 'rgba(23, 24, 32, 1)',
   bgcSecondaryTheme: 'rgba(33, 34, 44, 1)',
@@ -150,4 +160,12 @@ export const dark = {
   bgcSideBarTheme: '#13151A',
 
   taskBorderTheme: 'rgba(255, 255, 255, 0.15)',
+
+  calendarDayNameAtMonth: 'rgba(255, 255, 255, 1)',
+  calendarDayNumbers: 'rgba(255, 255, 255, 1)',
+  borderDayMonthSelector: 'none',
+  bgDayMonthSelector: 'rgba(33, 34, 44, 1)',
+  bgActiveBtnDayMonthSelector: 'rgba(62, 133, 243, 1)',
+  textActiveDayMonthSelector: 'rgba(255, 255, 255, 1)',
+  moreTaskLabel: 'grey',
 };

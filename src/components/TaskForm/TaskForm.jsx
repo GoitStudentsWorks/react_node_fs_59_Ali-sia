@@ -47,6 +47,8 @@ const TaskForm = ({ initialData, onSubmit, onClose }) => {
         return '#F3B249'; // yellow
       case 'high':
         return '#EA3D65'; // red
+      default:
+        return '#111111';
     }
   };
 

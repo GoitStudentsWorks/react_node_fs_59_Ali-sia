@@ -1,11 +1,26 @@
 import CalendarTable from 'components/CalendarTable/CalendarTable';
 import MonthCalendarHead from 'components/MonthCalendarHead/MonthCalendarHead';
+// import TaskModal from 'components/TaskModal/TaskModal';
 
-export default function ChoosedMonth({ currentDate, activeDate }) {
+export default function ChoosedMonth({
+  currentDate,
+  activeDate,
+  tasks,
+  openModal,
+  changeActiveDay,
+  togglePage,
+}) {
   return (
     <div>
       <MonthCalendarHead currentDate={currentDate} />
-      <CalendarTable currentDate={currentDate} activeDate={activeDate} />
+      <CalendarTable
+        currentDate={currentDate}
+        activeDate={activeDate}
+        tasks={tasks}
+        openModal={openModal}
+        changeActiveDay={changeActiveDay}
+        togglePage={togglePage}
+      />
     </div>
   );
 }
