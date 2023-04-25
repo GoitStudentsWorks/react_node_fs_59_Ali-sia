@@ -23,53 +23,65 @@ export const App = () => {
       <BrowserRouter basename="goose-track-team-4">
         {/* <Suspense fallback={null}> */}
         <Routes>
-          <Route path="/" element={<InitialElement />}>
-            {/* routes for authorization */}
-            <Route index element={<Navigate to="/login" />} />
-            <Route
-              path="/register"
-              element={
-                <RegisterPage />
-                // <h2>register</h2>
-                // <RestrictedRoute
-                //   redirectTo="/contacts"
-                //   component={<RegisterPage />}
-                // />
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <LoginPage />
-                // <h2>login</h2>
-                // <RestrictedRoute
-                //   redirectTo="/contacts"
-                //   component={<LoginPage />}
-                // />
-              }
-            />
-          </Route>
+          <Route
+            path="/"
+            element={
+              <RestrictedRoute
+                redirectTo="/login"
+                component={<Navigate to="/calendar" />}
+              />
+            }
+          />
+          {/* routes for authorization */}
+          <Route
+            index
+            path="/login"
+            element={
+              <RestrictedRoute
+                redirectTo="/calendar"
+                component={<LoginPage />}
+              />
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/login"
+                component={<RegisterPage />}
+              />
+            }
+          />
+          {/* </Route> */}
           <Route element={<MainLayout />}>
             <Route
               path="/account"
               element={
-                <AccountPage />
-                // <PrivateRoute redirectTo="/login" component={<AccountPage />} />
+                <PrivateRoute redirectTo="/login" component={<AccountPage />} />
               }
             />
             <Route
               path="/calendar"
               element={
-                <Navigate to={`/calendar/month/${Date.now()}`} replace />
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={
+                    <Navigate to={`/calendar/month/${Date.now()}`} replace />
+                  }
+                />
               }
             />
             <Route
               path="/calendar/month/:currentDay"
-              element={<CalendarPage />}
+              element={
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<CalendarPage />}
+                />
+              }
             />
           </Route>
           {/* </Route> */}
-
           <Route path="*" element={<h1>not found page</h1>} />
         </Routes>
         {/* </Suspense> */}

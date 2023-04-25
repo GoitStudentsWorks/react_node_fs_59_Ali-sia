@@ -5,24 +5,28 @@ import { Suspense, useEffect } from 'react';
 import Header from '../Header/Header';
 import SideBar from '../SideBar/SideBar';
 
-import { StyledMain, WrapperMain, WrapperMainContent } from './MainLayout.styled';
+import {
+  StyledMain,
+  WrapperMain,
+  WrapperMainContent,
+} from './MainLayout.styled';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { selectUser } from 'redux/auth/auth.selectors';
-import { refreshUser } from 'redux/auth/auth.operations';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { selectUser } from 'redux/auth/auth.selectors';
+// import { refreshUser } from 'redux/auth/auth.operations';
 
-const isUserNull = user => {
-  const { name, email } = user;
-  return name === null || email === null ? true : false;
-};
+// const isUserNull = user => {
+//   const { name, email } = user;
+//   return name === null || email === null ? true : false;
+// };
 
 const MainLayout = () => {
-  const user = useSelector(selectUser);
-  const dispatch = useDispatch();
+  // const user = useSelector(selectUser);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (isUserNull(user)) dispatch(refreshUser());
-  }, [dispatch, user]);
+  // useEffect(() => {
+  //   if (isUserNull(user)) dispatch(refreshUser());
+  // }, [dispatch, user]);
 
   return (
     <StyledMain>
