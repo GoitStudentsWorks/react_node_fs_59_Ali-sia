@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { greaterThan } from "helpers/breakpoints.styled";
+
 import {ReactComponent as BurgerSVG} from './burger.svg';
 
 export const HeaderStyled = styled.header`
@@ -20,18 +22,16 @@ export const HeaderStyled = styled.header`
     background-color: transparent;
     color: ${props => props.theme.colors.textHeaderTheme};
 
-    @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-        max-width: ${props => props.theme.breakpoints.tablet};
-
+    ${props => greaterThan("tablet", `
+        max-width: ${props.theme.breakpoints.tablet};
         padding-left: 32px;
         padding-right: 32px;
-    };
+    `)};
 
-    @media screen and (min-width: ${props => props.theme.breakpoints.laptop}) {
-        max-width: ${props => props.theme.breakpoints.laptop};
-
+    ${props => greaterThan("laptop", `
+        max-width: 100%;
         padding-bottom: 32px;
-    };
+    `)};
 `;
 
 export const ButtonStyled = styled.button`
@@ -48,13 +48,13 @@ export const ButtonStyled = styled.button`
         box-shadow: 0 0 4px ${props => props.theme.colors.textHeaderTheme};
         border-radius: 50%;
     };
-    
-    @media screen and (min-width: ${props => props.theme.breakpoints.laptop}) {
+
+    ${() => greaterThan("laptop", `
         display: none;
-    };
+    `)};
 `
 
-export const PageName =styled.p`
+export const PageName =styled.h1`
     display: none;
 
     font-weight: ${props => props.theme.fontWeights.bold};
@@ -63,10 +63,10 @@ export const PageName =styled.p`
     line-height: 1;
 
     text-shadow: ${props => props.theme.shadows.headerText};
-    
-    @media screen and (min-width: ${props => props.theme.breakpoints.laptop}) {
+
+    ${() => greaterThan("laptop", `
         display: block;
-    };
+    `)};
 `
 
 export const BurgerSVGStyled = styled(BurgerSVG)`
@@ -75,10 +75,10 @@ export const BurgerSVGStyled = styled(BurgerSVG)`
     height: 24px;
     color: ${props => props.theme.colors.textHeaderTheme};
 
-    @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    ${props => greaterThan("laptop", `
         width: 32px;
         height: 32px;
-    };
+    `)};
 `
 
 export const UserMenu = styled.div`

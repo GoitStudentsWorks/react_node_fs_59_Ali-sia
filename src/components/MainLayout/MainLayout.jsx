@@ -3,9 +3,9 @@ import { Toaster } from 'react-hot-toast';
 import { Suspense, useEffect } from 'react';
 
 import Header from '../Header/Header';
-// import { SideBar } from '../SideBar/SideBar';
+import SideBar from '../SideBar/SideBar';
 
-import { StyledMain } from './MainLayout.styled';
+import { StyledMain, WrapperMain, WrapperMainContent } from './MainLayout.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from 'redux/auth/auth.selectors';
@@ -26,11 +26,15 @@ const MainLayout = () => {
 
   return (
     <StyledMain>
-      <Header />
-      {/* <p>SideBar </p> */}
-      <Suspense fallback={null}>
-        <Outlet />
-      </Suspense>
+      <WrapperMain>
+        <SideBar />
+        <WrapperMainContent>
+          <Header />
+          <Suspense fallback={null}>
+            <Outlet />
+          </Suspense>
+        </WrapperMainContent>
+      </WrapperMain>
       <Toaster position="top-right" reverseOrder={false} />
     </StyledMain>
   );

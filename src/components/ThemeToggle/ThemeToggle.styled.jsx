@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { greaterThan } from "helpers/breakpoints.styled";
+
 import {ReactComponent as MoonSVG} from './moon.svg';
 import {ReactComponent as SunSVG} from './sun.svg';
 
@@ -23,10 +25,10 @@ const SVGStyled = imageSVG => {
         width: 24px;
         height: 24px;
 
-        @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+        ${() => greaterThan("tablet", `
             width: 32px;
             height: 32px;
-        };
+        `)};
     `
 }
 
