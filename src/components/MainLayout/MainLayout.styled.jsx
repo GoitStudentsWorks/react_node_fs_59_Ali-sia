@@ -21,3 +21,13 @@ export const StyledMain = styled.div`
   padding-bottom: ${prop => prop.theme.space[7]}px;`
   )}
 `;
+
+export const WrapperMain = styled.div`
+  ${() => greaterThan("laptop", `
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  `)};
+`;
+
+export const WrapperMainContent = styled.div``;
