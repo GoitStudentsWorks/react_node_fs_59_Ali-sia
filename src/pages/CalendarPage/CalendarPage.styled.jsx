@@ -1,16 +1,18 @@
 import { greaterThan } from 'helpers/breakpoints.styled';
 import styled from 'styled-components';
 
-export const Warapper = styled.div`
-  display: flex;
-  gap: 24px;
-  flex-direction: column;
+export const Wrapper = styled.div`
   margin: 0 auto;
-
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 24px;
   max-width: 336px;
 
+  font: inherit;
+
   ${greaterThan(
-    'mobile',
+    'tablet',
     `
     max-width: 704px;
     gap: 32x;
@@ -18,9 +20,12 @@ export const Warapper = styled.div`
   )}
 
   ${greaterThan(
-    'tablet',
+    'laptop',
     `
+    width: 1087px;
     max-width: 1087px;
+    padding-left: 32px;
+    padding-right: 32px;
 `
   )}
 `;
