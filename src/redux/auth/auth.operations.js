@@ -29,16 +29,15 @@ export const register = createAsyncThunk(
  * POST @ /users/login
  * body: { email, password }
  */
+
 export const logIn = createAsyncThunk(
-  'auth/login',
-  async (credentials, thunkAPI) => {
+  'users/login',
+  async (credentials, { rejectWithValue }) => {
     try {
-      const res = await axios.post('/users/login', credentials);
-      // After successful login, add the token to the HTTP header
-      setAuthHeader(res.data.token);
-      return res.data;
+      const response = await axios.post('/api/users/login', credentials);
+      return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -47,17 +46,18 @@ export const logIn = createAsyncThunk(
  * POST @ /users/logout
  * headers: Authorization: Bearer token
  */
-export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
-  // try {
-  return 0;
 
-  // await privateApi.post('/users/logout');
-  // // After a successful logout, remove the token from the HTTP header
-  // clearAuthHeader();
-  // } catch (error) {
-  //   return thunkAPI.rejectWithValue(error.message);
-  // }
-});
+export const logOut = createAsyncThunk(
+  'users/logout',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/api/users/logout');
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 /*
  * GET @ /users/current

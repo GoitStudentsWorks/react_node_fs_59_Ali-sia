@@ -1,10 +1,10 @@
 import React from 'react';
-// import { useDispatch } from 'react-redux';
-import { Formik } from 'formik';
+// import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-// import { logIn } from '../../redux/auth/auth.operations';
-
+import { logIn } from '../../redux/auth/auth.operations';
 import {
   StyledContainer,
   FormHeader,
@@ -15,55 +15,52 @@ import {
   StyledButton,
 } from './LoginForm.styled';
 
-const LoginSchema = Yup.object().shape({
-  password: Yup.string()
-    .min(6, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-
-  email: Yup.string().email('Invalid email').required('Required'),
-});
-
-const initialValues = {
-  email: '',
-  password: '',
-};
+// #TODO коли кнопка буде готова, перемістити її в потрібний файл
+import { LogoutBtn } from '../LogoutBtn/LogoutBtn';
 
 export const LoginForm = () => {
-  // const dispatch = useDispatch();
+  const initialValues = {
+    email: '',
+    password: '',
+  };
 
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   const form = e.currentTarget;
-  //   dispatch(
-  //     logIn({
-  //       email: form.elements.email.value,
-  //       password: form.elements.password.value,
-  //     })
-  //   );
-  //   form.reset();
-  // };
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Invalid email address')
+      .required('Email is required'),
+    password: Yup.string().required('Password is required'),
+  });
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log(setSubmitting);
-    console.log(values);
-    setTimeout(() => {
-      alert(JSON.stringify('Логін успішний'));
+  const dispatch = useDispatch();
+  // const history = useHistory();
+
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      const data = await dispatch(logIn(values)).unwrap();
+      console.log('Login successfull:', data);
+      resetForm();
+      // history.push('/calendar/month');
+    } catch (error) {
+      console.error('Login error:', error.message);
+    } finally {
       setSubmitting(false);
-    }, 400);
+    }
   };
 
   return (
     <StyledContainer>
+
+      {/* #TODO коли кнопка буде готова, перемістити її в потрібний файл */}
+      <LogoutBtn />
+      
       <FormHeader>Log In</FormHeader>
 
       <Formik
         initialValues={initialValues}
-        validationSchema={LoginSchema}
+        validationSchema={validationSchema}
         onSubmit={handleSubmit}
-        autoComplete="off"
       >
-        {({ errors, touched }) => (
+        {({ isSubmitting }) => (
           <StyledForm>
             <InputContainer>
               <StyledLabel htmlFor="email">
@@ -74,8 +71,7 @@ export const LoginForm = () => {
                   placeholder="Enter your email"
                   type="email"
                 />
-                {/* If this field has been touched, and it contains an error, display it */}
-                {touched.email && errors.email && <div>{errors.email}</div>}
+                <ErrorMessage name="email" component="div" />
               </StyledLabel>
             </InputContainer>
 
@@ -88,12 +84,13 @@ export const LoginForm = () => {
                   placeholder="Enter your password"
                   type="password"
                 />
-                {touched.password && errors.password && (
-                  <div>{errors.password}</div>
-                )}
+                <ErrorMessage name="password" component="div" />
               </StyledLabel>
             </InputContainer>
-            <StyledButton type="submit">Log In</StyledButton>
+
+            <StyledButton type="submit" disabled={isSubmitting}>
+              Log In
+            </StyledButton>
           </StyledForm>
         )}
       </Formik>
