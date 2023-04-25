@@ -31,7 +31,7 @@ export const UserMenuButton = styled.button`
 
     &:hover,
     &:focus {
-        box-shadow: 0 0 4px ${props => props.theme.colors.textHeaderTheme};
+        box-shadow: ${props => props.theme.shadows.loginBtn};
     };
 
     ${() => greaterThan("tablet", `

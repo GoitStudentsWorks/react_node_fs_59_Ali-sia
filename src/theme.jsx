@@ -93,6 +93,7 @@ export const light = {
 
   btnMain: 'rgba(227, 243, 255, 1)',
   btnAccent: 'rgba(202, 232, 255, 1)',
+  btnLogout: "#3E85F3",
 
   btnCloseSideBarTheme: '#343434',
 
@@ -132,6 +133,7 @@ export const dark = {
 
   btnMain: 'rgba(227, 243, 255, 1)',
   btnAccent: 'rgba(202, 232, 255, 1)',
+  btnLogout: "#3E85F3",
 
   btnCloseSideBarTheme: '#FFFFFF',
 

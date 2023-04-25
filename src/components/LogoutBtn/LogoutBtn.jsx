@@ -1,13 +1,15 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../redux/auth/auth.operations';
-// import { useHistory } from 'react-router-dom'; 
+// import { useHistory } from 'react-router-dom';
+
+import { ButtonStyled, LogoutSVGStyled } from './LogoutBtn.styled';
 
 export const LogoutBtn = () => {
   const dispatch = useDispatch();
   // const history = useHistory(); 
 
-  const handleLogOut = async () => {
+  const handleLogOut = async (e) => {
     try {
       await dispatch(logOut()).unwrap();
       console.log('Logout successful');
@@ -15,12 +17,15 @@ export const LogoutBtn = () => {
     } catch (error) {
       console.error('Logout error:', error.message);
     }
+
+    e.currentTarget.blur();
   };
 
   return (
-    <button type="submit" onClick={handleLogOut}>
+    <ButtonStyled type="submit" onClick={handleLogOut}>
       Log Out
-    </button>
+      <LogoutSVGStyled />
+    </ButtonStyled>
   );
 };
 
