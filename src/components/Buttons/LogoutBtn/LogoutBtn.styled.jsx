@@ -19,6 +19,14 @@ export const StyledButton = styled.button`
   color: ${props => props.theme.colors.white};
 
   img {
-    margin-left: ${p => p.theme.space[4] - 1}px;
+    margin-left: ${p => p.theme.space[3]}px;
+  }
+
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    padding: ${p => p.theme.space[5]}px ${p => p.theme.space[6]}px;
+
+    img {
+      margin-left: ${p => p.theme.space[4] + 1}px;
+    }
   }
 `;

@@ -26,6 +26,6 @@ export const StyledButton = styled.button`
   color: ${props => props.theme.colors.white};
 
   img {
-    margin-left: ${p => p.theme.space[4] + 1}px;
+    margin-left: ${p => p.theme.space[4] - 1}px;
   }
 `;
