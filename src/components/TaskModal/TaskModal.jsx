@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useDispatch } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { createTask, updateTask } from '../../redux/tasks/tasks.operations';
 import Modal from '../Modal/Modal';
 import TaskForm from '../TaskForm/TaskForm';
