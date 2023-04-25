@@ -1,10 +1,12 @@
 import React from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import { logIn } from '../../redux/auth/auth.operations';
+import { LoginRegisterBtn } from '../Buttons/LoginRegisterBtn/LoginRegisterBtn';
+
 import {
   StyledContainer,
   FormHeader,
@@ -12,11 +14,7 @@ import {
   InputContainer,
   StyledLabel,
   StyledField,
-  StyledButton,
 } from './LoginForm.styled';
-
-// #TODO коли кнопка буде готова, перемістити її в потрібний файл
-import { LogoutBtn } from '../Buttons/LogoutBtn/LogoutBtn';
 
 export const LoginForm = () => {
   const initialValues = {
@@ -32,14 +30,14 @@ export const LoginForm = () => {
   });
 
   const dispatch = useDispatch();
-  // const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       const data = await dispatch(logIn(values)).unwrap();
       console.log('Login successfull:', data);
       resetForm();
-      // history.push('/calendar/month');
+      navigate.push('/calendar/month');
     } catch (error) {
       console.error('Login error:', error.message);
     } finally {
@@ -49,9 +47,6 @@ export const LoginForm = () => {
 
   return (
     <StyledContainer>
-      {/* #TODO коли кнопка буде готова, перемістити її в потрібний файл */}
-      <LogoutBtn />
-
       <FormHeader>Log In</FormHeader>
 
       <Formik
@@ -87,9 +82,11 @@ export const LoginForm = () => {
               </StyledLabel>
             </InputContainer>
 
-            <StyledButton type="submit" disabled={isSubmitting}>
-              Log In
-            </StyledButton>
+            <LoginRegisterBtn
+              type="submit"
+              disabled={isSubmitting}
+              btnText="Log In"
+            />
           </StyledForm>
         )}
       </Formik>
