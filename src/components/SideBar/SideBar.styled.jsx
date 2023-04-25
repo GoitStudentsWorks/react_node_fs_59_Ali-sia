@@ -57,6 +57,8 @@ export const LogoBarStyled = styled.div`
     justify-content: space-between;
     align-items: center;
 
+    width: 100%;
+
     padding-bottom: 64px;
 
     ${() => greaterThan("tablet", `

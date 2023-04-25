@@ -1,51 +1,25 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { greaterThan } from "helpers/breakpoints.styled";
-
-import {ReactComponent as LogoutSVG} from './logout.svg';
-
-export const ButtonStyled = styled.button`
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    
-    border: 0;
-    border-radius: 16px;
-
-    padding: 14px 28px;
-
-    background: ${({theme}) => theme.colors.btnLogout};
-
-    font-weight: ${props => props.theme.fontWeights.semibold};
-    font-size: ${props => props.theme.fontSizes.s};
-    line-height: 1.29;
-    letter-spacing: -0.02em;
-    color: ${({theme}) => theme.colors.white};
-
-    &:hover,
-    &:focus {
-        box-shadow: ${props => props.theme.shadows.loginBtn};
-    };
-
-    ${props => greaterThan("tablet", `
-        padding: 16px 23px;
-
-        font-size: ${props.theme.fontSizes.l};
-        line-height: 1.33;
-    `)};
-`
-
-export const LogoutSVGStyled = styled(LogoutSVG)`
-    display: block;
-    width: 18px;
-    height: 18px;
-
-    margin-left: 6px;
-
-    ${() => greaterThan("tablet", `
-        width: 20px;
-        height: 20px;
-
-        margin-left: 11px;
-    `)};
-`
+export const StyledButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${p => p.theme.space[4]}px ${p => p.theme.space[6] + 4}px;
+  border: ${props => props.theme.borders.none};
+  border-radius: ${props => props.theme.radii.normal};
+  background-color: ${props => props.theme.colors.primary};
+  box-shadow: ${props => props.theme.shadows.loginBtn};
+  font-weight: ${props => props.theme.fontWeights.semibold};
+  font-size: ${props => props.theme.fontSizes.s};
+  cursor: pointer;
+  color: ${props => props.theme.colors.white};
+  img {
+    margin-left: ${p => p.theme.space[3]}px;
+  }
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    padding: ${p => p.theme.space[5]}px ${p => p.theme.space[6]}px;
+    img {
+      margin-left: ${p => p.theme.space[4] + 1}px;
+    }
+  }
+`;
