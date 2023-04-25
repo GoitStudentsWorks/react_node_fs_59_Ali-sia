@@ -1,44 +1,34 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import { logOut } from '../../redux/auth/auth.operations';
-// import { useHistory } from 'react-router-dom'; 
+
+import { StyledButton } from './LogoutBtn.styled';
+import logoutIcon from './logoutIcon.svg';
 
 export const LogoutBtn = () => {
   const dispatch = useDispatch();
-  // const history = useHistory(); 
+  const navigate = useNavigate();
 
   const handleLogOut = async () => {
     try {
       await dispatch(logOut()).unwrap();
       console.log('Logout successful');
-      // history.push('/login'); 
+
+      navigate.push('/login');
+
     } catch (error) {
       console.error('Logout error:', error.message);
     }
   };
 
   return (
-    <button type="submit" onClick={handleLogOut}>
-      Log Out
-    </button>
+
+    <StyledButton type="submit" onClick={handleLogOut}>
+      <span>Log Out </span>
+      <img src={logoutIcon} alt="[->"></img>
+    </StyledButton>
   );
 };
 
-// export const LogOutBtn = () => {
-//   const dispatch = useDispatch();
-
-//   const handleLogout = async () => {
-//     try {
-//       await dispatch(logOut());
-//       // redirect to a login page here
-//     } catch (error) {
-//       console.error('Logout error:', error.message);
-//     }
-//   };
-
-//   return (
-//     <button type="button" onClick={handleLogout}>
-//       Log Out
-//     </button>
-//   );
-// };
