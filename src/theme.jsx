@@ -94,15 +94,21 @@ export const light = {
   btnMain: 'rgba(227, 243, 255, 1)',
   btnAccent: 'rgba(202, 232, 255, 1)',
 
+  btnCloseSideBarTheme: '#343434',
+
   textMainTheme: 'rgba(17, 17, 17, 1)',
   userPanelTextTheme: 'rgba(126, 125, 130, 1)',
 
   textHeaderTheme: '#111111',
 
+  textLogoTheme: "#3E85F3",
+
   bgcMainTheme: 'rgba(247, 246, 249, 1)',
   bgcSecondaryTheme: 'rgba(255, 255, 255, 1)',
 
   bgcInputTheme: 'rgba(246, 246, 246, 1)',
+
+  bgcSideBarTheme: '#FFFFFF',
 
   taskBorderTheme: 'rgba(220, 227, 229, 0.8)',
 };
@@ -127,15 +133,21 @@ export const dark = {
   btnMain: 'rgba(227, 243, 255, 1)',
   btnAccent: 'rgba(202, 232, 255, 1)',
 
+  btnCloseSideBarTheme: '#FFFFFF',
+
   textMainTheme: 'rgba(255, 255, 255, 1)',
   userPanelTextTheme: 'rgba(250, 250, 250, 0.3)',
 
   textHeaderTheme: '#FFFFFF',
 
+  textLogoTheme: "#E3F3FF",
+
   bgcMainTheme: 'rgba(23, 24, 32, 1)',
   bgcSecondaryTheme: 'rgba(33, 34, 44, 1)',
 
   bgcInputTheme: 'rgba(255, 255, 255, 0.15)',
+
+  bgcSideBarTheme: '#13151A',
 
   taskBorderTheme: 'rgba(255, 255, 255, 0.15)',
 };

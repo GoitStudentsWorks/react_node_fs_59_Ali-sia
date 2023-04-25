@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { greaterThan } from "helpers/breakpoints.styled";
+
 export const UserName = styled.p`
     margin-right: 14px;
     margin-left: 14px;
@@ -8,10 +10,10 @@ export const UserName = styled.p`
     font-size: ${props => props.theme.fontSizes.s};
     line-height: 1.29;
 
-    @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-        font-size: ${props => props.theme.fontSizes.l};
+    ${props => greaterThan("tablet", `
+        font-size: ${props.theme.fontSizes.l};
         line-height: 1;
-    };
+    `)};
 `
 
 export const UserMenuButton = styled.button`
@@ -32,10 +34,10 @@ export const UserMenuButton = styled.button`
         box-shadow: 0 0 4px ${props => props.theme.colors.textHeaderTheme};
     };
 
-    @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    ${() => greaterThan("tablet", `
         width: 44px;
         height: 44px;
-    };
+    `)};
 `
 
 export const UserMenuButtonAvatar = styled.img`
@@ -47,7 +49,7 @@ export const UserMenuButtonChar = styled.p`
     font-weight: ${props => props.theme.fontWeights.bold};
     font-size: ${props => props.theme.fontSizes.logo};
 
-    @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-        font-size: ${props => props.theme.fontSizes.heading};
-    };
+    ${props => greaterThan("tablet", `
+        font-size: ${props.theme.fontSizes.heading};
+    `)};
 `
