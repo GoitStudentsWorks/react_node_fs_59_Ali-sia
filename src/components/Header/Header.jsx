@@ -8,8 +8,10 @@ import { HeaderStyled, ButtonStyled, PageName, BurgerSVGStyled, UserMenu } from 
 
 const handleClick = ({currentTarget}) => {
     currentTarget.disabled = true;
-    document.querySelector("#sideBar").style.display = "flex";
+    currentTarget.style.pointerEvents = "none";
     currentTarget.blur();
+
+    document.querySelector("#sideBar").style.display = "flex";  
 }
 
 const Header = () => {
