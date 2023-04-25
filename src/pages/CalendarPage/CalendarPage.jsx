@@ -1,20 +1,92 @@
 import ChoosedMonth from 'components/ChoosedMonth/ChoosedMonth';
-import { Warapper } from './CalendarPage.styled';
+import { Wrapper } from './CalendarPage.styled';
 import CalendarToolbar from 'components/CalendarToolbar/CalendarToolbar';
 import { useState } from 'react';
-import { setDefaultOptions } from 'date-fns';
+import { addDays, addMonths, setDefaultOptions } from 'date-fns';
+import TaskModal from 'components/TaskModal/TaskModal';
+import MonthCalendarHead from 'components/MonthCalendarHead/MonthCalendarHead';
 
 export default function CalendarPage() {
-  setDefaultOptions({ weekStartsOn: 1 });
-  const [currentDate] = useState(new Date());
+  setDefaultOptions({ weekStartsOn: 1 }); //for date-fns, to start count weeks from monday
+  const currentDate = new Date();
   const [activeDate, setActiveDate] = useState(currentDate);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMonthPage, setIsMonthPage] = useState(true);
+  const tasks = { tasks: [] };
+
+  const changeActiveDay = (value, day) => {
+    if (day) {
+      return setActiveDate(day);
+    }
+    if (isMonthPage) {
+      return setActiveDate(addMonths(activeDate, value));
+    } else {
+      setActiveDate(addDays(activeDate, value));
+    }
+  };
+
+  const toggleModal = () => {
+    setIsModalOpen(prev => !prev);
+  };
+
+  const togglePage = () => {
+    setIsMonthPage(prev => !prev);
+  };
+  // const startDayForFetch = Number(format(startOfMonth(activeDate), 'T'));
+  // const endDayForFetch = Number(format(endOfMonth(activeDate), 'T'));
+  ///////////////// const startDateForFetch = format(startOfMonth(activeDate), 'T');
+  ///////////////// const endDateForFetch = format(endOfMonth(activeDate), 'T');
+  // const aa = '1690837200000';
+  // console.log('endDayForFetch', endDayForFetch);
+  // const difff = startDateForFetch === aa;
+  /////////////// console.log('startDateForFetch', startDateForFetch);
+  /////////////// console.log('endDateForFetch', endDateForFetch);
+  // console.log('tasks', tasks);
+
+  // const day = new Date(+startDateForFetch);
+
+  // useEffect(() => {
+  //   // if (!isLoggedIn) {
+  //   //   return;
+  //   // }
+  //   dispatch(fetchTasks());
+  // }, [dispatch]);
 
   return (
-    <Warapper>
-      <CalendarToolbar activeDate={activeDate} setActiveDate={setActiveDate} />
-      <ChoosedMonth currentDate={currentDate} activeDate={activeDate} />
-      {/* <ChoosedDay /> */}
-    </Warapper>
+    <Wrapper>
+      <CalendarToolbar
+        activeDate={activeDate}
+        changeActiveDay={changeActiveDay}
+        isMonthPage={isMonthPage}
+        togglePage={togglePage}
+      />
+      {isMonthPage ? (
+        <ChoosedMonth
+          currentDate={currentDate}
+          activeDate={activeDate}
+          changeActiveDay={changeActiveDay}
+          tasks={tasks}
+          openModal={toggleModal}
+          togglePage={togglePage}
+        />
+      ) : (
+        <div>
+          <MonthCalendarHead currentDate={currentDate} />
+          <h1 style={{ color: 'grey' }}>Choosed Day</h1>
+          <h2 style={{ color: 'grey' }}> Modal test</h2>
+          <button type="button" onClick={toggleModal}>
+            openModal
+          </button>
+        </div>
+        // <ChoosedDay
+        //   currentDate={currentDate}
+        //   activeDate={activeDate}
+        //   setIsModalOpen={setIsModalOpen}
+        // />
+      )}
+
+      {isModalOpen && <TaskModal onClose={toggleModal} />}
+    </Wrapper>
   );
 }
 

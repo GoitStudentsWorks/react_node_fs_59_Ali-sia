@@ -10,38 +10,47 @@ export const ButtonsWrapper = styled.div`
 `;
 
 export const Button = styled.button`
-  padding: 0;
+  padding: ${p => p.theme.space[0]}px;
   display: flex;
   justify-content: center;
   align-items: center;
+
   height: 34px;
   width: 76px;
 
-  cursor: pointer;
   border: none;
   font-size: ${p => p.theme.fontSizes.s};
+  font-weight: ${p => p.theme.fontWeights.medium};
   line-height: 1.29;
 
-  color: #3e85f3;
-  background-color: #cae8ff;
+  color: ${p => p.theme.colors.primary};
+  background-color: ${p => p.theme.colors.bgDayMonthSelector};
+
+  ${p =>
+    p.disabled &&
+    `color: ${p.theme.colors.textActiveDayMonthSelector}; background-color: ${p.theme.colors.bgActiveBtnDayMonthSelector};`}
+  cursor: pointer;
 
   &:first-of-type {
-    border-right: 1px solid rgba(62, 133, 243, 0.2);
+    border-right: ${p =>
+      `${p.theme.borders.normal} ${p.theme.colors.borderDayMonthSelector}`};
     border-radius: 8px 0px 0px 8px;
   }
   &:last-of-type {
     border-radius: 0px 8px 8px 0px;
   }
-
-  &:hover,
-  :focus {
-    background-color: #e3f3ff;
+  &:last-of-type:hover {
+    border-left: ${p =>
+      `${p.theme.borders.normal} ${p.theme.colors.borderDayMonthSelector}`};
+  }
+  &:hover {
+    scale: 1.05;
   }
 
   ${greaterThan(
-    'mobile',
+    'tablet',
     `
- font-size: ${p => p.theme.fontSizes.m};
+  font-size: 16px;
 `
   )}
 `;
