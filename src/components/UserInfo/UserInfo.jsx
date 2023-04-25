@@ -14,7 +14,7 @@ const UserInfo = () => {
             <UserName>
                 {userName}
             </UserName>
-            <UserMenuButton>
+            <UserMenuButton type="button">
                 {
                     avatar
                         ? <UserMenuButtonAvatar src={avatar} alt={userName + "'s avatar"}></UserMenuButtonAvatar>
