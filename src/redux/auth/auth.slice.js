@@ -3,12 +3,21 @@ import { register, logIn, logOut, refreshUser } from './auth.operations';
 import THEME_CONTEXT from 'context/ThemeContext';
 
 const initialState = {
-  user: { name: null, email: null, avatar: null },
+  user: {
+    name: null,
+    birthday: null,
+    email: null,
+    phone: null,
+    telegram: null,
+    avatarURL: null,
+  },
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
-  theme: localStorage.getItem("theme") ? localStorage.getItem("theme") : THEME_CONTEXT.LIGHT,
+  theme: localStorage.getItem('theme')
+    ? localStorage.getItem('theme')
+    : THEME_CONTEXT.LIGHT,
 };
 
 export const toggleTheme = createAction('toggleTheme');
@@ -45,8 +54,11 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(toggleTheme, (state, action) => {
-        state.theme = state.theme === THEME_CONTEXT.LIGHT ? THEME_CONTEXT.DARK : THEME_CONTEXT.LIGHT;
-        localStorage.setItem("theme", state.theme);
+        state.theme =
+          state.theme === THEME_CONTEXT.LIGHT
+            ? THEME_CONTEXT.DARK
+            : THEME_CONTEXT.LIGHT;
+        localStorage.setItem('theme', state.theme);
       });
   },
 });

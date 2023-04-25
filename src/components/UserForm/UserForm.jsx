@@ -1,24 +1,29 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from 'formik';
+import { selectUser } from "redux/auth/auth.selectors";
+import { parseISO } from 'date-fns';
 
 import { StyledForm, Photo, Plug, PhotoSelection, LabelPhotoSelection, SelectionIcon, Wrapper, Label, LabelName, Input, StyledDatePicker, Button } from "./UserForm.styled";
 import "react-datepicker/dist/react-datepicker.css";
 
 export const UserForm = () => {  
+    const dispatch = useDispatch();
+    const user = useSelector(selectUser);
+
   const formik = useFormik({
       initialValues: {
-      name: '',
-      birthday: null,
-      email: '',
-      phone: '',
-      telegram: '',
-      photo: '',
+          name: "",
+          birthday: null,
+          email: "",
+          phone: "",
+          telegram: "",
+          avatarURL: "",
       },
-      onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-      },
+    onSubmit: values => {
+        dispatch(values);
+    },
   });
-
-  const userPhoto = formik.values.photo ? <Photo src={formik.values.photo} alt="User's photo" /> : <Plug />;
 
   const handleImageUpload = e => { 
       const file = e.target.files[0];
@@ -29,16 +34,28 @@ export const UserForm = () => {
       };
 
       reader.readAsDataURL(file);
-  }
+    }
     
-  return (
+  useEffect(() => {
+  if (user.email) {
+    const modifiedUser = {
+      ...user,
+      birthday: parseISO(user.birthday),
+    };
+      formik.setValues(modifiedUser);
+      
+  }
+}, [formik, user]);
+
+    return (
+    user.name && (
     <StyledForm autocomplete="off" enctype="multipart/form-data" onSubmit={formik.handleSubmit}>
-      {userPhoto}
+      {(formik.values.avatarURL !== "public\\avatars\\6447ffc16d4d3d7eadd00104_Фото профиля.jpg") ? <Photo src={formik.values.avatarURL} alt="User's photo" /> : <Plug />}
       <LabelPhotoSelection>
           <SelectionIcon/>
           <PhotoSelection
               type="file"
-              name="photo"
+              name="avatarURL"
               onChange={handleImageUpload}
           />
       </LabelPhotoSelection>
@@ -48,12 +65,12 @@ export const UserForm = () => {
                   User Name
               </LabelName>
               <Input
-                  type="text"
-                  name="name"
-                  placeholder="Edit your name"
-                  value={formik.values.name}
-                  onChange={formik.handleChange}
-                  required
+                type="text"
+                name="name"
+                placeholder="Edit your name"
+                selected={formik.values.name}
+                value={formik.values.name}
+                required
               />
           </Label>
           <Label>
@@ -61,11 +78,12 @@ export const UserForm = () => {
                   Birthday
               </LabelName>
               <StyledDatePicker
-                  name="birthday"
-                  placeholderText={new Date().toLocaleDateString()}
-                  selected={formik.values.birthday}
-                  onChange={(date) => formik.setFieldValue('birthday', date)}
-                  calendarClassName="goose"
+                name="birthday"
+                placeholderText={new Date().toLocaleDateString()}
+                selected={formik.values.birthday}
+                value={formik.values.birthday}
+                onChange={(date) => formik.setFieldValue('birthday', date)}
+                calendarClassName="goose"
               />
           </Label>
           <Label>
@@ -110,6 +128,6 @@ export const UserForm = () => {
         type="submit">
         Save changes
       </Button>
-    </StyledForm>
+    </StyledForm>)
   );
 };

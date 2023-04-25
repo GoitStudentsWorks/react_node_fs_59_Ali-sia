@@ -78,8 +78,8 @@ export const refreshUser = createAsyncThunk(
     try {
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
-      const res = await privateApi.get('/users/current');
-      return res.data;
+      const res = await privateApi.get('api/users/current');
+      return res.data.data.user;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
