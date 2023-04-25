@@ -7,7 +7,8 @@ import UserInfo from "components/UserInfo/UserInfo";
 import { HeaderStyled, ButtonStyled, PageName, BurgerSVGStyled, UserMenu } from './Header.styled';
 
 const handleClick = ({currentTarget}) => {
-    document.querySelector("#sideBar").style.display = "block";
+    currentTarget.disabled = true;
+    document.querySelector("#sideBar").style.display = "flex";
     currentTarget.blur();
 }
 
@@ -16,7 +17,11 @@ const Header = () => {
 
     return (
         <HeaderStyled>
-            <ButtonStyled onClick={handleClick}>
+            <ButtonStyled
+                type="button"
+                onClick={handleClick}
+                id="burgerBtn"
+            >
                 <BurgerSVGStyled />
             </ButtonStyled>
             <PageName>

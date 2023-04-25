@@ -1,3 +1,5 @@
+import { LogoutBtn } from "components/Buttons/LogoutBtn/LogoutBtn";
+
 import {
     SideBarStyled,
     LogoBarStyled,
@@ -9,6 +11,7 @@ import {
 } from "./SideBar.styled";
 
 const handleClick = ({currentTarget}) => {
+    document.querySelector("#burgerBtn").disabled = false;
     document.querySelector("#sideBar").style.display = "none";
     currentTarget.blur();
 }
@@ -24,7 +27,8 @@ const Sidebar = () => {
                 <ButtonStyled onClick={handleClick}>
                     <CloseSVGStyled />
                 </ButtonStyled>
-            </LogoBarStyled>         
+            </LogoBarStyled>
+            <LogoutBtn />         
         </SideBarStyled>
     );
 };

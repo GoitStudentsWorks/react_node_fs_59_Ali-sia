@@ -1,5 +1,19 @@
-import { greaterThan } from 'helpers/breakpoints.styled';
+import { between, greaterThan } from 'helpers/breakpoints.styled';
 import styled from 'styled-components';
+
+const getTasksColor = p => {
+  const c = p.theme.colors;
+  switch (p.priority) {
+    case 'low':
+      return `color: ${c.primary}; background-color: ${c.taskSecondaryLow};`;
+    case 'medium':
+      return `color: ${c.taskMainMedium}; background-color: ${c.taskSecondaryMedium};`;
+    case 'high':
+      return `color: ${c.taskMainHigh}; background-color: ${c.taskSecondaryHigh};`;
+    default:
+      return `color: ${c.black}; background-color: ${c.secondary};`;
+  }
+};
 
 export const CalendarWrapper = styled.div`
   display: flex;
@@ -9,14 +23,14 @@ export const CalendarWrapper = styled.div`
   height: 640px;
 
   ${greaterThan(
-    'mobile',
+    'tablet',
     `
   height: 928px;
 `
   )}
 
   ${greaterThan(
-    'tablet',
+    'laptop',
     `
   height: 812px;
 `
@@ -26,37 +40,59 @@ export const CalendarWrapper = styled.div`
 export const TableWrapper = styled.div`
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: repeat(6, minmax(0, 1fr));
   grid-gap: 1px;
 
-  background: rgba(220, 227, 229, 0.5);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(220, 227, 229, 0.8);
-  border-radius: 8px;
+  border-radius: ${p => p.theme.radii.light};
+  border: ${p => `${p.theme.borders.normal} ${p.theme.colors.taskBorderTheme}`};
+  background-color: ${p => p.theme.colors.taskBorderTheme};
   overflow: hidden;
+`;
+
+export const CellWrapper = styled.div`
+  padding: 8px 2px 2px 2px;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  background-color: ${p => p.theme.colors.bgcSecondaryTheme};
+  cursor: pointer;
+
+  opacity: ${p => (!p.isSameMonth ? '0.7' : 1)};
+
+  &:hover {
+    border: ${p =>
+      `${p.theme.borders.normal} ${p.theme.colors.taskBorderTheme}`};
+  }
 
   ${greaterThan(
-    'mobile',
+    'tablet',
     `
-    box-shadow: none;
+  padding: 14px 4px 4px 4px;
+`
+  )}
+
+  ${greaterThan(
+    'laptop',
+    `
+  padding: 14px 8px 8px 8px;
 `
   )}
 `;
 
-export const CellWrapper = styled.div`
-  background: #ffffff;
-`;
-
 export const RowWrapper = styled.div`
   display: flex;
-  justify-content: ${p => (p.jc ? p.jc : 'flex-start')};
+  justify-content: flex-end;
+
+  ${greaterThan(
+    'tablet',
+    `
+  margin-right: 10px;
+`
+  )}
 `;
 
 export const DayWrapper = styled.div`
-  margin-top: 8px;
-  margin-right: 3px;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,13 +103,15 @@ export const DayWrapper = styled.div`
   font-weight: ${p => p.theme.fontWeights.bold};
   font-size: ${p => p.theme.fontSizes.xs};
   line-height: 1.16;
-  color: ${p => (!p.isSameMonth ? 'lightgrey' : '#343434')};
+
+  color: ${p =>
+    p.isSameMonth
+      ? p.theme.colors.calendarDayNumbers
+      : p.theme.colors.moreTaskLabel};
 
   ${greaterThan(
-    'mobile',
+    'tablet',
     `
-  margin-top: 14px;
-  margin-right: 14px;
   width: 26px;
   height: 26px;
   font-size: 16px;
@@ -83,15 +121,85 @@ export const DayWrapper = styled.div`
 `;
 
 export const CurrentDayWrapper = styled(DayWrapper)`
-  background-color: #3e85f3;
+  background-color: ${p => p.theme.colors.primary};
   border-radius: 6px;
   color: ${p => p.theme.colors.white};
   /* padding-bottom: 1px; */
 
   ${greaterThan(
-    'mobile',
+    'tablet',
     `
   border-radius: 8px;
 `
   )}
+`;
+
+export const TasksWrapper = styled.div`
+  display: flex;
+  flex-basis: 44px;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 2px;
+`;
+
+export const TaskWrapper = styled.button`
+  padding: 0 4px 0 8px;
+  width: 100%;
+  height: 22px;
+  line-height: 1;
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 8px;
+  border: none;
+  ${p => getTasksColor(p)};
+  cursor: pointer;
+
+  font-weight: ${p => p.theme.fontWeights.bold};
+  font-size: ${p => p.theme.fontSizes.xxs};
+
+  ${greaterThan(
+    'tablet',
+    `
+  padding: 0 10px 0 12px;
+  height: 26px;
+  font-size: 14px;
+`
+  )}
+
+  ${greaterThan(
+    'laptop',
+    `
+  padding: 0 12px 0 12px;
+`
+  )}
+`;
+
+export const MoreTasksLabel = styled.div`
+  margin-top: auto;
+
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-weight: ${p => p.theme.fontWeights.bold};
+  font-size: ${p => p.theme.fontSizes.xs};
+
+  color: grey;
+
+  ${greaterThan(
+    'tablet',
+    `
+  font-size: 16px;
+`
+  )}
+  ${between(
+    'mobile',
+    'tablet',
+    `
+  margin: auto;
+`
+  )};
 `;

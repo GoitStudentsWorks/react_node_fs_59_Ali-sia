@@ -2,14 +2,23 @@ import PeriodPaginator from 'components/PeriodPaginator/PeriodPaginator';
 import PeriodTypeSelect from 'components/PeriodTypeSelect/PeriodTypeSelect';
 import { CalendarToolbarWrapper } from './CalendarToolbar.styled';
 
-export default function CalendarToolbar({ activeDate, setActiveDate }) {
+export default function CalendarToolbar({
+  activeDate,
+  changeActiveDay,
+  isMonthPage,
+  togglePage,
+}) {
   return (
     <CalendarToolbarWrapper>
       <PeriodPaginator
         activeDate={activeDate}
-        setActiveDate={setActiveDate}
+        isMonthPage={isMonthPage}
+        changeActiveDay={changeActiveDay}
       ></PeriodPaginator>
-      <PeriodTypeSelect></PeriodTypeSelect>
+      <PeriodTypeSelect
+        isMonthPage={isMonthPage}
+        togglePage={togglePage}
+      ></PeriodTypeSelect>
     </CalendarToolbarWrapper>
   );
 }

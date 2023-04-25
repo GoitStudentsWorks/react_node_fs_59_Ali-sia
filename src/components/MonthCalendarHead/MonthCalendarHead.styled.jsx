@@ -4,34 +4,33 @@ import { greaterThan } from 'helpers/breakpoints.styled';
 export const DaysNamesWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: ${p => p.theme.space[4]}px; //14px
 
   min-height: 50px;
   max-width: 336px;
 
-  border-radius: 8px;
-  border: 1px solid rgba(220, 227, 229, 0.8);
+  border-radius: ${p => p.theme.radii.light}; //8px;
+  border: ${p => `${p.theme.borders.normal} ${p.theme.colors.taskBorderTheme}`};
+  // 1px solid rgba(220, 227, 229, 0.8);
 
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 1.12;
-  font-weight: ${p => p.theme.fontWeights.semibold};
   font-size: ${p => p.theme.fontSizes.m};
-  color: #616161;
+  font-weight: ${p => p.theme.fontWeights.semibold};
+  line-height: 1.12;
 
-  ${greaterThan(
-    'mobile',
-    `
-  min-height: 46px;
-   max-width: 704px;
-`
-  )}
+  background-color: ${p => p.theme.colors.bgcSecondaryTheme};
+  color: ${p => p.theme.colors.calendarDayNameAtMonth};
 
   ${greaterThan(
     'tablet',
     `
+   min-height: 46px;
+   max-width: 704px;
+`
+  )}
+  ${greaterThan(
+    'laptop',
+    `
   max-width: 1087px;
-
 `
   )}
 `;
@@ -41,25 +40,17 @@ export const DayNameWrapper = styled.div`
   flex-grow: 1;
   justify-content: center;
 
-  color: ${p => (p.isWeekend ? '#3e85f3' : 'inherit')};
-
-  /* &:nth-last-child(-n + 2) {
-    color: #3e85f3;
-  } */
+  color: ${p => (p.isWeekend ? p.theme.colors.primary : 'inherit')};
 `;
 
 export const DayName = styled.span`
   display: none;
 
-  ${greaterThan(
-    'mobile',
-    `display: block;
-`
-  )}
+  ${greaterThan('tablet', `display: block;`)}
 `;
 
 export const MobileDayName = styled.span`
   display: block;
 
-  ${greaterThan('mobile', `display: none;`)}
+  ${greaterThan('tablet', `display: none;`)}
 `;
