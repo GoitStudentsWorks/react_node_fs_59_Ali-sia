@@ -1,4 +1,4 @@
-import { LogoutBtn } from "components/LogoutBtn/LogoutBtn";
+import { LogoutBtn } from "components/Buttons/LogoutBtn/LogoutBtn";
 
 import {
     SideBarStyled,
