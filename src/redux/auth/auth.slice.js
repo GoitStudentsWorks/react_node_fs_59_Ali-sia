@@ -67,7 +67,6 @@ const authSlice = createSlice({
         localStorage.setItem('theme', state.theme);
       })
       .addCase(updateUser.fulfilled, (state, { payload }) => {
-        console.log('payload', payload);
         state.user = payload;
       })
       .addCase(updateUser.rejected, (state, { payload }) => {
