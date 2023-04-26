@@ -72,36 +72,41 @@ export const theme = {
   transitions: {},
 
   zIndices: {},
+
+  colors: {
+    white: '#FFFFFF',
+    black: '#111111',
+
+    bgcLogin: 'rgba(220, 235, 247, 1)',
+
+    primary: 'rgba(62, 133, 243, 1)',
+    secondary: '#E3F3FF',
+
+    taskMainLow: 'rgba(114, 194, 248, 1)',
+    taskMainMedium: 'rgba(243, 178, 73, 1)',
+    taskMainHigh: 'rgba(234, 61, 101, 1)',
+
+    taskSecondaryLow: 'rgba(206, 238, 253, 1)',
+    taskSecondaryMedium: 'rgba(252, 240, 212, 1)',
+    taskSecondaryHigh: 'rgba(255, 210, 221, 1)',
+
+    userNavModalTheme: '#84828A',
+
+    btnMain: 'rgba(227, 243, 255, 1)',
+    btnAccent: 'rgba(202, 232, 255, 1)',
+    btnLogout: "#3E85F3",
+
+    moreTaskLabel: 'grey',
+  }
 };
 
 export const light = {
-  white: '#FFFFFF',
-  black: '#111111',
-
-  bgcLogin: 'rgba(220, 235, 247, 1)',
-
-  primary: 'rgba(62, 133, 243, 1)',
-  secondary: '#E3F3FF',
-
-  taskMainLow: 'rgba(114, 194, 248, 1)',
-  taskMainMedium: 'rgba(243, 178, 73, 1)',
-  taskMainHigh: 'rgba(234, 61, 101, 1)',
-
-  taskSecondaryLow: 'rgba(206, 238, 253, 1)',
-  taskSecondaryMedium: 'rgba(252, 240, 212, 1)',
-  taskSecondaryHigh: 'rgba(255, 210, 221, 1)',
-
   userNavTheme: "#7E7D82",
   userNavLinkTheme: "#3E85F3",
   userNavLinkActiveTheme: "#84828A",
   userNavLinkBcgTheme: "#E3F3FF",
   userNavModalBcgTheme: '#FFFFFF',
   userNavModalBorderTheme: '1px solid rgba(220, 227, 229, 0.3)',
-  userNavModalTheme: '#84828A',
-
-  btnMain: 'rgba(227, 243, 255, 1)',
-  btnAccent: 'rgba(202, 232, 255, 1)',
-  btnLogout: "#3E85F3",
 
   btnCloseSideBarTheme: '#343434',
 
@@ -127,37 +132,15 @@ export const light = {
   bgDayMonthSelector: 'rgba(227, 243, 255, 1)',
   bgActiveBtnDayMonthSelector: 'rgba(202, 232, 255, 1)',
   textActiveDayMonthSelector: 'rgba(62, 133, 243, 1)',
-  moreTaskLabel: 'grey',
 };
 
 export const dark = {
-  white: '#FFFFFF',
-  black: '#111111',
-
-  bgcLogin: 'rgba(220, 235, 247, 1)',
-
-  primary: 'rgba(62, 133, 243, 1)',
-  secondary: '#E3F3FF',
-
-  taskMainLow: 'rgba(114, 194, 248, 1)',
-  taskMainMedium: 'rgba(243, 178, 73, 1)',
-  taskMainHigh: 'rgba(234, 61, 101, 1)',
-
-  taskSecondaryLow: 'rgba(206, 238, 253, 1)',
-  taskSecondaryMedium: 'rgba(252, 240, 212, 1)',
-  taskSecondaryHigh: 'rgba(255, 210, 221, 1)',
-
   userNavTheme: "rgba(250, 250, 250, 0.3)",
   userNavLinkTheme: "#FFFFFF",
   userNavLinkActiveTheme: "#FFFFFF",
   userNavLinkBcgTheme: "#3E85F3",
   userNavModalBcgTheme: '#171820',
   userNavModalBorderTheme: '1px solid rgba(255, 255, 255, 0.05)',
-  userNavModalTheme: '#84828A',
-
-  btnMain: 'rgba(227, 243, 255, 1)',
-  btnAccent: 'rgba(202, 232, 255, 1)',
-  btnLogout: "#3E85F3",
 
   btnCloseSideBarTheme: '#FFFFFF',
 
@@ -183,5 +166,4 @@ export const dark = {
   bgDayMonthSelector: 'rgba(33, 34, 44, 1)',
   bgActiveBtnDayMonthSelector: 'rgba(62, 133, 243, 1)',
   textActiveDayMonthSelector: 'rgba(255, 255, 255, 1)',
-  moreTaskLabel: 'grey',
 };

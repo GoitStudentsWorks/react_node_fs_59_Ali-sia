@@ -19,7 +19,7 @@ import { PrivateRoute } from './PrivateRoute';
 
 export const App = () => {
   const currentTheme = useSelector(selectTheme);
-  const themeGlobal = { ...theme, colors: { light, dark }[currentTheme] };
+  const themeGlobal = { ...theme, colors: {...theme.colors, ...{ light, dark }[currentTheme]} };
 
   const dispatch = useDispatch();
 

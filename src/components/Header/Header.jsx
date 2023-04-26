@@ -4,7 +4,18 @@ import {
 
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import UserInfo from "components/UserInfo/UserInfo";
-import { HeaderStyled, ButtonStyled, PageName, BurgerSVGStyled, UserMenu } from './Header.styled';
+import {
+    HeaderStyled,
+    ButtonStyled,
+    ForTheGloryOfMentors,
+    PageName,
+    BurgerSVGStyled,
+    UserMenu,
+    SiteNameContainer,
+    GooseContainer,
+    PageContainer,
+    TakeToWork,
+} from './Header.styled';
 
 const handleClick = ({currentTarget}) => {
     currentTarget.disabled = true;
@@ -26,9 +37,19 @@ const Header = () => {
             >
                 <BurgerSVGStyled />
             </ButtonStyled>
-            <PageName>
-                { pathname === "/account" ? "User Profile" : "Calendar" }
-            </PageName>
+            <SiteNameContainer>
+                <GooseContainer>
+                    <ForTheGloryOfMentors />
+                </GooseContainer>
+                <PageContainer>
+                    <PageName>
+                        { pathname === "/account" ? "User Profile" : "Calendar" }
+                    </PageName>
+                    <TakeToWork>
+                        <span>Let go</span> of the past and focus on the present!
+                    </TakeToWork>
+                </PageContainer>
+            </SiteNameContainer>
             <UserMenu>
                 <ThemeToggle />
                 <UserInfo />
