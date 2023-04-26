@@ -1,11 +1,11 @@
 import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectTheme } from 'redux/auth/auth.selectors';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, Suspense } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from 'styled-components';
 import { theme, light, dark } from 'theme';
 
-import { useDispatch } from 'react-redux';
-import { useEffect, Suspense } from 'react';
+import { selectTheme } from 'redux/auth/auth.selectors';
 import { refreshUser } from 'redux/auth/auth.operations';
 
 import MainLayout from './MainLayout/MainLayout';
@@ -31,6 +31,7 @@ export const App = () => {
     <ThemeProvider theme={themeGlobal}>
       <BrowserRouter basename="goose-track-team-4">
         <Suspense fallback={null}>
+          <Toaster />
           <Routes>
             <Route path="/" element={<Navigate to={'/login'} />} />
             {/* routes for authorization */}
