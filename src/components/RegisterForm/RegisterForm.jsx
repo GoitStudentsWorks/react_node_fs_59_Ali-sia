@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 
@@ -14,6 +14,7 @@ import {
   InputContainer,
   StyledLabel,
   StyledField,
+  ErrorMsgContainer,
 } from './RegisterForm.styled';
 
 export const RegisterForm = () => {
@@ -64,7 +65,7 @@ export const RegisterForm = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors, touched }) => (
           <StyledForm>
             <InputContainer>
               <StyledLabel htmlFor="name">
@@ -75,7 +76,11 @@ export const RegisterForm = () => {
                   placeholder="Enter your name"
                   type="text"
                 />
-                <ErrorMessage name="name" component="div" />
+                {/* If this field has been touched, and it contains an error, display it
+                 */}
+                {touched.name && errors.name && (
+                  <ErrorMsgContainer>{errors.name}</ErrorMsgContainer>
+                )}
               </StyledLabel>
             </InputContainer>
 
@@ -89,7 +94,11 @@ export const RegisterForm = () => {
                   type="email"
                   autoComplete="off"
                 />
-                <ErrorMessage name="email" component="div" />
+                {/* If this field has been touched, and it contains an error, display it
+                 */}
+                {touched.email && errors.email && (
+                  <ErrorMsgContainer>{errors.email}</ErrorMsgContainer>
+                )}
               </StyledLabel>
             </InputContainer>
 
@@ -103,7 +112,11 @@ export const RegisterForm = () => {
                   type="password"
                   autoComplete="off"
                 />
-                <ErrorMessage name="password" component="div" />
+                {/* If this field has been touched, and it contains an error, display it
+                 */}
+                {touched.password && errors.password && (
+                  <ErrorMsgContainer>{errors.password}</ErrorMsgContainer>
+                )}
               </StyledLabel>
             </InputContainer>
 
