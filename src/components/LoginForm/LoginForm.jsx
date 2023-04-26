@@ -43,7 +43,7 @@ export const LoginForm = () => {
       const data = await dispatch(logIn(values)).unwrap();
       // console.log('Login successfull:', data);
       resetForm();
-      navigate('/calendar/month');
+      navigate('/calendar');
     } catch (error) {
       const errorNotify = () => toast.error(`${error.message}`);
       errorNotify();
