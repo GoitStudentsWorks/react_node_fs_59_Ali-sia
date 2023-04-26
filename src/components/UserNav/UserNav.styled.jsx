@@ -49,7 +49,6 @@ export const NavLinkStyled = styled(NavLink)`
     &.active {
         color: ${props => props.theme.colors.userNavLinkTheme};
         background: ${props => props.theme.colors.userNavLinkBcgTheme};
-        text-decoration: underline;
         pointer-events: none;
     }
 

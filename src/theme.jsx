@@ -95,6 +95,9 @@ export const light = {
   userNavLinkTheme: "#3E85F3",
   userNavLinkActiveTheme: "#84828A",
   userNavLinkBcgTheme: "#E3F3FF",
+  userNavModalBcgTheme: '#FFFFFF',
+  userNavModalBorderTheme: '1px solid rgba(220, 227, 229, 0.3)',
+  userNavModalTheme: '#84828A',
 
   btnMain: 'rgba(227, 243, 255, 1)',
   btnAccent: 'rgba(202, 232, 255, 1)',
@@ -148,6 +151,9 @@ export const dark = {
   userNavLinkTheme: "#FFFFFF",
   userNavLinkActiveTheme: "#FFFFFF",
   userNavLinkBcgTheme: "#3E85F3",
+  userNavModalBcgTheme: '#171820',
+  userNavModalBorderTheme: '1px solid rgba(255, 255, 255, 0.05)',
+  userNavModalTheme: '#84828A',
 
   btnMain: 'rgba(227, 243, 255, 1)',
   btnAccent: 'rgba(202, 232, 255, 1)',
