@@ -18,9 +18,9 @@ import {
 } from './LoginForm.styled';
 
 // #TODO: check
-// toast() API
-// Call it to create a toast from anywhere, even outside React.
 // Make sure you add the <Toaster/> component to your app first.
+
+// #TODO: повидаляти консоль логи
 
 export const LoginForm = () => {
   const initialValues = {
@@ -86,6 +86,7 @@ export const LoginForm = () => {
                   name="password"
                   placeholder="Enter your password"
                   type="password"
+                  autoComplete="current-password"
                 />
                 <ErrorMessage name="password" component="div" />
               </StyledLabel>

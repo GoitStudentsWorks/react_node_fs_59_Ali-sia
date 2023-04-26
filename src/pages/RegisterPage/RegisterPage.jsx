@@ -1,23 +1,28 @@
 import { RegisterForm } from '../../components/RegisterForm/RegisterForm';
 import {
   PageContainer,
+  BackdropContainer,
   PositionContainer,
+  NavLinkStyled,
   PositionImgContainer,
   GooseContainer,
   Goose,
   Speak,
   TextContainer,
-  INeedMoreContainers,
+  AccentText,
 } from './RegisterPage.styled';
 
 const RegisterPage = () => {
   return (
     <>
       <PageContainer>
-        <INeedMoreContainers>
-          
+        <BackdropContainer>
           <PositionContainer>
             <RegisterForm />
+
+            <NavLinkStyled to="/login" end>
+              Log In
+            </NavLinkStyled>
           </PositionContainer>
 
           <PositionImgContainer>
@@ -26,7 +31,7 @@ const RegisterPage = () => {
               <Speak>
                 <TextContainer>
                   <span>Quickly </span>
-                  <a href="url">register </a>
+                  <AccentText>register </ AccentText>
                   <span>
                     {' '}
                     and <br /> familiarize yourself <br /> with the application!
@@ -35,8 +40,7 @@ const RegisterPage = () => {
               </Speak>
             </GooseContainer>
           </PositionImgContainer>
-
-        </INeedMoreContainers>
+        </BackdropContainer>
       </PageContainer>
     </>
   );
