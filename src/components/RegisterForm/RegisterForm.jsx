@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import toast from 'react-hot-toast';
 
 import { register } from '../../redux/auth/auth.operations';
 import { LoginRegisterBtn } from '../Buttons/LoginRegisterBtn/LoginRegisterBtn';
@@ -34,18 +34,21 @@ export const RegisterForm = () => {
   });
 
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
 
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     dispatch(register(values))
       .unwrap()
-      .then(data => {
-        console.log('Registration success:', data);
-        // navigate('/calendar');
+      .then(res => {
+        const successNotify = () =>
+          toast.success(
+            `Welcome ${res.data.user.name}! Enjoy using the Goose App :)`
+          );
+        successNotify();
         resetForm();
       })
       .catch(error => {
-        console.error('Registration error:', error.message);
+        const errorNotify = () => toast.error(`${error.message}`);
+        errorNotify();
       })
       .finally(() => {
         setSubmitting(false);
@@ -84,6 +87,7 @@ export const RegisterForm = () => {
                   name="email"
                   placeholder="Enter your email"
                   type="email"
+                  autoComplete="off"
                 />
                 <ErrorMessage name="email" component="div" />
               </StyledLabel>
@@ -97,6 +101,7 @@ export const RegisterForm = () => {
                   name="password"
                   placeholder="Enter your password"
                   type="password"
+                  autoComplete="off"
                 />
                 <ErrorMessage name="password" component="div" />
               </StyledLabel>
