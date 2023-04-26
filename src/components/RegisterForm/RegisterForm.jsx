@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -33,12 +34,14 @@ export const RegisterForm = () => {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     dispatch(register(values))
       .unwrap()
       .then(data => {
         console.log('Registration success:', data);
+        navigate('/calendar');
         resetForm();
       })
       .catch(error => {

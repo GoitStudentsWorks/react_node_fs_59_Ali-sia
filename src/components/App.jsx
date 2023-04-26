@@ -1,9 +1,12 @@
 import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
-import { InitialElement } from './InitialElement';
 import { useSelector } from 'react-redux';
 import { selectTheme } from 'redux/auth/auth.selectors';
 import { ThemeProvider } from 'styled-components';
 import { theme, light, dark } from 'theme';
+
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { refreshUser } from 'redux/auth/auth.operations';
 
 import MainLayout from './MainLayout/MainLayout';
 import AccountPage from '../pages/AccountPage/AccountPage';
@@ -18,20 +21,18 @@ export const App = () => {
   const currentTheme = useSelector(selectTheme);
   const themeGlobal = { ...theme, colors: { light, dark }[currentTheme] };
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
   return (
     <ThemeProvider theme={themeGlobal}>
       <BrowserRouter basename="goose-track-team-4">
         {/* <Suspense fallback={null}> */}
         <Routes>
-          <Route
-            path="/"
-            element={
-              <RestrictedRoute
-                redirectTo="/login"
-                component={<Navigate to="/calendar" />}
-              />
-            }
-          />
+          <Route path="/" element={<Navigate to={'/login'} />} />
           {/* routes for authorization */}
           <Route
             index
@@ -63,6 +64,7 @@ export const App = () => {
             <Route
               path="/calendar"
               element={
+                // <Navigate to={`/calendar/month/${Date.now()}`} replace />
                 <PrivateRoute
                   redirectTo="/login"
                   component={
