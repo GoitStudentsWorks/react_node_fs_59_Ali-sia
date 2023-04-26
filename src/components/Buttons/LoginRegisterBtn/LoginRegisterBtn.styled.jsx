@@ -25,6 +25,10 @@ export const StyledButton = styled.button`
 
   color: ${props => props.theme.colors.white};
 
+  &:disabled {
+    background-color: ${props => props.theme.colors.taskMainLow};
+  }
+
   img {
     margin-left: ${p => p.theme.space[4] - 1}px;
   }
