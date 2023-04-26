@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -36,14 +36,15 @@ export const LoginForm = () => {
   });
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      const data = await dispatch(logIn(values)).unwrap();
+      await dispatch(logIn(values)).unwrap();
+      // const data = await dispatch(logIn(values)).unwrap();
       // console.log('Login successfull:', data);
+      // navigate('/calendar/month/:currentDay');
       resetForm();
-      navigate('/calendar');
     } catch (error) {
       const errorNotify = () => toast.error(`${error.message}`);
       errorNotify();

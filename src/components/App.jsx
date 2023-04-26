@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme, light, dark } from 'theme';
 
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { refreshUser } from 'redux/auth/auth.operations';
 
 import MainLayout from './MainLayout/MainLayout';
@@ -30,63 +30,66 @@ export const App = () => {
   return (
     <ThemeProvider theme={themeGlobal}>
       <BrowserRouter basename="goose-track-team-4">
-        {/* <Suspense fallback={null}> */}
-        <Routes>
-          <Route path="/" element={<Navigate to={'/login'} />} />
-          {/* routes for authorization */}
-          <Route
-            index
-            path="/login"
-            element={
-              <RestrictedRoute
-                redirectTo="/calendar"
-                component={<LoginPage />}
-              />
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <RestrictedRoute
-                redirectTo="/login"
-                component={<RegisterPage />}
-              />
-            }
-          />
-          {/* </Route> */}
-          <Route element={<MainLayout />}>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<Navigate to={'/login'} />} />
+            {/* routes for authorization */}
             <Route
-              path="/account"
+              index
+              path="/login"
               element={
-                <PrivateRoute redirectTo="/login" component={<AccountPage />} />
-              }
-            />
-            <Route
-              path="/calendar"
-              element={
-                // <Navigate to={`/calendar/month/${Date.now()}`} replace />
-                <PrivateRoute
-                  redirectTo="/login"
-                  component={
-                    <Navigate to={`/calendar/month/${Date.now()}`} replace />
-                  }
+                <RestrictedRoute
+                  redirectTo="/calendar"
+                  component={<LoginPage />}
                 />
               }
             />
             <Route
-              path="/calendar/month/:currentDay"
+              path="/register"
               element={
-                <PrivateRoute
-                  redirectTo="/login"
-                  component={<CalendarPage />}
+                <RestrictedRoute
+                  redirectTo="/calendar"
+                  component={<RegisterPage />}
                 />
               }
             />
-          </Route>
-          {/* </Route> */}
-          <Route path="*" element={<h1>not found page</h1>} />
-        </Routes>
-        {/* </Suspense> */}
+            {/* </Route> */}
+            <Route element={<MainLayout />}>
+              <Route
+                path="/account"
+                element={
+                  <PrivateRoute
+                    redirectTo="/login"
+                    component={<AccountPage />}
+                  />
+                }
+              />
+              <Route
+                path="/calendar"
+                element={
+                  // <Navigate to={`/calendar/month/${Date.now()}`} replace />
+                  <PrivateRoute
+                    redirectTo="/login"
+                    component={
+                      <Navigate to={`/calendar/month/${Date.now()}`} replace />
+                    }
+                  />
+                }
+              />
+              <Route
+                path="/calendar/month/:currentDay"
+                element={
+                  <PrivateRoute
+                    redirectTo="/login"
+                    component={<CalendarPage />}
+                  />
+                }
+              />
+            </Route>
+            {/* </Route> */}
+            <Route path="*" element={<h1>not found page</h1>} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </ThemeProvider>
   );
