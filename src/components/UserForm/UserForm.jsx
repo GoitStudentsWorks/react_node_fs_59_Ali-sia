@@ -64,6 +64,28 @@ export const UserForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
+    // const formData = new FormData();
+
+    // formData.append('name', form.name.value);
+    // formData.append('birthday', form.birthday.value);
+    // formData.append('email', form.email.value);
+    // formData.append('phone', form.phone.value);
+    // formData.append('telegram', form.telegram.value);
+    // formData.append('avatar', form.avatar.files[0]);
+
+    // console.log(formData);
+    // try {
+    //   const response = await fetch('/api/updateUser', {
+    //     method: 'POST',
+    //     body: formData,
+    //   });
+    //   const data = await response.json();
+
+    //   dispatch({ type: 'UPDATE_USER_SUCCESS', payload: data });
+    // } catch (error) {
+    //   dispatch({ type: 'UPDATE_USER_ERROR', payload: error.message });
+    // }
+
     const credentials = {
       name: form.name.value,
       birthday: form.birthday.value,
@@ -90,7 +112,7 @@ export const UserForm = () => {
     user.email && (
       <StyledForm
         autoComplete="off"
-        // encType="multipart/form-data"
+        encType="multipart/form-data"
         onSubmit={handleSubmit}
       >
         {values.avatarURL ? (

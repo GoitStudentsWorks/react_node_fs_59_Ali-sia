@@ -34,12 +34,12 @@ const authSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(register.fulfilled, (state, { payload }) => {
-        state.user = payload.user;
+        state.user = payload.data.user;
         state.token = payload.token;
         state.isLoggedIn = true;
       })
       .addCase(logIn.fulfilled, (state, { payload }) => {
-        state.user = payload.user;
+        state.user = payload.data.user;
         state.token = payload.token;
         state.isLoggedIn = true;
       })
@@ -52,7 +52,7 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, { payload }) => {
-        state.user = payload;
+        state.user = payload.data.user;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
@@ -67,7 +67,7 @@ const authSlice = createSlice({
         localStorage.setItem('theme', state.theme);
       })
       .addCase(updateUser.fulfilled, (state, { payload }) => {
-        state.user = payload;
+        state.user = payload.data.user;
       })
       .addCase(updateUser.rejected, (state, { payload }) => {
         state.error = payload;
