@@ -78,10 +78,27 @@ export const refreshUser = createAsyncThunk(
     try {
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
-      const res = await privateApi.get('api/users/current');
-      return res.data.data.user;
+      const { data } = await privateApi.get('api/users/current');
+      return data.data.user;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+/*
+ * PATCH @ /users/info
+ * body: { name, birthday, email, phone, telegram, avatarURL }
+ */
+
+export const updateUser = createAsyncThunk(
+  'auth/updateUser',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await privateApi.patch('/api/users/info', credentials);
+      return data.data.user;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
   }
 );

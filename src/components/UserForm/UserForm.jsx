@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useFormik } from 'formik';
+import { updateUser } from 'redux/auth/auth.operations';
 import { selectUser } from 'redux/auth/auth.selectors';
 import { parseISO } from 'date-fns';
 
@@ -23,54 +23,78 @@ import 'react-datepicker/dist/react-datepicker.css';
 export const UserForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const shouldRender = useRef(true);
-
-  const formik = useFormik({
-    initialValues: {
-      name: '',
-      birthday: null,
-      email: '',
-      phone: '',
-      telegram: '',
-      avatarURL: '',
-    },
-    onSubmit: values => {
-      dispatch(values);
-    },
+  const [values, setValues] = useState({
+    name: '',
+    birthday: null,
+    email: '',
+    phone: '',
+    telegram: '',
+    avatarURL: '',
   });
+
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setValues(prevValues => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
+  const handleDateChange = date => {
+    setValues(prevValues => ({
+      ...prevValues,
+      birthday: date,
+    }));
+  };
 
   const handleImageUpload = e => {
     const file = e.target.files[0];
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      formik.setFieldValue('photo', reader.result);
+      setValues(prevValues => ({
+        ...prevValues,
+        avatarURL: reader.result,
+      }));
     };
 
     reader.readAsDataURL(file);
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.target;
+    const credentials = {
+      name: form.name.value,
+      birthday: form.birthday.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      telegram: form.telegram.value,
+      avatarURL: form.avatarURL.value,
+    };
+
+    dispatch(updateUser(credentials));
+  };
+
   useEffect(() => {
-    if (user.email && shouldRender.current) {
+    if (user.email) {
       const modifiedUser = {
         ...user,
         birthday: parseISO(user.birthday),
       };
-      formik.setValues(modifiedUser);
-      shouldRender.current = false;
+      setValues(modifiedUser);
     }
-  }, [formik, user]);
+  }, [user]);
 
   return (
-    user.name && (
+    user.email && (
       <StyledForm
-        autocomplete="off"
-        enctype="multipart/form-data"
-        onSubmit={formik.handleSubmit}
+        autoComplete="off"
+        // encType="multipart/form-data"
+        onSubmit={handleSubmit}
       >
-        {formik.values.avatarURL !==
-        'public\\avatars\\6447ffc16d4d3d7eadd00104_Фото профиля.jpg' ? (
-          <Photo src={formik.values.avatarURL} alt="User's photo" />
+        {values.avatarURL ? (
+          <Photo src={values.avatarURL} alt="User's photo" />
         ) : (
           <Plug />
         )}
@@ -89,9 +113,8 @@ export const UserForm = () => {
               type="text"
               name="name"
               placeholder="Edit your name"
-              selected={formik.values.name}
-              value={formik.values.name}
-              onChange={formik.handleChange}
+              value={values.name}
+              onChange={handleInputChange}
               required
             />
           </Label>
@@ -100,9 +123,9 @@ export const UserForm = () => {
             <StyledDatePicker
               name="birthday"
               placeholderText={new Date().toLocaleDateString()}
-              selected={formik.values.birthday}
-              value={formik.values.birthday}
-              onChange={date => formik.setFieldValue('birthday', date)}
+              selected={values.birthday}
+              value={values.birthday}
+              onChange={handleDateChange}
               calendarClassName="goose"
             />
           </Label>
@@ -112,8 +135,8 @@ export const UserForm = () => {
               type="email"
               name="email"
               placeholder="Edit your email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
+              value={values.email}
+              onChange={handleInputChange}
               required
             />
           </Label>
@@ -123,8 +146,8 @@ export const UserForm = () => {
               type="text"
               name="phone"
               placeholder="Add a phone number"
-              value={formik.values.phone}
-              onChange={formik.handleChange}
+              value={values.phone}
+              onChange={handleInputChange}
             />
           </Label>
           <Label>
@@ -133,8 +156,8 @@ export const UserForm = () => {
               type="text"
               name="telegram"
               placeholder="Add a link to Telegram"
-              value={formik.values.telegram}
-              onChange={formik.handleChange}
+              value={values.telegram}
+              onChange={handleInputChange}
             />
           </Label>
         </Wrapper>
