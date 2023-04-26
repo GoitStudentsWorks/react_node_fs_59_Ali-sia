@@ -7,6 +7,7 @@ export const StyledMain = styled.div`
   padding-right: ${prop => prop.theme.space[2] * 5}px;
   padding-bottom: ${prop => prop.theme.space[3] * 5}px;
   background-color: ${prop => prop.theme.colors.bgcMainTheme};
+  min-height: 100vh;
 
   ${greaterThan(
     'mobile',

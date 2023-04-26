@@ -47,7 +47,7 @@ export const SideBarStyled = styled.aside`
         padding-left: 24px;
         padding-right: 24px;
 
-        min-heigth: 100%;
+        min-height: 100%;
     `)};
 `;
 
