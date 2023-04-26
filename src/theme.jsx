@@ -91,6 +91,11 @@ export const light = {
   taskSecondaryMedium: 'rgba(252, 240, 212, 1)',
   taskSecondaryHigh: 'rgba(255, 210, 221, 1)',
 
+  userNavTheme: "#7E7D82",
+  userNavLinkTheme: "#3E85F3",
+  userNavLinkActiveTheme: "#84828A",
+  userNavLinkBcgTheme: "#E3F3FF",
+
   btnMain: 'rgba(227, 243, 255, 1)',
   btnAccent: 'rgba(202, 232, 255, 1)',
   btnLogout: "#3E85F3",
@@ -138,6 +143,11 @@ export const dark = {
   taskSecondaryLow: 'rgba(206, 238, 253, 1)',
   taskSecondaryMedium: 'rgba(252, 240, 212, 1)',
   taskSecondaryHigh: 'rgba(255, 210, 221, 1)',
+
+  userNavTheme: "rgba(250, 250, 250, 0.3)",
+  userNavLinkTheme: "#FFFFFF",
+  userNavLinkActiveTheme: "#FFFFFF",
+  userNavLinkBcgTheme: "#3E85F3",
 
   btnMain: 'rgba(227, 243, 255, 1)',
   btnAccent: 'rgba(202, 232, 255, 1)',

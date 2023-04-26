@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+//1
 
 const Form = styled.form`
   width: 100%;
@@ -44,7 +45,7 @@ const TitleContainer = styled.div`
   flex-direction: column;
   margin-bottom: 16px;
 
-  @media (min-width: 375px) {
+  @media (min-width: 768px) {
     margin-bottom: 18px;
   }
 `;
@@ -56,7 +57,7 @@ const TimeContainer = styled.div`
   gap: 15px;
   margin-bottom: 18px;
 
-  @media (min-width: 375px) {
+  @media (min-width: 768px) {
     margin-bottom: 28px;
   }
 `;
@@ -66,7 +67,7 @@ const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 375px) {
+  @media (min-width: 768px) {
     max-width: 163px;
   }
 `;
