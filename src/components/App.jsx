@@ -67,7 +67,6 @@ export const App = () => {
               <Route
                 path="/calendar"
                 element={
-                  // <Navigate to={`/calendar/month/${Date.now()}`} replace />
                   <PrivateRoute
                     redirectTo="/login"
                     component={
@@ -77,7 +76,7 @@ export const App = () => {
                 }
               />
               <Route
-                path="/calendar/month/:currentDay"
+                path="/calendar/month/:currentDate"
                 element={
                   <PrivateRoute
                     redirectTo="/login"
