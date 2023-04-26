@@ -1,9 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+// import { useNavigate } from 'react-router-dom';
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import { register } from '../../redux/auth/auth.operations';
+import { LoginRegisterBtn } from '../Buttons/LoginRegisterBtn/LoginRegisterBtn';
+
 import {
   StyledContainer,
   FormHeader,
@@ -11,7 +14,6 @@ import {
   InputContainer,
   StyledLabel,
   StyledField,
-  StyledButton,
 } from './RegisterForm.styled';
 
 export const RegisterForm = () => {
@@ -32,12 +34,14 @@ export const RegisterForm = () => {
   });
 
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     dispatch(register(values))
       .unwrap()
       .then(data => {
-        // console.log('Registration success:', data);
+        console.log('Registration success:', data);
+        // navigate('/calendar');
         resetForm();
       })
       .catch(error => {
@@ -98,9 +102,11 @@ export const RegisterForm = () => {
               </StyledLabel>
             </InputContainer>
 
-            <StyledButton type="submit" disabled={isSubmitting}>
-              Sign Up
-            </StyledButton>
+            <LoginRegisterBtn
+              type="submit"
+              disabled={isSubmitting}
+              btnText="Sign Up"
+            />
           </StyledForm>
         )}
       </Formik>

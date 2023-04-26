@@ -1,16 +1,21 @@
-import { addMonths, format } from 'date-fns';
+import { format } from 'date-fns';
 import {
   Button,
   ButtonsWrapper,
   DateField,
   PeriodPaginationWrapper,
+  StyledHiChevronLeft,
+  StyledHiChevronRight,
 } from './PeriodPaginator.styled';
-import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 
-export default function PeriodPaginator({ activeDate, setActiveDate }) {
-  const date = format(activeDate, 'MMMM yyyy');
-  const handlePrevBtnClick = () => setActiveDate(addMonths(activeDate, -1));
-  const handleNextBtnClick = () => setActiveDate(addMonths(activeDate, 1));
+export default function PeriodPaginator({
+  activeDate,
+  changeActiveDay,
+  isMonthPage,
+}) {
+  const date = isMonthPage
+    ? format(activeDate, 'MMMM yyyy')
+    : format(activeDate, 'dd MMMM yyyy');
 
   return (
     <PeriodPaginationWrapper>
@@ -18,11 +23,11 @@ export default function PeriodPaginator({ activeDate, setActiveDate }) {
         <DateField>{date}</DateField>
       </div>
       <ButtonsWrapper>
-        <Button type="button" onClick={() => handlePrevBtnClick()}>
-          <HiChevronLeft />
+        <Button type="button" onClick={() => changeActiveDay(-1)}>
+          <StyledHiChevronLeft />
         </Button>
-        <Button type="button" onClick={() => handleNextBtnClick()}>
-          <HiChevronRight />
+        <Button type="button" onClick={() => changeActiveDay(1)}>
+          <StyledHiChevronRight />
         </Button>
       </ButtonsWrapper>
     </PeriodPaginationWrapper>

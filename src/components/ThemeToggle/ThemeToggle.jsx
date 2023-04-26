@@ -10,7 +10,7 @@ const ThemeToggle = () => {
     const currentTheme = useSelector(selectTheme);
 
     return (
-        <ButtonStyled onClick={(event) => {
+        <ButtonStyled type="button" onClick={(event) => {
             dispatch(toggleTheme());
             event.currentTarget.blur();
         }}>

@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { greaterThan } from 'helpers/breakpoints.styled';
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 
 export const PeriodPaginationWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 
   ${greaterThan(
-    'mobile',
+    'tablet',
     `
    gap: 8px;
 `
@@ -16,21 +17,24 @@ export const DateField = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 150px;
+
+  width: 152px;
   height: 30px;
 
-  background-color: #3e85f3;
   color: ${p => p.theme.colors.white};
+  background-color: ${p => p.theme.colors.primary};
 
-  border-radius: 8px;
-  line-height: 1.29;
+  border-radius: ${p => p.theme.radii.light};
   font-weight: ${p => p.theme.fontWeights.bold};
-  font-size: ${p => p.theme.fontSizes.m};
+  font-size: ${p => p.theme.fontSizes.s};
+  line-height: 1.29;
 
   ${greaterThan(
-    'mobile',
+    'tablet',
     `
    height: 34px;
+   font-size: 16px;
+   width: 180px;
 `
   )}
 `;
@@ -41,17 +45,16 @@ export const ButtonsWrapper = styled.div`
 
 export const Button = styled.button`
   padding: 0;
-  color: #616161;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 30px;
   width: 36px;
 
-  cursor: pointer;
-  border: 1px solid rgba(220, 227, 229, 0.5);
+  border: ${p => `${p.theme.borders.normal} ${p.theme.colors.taskBorderTheme}`};
   font-size: ${p => p.theme.fontSizes.l};
-  background-color: ${p => p.theme.colors.white};
+  background-color: ${p => p.theme.colors.bgcSecondaryTheme};
+  cursor: pointer;
 
   &:first-of-type {
     border-radius: 8px 0px 0px 8px;
@@ -60,16 +63,24 @@ export const Button = styled.button`
     border-radius: 0px 8px 8px 0px;
     border-left: none;
   }
-
-  &:hover,
-  :focus {
-    background-color: #e3f3ff;
+  &:last-of-type:hover {
+    border-left: ${p =>
+      `${p.theme.borders.normal} ${p.theme.colors.taskBorderTheme}`};
   }
-  
+  &:hover {
+    scale: 1.05;
+  }
+
   ${greaterThan(
-    'mobile',
+    'tablet',
     `
    height: 34px;
 `
   )}
+`;
+export const StyledHiChevronLeft = styled(HiChevronLeft)`
+  color: ${p => p.theme.colors.calendarDayNumbers};
+`;
+export const StyledHiChevronRight = styled(HiChevronRight)`
+  color: ${p => p.theme.colors.calendarDayNumbers};
 `;

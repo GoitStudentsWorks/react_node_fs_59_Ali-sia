@@ -12,22 +12,47 @@ import {ReactComponent as CloseSVG} from './close.svg';
 
 export const SideBarStyled = styled.aside`
     display: none;
-    position: absolute;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+
+    position: fixed;
+    top: 0;
+    left: 0;
     z-index: 999;
 
+    padding-top: 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 24px;
+
     width: 225px;
-    height: 100vh;
+    min-height: 100vh;
 
     background: ${({theme}) => theme.colors.bgcSideBarTheme};
 
     ${() => greaterThan("tablet", `
         width: 289px;
+
+        padding-left: 32px;
+        padding-right: 32px;
     `)};
 
     ${() => greaterThan("laptop", `
-        display: block;
+        display: flex;
+
         position: static;
+
+        padding-top: 32px;    
+        padding-left: 24px;
+        padding-right: 24px;
+
+        min-heigth: 100%;
     `)};
+`;
+
+export const WrapperStyled = styled.div`
+    width: 100%;
 `;
 
 export const LogoBarStyled = styled.div`
@@ -36,22 +61,17 @@ export const LogoBarStyled = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    padding-top: 24px;
-    padding-left: 20px;
-    padding-right: 20px;
+    width: 100%;
+
     padding-bottom: 64px;
 
     ${() => greaterThan("tablet", `
-        padding-left: 32px;
-        padding-right: 32px;
         padding-bottom: 50px;
     `)};
 
     ${() => greaterThan("laptop", `
-        padding-top: 32px;    
-        padding-left: 24px;
-        padding-right: 64px;
         padding-bottom: 32px;
+        display: block;
     `)};
 `;
 
@@ -123,13 +143,13 @@ export const AppNameStyled = styled.p`
 export const ButtonStyled = styled.button`
     background-color: transparent;
     border: 0;
-    padding: 4px;
+    padding: 0px;
 
     cursor: pointer;
 
     &:hover,
     &:focus {
-        box-shadow: 0 0 4px ${props => props.theme.colors.textHeaderTheme};
+        box-shadow: ${props => props.theme.shadows.loginBtn};
         border-radius: 50%;
     };
 
