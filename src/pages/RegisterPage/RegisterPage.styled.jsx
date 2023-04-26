@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+
 import signUpGoose from './SVG/signUpGoose.svg';
 import signUpSpeak from './SVG/signUpSpeak.svg';
 
@@ -14,7 +16,7 @@ export const PageContainer = styled.div`
   background-color: ${props => props.theme.colors.bgcLogin};
 `;
 
-export const INeedMoreContainers = styled.div`
+export const BackdropContainer = styled.div`
   position: relative;
   background-color: transparent;
 
@@ -28,6 +30,21 @@ export const INeedMoreContainers = styled.div`
 
 export const PositionContainer = styled.div`
   position: absolute;
+`;
+
+export const NavLinkStyled = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: ${p => p.theme.space[5] + 2}px;
+
+  color: ${props => props.theme.colors.primary};
+  cursor: pointer;
+
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    margin-top: ${p => p.theme.space[6]}px;
+  }
 `;
 
 export const PositionImgContainer = styled.div`
@@ -97,4 +114,8 @@ export const TextContainer = styled.div`
   color: #111111;
 
   transform: rotate(-27deg);
+`;
+
+export const AccentText = styled.span`
+  color: ${props => props.theme.colors.primary};
 `;

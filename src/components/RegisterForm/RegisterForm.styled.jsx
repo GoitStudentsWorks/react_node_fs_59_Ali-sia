@@ -9,10 +9,9 @@ export const StyledContainer = styled.div`
   padding: ${p => p.theme.space[8]}px ${p => p.theme.space[6]}px;
 
   border-radius: ${props => props.theme.radii.light};
+  background-color: ${props => props.theme.colors.white};
 
   font-family: ${props => props.theme.fonts.main};
-
-  background-color: ${props => props.theme.colors.white};
 
   @media (min-width: ${props => props.theme.breakpoints.tablet}) {
     width: 480px;
