@@ -8,7 +8,9 @@ const initialState = {
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
-  theme: localStorage.getItem("theme") ? localStorage.getItem("theme") : THEME_CONTEXT.LIGHT,
+  theme: localStorage.getItem('theme')
+    ? localStorage.getItem('theme')
+    : THEME_CONTEXT.LIGHT,
 };
 
 export const toggleTheme = createAction('toggleTheme');
@@ -19,7 +21,7 @@ const authSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(register.fulfilled, (state, { payload }) => {
-        state.user = payload.user;
+        state.user = payload.data.user;
         state.token = payload.token;
         state.isLoggedIn = true;
       })
@@ -37,7 +39,7 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, { payload }) => {
-        state.user = payload;
+        state.user = payload.data.user;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
@@ -45,8 +47,11 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(toggleTheme, (state, action) => {
-        state.theme = state.theme === THEME_CONTEXT.LIGHT ? THEME_CONTEXT.DARK : THEME_CONTEXT.LIGHT;
-        localStorage.setItem("theme", state.theme);
+        state.theme =
+          state.theme === THEME_CONTEXT.LIGHT
+            ? THEME_CONTEXT.DARK
+            : THEME_CONTEXT.LIGHT;
+        localStorage.setItem('theme', state.theme);
       });
   },
 });

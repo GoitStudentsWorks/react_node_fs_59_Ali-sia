@@ -5,7 +5,11 @@ import { Suspense, useEffect } from 'react';
 import Header from '../Header/Header';
 import SideBar from '../SideBar/SideBar';
 
-import { StyledMain, WrapperMain, WrapperMainContent } from './MainLayout.styled';
+import {
+  StyledMain,
+  WrapperMain,
+  WrapperMainContent,
+} from './MainLayout.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from 'redux/auth/auth.selectors';
