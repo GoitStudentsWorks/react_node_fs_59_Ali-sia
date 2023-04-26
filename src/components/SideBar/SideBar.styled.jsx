@@ -27,7 +27,7 @@ export const SideBarStyled = styled.aside`
     padding-bottom: 24px;
 
     width: 225px;
-    height: 100vh;
+    min-height: 100vh;
 
     background: ${({theme}) => theme.colors.bgcSideBarTheme};
 
