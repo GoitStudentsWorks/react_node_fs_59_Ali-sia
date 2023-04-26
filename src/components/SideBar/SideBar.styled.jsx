@@ -51,6 +51,10 @@ export const SideBarStyled = styled.aside`
     `)};
 `;
 
+export const WrapperStyled = styled.div`
+    width: 100%;
+`;
+
 export const LogoBarStyled = styled.div`
     display: flex;
     flex-direction: row;
