@@ -15,7 +15,6 @@ const ModalWrapper = styled.div`
 const ModalContainer = styled.div`
   position: relative;
   width: 267px;
-  /* height: 334px; */
   padding: 48px 18px 40px 18px;
 
   background-color: #ffffff;
@@ -23,7 +22,7 @@ const ModalContainer = styled.div`
   box-shadow: 0px 4px 16px rgba(17, 17, 17, 0.1);
   border-radius: 8px;
 
-  @media (min-width: 375px) {
+  @media (min-width: 768px) {
     width: 340px;
     padding: 40px 28px;
   }
