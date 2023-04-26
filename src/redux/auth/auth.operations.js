@@ -49,10 +49,13 @@ export const logIn = createAsyncThunk(
 
 export const logOut = createAsyncThunk(
   'users/logout',
-  async (_, { rejectWithValue }) => {
+  async (_, { getState, rejectWithValue }) => {
+    const state = getState();
+    const persistedToken = state.auth.token;
+
     try {
+      setAuthHeader(persistedToken);
       const response = await privateApi.post('/api/users/logout');
-      console.log('---> ~ response:', response);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -66,14 +69,14 @@ export const logOut = createAsyncThunk(
  */
 export const refreshUser = createAsyncThunk(
   'auth/refresh',
-  async (_, thunkAPI) => {
+  async (_, { getState, rejectWithValue }) => {
     // Reading the token from the state via getState()
-    const state = thunkAPI.getState();
+    const state = getState();
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
       // If there is no token, exit without performing any request
-      return thunkAPI.rejectWithValue('Unable to fetch user');
+      return rejectWithValue('Unable to fetch user');
     }
 
     try {
@@ -82,7 +85,7 @@ export const refreshUser = createAsyncThunk(
       const res = await privateApi.get('/api/users/current');
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
