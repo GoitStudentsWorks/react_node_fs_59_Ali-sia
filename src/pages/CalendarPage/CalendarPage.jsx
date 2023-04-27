@@ -1,27 +1,28 @@
-import ChoosedMonth from 'components/ChoosedMonth/ChoosedMonth';
 import { Wrapper } from './CalendarPage.styled';
 import CalendarToolbar from 'components/CalendarToolbar/CalendarToolbar';
 import { useState } from 'react';
 import { addDays, addMonths, setDefaultOptions } from 'date-fns';
 import TaskModal from 'components/TaskModal/TaskModal';
-import MonthCalendarHead from 'components/MonthCalendarHead/MonthCalendarHead';
+import { Outlet, useLocation } from 'react-router-dom';
 
 export default function CalendarPage() {
   setDefaultOptions({ weekStartsOn: 1 }); //for date-fns, to start count weeks from monday
+  const location = useLocation();
   const currentDate = new Date();
   const [activeDate, setActiveDate] = useState(currentDate);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isMonthPage, setIsMonthPage] = useState(true);
+  const isDayPage = location?.pathname.includes('day');
   const tasks = { tasks: [] };
 
   const changeActiveDay = (value, day) => {
     if (day) {
       return setActiveDate(day);
     }
-    if (isMonthPage) {
-      return setActiveDate(addMonths(activeDate, value));
+
+    if (location.pathname.includes('day')) {
+      return setActiveDate(addDays(activeDate, value));
     } else {
-      setActiveDate(addDays(activeDate, value));
+      setActiveDate(addMonths(activeDate, value));
     }
   };
 
@@ -29,9 +30,11 @@ export default function CalendarPage() {
     setIsModalOpen(prev => !prev);
   };
 
-  const togglePage = () => {
-    setIsMonthPage(prev => !prev);
-  };
+  // const isRefreshing = useSelector(selectIsRefreshing);
+  // if (isRefreshing) {
+  //   return;
+  // }
+
   // const startDayForFetch = Number(format(startOfMonth(activeDate), 'T'));
   // const endDayForFetch = Number(format(endOfMonth(activeDate), 'T'));
   ///////////////// const startDateForFetch = format(startOfMonth(activeDate), 'T');
@@ -52,39 +55,35 @@ export default function CalendarPage() {
   //   dispatch(fetchTasks());
   // }, [dispatch]);
 
+  // console.log('REDNDER CALENDAR PAGE');
   return (
     <Wrapper>
       <CalendarToolbar
         activeDate={activeDate}
         changeActiveDay={changeActiveDay}
-        isMonthPage={isMonthPage}
-        togglePage={togglePage}
+        isDayPage={isDayPage}
       />
-      {isMonthPage ? (
-        <ChoosedMonth
-          currentDate={currentDate}
-          activeDate={activeDate}
-          changeActiveDay={changeActiveDay}
-          tasks={tasks}
-          openModal={toggleModal}
-          togglePage={togglePage}
+
+      {isDayPage ? (
+        <Outlet
+          context={{
+            currentDate,
+            activeDate,
+            toggleModal,
+            changeActiveDay,
+          }}
         />
       ) : (
-        <div>
-          <MonthCalendarHead currentDate={currentDate} />
-          <h1 style={{ color: 'grey' }}>Choosed Day</h1>
-          <h2 style={{ color: 'grey' }}> Modal test</h2>
-          <button type="button" onClick={toggleModal}>
-            openModal
-          </button>
-        </div>
-        // <ChoosedDay
-        //   currentDate={currentDate}
-        //   activeDate={activeDate}
-        //   setIsModalOpen={setIsModalOpen}
-        // />
+        <Outlet
+          context={{
+            currentDate,
+            activeDate,
+            changeActiveDay,
+            tasks,
+            toggleModal,
+          }}
+        />
       )}
-
       {isModalOpen && <TaskModal onClose={toggleModal} />}
     </Wrapper>
   );
