@@ -6,8 +6,6 @@ export const Main = styled.main`
   margin-right: auto;
   padding: 0 20px 40px;
 
-  background: #f7f6f9;
-
   ${greaterThan(
     'tablet',
     `
