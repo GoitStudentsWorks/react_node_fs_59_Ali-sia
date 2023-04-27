@@ -29,6 +29,7 @@ export const UserForm = () => {
     email: '',
     phone: '',
     telegram: '',
+    avatarFile: null,
     avatarURL: '',
   });
 
@@ -54,6 +55,7 @@ export const UserForm = () => {
     reader.onloadend = () => {
       setValues(prevValues => ({
         ...prevValues,
+        avatarFile: file,
         avatarURL: reader.result,
       }));
     };
@@ -63,39 +65,18 @@ export const UserForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const form = e.target;
-    // const formData = new FormData();
+    const formData = new FormData();
 
-    // formData.append('name', form.name.value);
-    // formData.append('birthday', form.birthday.value);
-    // formData.append('email', form.email.value);
-    // formData.append('phone', form.phone.value);
-    // formData.append('telegram', form.telegram.value);
-    // formData.append('avatar', form.avatar.files[0]);
+    formData.append('name', values.name);
+    formData.append('birthday', values.birthday);
+    formData.append('email', values.email);
+    formData.append('phone', values.phone);
+    formData.append('telegram', values.telegram);
+    if (values.avatarFile) {
+      formData.append('avatarURL', values.avatarFile);
+    }
 
-    // console.log(formData);
-    // try {
-    //   const response = await fetch('/api/updateUser', {
-    //     method: 'POST',
-    //     body: formData,
-    //   });
-    //   const data = await response.json();
-
-    //   dispatch({ type: 'UPDATE_USER_SUCCESS', payload: data });
-    // } catch (error) {
-    //   dispatch({ type: 'UPDATE_USER_ERROR', payload: error.message });
-    // }
-
-    const credentials = {
-      name: form.name.value,
-      birthday: form.birthday.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      telegram: form.telegram.value,
-      avatarURL: form.avatarURL.value,
-    };
-
-    dispatch(updateUser(credentials));
+    dispatch(updateUser(formData));
   };
 
   useEffect(() => {
@@ -124,7 +105,7 @@ export const UserForm = () => {
           <SelectionIcon />
           <PhotoSelection
             type="file"
-            name="avatarURL"
+            name="avatarFile"
             onChange={handleImageUpload}
           />
         </LabelPhotoSelection>
