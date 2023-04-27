@@ -83,7 +83,7 @@ export const UserForm = () => {
     if (user.email) {
       const modifiedUser = {
         ...user,
-        birthday: parseISO(user.birthday),
+        birthday: user.birthday ? parseISO(user.birthday) : null,
       };
       setValues(modifiedUser);
     }
