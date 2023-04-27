@@ -19,7 +19,7 @@ export const SideBarStyled = styled.aside`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 1;
 
     padding-top: 24px;
     padding-left: 20px;
@@ -47,7 +47,7 @@ export const SideBarStyled = styled.aside`
         padding-left: 24px;
         padding-right: 24px;
 
-        min-heigth: 100%;
+        min-height: 100%;
     `)};
 `;
 

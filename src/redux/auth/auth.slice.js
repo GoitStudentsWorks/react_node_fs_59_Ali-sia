@@ -1,9 +1,22 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
-import { register, logIn, logOut, refreshUser } from './auth.operations';
+import {
+  register,
+  logIn,
+  logOut,
+  refreshUser,
+  updateUser,
+} from './auth.operations';
 import THEME_CONTEXT from 'context/ThemeContext';
 
 const initialState = {
-  user: { name: null, email: null, avatar: null },
+  user: {
+    name: null,
+    birthday: null,
+    email: null,
+    phone: null,
+    telegram: null,
+    avatarURL: null,
+  },
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
@@ -52,6 +65,12 @@ const authSlice = createSlice({
             ? THEME_CONTEXT.DARK
             : THEME_CONTEXT.LIGHT;
         localStorage.setItem('theme', state.theme);
+      })
+      .addCase(updateUser.fulfilled, (state, { payload }) => {
+        state.user = payload.data.user;
+      })
+      .addCase(updateUser.rejected, (state, { payload }) => {
+        state.error = payload;
       });
   },
 });
