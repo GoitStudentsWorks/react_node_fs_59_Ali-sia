@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { greaterThan } from 'helpers/breakpoints.styled';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 
 export const PeriodPaginationWrapper = styled.div`
   display: flex;
@@ -43,7 +44,7 @@ export const ButtonsWrapper = styled.div`
   display: flex;
 `;
 
-export const Button = styled.button`
+export const StyledLink = styled(Link)`
   padding: 0;
   display: flex;
   justify-content: center;

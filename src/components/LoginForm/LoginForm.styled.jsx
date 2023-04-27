@@ -78,3 +78,7 @@ export const StyledField = styled(Field)`
     background-color: ${props => props.theme.colors.bgcLogin};
   }
 `;
+
+export const ErrorMsgContainer = styled.div`
+  color: red;
+`;
