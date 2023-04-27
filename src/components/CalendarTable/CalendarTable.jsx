@@ -11,8 +11,6 @@ import {
 } from 'date-fns';
 
 import {
-  TableWrapper,
-  CellWrapper,
   DayWrapper,
   RowWrapper,
   CurrentDayWrapper,
@@ -20,16 +18,15 @@ import {
   TasksWrapper,
   TaskWrapper,
   MoreTasksLabel,
+  CellLink,
+  TableList,
 } from './CalendarTable.styled';
+import { useOutletContext } from 'react-router-dom';
 
-export default function CalendarTable({
-  currentDate,
-  activeDate,
-  tasks,
-  openModal,
-  changeActiveDay,
-  togglePage,
-}) {
+export default function CalendarTable() {
+  const { changeActiveDay, openModal, tasks, activeDate, currentDate } =
+    useOutletContext();
+
   const currentMonth = getMonth(activeDate);
   const totalDaysForGrid = 41; // 42 = (0 - 41)
   const startDay = startOfWeek(startOfMonth(activeDate));
@@ -44,6 +41,7 @@ export default function CalendarTable({
   const isCurrentDay = day => isSameDay(currentDate, day);
   const getIsSameMonth = day => currentMonth === getMonth(day);
   const getDayNumber = day => format(day, 'd');
+  const dayForLink = format(activeDate, 'ddMMMMyyyy');
 
   let filteredTasks = [];
   const getDayTasks = day => {
@@ -56,6 +54,7 @@ export default function CalendarTable({
   const handleClick = (e, item) => {
     //item = day or task
     const { nodeName } = e.target;
+    console.log(nodeName);
 
     if (nodeName === 'BUTTON') {
       // console.log('task', item);
@@ -65,48 +64,49 @@ export default function CalendarTable({
       return;
     }
     changeActiveDay(0, item);
-    togglePage();
   };
 
   return (
     <div>
       <CalendarWrapper>
-        <TableWrapper>
+        <TableList>
           {visibleDaysArray.map(day => (
-            <CellWrapper
-              key={format(day, 'ddMMyyyy')}
-              onClick={e => handleClick(e, day)}
-              isSameMonth={getIsSameMonth(day)}
-            >
-              <RowWrapper>
-                {isCurrentDay(day) ? (
-                  <CurrentDayWrapper>{getDayNumber(day)}</CurrentDayWrapper>
-                ) : (
-                  <DayWrapper isSameMonth={getIsSameMonth(day)}>
-                    {getDayNumber(day)}
-                  </DayWrapper>
-                )}
-              </RowWrapper>
-              <TasksWrapper>
-                {getDayTasks(day)}
-                {filteredTasks.slice(0, 2).map(task => (
-                  <TaskWrapper
-                    key={task.id}
-                    priority={task.priority}
-                    onClick={e => handleClick(e, task)}
-                  >
-                    {task.title}
-                  </TaskWrapper>
-                ))}
-                {filteredTasks.length > 2 && (
-                  <MoreTasksLabel>
-                    {filteredTasks.length - 2} more..
-                  </MoreTasksLabel>
-                )}
-              </TasksWrapper>
-            </CellWrapper>
+            <li key={format(day, 'ddMMyyyy')}>
+              <CellLink
+                to={`/calendar/day/${dayForLink}`}
+                onClick={e => handleClick(e, day)}
+                issamemonth={getIsSameMonth(day).toString()}
+              >
+                <RowWrapper>
+                  {isCurrentDay(day) ? (
+                    <CurrentDayWrapper>{getDayNumber(day)}</CurrentDayWrapper>
+                  ) : (
+                    <DayWrapper isSameMonth={getIsSameMonth(day)}>
+                      {getDayNumber(day)}
+                    </DayWrapper>
+                  )}
+                </RowWrapper>
+                <TasksWrapper>
+                  {getDayTasks(day)}
+                  {filteredTasks.slice(0, 2).map(task => (
+                    <TaskWrapper
+                      key={task.id}
+                      priority={task.priority}
+                      onClick={e => handleClick(e, task)}
+                    >
+                      {task.title}
+                    </TaskWrapper>
+                  ))}
+                  {filteredTasks.length > 2 && (
+                    <MoreTasksLabel>
+                      {filteredTasks.length - 2} more..
+                    </MoreTasksLabel>
+                  )}
+                </TasksWrapper>
+              </CellLink>
+            </li>
           ))}
-        </TableWrapper>
+        </TableList>
       </CalendarWrapper>
     </div>
   );

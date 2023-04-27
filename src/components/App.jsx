@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
@@ -14,8 +14,11 @@ import CalendarPage from 'pages/CalendarPage/CalendarPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 
-import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
+import { CalendarRoute, DayRoute } from './CalendarRoute';
+import ChoosedMonth from './ChoosedMonth/ChoosedMonth';
+import ChoosedDay from './ChooseDay/ChooseDay';
 
 export const App = () => {
   const currentTheme = useSelector(selectTheme);
@@ -33,60 +36,37 @@ export const App = () => {
         <Suspense fallback={null}>
           <Toaster />
           <Routes>
-            <Route path="/" element={<Navigate to={'/login'} />} />
-            {/* routes for authorization */}
-            <Route
-              index
-              path="/login"
-              element={
-                <RestrictedRoute
-                  redirectTo="/calendar"
-                  component={<LoginPage />}
-                />
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <RestrictedRoute
-                  redirectTo="/calendar"
-                  component={<RegisterPage />}
-                />
-              }
-            />
-            {/* </Route> */}
-            <Route element={<MainLayout />}>
-              <Route
-                path="/account"
-                element={
-                  <PrivateRoute
-                    redirectTo="/login"
-                    component={<AccountPage />}
+            {/* Приватні маршрути */}
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="/" element={<MainLayout />}>
+                <Route path="/" element={<CalendarPage />}>
+                  {/* Переадресація на календар місяц/день*/}
+                  <Route path="/" element={<CalendarRoute />} />
+                  <Route path="/calendar" element={<CalendarRoute />} />
+                  <Route path="/calendar/month" element={<CalendarRoute />} />
+                  <Route path="/calendar/day" element={<DayRoute />} />
+
+                  {/* Переадресація на відповідний компонент календаря */}
+                  <Route
+                    path="calendar/month/:currentDate"
+                    element={<ChoosedMonth />}
                   />
-                }
-              />
-              <Route
-                path="/calendar"
-                element={
-                  <PrivateRoute
-                    redirectTo="/login"
-                    component={
-                      <Navigate to={`/calendar/month/${Date.now()}`} replace />
-                    }
+                  <Route
+                    path="calendar/day/:currentDate"
+                    element={<ChoosedDay />}
                   />
-                }
-              />
-              <Route
-                path="/calendar/month/:currentDate"
-                element={
-                  <PrivateRoute
-                    redirectTo="/login"
-                    component={<CalendarPage />}
-                  />
-                }
-              />
+                </Route>
+                {/* Аккаунт */}
+                <Route path="account" element={<AccountPage />} />
+              </Route>
             </Route>
-            {/* </Route> */}
+
+            {/* Публічні маршрути */}
+            <Route path="/" element={<PublicRoute />}>
+              <Route path="login" element={<LoginPage />} />
+              <Route path="register" element={<RegisterPage />} />
+            </Route>
+
             <Route path="*" element={<h1>not found page</h1>} />
           </Routes>
         </Suspense>

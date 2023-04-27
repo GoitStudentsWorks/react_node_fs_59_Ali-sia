@@ -1,4 +1,5 @@
 import { between, greaterThan } from 'helpers/breakpoints.styled';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const getTasksColor = p => {
@@ -37,28 +38,32 @@ export const CalendarWrapper = styled.div`
   )}
 `;
 
-export const TableWrapper = styled.div`
+export const TableList = styled.ul`
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+
   height: 100%;
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   grid-template-rows: repeat(6, minmax(0, 1fr));
   grid-gap: 1px;
+  marker: none;
 
   border-radius: ${p => p.theme.radii.light};
   border: ${p => `${p.theme.borders.normal} ${p.theme.colors.taskBorderTheme}`};
   background-color: ${p => p.theme.colors.taskBorderTheme};
   overflow: hidden;
 `;
-
-export const CellWrapper = styled.div`
+export const CellLink = styled(Link)`
   padding: 8px 2px 2px 2px;
+  height: 100%;
   display: flex;
   gap: 8px;
   flex-direction: column;
   background-color: ${p => p.theme.colors.bgcSecondaryTheme};
-  cursor: pointer;
 
-  opacity: ${p => (!p.isSameMonth ? '0.7' : 1)};
+  opacity: ${p => (p.issamemonth === 'false' ? '0.7' : 1)};
 
   &:hover {
     border: ${p =>
