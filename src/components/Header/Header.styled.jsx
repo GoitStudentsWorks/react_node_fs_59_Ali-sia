@@ -25,13 +25,15 @@ export const HeaderStyled = styled.header`
     color: ${props => props.theme.colors.textHeaderTheme};
 
     ${props => greaterThan("tablet", `
+        min-width: ${props.theme.breakpoints.tablet};
         max-width: ${props.theme.breakpoints.tablet};
         padding-left: 32px;
         padding-right: 32px;
     `)};
 
     ${props => greaterThan("laptop", `
-        max-width: 100%;
+        min-width: 1151px;
+        max-width: 1151px;
         padding-bottom: 32px;
     `)};
 `;

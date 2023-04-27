@@ -2,15 +2,13 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { greaterThan } from "helpers/breakpoints.styled";
-import { UserSVGStyled } from 'components/UserNav/UserNav.styled';
+import { UserSVGStyled, CalendarSVGStyled } from 'components/UserNav/UserNav.styled';
 
 export const ModalWrapper = styled.div`
   position: fixed;
   z-index: 1;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: fixed;
   top: 0;
   left: 0;
   
@@ -22,10 +20,24 @@ export const ModalWrapper = styled.div`
 
 export const ModalContainer = styled.div`
   min-width: 197px;
+
+  position: absolute;
+  top: 60px;
+  ${props => `right: calc((100vw - ${props.theme.breakpoints.mobile}) / 2 + 20px);`}
   
   background-color: ${props => props.theme.colors.bgcSideBarTheme};
   box-shadow: ${props => props.theme.shadows.box};
   border-radius: 8px;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    top: 75px;
+    ${props => `right: calc((100vw - ${props.theme.breakpoints.tablet}) / 2 + 32px);`}
+  };
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.laptop}) {
+    top: 90px;
+    ${props => `right: calc((100vw - ${props.theme.breakpoints.laptop}) / 2 + 32px);`}
+  };
 `;
 
 export const HeadModal = styled.div`
@@ -111,12 +123,18 @@ export const NavLinkStyled = styled(NavLink)`
   };
 `;
 
-export const UserSVG = styled(UserSVGStyled)`
-  ${props => greaterThan("tablet", `
-    width: 20px;
-    height: 20px;
-  `)};
-`;
+const SVGStyled = imageSVG => {
+  return styled(imageSVG)`
+    ${() => greaterThan("tablet", `
+      width: 20px;
+      height: 20px;
+    `)};
+  `;
+}
+
+export const UserSVG = SVGStyled(UserSVGStyled);
+
+export const CalendarSVG = SVGStyled(CalendarSVGStyled);
 
 export const LogOutContainer = styled.div`
   padding-top: 32px;

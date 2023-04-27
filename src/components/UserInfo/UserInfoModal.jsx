@@ -11,6 +11,7 @@ import {
   UserName,
   NavLinkStyled,
   UserSVG,
+  CalendarSVG,
   LogOutContainer,
 } from './UserInfoModal.styled';
 import { UserMenuButtonAvatar, UserMenuButtonChar } from './UserInfo.styled';
@@ -50,6 +51,10 @@ const Modal = ({ onClose }) => {
         <NavLinkStyled to="/account" onClick={() => onClose()}>
           <UserSVG />
           My account
+        </NavLinkStyled>
+        <NavLinkStyled to="/calendar" onClick={() => onClose()}>
+          <CalendarSVG />
+          Calendar
         </NavLinkStyled>
         <LogOutContainer>
           <LogoutBtn />
