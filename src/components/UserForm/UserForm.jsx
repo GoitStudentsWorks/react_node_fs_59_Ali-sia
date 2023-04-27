@@ -67,13 +67,18 @@ export const UserForm = () => {
     e.preventDefault();
     const formData = new FormData();
 
-    formData.append('name', values.name);
-    formData.append('birthday', values.birthday);
-    formData.append('email', values.email);
-    formData.append('phone', values.phone);
-    formData.append('telegram', values.telegram);
-    if (values.avatarFile) {
-      formData.append('avatarURL', values.avatarFile);
+    const { name, birthday, email, phone, telegram, avatarFile } = values;
+
+    const updatedPhone = phone.trim() || '';
+    const updatedTelegram = telegram.trim() || '';
+
+    formData.append('name', name);
+    formData.append('birthday', birthday);
+    formData.append('email', email);
+    formData.append('phone', updatedPhone);
+    formData.append('telegram', updatedTelegram);
+    if (avatarFile) {
+      formData.append('avatarFile', avatarFile);
     }
 
     dispatch(updateUser(formData));
