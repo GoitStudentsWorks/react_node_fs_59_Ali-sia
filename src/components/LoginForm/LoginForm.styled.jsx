@@ -2,22 +2,19 @@ import styled from 'styled-components';
 import { Field, Form } from 'formik';
 
 export const StyledContainer = styled.div`
-  max-width: 335px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  margin-left: auto;
-  margin-right: auto;
   padding: ${p => p.theme.space[8]}px ${p => p.theme.space[6]}px;
 
   border-radius: ${props => props.theme.radii.light};
+  background-color: ${props => props.theme.colors.white};
 
   font-family: ${props => props.theme.fonts.main};
 
   @media (min-width: ${props => props.theme.breakpoints.tablet}) {
-    max-width: 480px;
+    width: 480px;
   }
 `;
 
