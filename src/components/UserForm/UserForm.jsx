@@ -25,7 +25,7 @@ export const UserForm = () => {
   const user = useSelector(selectUser);
   const [values, setValues] = useState({
     name: '',
-    birthday: null,
+    birthday: '',
     email: '',
     phone: '',
     telegram: '',
@@ -66,11 +66,10 @@ export const UserForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const formData = new FormData();
-
     const { name, birthday, email, phone, telegram, avatarFile } = values;
 
     formData.append('name', name);
-    formData.append('birthday', birthday);
+    formData.append('birthday', birthday ? birthday : '');
     formData.append('email', email);
     formData.append('phone', phone);
     formData.append('telegram', telegram);
@@ -85,7 +84,7 @@ export const UserForm = () => {
     if (user.email) {
       const modifiedUser = {
         ...user,
-        birthday: user.birthday ? parseISO(user.birthday) : null,
+        birthday: user.birthday ? parseISO(user.birthday) : '',
       };
       setValues(modifiedUser);
     }

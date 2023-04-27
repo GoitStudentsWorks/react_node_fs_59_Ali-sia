@@ -7,6 +7,7 @@ import axios from 'axios';
 import { setAuthHeader, privateApi, publicApi } from 'services/http';
 
 axios.defaults.baseURL = 'https://goose-track-backend-8txo.onrender.com';
+// axios.defaults.baseURL = 'http://localhost:4000';
 
 /*
  * POST @ /users/signup
