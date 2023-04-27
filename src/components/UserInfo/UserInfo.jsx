@@ -24,7 +24,7 @@ const ModalClose = setModalOpen => {
 
 const UserInfo = () => {
     const [ isModalOpen, setModalOpen ] = useState(false);
-    const { name, avatar } = useSelector(selectUser);
+    const { name, avatarURL } = useSelector(selectUser);
     
     const userName = name?.trim().split(' ')[0];
 
@@ -35,8 +35,8 @@ const UserInfo = () => {
             </UserName>
             <UserMenuButton type="button" onClick={event => ModalOpen(event, setModalOpen)}>
                 {
-                    avatar
-                        ? <UserMenuButtonAvatar src={avatar} alt={userName + "'s avatar"}></UserMenuButtonAvatar>
+                    avatarURL
+                        ? <UserMenuButtonAvatar src={avatarURL} alt={userName + "'s avatar"}></UserMenuButtonAvatar>
                         : <UserMenuButtonChar >{userName?.charAt(0).toUpperCase()}</UserMenuButtonChar>
                 }
             </UserMenuButton>

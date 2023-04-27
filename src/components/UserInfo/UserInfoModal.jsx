@@ -33,15 +33,15 @@ const Modal = ({ onClose }) => {
     };
   }, []);
 
-  const { name, avatar } = useSelector(selectUser);
+  const { name, avatarURL } = useSelector(selectUser);
   
   return (
     <ModalWrapper onClick={event => handleClose(event, onClose)}>
       <ModalContainer>
         <HeadModal>
           <UserAvatarModal>
-            {avatar
-              ? <UserMenuButtonAvatar src={avatar} alt={name + "'s avatar"}></UserMenuButtonAvatar>
+            {avatarURL
+              ? <UserMenuButtonAvatar src={avatarURL} alt={name + "'s avatar"}></UserMenuButtonAvatar>
               : <UserMenuButtonChar >{name?.charAt(0).toUpperCase()}</UserMenuButtonChar>}
           </UserAvatarModal>
           <UserName>
