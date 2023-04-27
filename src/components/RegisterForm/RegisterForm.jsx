@@ -25,7 +25,9 @@ export const RegisterForm = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
+    name: Yup.string()
+      .min(2, 'Your name is too short')
+      .required('Name is required'),
     email: Yup.string()
       .email('Invalid email address')
       .required('Email is required'),
@@ -64,18 +66,25 @@ export const RegisterForm = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
+        autoComplete="off"
       >
-        {({ isSubmitting, errors, touched }) => (
+        {({ errors, touched, isSubmitting }) => (
           <StyledForm>
             <InputContainer>
-              <StyledLabel htmlFor="name">
+              <StyledLabel
+                htmlFor="name"
+                aria-invalid={touched.name && errors.name ? 'true' : 'false'}
+                data-valid={touched.name && !errors.name ? 'true' : 'false'}
+              >
                 Name
                 <StyledField
                   id="name"
                   name="name"
                   placeholder="Enter your name"
                   type="text"
-                  autoComplete="off"
+                  autoComplete="name"
+                  aria-invalid={touched.name && errors.name ? 'true' : 'false'}
+                  data-valid={touched.name && !errors.name ? 'true' : 'false'}
                 />
                 {/* If this field has been touched, and it contains an error, display it
                  */}
@@ -86,17 +95,23 @@ export const RegisterForm = () => {
             </InputContainer>
 
             <InputContainer>
-              <StyledLabel htmlFor="email">
+              <StyledLabel
+                htmlFor="email"
+                aria-invalid={touched.email && errors.email ? 'true' : 'false'}
+                data-valid={touched.email && !errors.email ? 'true' : 'false'}
+              >
                 Email
                 <StyledField
                   id="email"
                   name="email"
                   placeholder="Enter your email"
                   type="email"
-                  autoComplete="off"
+                  autoComplete="email"
+                  aria-invalid={
+                    touched.email && errors.email ? 'true' : 'false'
+                  }
+                  data-valid={touched.email && !errors.email ? 'true' : 'false'}
                 />
-                {/* If this field has been touched, and it contains an error, display it
-                 */}
                 {touched.email && errors.email && (
                   <ErrorMsgContainer>{errors.email}</ErrorMsgContainer>
                 )}
@@ -104,7 +119,15 @@ export const RegisterForm = () => {
             </InputContainer>
 
             <InputContainer>
-              <StyledLabel htmlFor="password">
+              <StyledLabel
+                htmlFor="password"
+                aria-invalid={
+                  touched.password && errors.password ? 'true' : 'false'
+                }
+                data-valid={
+                  touched.password && !errors.password ? 'true' : 'false'
+                }
+              >
                 Password
                 <StyledField
                   id="password"
@@ -112,9 +135,13 @@ export const RegisterForm = () => {
                   placeholder="Enter your password"
                   type="password"
                   autoComplete="off"
+                  aria-invalid={
+                    touched.password && errors.password ? 'true' : 'false'
+                  }
+                  data-valid={
+                    touched.password && !errors.password ? 'true' : 'false'
+                  }
                 />
-                {/* If this field has been touched, and it contains an error, display it
-                 */}
                 {touched.password && errors.password && (
                   <ErrorMsgContainer>{errors.password}</ErrorMsgContainer>
                 )}
@@ -123,7 +150,7 @@ export const RegisterForm = () => {
 
             <LoginRegisterBtn
               disabled={isSubmitting}
-              btnText="Sign Up"
+              btnText={isSubmitting ? `Submiting...` : `Sign Up`}
             />
           </StyledForm>
         )}
