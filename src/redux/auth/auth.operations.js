@@ -98,8 +98,19 @@ export const refreshUser = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
   'auth/updateUser',
-  async (formData, { rejectWithValue }) => {
+  async (formData, { getState, rejectWithValue }) => {
+    // Reading the token from the state via getState()
+    const state = getState();
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      // If there is no token, exit without performing any request
+      return rejectWithValue('Unable to fetch user');
+    }
+
     try {
+      // If there is a token, add it to the HTTP header and perform the request
+      setAuthHeader(persistedToken);
       const res = await privateApi.patch('/api/users/info', formData);
       return res.data;
     } catch (error) {
