@@ -4,7 +4,7 @@ import { greaterThan } from 'helpers/breakpoints.styled';
 export const DaysNamesWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: ${p => p.theme.space[4]}px; //14px
+  margin-bottom: ${p => p.theme.space[4 + 1]}px; //15px
 
   min-height: 50px;
   max-width: 336px;
