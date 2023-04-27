@@ -26,14 +26,16 @@ export const CalendarWrapper = styled.div`
   ${greaterThan(
     'tablet',
     `
-  height: 928px;
+  height: 864px;
+    
 `
   )}
 
   ${greaterThan(
     'laptop',
     `
-  height: 812px;
+    height: 750px;
+    width: 1087px;
 `
   )}
 `;
