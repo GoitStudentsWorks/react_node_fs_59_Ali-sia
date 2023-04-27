@@ -75,6 +75,7 @@ export const RegisterForm = () => {
                   name="name"
                   placeholder="Enter your name"
                   type="text"
+                  autoComplete="off"
                 />
                 {/* If this field has been touched, and it contains an error, display it
                  */}
@@ -121,7 +122,6 @@ export const RegisterForm = () => {
             </InputContainer>
 
             <LoginRegisterBtn
-              type="submit"
               disabled={isSubmitting}
               btnText="Sign Up"
             />

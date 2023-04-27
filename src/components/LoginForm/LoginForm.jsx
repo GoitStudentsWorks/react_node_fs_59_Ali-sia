@@ -63,6 +63,7 @@ export const LoginForm = () => {
                   name="email"
                   placeholder="Enter your email"
                   type="email"
+                  autoComplete="email"
                 />
                 {/* If this field has been touched, and it contains an error, display it
                  */}
@@ -91,7 +92,6 @@ export const LoginForm = () => {
             </InputContainer>
 
             <LoginRegisterBtn
-              type="submit"
               disabled={isSubmitting}
               btnText="Log In"
             />
