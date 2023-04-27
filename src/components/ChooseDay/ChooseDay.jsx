@@ -1,4 +1,4 @@
-import DayCalendarHead from 'components/DayCalendarHead/DayCalendarHead';
+import DayCalendarHead from './DayCalendarHead/DayCalendarHead';
 import { useOutletContext } from 'react-router-dom';
 
 export default function ChoosedDay() {
