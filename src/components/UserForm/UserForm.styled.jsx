@@ -2,7 +2,7 @@ import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import photoPlug from "./ph_user.svg";
 import { HiPlus } from "react-icons/hi";
-import { between, greaterThan } from "./../../helpers/breakpoints.styled";
+import { between, greaterThan, lesserThan } from "./../../helpers/breakpoints.styled";
 
 
 export const StyledForm = styled.form`
@@ -17,14 +17,21 @@ export const StyledForm = styled.form`
     background-color: #fff;
     border-radius: 16px;
 
-    ${between('tablet', 'laptop', `
+    ${lesserThan('mobile', `
+        margin: 0 20px;
+    `)}
+    
+    ${greaterThan('tablet', `
         max-width: 704px;
+        padding-right: 175px;
+        padding-left: 175px;
         padding-top: 268px;
     `)}
 
     ${greaterThan('laptop', `
         max-width: 1087px;
-        padding-top: 268px;
+        padding-right: 175px;
+        padding-left: 175px;
     `)}
 `;
 
