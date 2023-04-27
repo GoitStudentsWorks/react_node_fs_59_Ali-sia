@@ -1,115 +1,172 @@
-import { useFormik } from 'formik';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUser } from 'redux/auth/auth.operations';
+import { selectUser } from 'redux/auth/auth.selectors';
+import { parseISO } from 'date-fns';
 
-import { StyledForm, Photo, Plug, PhotoSelection, LabelPhotoSelection, SelectionIcon, Wrapper, Label, LabelName, Input, StyledDatePicker, Button } from "./UserForm.styled";
-import "react-datepicker/dist/react-datepicker.css";
+import {
+  StyledForm,
+  Photo,
+  Plug,
+  PhotoSelection,
+  LabelPhotoSelection,
+  SelectionIcon,
+  Wrapper,
+  Label,
+  LabelName,
+  Input,
+  StyledDatePicker,
+  Button,
+} from './UserForm.styled';
+import 'react-datepicker/dist/react-datepicker.css';
 
-export const UserForm = () => {  
-  const formik = useFormik({
-      initialValues: {
-      name: '',
-      birthday: null,
-      email: '',
-      phone: '',
-      telegram: '',
-      photo: '',
-      },
-      onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-      },
+export const UserForm = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const [values, setValues] = useState({
+    name: '',
+    birthday: '',
+    email: '',
+    phone: '',
+    telegram: '',
+    avatarFile: null,
+    avatarURL: '',
   });
 
-  const userPhoto = formik.values.photo ? <Photo src={formik.values.photo} alt="User's photo" /> : <Plug />;
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setValues(prevValues => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
 
-  const handleImageUpload = e => { 
-      const file = e.target.files[0];
-      const reader = new FileReader();
+  const handleDateChange = date => {
+    setValues(prevValues => ({
+      ...prevValues,
+      birthday: date,
+    }));
+  };
 
-      reader.onloadend = () => {
-          formik.setFieldValue("photo", reader.result);
+  const handleImageUpload = e => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setValues(prevValues => ({
+        ...prevValues,
+        avatarFile: file,
+        avatarURL: reader.result,
+      }));
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const formData = new FormData();
+    const { name, birthday, email, phone, telegram, avatarFile } = values;
+
+    formData.append('name', name);
+    formData.append('birthday', birthday ? birthday : '');
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('telegram', telegram);
+    if (avatarFile) {
+      formData.append('avatarFile', avatarFile);
+    }
+
+    dispatch(updateUser(formData));
+  };
+
+  useEffect(() => {
+    if (user.email) {
+      const modifiedUser = {
+        ...user,
+        birthday: user.birthday ? parseISO(user.birthday) : '',
       };
+      setValues(modifiedUser);
+    }
+  }, [user]);
 
-      reader.readAsDataURL(file);
-  }
-    
   return (
-    <StyledForm autocomplete="off" enctype="multipart/form-data" onSubmit={formik.handleSubmit}>
-      {userPhoto}
-      <LabelPhotoSelection>
-          <SelectionIcon/>
+    user.email && (
+      <StyledForm
+        autoComplete="off"
+        encType="multipart/form-data"
+        onSubmit={handleSubmit}
+      >
+        {values.avatarURL ? (
+          <Photo src={values.avatarURL} alt="User's photo" />
+        ) : (
+          <Plug />
+        )}
+        <LabelPhotoSelection>
+          <SelectionIcon />
           <PhotoSelection
-              type="file"
-              name="photo"
-              onChange={handleImageUpload}
+            type="file"
+            name="avatarFile"
+            onChange={handleImageUpload}
           />
-      </LabelPhotoSelection>
-      <Wrapper>
+        </LabelPhotoSelection>
+        <Wrapper>
           <Label>
-              <LabelName>
-                  User Name
-              </LabelName>
-              <Input
-                  type="text"
-                  name="name"
-                  placeholder="Edit your name"
-                  value={formik.values.name}
-                  onChange={formik.handleChange}
-                  required
-              />
+            <LabelName>User Name</LabelName>
+            <Input
+              type="text"
+              name="name"
+              placeholder="Edit your name"
+              value={values.name}
+              onChange={handleInputChange}
+              required
+            />
           </Label>
           <Label>
-              <LabelName>
-                  Birthday
-              </LabelName>
-              <StyledDatePicker
-                  name="birthday"
-                  placeholderText={new Date().toLocaleDateString()}
-                  selected={formik.values.birthday}
-                  onChange={(date) => formik.setFieldValue('birthday', date)}
-                  calendarClassName="goose"
-              />
+            <LabelName>Birthday</LabelName>
+            <StyledDatePicker
+              name="birthday"
+              placeholderText={new Date().toLocaleDateString()}
+              selected={values.birthday}
+              value={values.birthday}
+              onChange={handleDateChange}
+              calendarClassName="goose"
+            />
           </Label>
           <Label>
-              <LabelName>
-                  Email
-              </LabelName>
-              <Input
-                  type="email"
-                  name="email"
-                  placeholder="Edit your email"
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  required
-              />
+            <LabelName>Email</LabelName>
+            <Input
+              type="email"
+              name="email"
+              placeholder="Edit your email"
+              value={values.email}
+              onChange={handleInputChange}
+              required
+            />
           </Label>
           <Label>
-              <LabelName>
-                  Phone
-              </LabelName>
-              <Input
-                  type="text"
-                  name="phone"
-                  placeholder="Add a phone number"
-                  value={formik.values.phone}
-                  onChange={formik.handleChange}
-              />
+            <LabelName>Phone</LabelName>
+            <Input
+              type="text"
+              name="phone"
+              placeholder="Add a phone number"
+              value={values.phone}
+              onChange={handleInputChange}
+            />
           </Label>
           <Label>
-            <LabelName>
-              Telegram
-            </LabelName>
+            <LabelName>Telegram</LabelName>
             <Input
               type="text"
               name="telegram"
               placeholder="Add a link to Telegram"
-              value={formik.values.telegram}
-              onChange={formik.handleChange}
+              value={values.telegram}
+              onChange={handleInputChange}
             />
           </Label>
-      </Wrapper>
-      <Button
-        type="submit">
-        Save changes
-      </Button>
-    </StyledForm>
+        </Wrapper>
+        <Button type="submit">Save changes</Button>
+      </StyledForm>
+    )
   );
 };

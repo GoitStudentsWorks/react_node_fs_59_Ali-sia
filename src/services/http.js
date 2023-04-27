@@ -6,6 +6,7 @@ export const publicApi = axios.create({
 
 export const privateApi = axios.create({
   baseURL: 'https://goose-track-backend-8txo.onrender.com',
+  // baseURL: 'http://localhost:4000',
 });
 
 // Utility to add JWT

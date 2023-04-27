@@ -7,6 +7,7 @@ import axios from 'axios';
 import { setAuthHeader, privateApi, publicApi } from 'services/http';
 
 axios.defaults.baseURL = 'https://goose-track-backend-8txo.onrender.com';
+// axios.defaults.baseURL = 'http://localhost:4000';
 
 /*
  * POST @ /users/signup
@@ -86,6 +87,34 @@ export const refreshUser = createAsyncThunk(
       return res.data;
     } catch (error) {
       return rejectWithValue(error.message);
+    }
+  }
+);
+
+/*
+ * PATCH @ /users/info
+ * body: { name, birthday, email, phone, telegram, avatarURL }
+ */
+
+export const updateUser = createAsyncThunk(
+  'auth/updateUser',
+  async (formData, { getState, rejectWithValue }) => {
+    // Reading the token from the state via getState()
+    const state = getState();
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      // If there is no token, exit without performing any request
+      return rejectWithValue('Unable to fetch user');
+    }
+
+    try {
+      // If there is a token, add it to the HTTP header and perform the request
+      setAuthHeader(persistedToken);
+      const res = await privateApi.patch('/api/users/info', formData);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
   }
 );
