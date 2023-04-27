@@ -3,7 +3,9 @@ import { greaterThan } from 'helpers/breakpoints.styled';
 // import { Link } from 'react-router-dom';
 
 export const TaskColumnsWrapper = styled.div`
-  /* display: flex; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   /* align-items: center; */
   /* margin-bottom: ${p => p.theme.space[4]}px; */
   padding: 25px 18px 20px 18px;
