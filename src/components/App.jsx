@@ -39,37 +39,37 @@ export const App = () => {
           <Toaster />
           <Routes>
             {/* Приватні маршрути */}
-            <Route path="/" render={ () => <PrivateRoute /> }>
-              <Route path="/" render={ () => <MainLayout /> }>
-                <Route path="/" render={ () => <CalendarPage  /> }>
+            <Route path="/" element={<PrivateRoute /> }>
+              <Route path="/" element={<MainLayout /> }>
+                <Route path="/" element={<CalendarPage  /> }>
                   {/* Переадресація на календар місяц/день*/}
-                  <Route path="/" render={ () => <CalendarRoute   /> } />
-                  <Route path="/calendar" render={ () => <CalendarRoute   /> } />
-                  <Route path="/calendar/month" render={ () => <CalendarRoute   /> } />
-                  <Route path="/calendar/day" render={ () => <DayRoute   /> } />
+                  <Route path="/" element={<CalendarRoute   /> } />
+                  <Route path="/calendar" element={<CalendarRoute   /> } />
+                  <Route path="/calendar/month" element={<CalendarRoute   /> } />
+                  <Route path="/calendar/day" element={<DayRoute   /> } />
 
                   {/* Переадресація на відповідний компонент календаря */}
                   <Route
                     path="calendar/month/:currentDate"
-                    render={ () => <ChoosedMonth   /> }
+                    element={<ChoosedMonth   /> }
                   />
                   <Route
                     path="calendar/day/:currentDate"
-                    render={ () => <ChoosedDay   /> }
+                    element={<ChoosedDay   /> }
                   />
                 </Route>
                 {/* Аккаунт */}
-                <Route path="account" render={ () => <AccountPage   /> } />
+                <Route path="account" element={<AccountPage   /> } />
               </Route>
             </Route>
 
             {/* Публічні маршрути */}
-            <Route path="/" render={ () => <PublicRoute   /> }>
-              <Route path="login" render={ () => <LoginPage   /> } />
-              <Route path="register" render={ () => <RegisterPage   /> } />
+            <Route path="/" element={<PublicRoute   /> }>
+              <Route path="login" element={<LoginPage   /> } />
+              <Route path="register" element={<RegisterPage   /> } />
             </Route>
 
-            <Route path="*" render={ () => <h1>not found page</h1> } />
+            <Route path="*" element={<h1>not found page</h1> } />
           </Routes>
         </Suspense>
       </BrowserRouter>
