@@ -1,7 +1,6 @@
 import React from 'react';
-// import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 
@@ -15,12 +14,8 @@ import {
   InputContainer,
   StyledLabel,
   StyledField,
+  ErrorMsgContainer,
 } from './LoginForm.styled';
-
-// #TODO: check
-// Make sure you add the <Toaster/> component to your app first.
-
-// #TODO: повидаляти консоль логи
 
 export const LoginForm = () => {
   const initialValues = {
@@ -36,19 +31,14 @@ export const LoginForm = () => {
   });
 
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       await dispatch(logIn(values)).unwrap();
-      // const data = await dispatch(logIn(values)).unwrap();
-      // console.log('Login successfull:', data);
-      // navigate('/calendar/month/:currentDay');
       resetForm();
     } catch (error) {
       const errorNotify = () => toast.error(`${error.message}`);
       errorNotify();
-      // console.error('Login error:', error.message);
     } finally {
       setSubmitting(false);
     }
@@ -63,7 +53,7 @@ export const LoginForm = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors, touched }) => (
           <StyledForm>
             <InputContainer>
               <StyledLabel htmlFor="email">
@@ -74,7 +64,11 @@ export const LoginForm = () => {
                   placeholder="Enter your email"
                   type="email"
                 />
-                <ErrorMessage name="email" component="div" />
+                {/* If this field has been touched, and it contains an error, display it
+                 */}
+                {touched.email && errors.email && (
+                  <ErrorMsgContainer>{errors.email}</ErrorMsgContainer>
+                )}
               </StyledLabel>
             </InputContainer>
 
@@ -88,7 +82,11 @@ export const LoginForm = () => {
                   type="password"
                   autoComplete="current-password"
                 />
-                <ErrorMessage name="password" component="div" />
+                {/* If this field has been touched, and it contains an error, display it
+                 */}
+                {touched.password && errors.password && (
+                  <ErrorMsgContainer>{errors.password}</ErrorMsgContainer>
+                )}
               </StyledLabel>
             </InputContainer>
 

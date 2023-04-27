@@ -1,4 +1,5 @@
 import { greaterThan } from 'helpers/breakpoints.styled';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const PeriodSelectorWrapper = styled.div`
@@ -9,7 +10,7 @@ export const ButtonsWrapper = styled.div`
   display: flex;
 `;
 
-export const Button = styled.button`
+export const StyledLink = styled(Link)`
   padding: ${p => p.theme.space[0]}px;
   display: flex;
   justify-content: center;
@@ -27,7 +28,7 @@ export const Button = styled.button`
   background-color: ${p => p.theme.colors.bgDayMonthSelector};
 
   ${p =>
-    p.disabled &&
+    p.isdaypage === 'true' &&
     `color: ${p.theme.colors.textActiveDayMonthSelector}; background-color: ${p.theme.colors.bgActiveBtnDayMonthSelector};`}
   cursor: pointer;
 

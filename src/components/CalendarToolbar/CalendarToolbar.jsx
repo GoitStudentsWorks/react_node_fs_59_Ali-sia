@@ -5,18 +5,19 @@ import { CalendarToolbarWrapper } from './CalendarToolbar.styled';
 export default function CalendarToolbar({
   activeDate,
   changeActiveDay,
-  isMonthPage,
+  isDayPage,
   togglePage,
 }) {
   return (
     <CalendarToolbarWrapper>
       <PeriodPaginator
         activeDate={activeDate}
-        isMonthPage={isMonthPage}
+        isDayPage={isDayPage}
         changeActiveDay={changeActiveDay}
       ></PeriodPaginator>
       <PeriodTypeSelect
-        isMonthPage={isMonthPage}
+        activeDate={activeDate}
+        isDayPage={isDayPage}
         togglePage={togglePage}
       ></PeriodTypeSelect>
     </CalendarToolbarWrapper>

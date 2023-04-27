@@ -1,18 +1,24 @@
-import { Button, ButtonsWrapper } from './PeriodTypeSelect.styled';
+import { ButtonsWrapper, StyledLink } from './PeriodTypeSelect.styled';
+import { format } from 'date-fns';
 
-export default function PeriodTypeSelect({ isMonthPage, togglePage }) {
+export default function PeriodTypeSelect({ activeDate, isDayPage }) {
+  const monthForLink = format(activeDate, 'MMMMyyyy');
+  const dayForLink = format(activeDate, 'ddMMMMyyyy');
+
   return (
     <ButtonsWrapper>
-      <Button type="button" onClick={() => togglePage()} disabled={isMonthPage}>
+      <StyledLink
+        isdaypage={(!isDayPage).toString()}
+        to={`/calendar/month/${monthForLink}`}
+      >
         Month
-      </Button>
-      <Button
-        type="button"
-        onClick={() => togglePage()}
-        disabled={!isMonthPage}
+      </StyledLink>
+      <StyledLink
+        isdaypage={isDayPage.toString()}
+        to={`/calendar/day/${dayForLink}`}
       >
         Day
-      </Button>
+      </StyledLink>
     </ButtonsWrapper>
   );
 }
