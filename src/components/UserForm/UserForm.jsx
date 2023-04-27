@@ -69,14 +69,11 @@ export const UserForm = () => {
 
     const { name, birthday, email, phone, telegram, avatarFile } = values;
 
-    const updatedPhone = phone.trim() || '';
-    const updatedTelegram = telegram.trim() || '';
-
     formData.append('name', name);
     formData.append('birthday', birthday);
     formData.append('email', email);
-    formData.append('phone', updatedPhone);
-    formData.append('telegram', updatedTelegram);
+    formData.append('phone', phone);
+    formData.append('telegram', telegram);
     if (avatarFile) {
       formData.append('avatarFile', avatarFile);
     }
