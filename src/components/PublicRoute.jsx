@@ -1,12 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectToken } from 'redux/auth/auth.selectors';
+import { useAuth } from 'hooks';
+
 
 /**
  * - If the route is public gives acess to login or register page
  */
 
 export const PublicRoute = () => {
-  const token = useSelector(selectToken);
+  const { token } = useAuth();
   return token ? <Navigate to="/" replace /> : <Outlet />;
 };
