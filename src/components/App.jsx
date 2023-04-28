@@ -63,7 +63,7 @@ export const App = () => {
                   />
                 </Route>
                 {/* Аккаунт */}
-                <Route path="account" element={<AccountPage   /> } />
+                <Route path="account" element={<AccountPage />} />
               </Route>
             </Route>
 
