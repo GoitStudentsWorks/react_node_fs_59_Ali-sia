@@ -112,7 +112,8 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   flex: 1;
-  padding: 6px 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   border: none;
   border-radius: 4px;
   font-size: 14px;
@@ -128,6 +129,11 @@ const Button = styled.button`
 
   svg {
     margin-right: 8px;
+  }
+
+  @media (min-width: 768px) {
+    padding-top: 14px;
+    padding-bottom: 14px;
   }
 `;
 

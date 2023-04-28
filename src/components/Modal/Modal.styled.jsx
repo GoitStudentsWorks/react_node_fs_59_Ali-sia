@@ -14,7 +14,7 @@ const ModalWrapper = styled.div`
 
 const ModalContainer = styled.div`
   position: relative;
-  width: 267px;
+  width: 303px;
   padding: 48px 18px 40px 18px;
 
   background-color: #ffffff;
@@ -23,7 +23,7 @@ const ModalContainer = styled.div`
   border-radius: 8px;
 
   @media (min-width: 768px) {
-    width: 340px;
+    width: 396px;
     padding: 40px 28px;
   }
 `;
