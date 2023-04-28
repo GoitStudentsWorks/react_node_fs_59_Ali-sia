@@ -120,6 +120,8 @@ export const light = {
 
   bgcSideBarTheme: '#FFFFFF',
 
+  bgcUserProfileTheme: '#FFFFFF',
+
   taskBorderTheme: 'rgba(220, 227, 229, 0.8)',
 
   calendarDayNameAtMonth: 'rgba(97, 97, 97, 1)',
@@ -152,6 +154,8 @@ export const dark = {
   bgcInputTheme: 'rgba(255, 255, 255, 0.15)',
 
   bgcSideBarTheme: '#13151A',
+
+  bgcUserProfileTheme: '#21222C',
 
   taskBorderTheme: 'rgba(255, 255, 255, 0.15)',
 

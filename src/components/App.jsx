@@ -5,7 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from 'styled-components';
 import { theme, light, dark } from 'theme';
 
-import { selectTheme } from 'redux/auth/auth.selectors';
+import { selectTheme, selectIsRefreshing } from 'redux/auth/auth.selectors';
 import { refreshUser } from 'redux/auth/auth.operations';
 
 import { PrivateRoute } from './PrivateRoute';
@@ -32,7 +32,11 @@ export const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
 
+  const isRefreshing = useSelector(selectIsRefreshing);
+
   return (
+    <>
+    { isRefreshing ? <Loader /> :
     <ThemeProvider theme={themeGlobal}>
       <BrowserRouter basename="goose-track-team-4">
         <Suspense fallback={<Loader />}>
@@ -73,6 +77,6 @@ export const App = () => {
           </Routes>
         </Suspense>
       </BrowserRouter>
-    </ThemeProvider>
+    </ThemeProvider>}</>
   );
 };
