@@ -55,7 +55,7 @@ export const App = () => {
                   {/* Переадресація на відповідний компонент календаря */}
                   <Route
                     path="calendar/month/:currentDate"
-                    element={<ChoosedMonth   /> }
+                    element={<ChoosedMonth />}
                   />
                   <Route
                     path="calendar/day/:currentDate"
