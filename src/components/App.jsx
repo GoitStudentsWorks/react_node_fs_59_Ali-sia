@@ -59,7 +59,7 @@ export const App = () => {
                   />
                   <Route
                     path="calendar/day/:currentDate"
-                    element={<ChoosedDay   /> }
+                    element={<ChoosedDay />}
                   />
                 </Route>
                 {/* Аккаунт */}
