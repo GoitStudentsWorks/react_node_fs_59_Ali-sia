@@ -47,10 +47,10 @@ export const App = () => {
               <Route path="/" element={<MainLayout />}>
                 <Route path="/" element={<CalendarPage />}>
                   {/* Переадресація на календар місяц/день*/}
-                  <Route path="/" element={<CalendarRoute   /> } />
-                  <Route path="/calendar" element={<CalendarRoute   /> } />
-                  <Route path="/calendar/month" element={<CalendarRoute   /> } />
-                  <Route path="/calendar/day" element={<DayRoute   /> } />
+                  <Route path="/" element={<CalendarRoute />} />
+                  <Route path="/calendar" element={<CalendarRoute />} />
+                  <Route path="/calendar/month" element={<CalendarRoute />} />
+                  <Route path="/calendar/day" element={<DayRoute />} />
 
                   {/* Переадресація на відповідний компонент календаря */}
                   <Route
