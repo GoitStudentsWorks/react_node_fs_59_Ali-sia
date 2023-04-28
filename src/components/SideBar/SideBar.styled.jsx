@@ -11,7 +11,7 @@ import gooseLaptop2x from './gooseLaptop@2x.png';
 import { ReactComponent as CloseSVG } from './close.svg';
 
 export const SideBarStyled = styled.aside`
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: start;
@@ -46,8 +46,6 @@ export const SideBarStyled = styled.aside`
     greaterThan(
       'laptop',
       `
-        display: flex;
-
         position: static;
 
         padding-top: 32px;    
@@ -201,6 +199,8 @@ export const CloseSVGStyled = styled(CloseSVG)`
   height: 24px;
   color: ${props => props.theme.colors.textHeaderTheme};
 
+  pointer-events: none;
+
   ${() =>
     greaterThan(
       'tablet',
@@ -209,4 +209,29 @@ export const CloseSVGStyled = styled(CloseSVG)`
         height: 33px;
     `
     )};
+`;
+
+export const EventWrapper = styled.div`
+  display: none;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+
+  background-color: transparent;
+
+  ${() =>
+    greaterThan(
+      'laptop',
+      `
+        display: block;
+
+        position: static;
+        
+        pointer-events: none;
+    `
+  )};
 `;
