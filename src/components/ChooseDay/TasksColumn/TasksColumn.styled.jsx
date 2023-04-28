@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { greaterThan } from 'helpers/breakpoints.styled';
-// import { Link } from 'react-router-dom';
 
 export const TaskColumnsWrapper = styled.div`
   display: flex;
