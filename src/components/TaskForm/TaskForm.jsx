@@ -16,6 +16,7 @@ import {
   StyledRadioLabel,
   ButtonContainer,
   Button,
+  RadioIconContainer,
   RadioIcon,
   RadioIconChecked,
 } from './TaskForm.styled';
@@ -96,6 +97,7 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
             type="text"
             id="end"
             name="end"
+            theme={currentTheme}
             value={formData.end}
             onChange={handleChange}
             placeholder="14:00"
@@ -113,11 +115,13 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
             checked={formData.priority === 'low'}
             onChange={handleChange}
           />
-          {formData.priority === 'low' ? (
-            <RadioIconChecked color={getRadioColor('low')} />
-          ) : (
-            <RadioIcon color={getRadioColor('low')} />
-          )}
+          <RadioIconContainer>
+            {formData.priority === 'low' ? (
+              <RadioIconChecked color={getRadioColor('low')} />
+            ) : (
+              <RadioIcon color={getRadioColor('low')} />
+            )}
+          </RadioIconContainer>
           <StyledRadioLabel theme={currentTheme}>Low</StyledRadioLabel>
         </RadioLabel>
         <RadioLabel>
@@ -127,14 +131,16 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
             checked={formData.priority === 'medium'}
             onChange={handleChange}
           />
-          {formData.priority === 'medium' ? (
-            <RadioIconChecked color={getRadioColor('medium')}>
+          <RadioIconContainer>
+            {formData.priority === 'medium' ? (
+              <RadioIconChecked color={getRadioColor('medium')}>
+                <RadioIcon color={getRadioColor('medium')} />
+              </RadioIconChecked>
+            ) : (
               <RadioIcon color={getRadioColor('medium')} />
-            </RadioIconChecked>
-          ) : (
-            <RadioIcon color={getRadioColor('medium')} />
-          )}
-          <StyledRadioLabel>Medium</StyledRadioLabel>
+            )}
+          </RadioIconContainer>
+          <StyledRadioLabel theme={currentTheme}>Medium</StyledRadioLabel>
         </RadioLabel>
         <RadioLabel>
           <RadioInput
@@ -143,14 +149,16 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
             checked={formData.priority === 'high'}
             onChange={handleChange}
           />
-          {formData.priority === 'high' ? (
-            <RadioIconChecked color={getRadioColor('high')}>
+          <RadioIconContainer>
+            {formData.priority === 'high' ? (
+              <RadioIconChecked color={getRadioColor('high')}>
+                <RadioIcon color={getRadioColor('high')} />
+              </RadioIconChecked>
+            ) : (
               <RadioIcon color={getRadioColor('high')} />
-            </RadioIconChecked>
-          ) : (
-            <RadioIcon color={getRadioColor('high')} />
-          )}
-          <StyledRadioLabel>High</StyledRadioLabel>
+            )}
+          </RadioIconContainer>
+          <StyledRadioLabel theme={currentTheme}>High</StyledRadioLabel>
         </RadioLabel>
       </RadioContainer>
 
