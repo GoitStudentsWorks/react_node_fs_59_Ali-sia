@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import THEME_CONTEXT from 'context/ThemeContext';
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -17,8 +18,8 @@ const ModalContainer = styled.div`
   width: 303px;
   padding: 48px 18px 40px 18px;
 
-  background-color: #ffffff;
-  border: 1px solid rgba(220, 227, 229, 0.8);
+  background-color: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT ? '#ffffff' : '#171820'};
   box-shadow: 0px 4px 16px rgba(17, 17, 17, 0.1);
   border-radius: 8px;
 
@@ -36,6 +37,16 @@ const CloseButton = styled.button`
   border: none;
   font-size: 18px;
   cursor: pointer;
+
+  svg path {
+    stroke: ${({ theme }) =>
+      theme === THEME_CONTEXT.LIGHT ? '#111111' : '#ffffff'};
+  }
+
+  &:hover svg path {
+    stroke: #616161;
+    transition: stroke 0.3s ease;
+  }
 `;
 
 export { ModalWrapper, ModalContainer, CloseButton };
