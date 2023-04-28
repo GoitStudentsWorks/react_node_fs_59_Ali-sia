@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 // import { createTask, updateTask } from '../../redux/tasks/tasks.operations';
 import Modal from '../Modal/Modal';
 import TaskForm from '../TaskForm/TaskForm';
 
-function TaskModal({ initialData, onClose }) {
-  const [formData, setFormData] = useState(initialData);
-
-  useEffect(() => {
-    setFormData(initialData);
-  }, [initialData]);
-
+function TaskModal({ task, onClose }) {
   const handleSubmit = newData => {
     // Get the Redux dispatch function
     // const dispatch = useDispatch();
 
-    if (!initialData) {
+    if (!task) {
       // If there's no initial data, we're creating a new task
       //   dispatch(createTask(newData));
     } else {
@@ -32,11 +26,7 @@ function TaskModal({ initialData, onClose }) {
 
   return (
     <Modal onClose={handleClose}>
-      <TaskForm
-        initialData={formData}
-        onSubmit={handleSubmit}
-        onClose={handleClose}
-      />
+      <TaskForm task={task} onSubmit={handleSubmit} onClose={handleClose} />
     </Modal>
   );
 }

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectTheme } from 'redux/auth/auth.selectors';
 
 import {
   Form,
   Label,
   Input,
+  TimeInput,
   TitleContainer,
   TimeContainer,
   InnerContainer,
@@ -17,13 +20,15 @@ import {
   RadioIconChecked,
 } from './TaskForm.styled';
 
-const TaskForm = ({ initialData, onSubmit, onClose }) => {
+const TaskForm = ({ task, onSubmit, onClose }) => {
   const [formData, setFormData] = useState({
-    title: initialData?.title || '',
-    start: initialData?.start || '',
-    end: initialData?.end || '',
-    priority: initialData?.priority || 'low',
+    title: task?.title || '',
+    start: task?.start || '',
+    end: task?.end || '',
+    priority: task?.priority || 'low',
   });
+
+  const currentTheme = useSelector(selectTheme);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -55,11 +60,14 @@ const TaskForm = ({ initialData, onSubmit, onClose }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <TitleContainer>
-        <Label htmlFor="title">Title</Label>
+        <Label htmlFor="title" theme={currentTheme}>
+          Title
+        </Label>
         <Input
           type="text"
           id="title"
           name="title"
+          theme={currentTheme}
           value={formData.title}
           onChange={handleChange}
           placeholder="Enter text"
@@ -70,25 +78,28 @@ const TaskForm = ({ initialData, onSubmit, onClose }) => {
       <TimeContainer>
         <InnerContainer>
           <Label htmlFor="start">Start</Label>
-          <Input
+          <TimeInput
             type="text"
             id="start"
             name="start"
+            theme={currentTheme}
             value={formData.start}
             onChange={handleChange}
             placeholder="9:00"
+            mask={[/\d/, /\d/, ':', /\d/, /\d/]}
             required
           />
         </InnerContainer>
         <InnerContainer>
           <Label htmlFor="end">End</Label>
-          <Input
+          <TimeInput
             type="text"
             id="end"
             name="end"
             value={formData.end}
             onChange={handleChange}
             placeholder="14:00"
+            mask={[/\d/, /\d/, ':', /\d/, /\d/]}
             required
           />
         </InnerContainer>
@@ -107,7 +118,7 @@ const TaskForm = ({ initialData, onSubmit, onClose }) => {
           ) : (
             <RadioIcon color={getRadioColor('low')} />
           )}
-          <StyledRadioLabel>Low</StyledRadioLabel>
+          <StyledRadioLabel theme={currentTheme}>Low</StyledRadioLabel>
         </RadioLabel>
         <RadioLabel>
           <RadioInput
@@ -144,7 +155,7 @@ const TaskForm = ({ initialData, onSubmit, onClose }) => {
       </RadioContainer>
 
       <ButtonContainer>
-        {initialData ? (
+        {formData ? (
           <Button type="submit" primary>
             <svg
               width="16"
