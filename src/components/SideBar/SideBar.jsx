@@ -10,34 +10,37 @@ import {
     AppNameStyled,
     ButtonStyled,
     CloseSVGStyled,
+    EventWrapper,
 } from "./SideBar.styled";
 
-const handleClick = ({currentTarget}) => {
+const handleClick = ({ currentTarget, target}) => {
     document.querySelector("#burgerBtn").disabled = false;
     document.querySelector("#burgerBtn").style.pointerEvents = "auto";
 
-    document.querySelector("#sideBar").style.display = "none";
-    
-    currentTarget.blur();
-}
+    if (currentTarget === target || target.type === "button") {
+        document.querySelector("#sideBar").style.display = "none";
+    };
+};
 
 const Sidebar = () => {
     return (
-        <SideBarStyled id="sideBar">
-            <WrapperStyled>
-                <LogoBarStyled>
-                    <LogoStyled>
-                        <GooseLogoStyled />
-                        <AppNameStyled>GooseTrack</AppNameStyled>
-                    </LogoStyled>
-                    <ButtonStyled onClick={handleClick}>
-                        <CloseSVGStyled />
-                    </ButtonStyled>
-                </LogoBarStyled>
-                <UserNav />
-            </WrapperStyled>
-            <LogoutBtn />         
-        </SideBarStyled>
+        <EventWrapper  id="sideBar" onClick={handleClick}>
+            <SideBarStyled>
+                <WrapperStyled>
+                    <LogoBarStyled>
+                        <LogoStyled>
+                            <GooseLogoStyled />
+                            <AppNameStyled>GooseTrack</AppNameStyled>
+                        </LogoStyled>
+                        <ButtonStyled type="button">
+                            <CloseSVGStyled />
+                        </ButtonStyled>
+                    </LogoBarStyled>
+                    <UserNav />
+                </WrapperStyled>
+                <LogoutBtn />         
+            </SideBarStyled>
+        </EventWrapper>
     );
 };
 
