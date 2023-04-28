@@ -5,11 +5,11 @@ import styled from 'styled-components';
 const getTasksColor = p => {
   const c = p.theme.colors;
   switch (p.priority) {
-    case 'low':
+    case 'Low':
       return `color: ${c.primary}; background-color: ${c.taskSecondaryLow};`;
-    case 'medium':
+    case 'Medium':
       return `color: ${c.taskMainMedium}; background-color: ${c.taskSecondaryMedium};`;
-    case 'high':
+    case 'High':
       return `color: ${c.taskMainHigh}; background-color: ${c.taskSecondaryHigh};`;
     default:
       return `color: ${c.black}; background-color: ${c.secondary};`;
@@ -17,6 +17,7 @@ const getTasksColor = p => {
 };
 
 export const CalendarWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 14px;

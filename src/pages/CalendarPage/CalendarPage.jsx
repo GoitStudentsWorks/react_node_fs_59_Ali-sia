@@ -1,24 +1,28 @@
 import { Wrapper } from './CalendarPage.styled';
 import CalendarToolbar from 'components/CalendarToolbar/CalendarToolbar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { addDays, addMonths, setDefaultOptions } from 'date-fns';
 import TaskModal from 'components/TaskModal/TaskModal';
 import { Outlet, useLocation } from 'react-router-dom';
+import { useAuth } from 'hooks';
+import { fetchTasks } from 'redux/tasks/tasks.operations';
+import { useDispatch } from 'react-redux';
 
 export default function CalendarPage() {
   setDefaultOptions({ weekStartsOn: 1 }); //for date-fns, to start count weeks from monday
-  const location = useLocation();
+  const dispatch = useDispatch();
   const currentDate = new Date();
   const [activeDate, setActiveDate] = useState(currentDate);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isLoggedIn } = useAuth();
+  const location = useLocation();
+
   const isDayPage = location?.pathname.includes('day');
-  const tasks = { tasks: [] };
 
   const changeActiveDay = (value, day) => {
     if (day) {
       return setActiveDate(day);
     }
-
     if (location.pathname.includes('day')) {
       return setActiveDate(addDays(activeDate, value));
     } else {
@@ -29,11 +33,6 @@ export default function CalendarPage() {
   const toggleModal = () => {
     setIsModalOpen(prev => !prev);
   };
-
-  // const isRefreshing = useSelector(selectIsRefreshing);
-  // if (isRefreshing) {
-  //   return;
-  // }
 
   // const startDayForFetch = Number(format(startOfMonth(activeDate), 'T'));
   // const endDayForFetch = Number(format(endOfMonth(activeDate), 'T'));
@@ -48,12 +47,12 @@ export default function CalendarPage() {
 
   // const day = new Date(+startDateForFetch);
 
-  // useEffect(() => {
-  //   // if (!isLoggedIn) {
-  //   //   return;
-  //   // }
-  //   dispatch(fetchTasks());
-  // }, [dispatch]);
+  useEffect(() => {
+    if (!isLoggedIn) {
+      return;
+    }
+    dispatch(fetchTasks());
+  }, [dispatch, isLoggedIn]);
 
   // console.log('REDNDER CALENDAR PAGE');
   return (
@@ -78,9 +77,8 @@ export default function CalendarPage() {
           context={{
             currentDate,
             activeDate,
-            changeActiveDay,
-            tasks,
             toggleModal,
+            changeActiveDay,
           }}
         />
       )}

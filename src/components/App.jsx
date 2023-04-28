@@ -1,6 +1,6 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, Suspense } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from 'styled-components';
 import { theme, light, dark } from 'theme';
@@ -9,26 +9,40 @@ import { selectTheme } from 'redux/auth/auth.selectors';
 import { refreshUser } from 'redux/auth/auth.operations';
 
 import MainLayout from './MainLayout/MainLayout';
-import AccountPage from '../pages/AccountPage/AccountPage';
-import CalendarPage from 'pages/CalendarPage/CalendarPage';
-import RegisterPage from '../pages/RegisterPage/RegisterPage';
-import LoginPage from '../pages/LoginPage/LoginPage';
+// import AccountPage from '../pages/AccountPage/AccountPage';
+// import CalendarPage from '..pages/CalendarPage/CalendarPage';
+// import RegisterPage from '../pages/RegisterPage/RegisterPage';
+// import LoginPage from '../pages/LoginPage/LoginPage';
+import ChoosedMonth from './ChoosedMonth/ChoosedMonth';
+import ChoosedDay from './ChooseDay/ChooseDay';
 
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { CalendarRoute, DayRoute } from './CalendarRoute';
-import ChoosedMonth from './ChoosedMonth/ChoosedMonth';
-import ChoosedDay from './ChooseDay/ChooseDay';
+
+import { useAuth } from 'hooks';
+
+const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
+const CalendarPage = lazy(() => import('../pages/CalendarPage/CalendarPage'));
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
+
+// const MainLayout = lazy(() => import('./MainLayout/MainLayout'));
+// const ChoosedMonth = lazy(() => import('./ChoosedMonth/ChoosedMonth'));
+// const ChoosedDay = lazy(() => import('./ChooseDay/ChooseDay'));
 
 export const App = () => {
   const currentTheme = useSelector(selectTheme);
-  const themeGlobal = { ...theme, colors: {...theme.colors, ...{ light, dark }[currentTheme]} };
-
+  const themeGlobal = {
+    ...theme,
+    colors: { ...theme.colors, ...{ light, dark }[currentTheme] },
+  };
   const dispatch = useDispatch();
+  const { token } = useAuth();
 
   useEffect(() => {
     dispatch(refreshUser());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   return (
     <ThemeProvider theme={themeGlobal}>

@@ -1,8 +1,4 @@
-//selectors
-export const getContacts = state => state.contacts.items;
-
-export const getIsLoading = state => state.contacts.isLoading;
-
-export const getError = state => state.contacts.error;
-
-export const getFilter = state => state.filter;
+export const getTasks = state => state.tasks.tasks;
+export const geIsTasksLoading = state => state.isTasksLoading;
+export const getError = state => state.tasks.error;
+export const getRecievedPeriods = state => state.tasks.periods;
