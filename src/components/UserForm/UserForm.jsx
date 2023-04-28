@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from 'redux/auth/auth.operations';
-import { selectUser } from 'redux/auth/auth.selectors';
+import { selectIsLoggedIn, selectUser } from 'redux/auth/auth.selectors';
 import { parseISO } from 'date-fns';
 
 import {
@@ -11,6 +11,8 @@ import {
   PhotoSelection,
   LabelPhotoSelection,
   SelectionIcon,
+  UserName,
+  UserRole,
   Wrapper,
   Label,
   LabelName,
@@ -22,7 +24,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export const UserForm = () => {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
+
   const [values, setValues] = useState({
     name: '',
     birthday: '',
@@ -32,6 +36,7 @@ export const UserForm = () => {
     avatarFile: null,
     avatarURL: '',
   });
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -39,6 +44,7 @@ export const UserForm = () => {
       ...prevValues,
       [name]: value,
     }));
+    setIsSubmitDisabled(false);
   };
 
   const handleDateChange = date => {
@@ -46,6 +52,7 @@ export const UserForm = () => {
       ...prevValues,
       birthday: date,
     }));
+    setIsSubmitDisabled(false);
   };
 
   const handleImageUpload = e => {
@@ -61,34 +68,38 @@ export const UserForm = () => {
     };
 
     reader.readAsDataURL(file);
+    setIsSubmitDisabled(false);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const formData = new FormData();
+
     const { name, birthday, email, phone, telegram, avatarFile } = values;
 
+    const formData = new FormData();
     formData.append('name', name);
     formData.append('birthday', birthday ? birthday : '');
     formData.append('email', email);
-    formData.append('phone', phone);
-    formData.append('telegram', telegram);
+    formData.append('phone', phone ? phone : '');
+    formData.append('telegram', telegram ? telegram : '');
     if (avatarFile) {
       formData.append('avatarFile', avatarFile);
     }
 
     dispatch(updateUser(formData));
+
+    setIsSubmitDisabled(true);
   };
 
   useEffect(() => {
-    if (user.email) {
+    if (isLoggedIn) {
       const modifiedUser = {
         ...user,
         birthday: user.birthday ? parseISO(user.birthday) : '',
       };
       setValues(modifiedUser);
     }
-  }, [user]);
+  }, [dispatch, isLoggedIn, user]);
 
   return (
     user.email && (
@@ -110,6 +121,8 @@ export const UserForm = () => {
             onChange={handleImageUpload}
           />
         </LabelPhotoSelection>
+        <UserName>{values.name}</UserName>
+        <UserRole>user</UserRole>
         <Wrapper>
           <Label>
             <LabelName>User Name</LabelName>
@@ -165,7 +178,9 @@ export const UserForm = () => {
             />
           </Label>
         </Wrapper>
-        <Button type="submit">Save changes</Button>
+        <Button type="submit" disabled={isSubmitDisabled}>
+          Save changes
+        </Button>
       </StyledForm>
     )
   );
