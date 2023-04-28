@@ -14,6 +14,8 @@ import { CalendarRoute, DayRoute } from './CalendarRoute';
 
 import Loader from './Loader/Loader';
 
+import { HomePage } from 'pages/HomePage/HomePage';
+
 const MainLayout = lazy(() => import('./MainLayout/MainLayout'));
 const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
 const CalendarPage = lazy(() => import('pages/CalendarPage/CalendarPage'));
@@ -69,6 +71,7 @@ export const App = () => {
 
               {/* Публічні маршрути */}
               <Route path="/" element={<PublicRoute />}>
+                <Route path="homepage" element={<HomePage />} />
                 <Route path="login" element={<LoginPage />} />
                 <Route path="register" element={<RegisterPage />} />
               </Route>
