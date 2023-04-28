@@ -73,7 +73,7 @@ export const App = () => {
               <Route path="register" element={<RegisterPage />} />
             </Route>
 
-            <Route path="*" element={<h1>not found page</h1> } />
+            <Route path="*" element={<h1>not found page</h1>} />
           </Routes>
         </Suspense>
       </BrowserRouter>
