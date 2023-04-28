@@ -132,6 +132,7 @@ export const SiteNameContainer = styled.div`
       'laptop',
       `
         display: flex;
+        align-items: center;
         gap: 8px;
     `
     )};
