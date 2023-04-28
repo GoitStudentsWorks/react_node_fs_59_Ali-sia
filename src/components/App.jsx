@@ -68,9 +68,9 @@ export const App = () => {
             </Route>
 
             {/* Публічні маршрути */}
-            <Route path="/" element={<PublicRoute   /> }>
-              <Route path="login" element={<LoginPage   /> } />
-              <Route path="register" element={<RegisterPage   /> } />
+            <Route path="/" element={<PublicRoute />}>
+              <Route path="login" element={<LoginPage />} />
+              <Route path="register" element={<RegisterPage />} />
             </Route>
 
             <Route path="*" element={<h1>not found page</h1> } />
