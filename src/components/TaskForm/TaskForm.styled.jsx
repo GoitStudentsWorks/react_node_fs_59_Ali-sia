@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-//1
+import TextMask from 'react-text-mask';
+import THEME_CONTEXT from 'context/ThemeContext';
 
 const Form = styled.form`
   width: 100%;
@@ -15,17 +16,26 @@ const Label = styled.label`
   font-size: 10px;
   line-height: 12px;
 
-  color: rgba(52, 52, 52, 0.8);
+  color: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT
+      ? 'rgba(52, 52, 52, 0.8)'
+      : 'rgba(250, 250, 250, 0.3)'};
 `;
 
 const Input = styled.input`
   display: block;
   padding: 12px 14px;
 
-  background-color: #f7f7f7;
-  color: #616161;
+  background-color: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT ? '#F7F7F7' : 'transparent'};
+  color: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT ? '#616161' : '#FFFFFF'};
   border-radius: 8px;
   border-width: 0;
+  border: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT
+      ? 'none'
+      : '1px solid rgba(255, 255, 255, 0.15)'};
 
   font-family: 'Inter';
   font-style: normal;
@@ -48,6 +58,33 @@ const TitleContainer = styled.div`
   @media (min-width: 768px) {
     margin-bottom: 18px;
   }
+`;
+
+const TimeInput = styled(TextMask)`
+  display: block;
+  padding: 12px 14px;
+
+  background-color: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT ? '#F7F7F7' : 'transparent'};
+  color: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT ? '#616161' : '#FFFFFF'};
+  border-radius: 8px;
+  border-width: 0;
+  border: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT
+      ? 'none'
+      : '1px solid rgba(255, 255, 255, 0.15)'};
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+
+  ::placeholder {
+    opacity: 1;
+  }
+  box-sizing: 'border-box';
 `;
 
 const TimeContainer = styled.div`
@@ -97,7 +134,8 @@ const StyledRadioLabel = styled.span`
   font-weight: 600;
   font-size: 12px;
   line-height: 14px;
-  color: #616161;
+  color: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT ? '#616161' : '#FFFFFF'};
 `;
 
 const ButtonContainer = styled.div`
@@ -112,7 +150,8 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   flex: 1;
-  padding: 6px 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   border: none;
   border-radius: 4px;
   font-size: 14px;
@@ -129,6 +168,19 @@ const Button = styled.button`
   svg {
     margin-right: 8px;
   }
+
+  @media (min-width: 768px) {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+`;
+
+const RadioIconContainer = styled.div`
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const RadioIcon = ({ color }) => (
@@ -138,6 +190,7 @@ const RadioIcon = ({ color }) => (
     viewBox="0 0 10 10"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    style={{ display: 'block' }}
   >
     <circle cx="5" cy="5" r="5" fill={color} />
   </svg>
@@ -150,6 +203,7 @@ const RadioIconChecked = ({ color }) => (
     viewBox="0 0 14 14"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    style={{ display: 'block' }}
   >
     <circle
       cx="7"
@@ -169,6 +223,7 @@ export {
   Form,
   Label,
   Input,
+  TimeInput,
   TitleContainer,
   TimeContainer,
   InnerContainer,
@@ -178,6 +233,7 @@ export {
   StyledRadioLabel,
   ButtonContainer,
   Button,
+  RadioIconContainer,
   RadioIcon,
   RadioIconChecked,
 };

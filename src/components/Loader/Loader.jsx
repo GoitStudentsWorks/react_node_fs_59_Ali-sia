@@ -1,13 +1,18 @@
-import { ThreeDots } from 'react-loader-spinner';
+import { useEffect } from 'react';
+
+import { LoaderWrapper, RockinGoose } from './Loader.styled';
 
 const Loader = () => {
+  useEffect(() => {
+    return () => {
+      setTimeout(console.log('click'), 100000);
+    };
+  }, []);
+
   return (
-    <ThreeDots
-      color="rgba(62, 133, 243, 1)"
-      wrapperStyle={{ position: 'absolute', left: '500px', top: '-140px' }}
-      radius="9"
-      ariaLabel="three-dots-loading"
-    />
+    <LoaderWrapper>
+      <RockinGoose />
+    </LoaderWrapper>
   );
 };
 

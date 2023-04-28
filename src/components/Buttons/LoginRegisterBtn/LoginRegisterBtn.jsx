@@ -4,7 +4,7 @@ import { StyledButton } from './LoginRegisterBtn.styled';
 
 export const LoginRegisterBtn = ({ disabled, btnText }) => {
   return (
-    <StyledButton disabled={disabled}>
+    <StyledButton type="submit" disabled={disabled}>
       <span> {btnText} </span>
       <img src={loginRegisterIcon} alt="->]"></img>
     </StyledButton>

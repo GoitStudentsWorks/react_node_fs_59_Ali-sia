@@ -8,28 +8,21 @@ import { theme, light, dark } from 'theme';
 import { selectTheme } from 'redux/auth/auth.selectors';
 import { refreshUser } from 'redux/auth/auth.operations';
 
-import MainLayout from './MainLayout/MainLayout';
-// import AccountPage from '../pages/AccountPage/AccountPage';
-// import CalendarPage from '..pages/CalendarPage/CalendarPage';
-// import RegisterPage from '../pages/RegisterPage/RegisterPage';
-// import LoginPage from '../pages/LoginPage/LoginPage';
-import ChoosedMonth from './ChoosedMonth/ChoosedMonth';
-import ChoosedDay from './ChooseDay/ChooseDay';
-
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { CalendarRoute, DayRoute } from './CalendarRoute';
 
-import { useAuth } from 'hooks';
+import Loader from './Loader/Loader';
 
+import { HomePage } from 'pages/HomePage/HomePage';
+
+const MainLayout = lazy(() => import('./MainLayout/MainLayout'));
 const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
-const CalendarPage = lazy(() => import('../pages/CalendarPage/CalendarPage'));
-const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const CalendarPage = lazy(() => import('pages/CalendarPage/CalendarPage'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
-
-// const MainLayout = lazy(() => import('./MainLayout/MainLayout'));
-// const ChoosedMonth = lazy(() => import('./ChoosedMonth/ChoosedMonth'));
-// const ChoosedDay = lazy(() => import('./ChooseDay/ChooseDay'));
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const ChoosedMonth = lazy(() => import('./ChoosedMonth/ChoosedMonth'));
+const ChoosedDay = lazy(() => import('./ChooseDay/ChooseDay'));
 
 export const App = () => {
   const currentTheme = useSelector(selectTheme);
@@ -37,6 +30,7 @@ export const App = () => {
     ...theme,
     colors: { ...theme.colors, ...{ light, dark }[currentTheme] },
   };
+
   const dispatch = useDispatch();
   const { token } = useAuth();
 
@@ -45,46 +39,49 @@ export const App = () => {
   }, [dispatch, token]);
 
   return (
-    <ThemeProvider theme={themeGlobal}>
-      <BrowserRouter basename="goose-track-team-4">
-        <Suspense fallback={null}>
-          <Toaster />
-          <Routes>
-            {/* Приватні маршрути */}
-            <Route path="/" element={<PrivateRoute />}>
-              <Route path="/" element={<MainLayout />}>
-                <Route path="/" element={<CalendarPage />}>
-                  {/* Переадресація на календар місяц/день*/}
-                  <Route path="/" element={<CalendarRoute />} />
-                  <Route path="/calendar" element={<CalendarRoute />} />
-                  <Route path="/calendar/month" element={<CalendarRoute />} />
-                  <Route path="/calendar/day" element={<DayRoute />} />
+    <>
+      <ThemeProvider theme={themeGlobal}>
+        <BrowserRouter basename="goose-track-team-4">
+          <Suspense fallback={<Loader />}>
+            <Toaster />
+            <Routes>
+              {/* Приватні маршрути */}
+              <Route path="/" element={<PrivateRoute />}>
+                <Route path="/" element={<MainLayout />}>
+                  <Route path="/" element={<CalendarPage />}>
+                    {/* Переадресація на календар місяц/день*/}
+                    <Route path="/" element={<CalendarRoute />} />
+                    <Route path="/calendar" element={<CalendarRoute />} />
+                    <Route path="/calendar/month" element={<CalendarRoute />} />
+                    <Route path="/calendar/day" element={<DayRoute />} />
 
-                  {/* Переадресація на відповідний компонент календаря */}
-                  <Route
-                    path="calendar/month/:currentDate"
-                    element={<ChoosedMonth />}
-                  />
-                  <Route
-                    path="calendar/day/:currentDate"
-                    element={<ChoosedDay />}
-                  />
+                    {/* Переадресація на відповідний компонент календаря */}
+                    <Route
+                      path="calendar/month/:currentDate"
+                      element={<ChoosedMonth />}
+                    />
+                    <Route
+                      path="calendar/day/:currentDate"
+                      element={<ChoosedDay />}
+                    />
+                  </Route>
+                  {/* Аккаунт */}
+                  <Route path="account" element={<AccountPage />} />
                 </Route>
-                {/* Аккаунт */}
-                <Route path="account" element={<AccountPage />} />
               </Route>
-            </Route>
 
-            {/* Публічні маршрути */}
-            <Route path="/" element={<PublicRoute />}>
-              <Route path="login" element={<LoginPage />} />
-              <Route path="register" element={<RegisterPage />} />
-            </Route>
+              {/* Публічні маршрути */}
+              <Route path="/" element={<PublicRoute />}>
+                <Route path="homepage" element={<HomePage />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="register" element={<RegisterPage />} />
+              </Route>
 
-            <Route path="*" element={<h1>not found page</h1>} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </ThemeProvider>
+              <Route path="*" element={<h1>not found page</h1>} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </ThemeProvider>
+    </>
   );
 };
