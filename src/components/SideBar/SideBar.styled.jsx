@@ -230,8 +230,6 @@ export const EventWrapper = styled.div`
         display: block;
 
         position: static;
-        
-        pointer-events: none;
     `
   )};
 `;
