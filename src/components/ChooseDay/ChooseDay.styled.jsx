@@ -26,6 +26,17 @@ export const TasksColumnsList = styled.div`
   gap: 22px;
   margin-bottom: ${p => p.theme.space[4]}px;
   width: fit-content;
-
+    ${greaterThan(
+    'tablet',
+    `
+   gap: 16px;
+`
+  )}
+  ${greaterThan(
+    'laptop',
+    `
+  gap: 19px;
+`
+  )}
 `;
 
