@@ -1,6 +1,6 @@
 import { useOutletContext } from 'react-router-dom';
-import { ColumnHeadBarWrapper, ColumnHeadBarTitle, StyledRoundButton } from './ColumnHeadBar.styled';
-import RoundBtnIcon from './RoundBtnIcon.svg';
+import { ColumnHeadBarWrapper, ColumnHeadBarTitle, StyledRoundButton, RoundBtnIconSvg } from './ColumnHeadBar.styled';
+// import RoundBtnIcon from './RoundBtnIcon.svg';
 
 export default function ColumnHeadBar() {
     const { toggleModal } = useOutletContext();
@@ -11,7 +11,8 @@ export default function ColumnHeadBar() {
             <StyledRoundButton
                 type="button"
                 onClick={() => toggleModal()}>
-                <img src={RoundBtnIcon} alt="+"></img>
+                <RoundBtnIconSvg />
+                {/* <img src={RoundBtnIconSvg} alt="+"></img> */}
             </StyledRoundButton>
         </ColumnHeadBarWrapper>
     );
