@@ -27,6 +27,8 @@ const handleClick = ({currentTarget}) => {
 
 const Header = () => {
     const { pathname } = useLocation();
+    
+    const isVisibleGoose = pathname.split('/')[1] === 'calendar' && pathname.split('/')[2] === "day";
 
     return (
         <HeaderStyled>
@@ -39,14 +41,15 @@ const Header = () => {
             </ButtonStyled>
             <SiteNameContainer>
                 <GooseContainer>
-                    <ForTheGloryOfMentors />
+                    { isVisibleGoose && <ForTheGloryOfMentors /> }
                 </GooseContainer>
                 <PageContainer>
                     <PageName>
                         { pathname === "/account" ? "User Profile" : "Calendar" }
                     </PageName>
                     <TakeToWork>
-                        <span>Let go</span> of the past and focus on the present!
+                        { isVisibleGoose
+                            && <p><span>Let go</span> of the past and focus on the present!</p> }
                     </TakeToWork>
                 </PageContainer>
             </SiteNameContainer>

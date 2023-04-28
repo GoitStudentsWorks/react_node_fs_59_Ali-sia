@@ -148,11 +148,11 @@ export const PageContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const TakeToWork = styled.p`
+export const TakeToWork = styled.div`
   font-size: ${props => props.theme.fontSizes.s};
   line-height: 1.29;
 
-  & > span {
+  & span {
     color: ${props => props.theme.colors.btnLogout};
   }
 `;
