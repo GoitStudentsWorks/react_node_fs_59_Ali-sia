@@ -175,6 +175,14 @@ const Button = styled.button`
   }
 `;
 
+const RadioIconContainer = styled.div`
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const RadioIcon = ({ color }) => (
   <svg
     width="10"
@@ -182,6 +190,7 @@ const RadioIcon = ({ color }) => (
     viewBox="0 0 10 10"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    style={{ display: 'block' }}
   >
     <circle cx="5" cy="5" r="5" fill={color} />
   </svg>
@@ -194,6 +203,7 @@ const RadioIconChecked = ({ color }) => (
     viewBox="0 0 14 14"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    style={{ display: 'block' }}
   >
     <circle
       cx="7"
@@ -223,6 +233,7 @@ export {
   StyledRadioLabel,
   ButtonContainer,
   Button,
+  RadioIconContainer,
   RadioIcon,
   RadioIconChecked,
 };
