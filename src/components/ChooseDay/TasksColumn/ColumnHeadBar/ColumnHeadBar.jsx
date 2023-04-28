@@ -3,6 +3,7 @@ import { ColumnHeadBarWrapper } from './ColumnHeadBar.styled';
 
 export default function ColumnHeadBar() {
     const { toggleModal } = useOutletContext();
+    
 
     return (
         <ColumnHeadBarWrapper>
