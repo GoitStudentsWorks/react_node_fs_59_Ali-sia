@@ -6,8 +6,6 @@ export const TaskColumnsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* align-items: center; */
-  /* margin-bottom: ${p => p.theme.space[4]}px; */
   padding: 25px 18px 20px 18px;
 
   min-height: 155px;
@@ -23,19 +21,19 @@ export const TaskColumnsWrapper = styled.div`
   background-color: ${p => p.theme.colors.bgcSecondaryTheme};
   color: ${p => p.theme.colors.textDaysNameAtDaysPage};
 
-  /* ${greaterThan(
+  ${greaterThan(
     'tablet',
     `
-   min-height: 68px;
-   width: 704px;
-   font-size: 14px;
+   min-height: 165px;
+   width: 344px;
 `
   )}
   ${greaterThan(
     'laptop',
     `
-  width: 1087px;
+  width: 328px;
+  min-height: 165px;
 `
-  )} */
+)}
 `;
 
