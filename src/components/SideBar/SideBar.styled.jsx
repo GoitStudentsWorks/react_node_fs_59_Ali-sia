@@ -216,11 +216,22 @@ export const EventWrapper = styled.div`
 
   position: fixed;
   top: 0;
+  bottom: 0;
+  right: 0;
   left: 0;
   z-index: 1;
-  
-  width: 100vw;
-  height: 100vh;
 
   background-color: transparent;
+
+  ${() =>
+    greaterThan(
+      'laptop',
+      `
+        display: block;
+
+        position: static;
+        
+        pointer-events: none;
+    `
+  )};
 `;
