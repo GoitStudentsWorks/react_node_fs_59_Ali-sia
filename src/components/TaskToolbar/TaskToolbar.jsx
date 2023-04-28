@@ -1,4 +1,5 @@
-import React, { useState, useSelector } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { selectTheme } from 'redux/auth/auth.selectors';
 import TaskModal from '../TaskModal/TaskModal';
 // import { createTask, updateTask, deleteTask, updateTaskColumn } from '../redux/tasksSlice';
