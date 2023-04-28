@@ -15,7 +15,7 @@ import {
   StyledLabel,
   StyledField,
   ErrorMsgContainer,
-} from './LoginForm.styled';
+} from '../RegisterForm/RegisterForm.styled';
 
 export const LoginForm = () => {
   const initialValues = {
@@ -27,7 +27,9 @@ export const LoginForm = () => {
     email: Yup.string()
       .email('Invalid email address')
       .required('Email is required'),
-    password: Yup.string().required('Password is required'),
+    password: Yup.string()
+      .min(8, 'Your password can not be so short')
+      .required('Password is required'),
   });
 
   const dispatch = useDispatch();
@@ -56,13 +58,22 @@ export const LoginForm = () => {
         {({ isSubmitting, errors, touched }) => (
           <StyledForm>
             <InputContainer>
-              <StyledLabel htmlFor="email">
+              <StyledLabel
+                htmlFor="email"
+                aria-invalid={touched.email && errors.email ? 'true' : 'false'}
+                data-valid={touched.email && !errors.email ? 'true' : 'false'}
+              >
                 Email
                 <StyledField
                   id="email"
                   name="email"
                   placeholder="Enter your email"
                   type="email"
+                  autoComplete="email"
+                  aria-invalid={
+                    touched.email && errors.email ? 'true' : 'false'
+                  }
+                  data-valid={touched.email && !errors.email ? 'true' : 'false'}
                 />
                 {/* If this field has been touched, and it contains an error, display it
                  */}
@@ -73,7 +84,15 @@ export const LoginForm = () => {
             </InputContainer>
 
             <InputContainer>
-              <StyledLabel htmlFor="password">
+              <StyledLabel
+                htmlFor="password"
+                aria-invalid={
+                  touched.password && errors.password ? 'true' : 'false'
+                }
+                data-valid={
+                  touched.password && !errors.password ? 'true' : 'false'
+                }
+              >
                 Password
                 <StyledField
                   id="password"
@@ -81,9 +100,13 @@ export const LoginForm = () => {
                   placeholder="Enter your password"
                   type="password"
                   autoComplete="current-password"
+                  aria-invalid={
+                    touched.password && errors.password ? 'true' : 'false'
+                  }
+                  data-valid={
+                    touched.password && !errors.password ? 'true' : 'false'
+                  }
                 />
-                {/* If this field has been touched, and it contains an error, display it
-                 */}
                 {touched.password && errors.password && (
                   <ErrorMsgContainer>{errors.password}</ErrorMsgContainer>
                 )}
@@ -91,9 +114,8 @@ export const LoginForm = () => {
             </InputContainer>
 
             <LoginRegisterBtn
-              type="submit"
               disabled={isSubmitting}
-              btnText="Log In"
+              btnText={isSubmitting ? `Loading...` : `Log In`}
             />
           </StyledForm>
         )}
