@@ -6,11 +6,16 @@ import { TaskColumnsWrapper } from "./TasksColumn.styled";
 
 
 export default function TasksColumn() {
+    const columnData = [
+        { title: "To do", number: 1 },
+        { title: "In progress", number: 2 },
+        { title: "Done", number: 3 },
+    ];
 
     const tasksCollection = {};
     return (
         <TaskColumnsWrapper>
-            <ColumnHeadBar />
+            <ColumnHeadBar title={columnData.title}/>
             {tasksCollection && <ColumnTasksList />}
             
             <AddTaskBtn />
