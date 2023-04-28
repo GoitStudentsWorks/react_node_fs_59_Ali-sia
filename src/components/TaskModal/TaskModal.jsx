@@ -1,7 +1,9 @@
 import React from 'react';
-// import { createTask, updateTask } from '../../redux/tasks/tasks.operations';
+// import { createTask, updateTask } from 'redux/tasks/tasks.operations';
 import Modal from '../Modal/Modal';
 import TaskForm from '../TaskForm/TaskForm';
+
+// 1
 
 function TaskModal({ task, onClose }) {
   const handleSubmit = newData => {
