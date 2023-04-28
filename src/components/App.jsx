@@ -43,9 +43,9 @@ export const App = () => {
           <Toaster />
           <Routes>
             {/* Приватні маршрути */}
-            <Route path="/" element={<PrivateRoute /> }>
-              <Route path="/" element={<MainLayout /> }>
-                <Route path="/" element={<CalendarPage  /> }>
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="/" element={<MainLayout />}>
+                <Route path="/" element={<CalendarPage />}>
                   {/* Переадресація на календар місяц/день*/}
                   <Route path="/" element={<CalendarRoute   /> } />
                   <Route path="/calendar" element={<CalendarRoute   /> } />
