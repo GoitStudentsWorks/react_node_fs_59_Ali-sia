@@ -1,17 +1,22 @@
 import { useOutletContext } from 'react-router-dom';
-import { ColumnHeadBarWrapper } from './ColumnHeadBar.styled';
+import { ColumnHeadBarWrapper, ColumnHeadBarTitle, StyledRoundButton, RoundBtnIconSvg } from './ColumnHeadBar.styled';
+// import RoundBtnIcon from './RoundBtnIcon.svg';
 
 export default function ColumnHeadBar() {
     const { toggleModal } = useOutletContext();
     
-
     return (
         <ColumnHeadBarWrapper>
-            <h2>ToDo</h2>
-            <button type="button" onClick={() => toggleModal()}>+</button>
+            <ColumnHeadBarTitle>ToDo</ColumnHeadBarTitle>
+            <StyledRoundButton
+                type="button"
+                onClick={() => toggleModal()}>
+                <RoundBtnIconSvg />
+                {/* <img src={RoundBtnIconSvg} alt="+"></img> */}
+            </StyledRoundButton>
         </ColumnHeadBarWrapper>
-    )
-}
+    );
+};
 
 // 1. Компонент отримує в пропсах заголовок колонки групи та ідентифікатор ступеню виконання задач в цій колонці (To do | In progress | Done)
 // 2. Компонент рендерить блок розмітки 

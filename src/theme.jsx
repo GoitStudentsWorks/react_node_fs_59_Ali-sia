@@ -95,7 +95,7 @@ export const theme = {
     btnLogout: '#3E85F3',
 
     moreTaskLabel: 'grey',
-  }
+  },
 };
 
 export const light = {
@@ -121,6 +121,11 @@ export const light = {
   bgcSideBarTheme: '#FFFFFF',
 
   bgcUserProfileTheme: '#FFFFFF',
+  textUserProfileNameTheme: '#343434',
+  textUserProfileRoleTheme: '#616161',
+  textUserProfileLabelTheme: '#111111',
+  textUserProfileInputTheme: '#111111',
+  borderUserProfileTheme: 'rgba(17, 17, 17, 0.1)',
 
   taskBorderTheme: 'rgba(220, 227, 229, 0.8)',
 
@@ -156,6 +161,11 @@ export const dark = {
   bgcSideBarTheme: '#13151A',
 
   bgcUserProfileTheme: '#21222C',
+  textUserProfileNameTheme: '#FFFFFF',
+  textUserProfileRoleTheme: 'rgba(250, 250, 250, 0.3)',
+  textUserProfileLabelTheme: 'rgba(250, 250, 250, 0.3)',
+  textUserProfileInputTheme: '#FFFFFF',
+  borderUserProfileTheme: 'rgba(255, 255, 255, 0.15)',
 
   taskBorderTheme: 'rgba(255, 255, 255, 0.15)',
 
@@ -166,4 +176,4 @@ export const dark = {
   bgActiveBtnDayMonthSelector: 'rgba(62, 133, 243, 1)',
   textActiveDayMonthSelector: 'rgba(255, 255, 255, 1)',
   textDaysNameAtDaysPage: 'rgba(250, 250, 250, 0.3)',
-}
+};
