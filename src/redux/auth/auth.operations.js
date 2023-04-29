@@ -18,8 +18,8 @@ export const register = createAsyncThunk(
   'users/register',
   async (formData, { rejectWithValue }) => {
     try {
-      const { data } = await publicApi.post('/api/users/register', formData);
-      return data;
+      const response = await publicApi.post('/api/users/register', formData);
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -83,8 +83,8 @@ export const refreshUser = createAsyncThunk(
     try {
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
-      const res = await privateApi.get('/api/users/current');
-      return res.data;
+      const response = await privateApi.get('/api/users/current');
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -111,8 +111,8 @@ export const updateUser = createAsyncThunk(
     try {
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
-      const res = await privateApi.patch('/api/users/info', formData);
-      return res.data;
+      const response = await privateApi.patch('/api/users/info', formData);
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
