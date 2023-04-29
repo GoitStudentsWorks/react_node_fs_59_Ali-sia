@@ -21,8 +21,8 @@ export const LogoutBtn = () => {
   };
 
   const ModalClose = event => {
-    event.stopPropagation();
     setIsModalOpen(false);
+    event.stopPropagation();
   };
 
   const handleLogOut = async (event) => {
