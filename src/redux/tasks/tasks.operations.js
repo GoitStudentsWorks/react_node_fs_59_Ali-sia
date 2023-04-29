@@ -4,13 +4,16 @@ import { privateApi } from 'services/http';
 // GET @ /contacts
 export const fetchTasks = createAsyncThunk(
   'tasks/fetchTasks',
-  async (_, thunkAPI) => {
+  async (params, thunkAPI) => {
     try {
-      const { data } = await privateApi.get('/api/tasks');
-      // console.log('UUUUUUUUU ------> ', data.data.result);
-      return data.data.result;
+      const { data } = await privateApi.get('/api/tasks', {
+        params: params.period,
+        signal: params.signal,
+      });
+      return data.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      console.log('ERROORR', error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

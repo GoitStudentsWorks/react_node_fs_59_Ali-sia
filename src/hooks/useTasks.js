@@ -1,20 +1,21 @@
 import { useSelector } from 'react-redux';
+import {
+  getError,
+  getIsTasksLoading,
+  getSavedPeriods,
+  getTasks,
+} from 'redux/tasks/tasks.selectors';
 
 export const useTasks = () => {
   const tasks = useSelector(getTasks);
-  const isTasksLoading = useSelector(getIsLoading);
+  const isTasksLoading = useSelector(getIsTasksLoading);
   const error = useSelector(getError);
-  const periods = useSelector(getRecievedPeriods);
+  const savedPeriod = useSelector(getSavedPeriods);
 
   return {
     tasks,
     isTasksLoading,
     error,
-    periods,
+    savedPeriod,
   };
 };
-
-export const getTasks = state => state.tasks.tasks;
-export const getIsLoading = state => state.tasks.isTasksLoading;
-export const getError = state => state.tasks.error;
-export const getRecievedPeriods = state => state.tasks.periods;

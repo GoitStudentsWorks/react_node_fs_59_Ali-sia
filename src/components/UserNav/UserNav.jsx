@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
 import {
   WrapperStyled,
   UlStyled,
@@ -8,7 +8,7 @@ import {
   CalendarSVGStyled,
 } from './UserNav.styled';
 
-const monthForLink = format(Date.now(), 'MMMMyyyy');
+// const monthForLink = format(Date.now(), 'MMMMyyyy');
 
 const UserNav = () => {
   return (
@@ -22,7 +22,7 @@ const UserNav = () => {
           </NavLinkStyled>
         </LiStyled>
         <LiStyled>
-          <NavLinkStyled to={`/calendar/month/${monthForLink}`}>
+          <NavLinkStyled to={'/calendar'}>
             <CalendarSVGStyled />
             Calendar
           </NavLinkStyled>

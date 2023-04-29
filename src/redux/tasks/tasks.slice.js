@@ -17,7 +17,7 @@ const handleFulfiled = state => {
 
 export const tasksInitState = {
   tasks: [],
-  periods: [],
+  savedPeriods: [],
   isTasksLoading: false,
   error: null,
 };
@@ -26,8 +26,8 @@ const tasksSlice = createSlice({
   name: 'tasks',
   initialState: tasksInitState,
   reducers: {
-    addSearchPeriods(state, { payload }) {
-      state.periods.push(payload);
+    resetTasksState() {
+      return tasksInitState;
     },
   },
   extraReducers: builder => {
@@ -36,7 +36,8 @@ const tasksSlice = createSlice({
       .addCase(fetchTasks.rejected, handleRejected)
       .addCase(fetchTasks.fulfilled, (state, { payload }) => {
         handleFulfiled(state);
-        state.tasks = [...state.tasks, ...payload];
+        state.tasks = [...state.tasks, ...payload.result];
+        state.savedPeriods.push(payload.start);
       })
       .addCase(addTask.pending, handlePending)
       .addCase(addTask.rejected, handleRejected)
@@ -71,3 +72,4 @@ const tasksSlice = createSlice({
 });
 
 export const tasksReducer = tasksSlice.reducer;
+export const { resetTasksState } = tasksSlice.actions;

@@ -23,14 +23,16 @@ import {
   CellLink,
   TableList,
 } from './CalendarTable.styled';
-import { useOutletContext } from 'react-router-dom';
 import { useAuth } from 'hooks';
 import { useTasks } from 'hooks/useTasks';
-import Loader from 'components/Loader/Loader';
+import LoaderForCalendar from 'components/Loader/LoaderForCalendar';
 
-export default function CalendarTable() {
-  const { changeActiveDay, toggleModal, activeDate, currentDate } =
-    useOutletContext();
+export default function CalendarTable({
+  changeActiveDay,
+  toggleModal,
+  activeDate,
+  currentDate,
+}) {
   const { isRefresing, isLoggedIn } = useAuth();
   const { tasks, isTasksLoading } = useTasks();
 
@@ -68,11 +70,11 @@ export default function CalendarTable() {
     }
     changeActiveDay(0, item);
   };
-
   return (
     <div>
       <CalendarWrapper>
-        {(isRefresing || isTasksLoading) && <Loader />}
+        {/* <LoaderForCalendar /> */}
+        {(!isLoggedIn || isTasksLoading) && <LoaderForCalendar />}
         <TableList>
           {visibleDaysArray.map(day => (
             <li key={format(day, 'ddMMyyyy')}>

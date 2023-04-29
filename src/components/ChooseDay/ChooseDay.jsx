@@ -1,27 +1,37 @@
 import DayCalendarHead from './DayCalendarHead/DayCalendarHead';
 
-import { ChoosedDayWrapper, TasksColumnsList, TasksColumnsListWrapper } from './ChooseDay.styled';
+import {
+  ChoosedDayWrapper,
+  TasksColumnsList,
+  TasksColumnsListWrapper,
+} from './ChooseDay.styled';
 import TasksColumn from './TasksColumn/TasksColumn';
 
-export default function ChoosedDay() {
-
+export default function ChoosedDay({
+  currentDate,
+  activeDate,
+  toggleModal,
+  changeActiveDay,
+}) {
   return (
     <>
       <ChoosedDayWrapper>
-        <DayCalendarHead />
+        <DayCalendarHead
+          currentDate={currentDate}
+          activeDate={activeDate}
+          changeActiveDay={changeActiveDay}
+        />
         <TasksColumnsListWrapper>
           <TasksColumnsList>
-            <TasksColumn />
-            <TasksColumn />
-            <TasksColumn />
+            <TasksColumn toggleModal={toggleModal} />
+            <TasksColumn toggleModal={toggleModal} />
+            <TasksColumn toggleModal={toggleModal} />
           </TasksColumnsList>
         </TasksColumnsListWrapper>
-        
       </ChoosedDayWrapper>
     </>
   );
 }
-
 
 // 1. Компонент рендериться на розширеному маршруті сторінки /calendar/day/:currentDay
 // 2. Компонент підписаний на колекцію завдань з глобального стейту

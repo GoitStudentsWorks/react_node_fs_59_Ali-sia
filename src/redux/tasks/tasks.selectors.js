@@ -1,4 +1,4 @@
 export const getTasks = state => state.tasks.tasks;
-export const geIsTasksLoading = state => state.isTasksLoading;
+export const getIsTasksLoading = state => state.tasks.isTasksLoading;
 export const getError = state => state.tasks.error;
-export const getRecievedPeriods = state => state.tasks.periods;
+export const getSavedPeriods = state => state.tasks.savedPeriods;

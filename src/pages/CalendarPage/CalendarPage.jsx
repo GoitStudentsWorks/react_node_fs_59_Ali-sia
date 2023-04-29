@@ -1,23 +1,34 @@
 import { Wrapper } from './CalendarPage.styled';
 import CalendarToolbar from 'components/CalendarToolbar/CalendarToolbar';
-import { useEffect, useState } from 'react';
-import { addDays, addMonths, setDefaultOptions } from 'date-fns';
+import { useCallback, useEffect, useState } from 'react';
+import {
+  addDays,
+  addMonths,
+  setDefaultOptions,
+  startOfMonth,
+  startOfWeek,
+} from 'date-fns';
 import TaskModal from 'components/TaskModal/TaskModal';
-import { Outlet, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useAuth } from 'hooks';
 import { fetchTasks } from 'redux/tasks/tasks.operations';
 import { useDispatch } from 'react-redux';
+import ChoosedMonth from 'components/ChoosedMonth/ChoosedMonth';
+import ChoosedDay from 'components/ChooseDay/ChooseDay';
+import { useTasks } from 'hooks/useTasks';
+import { toast } from 'react-hot-toast';
 
 export default function CalendarPage() {
   setDefaultOptions({ weekStartsOn: 1 }); //for date-fns, to start count weeks from monday
   const dispatch = useDispatch();
+  const location = useLocation();
   const currentDate = new Date();
   const [activeDate, setActiveDate] = useState(currentDate);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isLoggedIn } = useAuth();
-  const location = useLocation();
+  const { savedPeriod } = useTasks();
 
-  const isDayPage = location?.pathname.includes('day');
+  const isDayPage = location.pathname.includes('day');
 
   const changeActiveDay = (value, day) => {
     if (day) {
@@ -34,27 +45,52 @@ export default function CalendarPage() {
     setIsModalOpen(prev => !prev);
   };
 
-  // const startDayForFetch = Number(format(startOfMonth(activeDate), 'T'));
-  // const endDayForFetch = Number(format(endOfMonth(activeDate), 'T'));
-  ///////////////// const startDateForFetch = format(startOfMonth(activeDate), 'T');
-  ///////////////// const endDateForFetch = format(endOfMonth(activeDate), 'T');
-  // const aa = '1690837200000';
-  // console.log('endDayForFetch', endDayForFetch);
-  // const difff = startDateForFetch === aa;
-  /////////////// console.log('startDateForFetch', startDateForFetch);
-  /////////////// console.log('endDateForFetch', endDateForFetch);
-  // console.log('tasks', tasks);
+  const getPeriod = useCallback(
+    activeDate => {
+      const filterDateFrom = startOfWeek(
+        startOfMonth(activeDate)
+      ).toISOString();
 
-  // const day = new Date(+startDateForFetch);
+      if (savedPeriod.includes(filterDateFrom)) {
+        return false;
+      }
+
+      const amoutDaysForFetch = 41;
+      return {
+        filterDateFrom: startOfWeek(startOfMonth(activeDate)),
+        filterDateTo: addDays(
+          startOfWeek(startOfMonth(activeDate)),
+          amoutDaysForFetch
+        ),
+      };
+    },
+    [savedPeriod]
+  );
 
   useEffect(() => {
     if (!isLoggedIn) {
       return;
     }
-    dispatch(fetchTasks());
-  }, [dispatch, isLoggedIn]);
+    const controller = new AbortController();
+    const signal = controller.signal;
+    const period = getPeriod(activeDate);
+    if (!period) {
+      return;
+    }
 
-  // console.log('REDNDER CALENDAR PAGE');
+    dispatch(fetchTasks({ period, signal }))
+      .unwrap()
+      .catch(e => {
+        if (e !== 'canceled') {
+          toast.error(`Unable to load tasks`, e);
+        }
+      });
+
+    return () => {
+      controller.abort();
+    };
+  }, [dispatch, isLoggedIn, activeDate, getPeriod]);
+
   return (
     <Wrapper>
       <CalendarToolbar
@@ -64,37 +100,21 @@ export default function CalendarPage() {
       />
 
       {isDayPage ? (
-        <Outlet
-          context={{
-            currentDate,
-            activeDate,
-            toggleModal,
-            changeActiveDay,
-          }}
+        <ChoosedDay
+          currentDate={currentDate}
+          activeDate={activeDate}
+          toggleModal={toggleModal}
+          changeActiveDay={changeActiveDay}
         />
       ) : (
-        <Outlet
-          context={{
-            currentDate,
-            activeDate,
-            toggleModal,
-            changeActiveDay,
-          }}
+        <ChoosedMonth
+          currentDate={currentDate}
+          activeDate={activeDate}
+          toggleModal={toggleModal}
+          changeActiveDay={changeActiveDay}
         />
       )}
       {isModalOpen && <TaskModal onClose={toggleModal} />}
     </Wrapper>
   );
 }
-
-// 1. Компонент рендериться на маршрут /calendar.
-// 2. При першому вході на сторінку компонент виконує переадресацію на розширений маршрут /calendar/month/:currentDate для відображення календяря місяця
-// 2. Сторінка повинна відображатись відповідно до макету на 3х розширеннях(375, 768, 1440)
-// 3. На сторінці знаходиться модуль CalendarToolbar - з яким користувач може обрати тип періоду, та його інтервал
-// 4. На сторінці відображаеться один з модулів періоду дат календаря:
-//  - ChoosedMonth - дозволяє подивитись всі задачі на місяць, перейти на сторінку одного дня ChoosedDay.
-//  - ChoosedDay - дозволяє створювати задачі та розділити ці задачі  на групи по ступеню їх виконання.
-// 5. При новому відвідуванні додатку та першому вході на сторінку відображаеться модуль ChoosedMonth з розкладкою комірок з датами поточного місяця.
-// 6. На сторінці повинен здійснюватись запит за завданнями, якщо вони відсутні в глобальному стейті
-// 7. Успіх - дані записуються у відповідний стейт
-// 8. Помилка - користувачу показується відповідне пуш-повідомлення
