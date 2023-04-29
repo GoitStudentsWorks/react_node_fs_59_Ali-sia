@@ -4,7 +4,7 @@ import React from 'react';
 import Modal from '../Modal/Modal';
 import TaskForm from '../TaskForm/TaskForm';
 
-function TaskModal({ task, onClose }) {
+function TaskModal({ task, onClose, isModalOpen }) {
   const handleSubmit = newData => {
     // Get the Redux dispatch function
     // const dispatch = useDispatch();
@@ -26,7 +26,7 @@ function TaskModal({ task, onClose }) {
   };
 
   return (
-    <Modal onClose={handleClose}>
+    <Modal onClose={handleClose} isModalOpen={isModalOpen}>
       <TaskForm task={task} onSubmit={handleSubmit} onClose={handleClose} />
     </Modal>
   );

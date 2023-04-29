@@ -12,7 +12,13 @@ const ModalWrapper = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 
-  z-index: 1;
+  overflow: hidden;
+  visibility: ${({ isModalOpen }) => (isModalOpen ? 'visible' : 'hidden')};
+  opacity: ${({ isModalOpen }) => (isModalOpen ? '1' : '0')};
+
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  z-index: 100;
 `;
 
 const ModalContainer = styled.div`
