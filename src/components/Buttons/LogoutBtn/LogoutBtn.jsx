@@ -6,6 +6,7 @@ import { logOut } from '../../../redux/auth/auth.operations';
 
 import { StyledButton } from './LogoutBtn.styled';
 import logoutIcon from './logoutIcon.svg';
+import { resetTasksState } from 'redux/tasks/tasks.slice';
 
 export const LogoutBtn = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export const LogoutBtn = () => {
   const handleLogOut = async () => {
     try {
       await dispatch(logOut()).unwrap();
+      dispatch(resetTasksState());
       console.log('Logout successful');
 
       // navigate.push('/login');

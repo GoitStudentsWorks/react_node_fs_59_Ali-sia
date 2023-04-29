@@ -20,7 +20,7 @@ const handleClick = ({ currentTarget }) => {
   currentTarget.style.pointerEvents = 'none';
   currentTarget.blur();
 
-  document.querySelector('#sideBar').style.display = 'flex';
+  document.querySelector('#sideBar').style.display = 'block';
 };
 
 const Header = () => {

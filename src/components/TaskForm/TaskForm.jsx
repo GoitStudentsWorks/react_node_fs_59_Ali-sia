@@ -78,7 +78,9 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
 
       <TimeContainer>
         <InnerContainer>
-          <Label htmlFor="start">Start</Label>
+          <Label htmlFor="start" theme={currentTheme}>
+            Start
+          </Label>
           <TimeInput
             type="text"
             id="start"
@@ -92,7 +94,9 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
           />
         </InnerContainer>
         <InnerContainer>
-          <Label htmlFor="end">End</Label>
+          <Label htmlFor="end" theme={currentTheme}>
+            End
+          </Label>
           <TimeInput
             type="text"
             id="end"

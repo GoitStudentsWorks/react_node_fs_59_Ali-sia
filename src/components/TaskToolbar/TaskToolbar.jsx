@@ -1,8 +1,8 @@
-import React, { useState, useSelector } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import { selectTheme } from 'redux/auth/auth.selectors';
 import TaskModal from '../TaskModal/TaskModal';
 // import { createTask, updateTask, deleteTask, updateTaskColumn } from '../redux/tasksSlice';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import {
   Toolbar,
@@ -15,51 +15,51 @@ import {
   MoveTaskIconBase,
 } from './TaskToolbar.styled';
 
-const theme = createTheme({
-  components: {
-    MuiMenuItem: {
-      styleOverrides: {
-        root: {
-          minHeight: 'unset',
-        },
-      },
-    },
-  },
-}); // to rewrite MUI styles
-
 const TaskToolbar = ({ task }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [showMenu, setShowMenu] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const menuRef = useRef(null);
 
   const currentTheme = useSelector(selectTheme);
 
-  const handleMoveTask = newColumn => {
-    setAnchorEl(null);
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setShowMenu(false);
+      }
+    };
+
+    const handleEscapeKey = event => {
+      if (event.key === 'Escape') {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscapeKey);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, []);
+
+  const handleMoveTask = column => {
+    setShowMenu(!showMenu);
     // Get the Redux dispatch function
     // const dispatch = useDispatch();
-
-    //we're updating tasks column
-    //dispatch(updateTaskColumn(task, newColumn)); or smth like that
   };
 
   const handleEdit = () => {
     setOpenModal(!openModal);
   };
 
-  const handleDelete = () => {
-    // Get the Redux dispatch function
-    // const dispatch = useDispatch();
-    //we're deleting task
-    //dispatch(deleteTask(task.id));
+  const handleDelete = () => {};
+
+  const handleToggleMenu = () => {
+    setShowMenu(!showMenu);
   };
 
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleCloseContext = () => {
-    setAnchorEl(null);
-  };
   const handleCloseModal = () => {
     setOpenModal(!openModal);
   };
@@ -69,27 +69,22 @@ const TaskToolbar = ({ task }) => {
 
   return (
     <Toolbar>
-      <Button onClick={handleClick}>
-        <MoveTaskIconBase theme={currentTheme} />
+      <Button onClick={handleToggleMenu}>
+        <MoveTaskIconBase theme={currentTheme} open={showMenu} />
       </Button>
-      <ThemeProvider theme={theme}>
-        <ContextMenu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleCloseContext}
-          theme={currentTheme}
-        >
-          {otherColumns.map(column => (
-            <ContextMenuItem
-              key={column}
-              onClick={() => handleMoveTask(column)}
-            >
-              {column}
-              <MoveTaskIcon theme={currentTheme} />
-            </ContextMenuItem>
-          ))}
-        </ContextMenu>
-      </ThemeProvider>
+      <ContextMenu
+        ref={menuRef}
+        open={showMenu}
+        onClose={handleToggleMenu}
+        theme={currentTheme}
+      >
+        {otherColumns.map(column => (
+          <ContextMenuItem key={column} onClick={() => handleMoveTask(column)}>
+            {column}
+            <MoveTaskIcon theme={currentTheme} />
+          </ContextMenuItem>
+        ))}
+      </ContextMenu>
       <Button onClick={handleEdit}>
         <EditTaskIcon theme={currentTheme} />
       </Button>

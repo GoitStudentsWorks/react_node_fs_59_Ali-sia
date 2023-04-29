@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import goose from './goose.png';
 import goose2x from './goose@2x.png';
 
-export const LoaderWrapper = styled.div`
-  height: 100vh;
-  width: 100vw;
-
-  position: fixed;
+export const LoaderCalendarWrapper = styled.div`
+  position: absolute;
   top: 0;
   left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 15%;
 
   background: radial-gradient(#3e85f3, #e3f3ff);
 
@@ -18,8 +18,8 @@ export const LoaderWrapper = styled.div`
   z-index: 1000;
 `;
 
-export const RockinGoose = styled.div`
-  width: 25vw;
+export const RockinGooseCalendar = styled.div`
+  width: 10vw;
   height: 25vh;
   background-image: url(${goose});
   background-size: contain;
