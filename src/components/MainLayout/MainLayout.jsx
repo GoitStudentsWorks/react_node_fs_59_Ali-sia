@@ -6,7 +6,6 @@ import Header from '../Header/Header';
 import SideBar from '../SideBar/SideBar';
 import Loader from 'components/Loader/Loader';
 
-
 import {
   StyledMain,
   WrapperMain,
@@ -41,7 +40,6 @@ const MainLayout = () => {
           </Suspense>
         </WrapperMainContent>
       </WrapperMain>
-      <Toaster position="top-right" reverseOrder={false} />
     </StyledMain>
   );
 };
