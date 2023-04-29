@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 // import { useNavigate } from 'react-router-dom';
 
+import Modal from 'components/Modal/Modal';
+
 import { logOut } from '../../../redux/auth/auth.operations';
 
-import { StyledButton } from './LogoutBtn.styled';
+import { StyledButton, ButtonsWrapper, StyledP } from './LogoutBtn.styled';
 import logoutIcon from './logoutIcon.svg';
 import { resetTasksState } from 'redux/tasks/tasks.slice';
 
@@ -12,7 +14,19 @@ export const LogoutBtn = () => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
-  const handleLogOut = async () => {
+  const [ isModalOpen, setIsModalOpen ] = useState(false);
+
+  const ModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const ModalClose = event => {
+    event.stopPropagation();
+    setIsModalOpen(false);
+  };
+
+  const handleLogOut = async (event) => {
+    event.stopPropagation();
     try {
       await dispatch(logOut()).unwrap();
       dispatch(resetTasksState());
@@ -25,9 +39,18 @@ export const LogoutBtn = () => {
   };
 
   return (
-    <StyledButton type="submit" onClick={handleLogOut}>
-      <span>Log Out </span>
-      <img src={logoutIcon} alt="[->"></img>
-    </StyledButton>
+    <>
+      <StyledButton type="submit" onClick={ModalOpen}>
+        <span>Log Out </span>
+        <img src={logoutIcon} alt="[->"></img>
+      </StyledButton>
+      { isModalOpen && <Modal onClose={ModalClose}>
+        <StyledP>Are you sure you want to log out?</StyledP>
+        <ButtonsWrapper>
+          <StyledButton type='button' onClick={handleLogOut}>Yes</StyledButton>
+          <StyledButton type='button' onClick={ModalClose}>No</StyledButton>
+        </ButtonsWrapper>
+      </Modal>}
+    </>
   );
 };
