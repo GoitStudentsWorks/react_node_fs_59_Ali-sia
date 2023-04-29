@@ -40,8 +40,10 @@ export const HeaderStyled = styled.header`
       `
         min-width: 1151px;
         max-width: 1151px;
+        height: 132px;
         padding-bottom: 32px;
-    `
+    )};
+`
     )};
 `;
 
