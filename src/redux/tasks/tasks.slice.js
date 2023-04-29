@@ -1,54 +1,75 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addContact, deleteContact } from './tasks.operations';
+import { fetchTasks, addTask, deleteTask, editTask } from './tasks.operations';
 
 const handlePending = state => {
-  state.isLoading = true;
+  state.isTasksLoading = true;
 };
 
-const handleRejected = (state, action) => {
-  state.isLoading = false;
-  state.error = action.payload;
+const handleRejected = (state, { error }) => {
+  state.isTasksLoading = false;
+  state.error = error;
+};
+
+const handleFulfiled = state => {
+  state.isTasksLoading = false;
+  state.error = null;
 };
 
 export const tasksInitState = {
-  items: [],
-  isLoading: false,
+  tasks: [],
+  savedPeriods: [],
+  isTasksLoading: false,
   error: null,
 };
 
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState: tasksInitState,
+  reducers: {
+    resetTasksState() {
+      return tasksInitState;
+    },
+  },
   extraReducers: builder => {
     builder
-      // fetchContacts
-      .addCase(fetchContacts.pending, handlePending)
-      .addCase(fetchContacts.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = null;
-        state.items = payload;
+      .addCase(fetchTasks.pending, handlePending)
+      .addCase(fetchTasks.rejected, handleRejected)
+      .addCase(fetchTasks.fulfilled, (state, { payload }) => {
+        handleFulfiled(state);
+        state.tasks = [...state.tasks, ...payload.result];
+        state.savedPeriods.push(payload.start);
       })
-      .addCase(fetchContacts.rejected, handleRejected)
-      // addContact
-      .addCase(addContact.pending, handlePending)
-      .addCase(addContact.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = null;
+      .addCase(addTask.pending, handlePending)
+      .addCase(addTask.rejected, handleRejected)
+      .addCase(addTask.fulfilled, (state, { payload }) => {
+        handleFulfiled(state);
         state.items.push(payload);
       })
-      .addCase(addContact.rejected, handleRejected)
-      //deleteContact
-      .addCase(deleteContact.pending, handlePending)
-      .addCase(deleteContact.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = null;
-        const index = state.items.findIndex(
-          contact => contact.id === payload.id
-        );
-        state.items.splice(index, 1);
+      .addCase(deleteTask.pending, handlePending)
+      .addCase(deleteTask.rejected, handleRejected)
+      .addCase(deleteTask.fulfilled, (state, { payload }) => {
+        handleFulfiled(state);
+        state.tasks = state.tasks.filter(task => task.id !== payload);
       })
-      .addCase(deleteContact.rejected, handleRejected);
+      .addCase(editTask.pending, handlePending)
+      .addCase(editTask.rejected, handleRejected)
+      .addCase(editTask.fulfilled, (state, { payload }) => {
+        handleFulfiled(state);
+        state.tasks = state.tasks.map(task => {
+          if (task.id === payload.id) {
+            task.name = payload.name;
+            task.number = payload.number;
+            //
+            // Додати і інші поля для редагування таски
+            //
+            //
+            //
+          }
+          return task;
+        });
+      });
   },
 });
 
 export const tasksReducer = tasksSlice.reducer;
+export const { resetTasksState } = tasksSlice.actions;

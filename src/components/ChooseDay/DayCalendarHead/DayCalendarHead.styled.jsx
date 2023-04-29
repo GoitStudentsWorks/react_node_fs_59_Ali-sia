@@ -91,13 +91,12 @@ export const DayNumber = styled(Link)`
       : p.theme.colors.bgcSecondaryTheme};
 
   &:hover {
-    outline: ${p =>
-      `${p.theme.borders.medium} ${p.theme.colors.calendarDayNumbers}`};
+    outline: ${p => `${p.theme.borders.medium} ${p.theme.colors.primary}`};
   }
 
   ${p =>
     p.isselectedday === 'true' &&
-    `outline: ${p.theme.borders.normal} ${p.theme.colors.calendarDayNumbers}`};
+    `outline: ${p.theme.borders.normal} ${p.theme.colors.primary}`};
 
   ${greaterThan(
     'tablet',

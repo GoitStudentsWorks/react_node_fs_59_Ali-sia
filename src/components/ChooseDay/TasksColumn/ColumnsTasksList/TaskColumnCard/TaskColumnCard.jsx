@@ -1,11 +1,6 @@
 export default function TaskColumnCard() {
-    return (
-        <div>
-            
-        </div>
-    )
+  return <div></div>;
 }
-
 
 // 1. Компонент отримує в пропсах дані необхідні для створення картки.
 // 2. Компонент підписаний на url аватару юзера

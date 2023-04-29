@@ -7,8 +7,8 @@ export const Wrapper = styled.div`
   flex-direction: column;
   flex-grow: 1;
   gap: 24px;
-  max-width: 375px;
-  padding: 0 20px 52px;
+  max-width: 336px;
+  padding: 0 0 52px;
 
   font: inherit;
 
@@ -16,9 +16,9 @@ export const Wrapper = styled.div`
     'tablet',
     `
    
-    max-width: 768px;
+    max-width: 704px;
     height: 1032px;
-    padding 0 32px 42px;
+    padding 0 0 42px;
     gap: 32x;
 `
   )}
