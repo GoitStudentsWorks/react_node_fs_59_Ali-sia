@@ -1,11 +1,9 @@
 import { Outlet } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
 import { Suspense, useEffect } from 'react';
 
 import Header from '../Header/Header';
 import SideBar from '../SideBar/SideBar';
 import Loader from 'components/Loader/Loader';
-
 
 import {
   StyledMain,
@@ -41,7 +39,6 @@ const MainLayout = () => {
           </Suspense>
         </WrapperMainContent>
       </WrapperMain>
-      <Toaster position="top-right" reverseOrder={false} />
     </StyledMain>
   );
 };
