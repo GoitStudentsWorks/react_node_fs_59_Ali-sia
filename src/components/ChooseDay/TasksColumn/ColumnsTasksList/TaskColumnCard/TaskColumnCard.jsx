@@ -1,3 +1,4 @@
+
 import React from 'react';
 import TaskToolbar from 'components/TaskToolbar/TaskToolbar';
 import {
@@ -52,6 +53,7 @@ export const TaskColumnCard = ({ task, avatarUrl }) => {
     </CardContainer>
   );
 };
+
 
 // 1. Компонент отримує в пропсах дані необхідні для створення картки.
 // 2. Компонент підписаний на url аватару юзера

@@ -12,10 +12,12 @@ import {
   DaysWrapper,
   MobileDayName,
 } from './DayCalendarHead.styled';
-import { useOutletContext } from 'react-router-dom';
 
-export default function DayCalendarHead() {
-  const { currentDate, activeDate, changeActiveDay } = useOutletContext();
+export default function DayCalendarHead({
+  currentDate,
+  activeDate,
+  changeActiveDay,
+}) {
   const daysArray = eachDayOfInterval({
     start: startOfWeek(activeDate),
     end: endOfWeek(activeDate),

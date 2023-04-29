@@ -1,7 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from 'hooks';
 
-
 /**
  * - If the route is public gives acess to login or register page
  */
