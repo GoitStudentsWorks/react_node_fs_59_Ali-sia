@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from 'redux/auth/auth.operations';
 import { selectIsLoggedIn, selectUser } from 'redux/auth/auth.selectors';
 import { parseISO } from 'date-fns';
+import * as Yup from 'yup';
+import toast from 'react-hot-toast';
 
 import {
   StyledForm,
@@ -18,6 +20,7 @@ import {
   LabelName,
   Input,
   StyledDatePicker,
+  StyledCalendar,
   Button,
 } from './UserForm.styled';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -37,6 +40,35 @@ export const UserForm = () => {
     avatarURL: '',
   });
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+
+  const schema = Yup.object().shape({
+    avatarFile: Yup.mixed().test(
+      'fileType',
+      'Invalid file type. Allowed .jpeg or .png',
+      value => {
+        if (!value) return true;
+        return ['image/jpeg', 'image/png'].includes(value.type);
+      }
+    ),
+    name: Yup.string()
+      .max(16, 'The name must be 16 characters or less.')
+      .required('Required'),
+    email: Yup.string().email('Invalid email address').required('Required'),
+    birthday: Yup.string()
+      .nullable()
+      .transform(v => (v === '' ? null : v)),
+    phone: Yup.string()
+      .matches(
+        /^\+380\d{9}$/,
+        'The phone number must contain "+380" and 9 digits.'
+      )
+      .nullable()
+      .transform(v => (v === '' ? null : v)),
+    telegram: Yup.string()
+      .max(16, 'The telegram must be 16 characters or less')
+      .nullable()
+      .transform(v => (v === '' ? null : v)),
+  });
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -74,6 +106,13 @@ export const UserForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
+    try {
+      await schema.validate(values);
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+
     const { name, birthday, email, phone, telegram, avatarFile } = values;
 
     const formData = new FormData();
@@ -86,9 +125,15 @@ export const UserForm = () => {
       formData.append('avatarFile', avatarFile);
     }
 
-    dispatch(updateUser(formData));
-
-    setIsSubmitDisabled(true);
+    dispatch(updateUser(formData))
+      .unwrap()
+      .then(res => {
+        toast.success('Your profile has been changed successfully.');
+        setIsSubmitDisabled(true);
+      })
+      .catch(error => {
+        toast.error(error.message);
+      });
   };
 
   useEffect(() => {
@@ -137,14 +182,15 @@ export const UserForm = () => {
           </Label>
           <Label>
             <LabelName>Birthday</LabelName>
-            <StyledDatePicker
-              name="birthday"
-              placeholderText={new Date().toLocaleDateString()}
-              selected={values.birthday}
-              value={values.birthday}
-              onChange={handleDateChange}
-              calendarClassName="goose"
-            />
+            <StyledCalendar>
+              <StyledDatePicker
+                name="birthday"
+                placeholderText={new Date().toLocaleDateString()}
+                selected={values.birthday}
+                value={values.birthday}
+                onChange={handleDateChange}
+              />
+            </StyledCalendar>
           </Label>
           <Label>
             <LabelName>Email</LabelName>
