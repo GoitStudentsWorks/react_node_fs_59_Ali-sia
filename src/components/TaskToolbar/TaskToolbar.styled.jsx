@@ -1,6 +1,4 @@
 import THEME_CONTEXT from 'context/ThemeContext';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import styled from 'styled-components';
 
 import { ReactComponent as EditIcon } from './edit-icon.svg';
@@ -8,6 +6,7 @@ import { ReactComponent as DeleteIcon } from './delete-icon.svg';
 import { ReactComponent as MoveIcon } from './move-icon.svg';
 
 const Toolbar = styled.div`
+  position: relative;
   width: 100%;
   display: flex;
   align-items: start;
@@ -23,100 +22,70 @@ const Button = styled.button`
   border-width: 0;
 `;
 
-const ContextMenu = styled(props => (
-  <Menu
-    {...props}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'left',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'left',
-    }}
-    PaperProps={{
-      ...props.PaperProps,
-      style: {
-        ...props.PaperProps?.style,
-        borderRadius: '8px',
-      },
-      classes: {
-        ...props.PaperProps?.classes,
-        list: 'MuiMenu-list',
-        item: 'MuiMenuItem',
-      },
-    }}
-  />
-))`
-  .MuiMenu-list {
-    background-color: ${({ theme }) =>
-      theme === THEME_CONTEXT.LIGHT ? '#ffffff' : '#171820'};
+const ContextMenu = styled.div`
+  position: absolute;
+  z-index: 50;
+  padding: 14px;
 
-    color: ${({ theme }) =>
-      theme === THEME_CONTEXT.LIGHT ? '#616161' : '#ffffff'};
+  background-color: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT ? '#ffffff' : '#171820'};
+  color: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT ? '#616161' : '#ffffff'};
+  border-radius: 8px;
+  box-shadow: 0px 4px 16px rgba(17, 17, 17, 0.1);
 
-    @media (max-width: 767px) {
-      & {
-        padding: 14px;
-      }
-    }
+  opacity: ${({ open }) => (open ? 1 : 0)};
+  visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 
-    @media (min-width: 768px) {
-      & {
-        padding: 20px 24px;
-      }
-    }
+  @media (min-width: 768px) {
+    padding: 20px 24px;
   }
 
-  .MuiMenuItem:not(:last-child) {
-    margin-bottom: 14px;
-  }
+  top: 150%;
+  left: 0;
 `;
 
-const ContextMenuItem = styled(MenuItem)`
-  && {
-    padding: 0;
-    display: flex;
+const ContextMenuItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  cursor: pointer;
+
+  span {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500px;
-    font-size: 12px;
-    line-height: 14px;
-
-    span {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      svg {
-        margin-left: 8px;
-      }
-    }
-
-    &:hover {
-      background-color: transparent;
-      color: #3e85f3;
-      transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-
-      span svg path {
-        stroke: #3e85f3;
-        transition: stroke 0.2s ease-in-out;
-      }
-    }
-
-    @media (min-width: 768px) {
-      & {
-        font-size: 14px;
-        line-height: 18px;
-      }
+    svg {
+      margin-left: 8px;
     }
   }
 
   &:not(:last-child) {
     margin-bottom: 14px;
+  }
+
+  &:hover {
+    background-color: transparent;
+    color: #3e85f3;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+    span svg path {
+      stroke: #3e85f3;
+      transition: stroke 0.2s ease-in-out;
+    }
+  }
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+    line-height: 18px;
   }
 `;
 
@@ -175,8 +144,8 @@ const IconWrapper = styled.div`
   width: 14px;
   height: 14px;
 
-  color: ${({ theme }) =>
-    theme === THEME_CONTEXT.LIGHT ? '#111111' : '#ffffff'};
+  color: ${({ theme, open }) =>
+    open ? '#3e85f3' : theme === THEME_CONTEXT.LIGHT ? '#111111' : '#ffffff'};
 
   &:hover {
     svg path {
@@ -207,9 +176,9 @@ const DeleteTaskIcon = ({ theme }) => {
   );
 };
 
-const MoveTaskIconBase = ({ theme }) => {
+const MoveTaskIconBase = ({ theme, open }) => {
   return (
-    <IconWrapper theme={theme}>
+    <IconWrapper theme={theme} open={open}>
       <MoveIcon />
     </IconWrapper>
   );
