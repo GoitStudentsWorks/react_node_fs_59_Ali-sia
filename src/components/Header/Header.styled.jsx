@@ -43,6 +43,8 @@ export const HeaderStyled = styled.header`
         height: 132px;
         padding-bottom: 32px;
     )};
+`
+    )};
 `;
 
 export const ButtonStyled = styled.button`
