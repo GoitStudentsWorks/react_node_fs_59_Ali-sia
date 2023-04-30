@@ -1,3 +1,4 @@
+import { greaterThan } from 'helpers/breakpoints.styled';
 import styled from 'styled-components';
 
 export const TasksListContainer = styled.div`
@@ -6,10 +7,25 @@ export const TasksListContainer = styled.div`
 
   max-height: 80vh;
   overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;
+
+  ${greaterThan(
+    'tablet',
+    `
+    padding-right: 7px;
+`
+  )}
 
   /* scrollbar width and height */
   ::-webkit-scrollbar {
     width: 6px;
+    ${greaterThan(
+    'tablet',
+    `
+    width: 8px;
+`
+  )}
   }
 
   /* background of the scrollbar*/
@@ -24,9 +40,17 @@ export const TasksListContainer = styled.div`
 
     background-color: rgba(231, 229, 229, 1);
     border-radius: 5px;
+    ${greaterThan(
+    'tablet',
+    `
+    width: 8px;
+`
+  )}
   }
 
   ::-webkit-scrollbar-thumb:hover {
     background-color: #888;
   }
+
+  
 `;
