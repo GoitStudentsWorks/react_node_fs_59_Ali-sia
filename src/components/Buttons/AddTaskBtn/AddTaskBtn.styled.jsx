@@ -1,9 +1,18 @@
 import styled from 'styled-components';
+import { greaterThan } from 'helpers/breakpoints.styled';
+
 
 export const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 12px;
+  ${greaterThan(
+    'tablet',
+    `
+   margin-right: 15px;
+`
+  )}
 
   padding: ${p => p.theme.space[4]}px;
 
@@ -23,4 +32,5 @@ export const StyledButton = styled.button`
   img {
     margin-right: ${p => p.theme.space[4] - 1}px;
   }
+
 `;

@@ -24,7 +24,7 @@ export const TasksColumnsListWrapper = styled.div`
 export const TasksColumnsList = styled.div`
   display: flex;
   gap: 22px;
-  margin-bottom: ${p => p.theme.space[4]}px;
+  /* margin-bottom: ${p => p.theme.space[4]}px; */
   width: fit-content;
     ${greaterThan(
     'tablet',
@@ -35,7 +35,7 @@ export const TasksColumnsList = styled.div`
   ${greaterThan(
     'laptop',
     `
-  gap: 19px;
+  gap: 27px;
 `
   )}
 `;

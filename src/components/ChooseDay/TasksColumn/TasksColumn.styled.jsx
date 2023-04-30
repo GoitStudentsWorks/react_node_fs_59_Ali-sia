@@ -5,7 +5,7 @@ export const TaskColumnsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 25px 18px 20px 18px;
+  padding: 25px 6px 20px 18px;
 
   min-height: 155px;
   width: 336px;
@@ -25,14 +25,8 @@ export const TaskColumnsWrapper = styled.div`
     `
    min-height: 165px;
    width: 344px;
+   padding: 27px 8px 20px 20px;
 `
   )}
-  ${greaterThan(
-    'laptop',
-    `
-  width: 328px;
-  min-height: 165px;
-`
-)}
 `;
 
