@@ -19,7 +19,6 @@ export const fetchColumns = createAsyncThunk(
         try {
             setAuthHeader(persistedToken);
             const { data } = await privateApi.get('/api/columns');
-            console.log('data from fetchColumns: ', data.data.result);
             return data.data.result;
         } catch (e) {
             return rejectWithValue(e.message);
@@ -42,7 +41,6 @@ export const addColumn = createAsyncThunk(
             setAuthHeader(persistedToken);
             
             const { data } = await privateApi.post('/api/columns', { id, title, number });
-            console.log('data from addColumn: ', data);
             
             return data;
         } catch (e) {
@@ -68,7 +66,6 @@ export const deleteColumn = createAsyncThunk(
             setAuthHeader(persistedToken);
             
             const { data } = await privateApi.delete(`/api/columns/${columnId}`);
-            console.log('data from deleteColumn: ', data);
             
             return data;
         } catch (e) {
