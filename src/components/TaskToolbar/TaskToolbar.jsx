@@ -62,7 +62,6 @@ const TaskToolbar = ({ task, columns }) => {
   const handleDelete = id => {
     dispatch(deleteTask(id))
       .unwrap()
-      .then(() => toast.success(`Task deleted!`))
       .catch(e => {
         toast.error(`Unable to change category task`);
       });
