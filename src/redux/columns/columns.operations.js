@@ -7,11 +7,6 @@ import { setAuthHeader, privateApi } from 'services/http';
 axios.defaults.baseURL = 'https://goose-track-backend-8txo.onrender.com';
 // axios.defaults.baseURL = 'http://localhost:4000';
 
-/*
- * POST @ /users/login
- * body: { email, password }
- */
-
 export const fetchColumns = createAsyncThunk(
     'columns/fetchAll',
     async (_, { getState, rejectWithValue }) => {
@@ -31,7 +26,7 @@ export const fetchColumns = createAsyncThunk(
     }
 );
 
-export const addContact = createAsyncThunk(
+export const addColumn = createAsyncThunk(
     'columns/addColumn',
     async (currentColumn, { getState, rejectWithValue }) => {
         try {
