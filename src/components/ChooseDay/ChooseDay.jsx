@@ -1,11 +1,12 @@
 import DayCalendarHead from './DayCalendarHead/DayCalendarHead';
+import TasksColumn from './TasksColumn/TasksColumn';
+
 
 import {
   ChoosedDayWrapper,
   TasksColumnsList,
   TasksColumnsListWrapper,
 } from './ChooseDay.styled';
-import TasksColumn from './TasksColumn/TasksColumn';
 import { endOfDay, getTime, parseJSON, startOfDay } from 'date-fns';
 import { useTasks } from 'hooks/useTasks';
 
