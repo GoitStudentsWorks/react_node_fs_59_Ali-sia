@@ -24,7 +24,7 @@ export const TasksColumnsList = styled.div`
   display: flex;
   gap: 22px;
   margin-bottom: ${p => p.theme.space[4]}px;
-  width: 100%;
+  width: fit-content;
   ${greaterThan(
     'tablet',
     `
