@@ -14,7 +14,7 @@ export default function ChoosedDay({
   activeDate,
   changeActiveDay,
 }) {
-  const { tasks } = useTasks(); //isTasksLoading
+  const { tasks } = useTasks();
   const columnData = [
     { title: 'To do', number: 1 },
     { title: 'In progress', number: 2 },
@@ -39,7 +39,6 @@ export default function ChoosedDay({
   let tasksForColumn = [];
   function getTasksForColumn(columnTitle) {
     tasksForColumn = dayTasks?.filter(task => task.category === columnTitle);
-    // console.log('FILTER TASKS FO COLUMN-------->>>', dayTasks);
   }
 
   return (
@@ -56,7 +55,7 @@ export default function ChoosedDay({
               getTasksForColumn(column.title);
               return (
                 <TasksColumn
-                  key={idx}
+                  key={'taskcolumn' + idx}
                   title={column.title}
                   sortedColumnList={sortedColumnList}
                   tasksForColumn={tasksForColumn}
