@@ -44,13 +44,13 @@ export const LogoutBtn = () => {
         <span>Log Out </span>
         <img src={logoutIcon} alt="[->"></img>
       </StyledButton>
-      { isModalOpen && <Modal onClose={ModalClose}>
+      <Modal onClose={ModalClose} isModalOpen={isModalOpen}>
         <StyledP>Are you sure you want to log out?</StyledP>
         <ButtonsWrapper>
           <StyledButton type='button' onClick={handleLogOut}>Yes</StyledButton>
           <StyledButton type='button' onClick={ModalClose}>No</StyledButton>
         </ButtonsWrapper>
-      </Modal>}
+      </Modal>
     </>
   );
 };
