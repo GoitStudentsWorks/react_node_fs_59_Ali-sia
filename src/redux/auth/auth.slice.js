@@ -16,6 +16,7 @@ const initialState = {
     phone: null,
     telegram: null,
     avatarURL: null,
+    createdAt: null,
   },
   token: null,
   isLoggedIn: false,

@@ -30,3 +30,21 @@ export const StyledButton = styled.button`
     }
   }
 `;
+
+export const StyledP = styled.p`
+  display: flex;
+  justify-content: center;
+
+  padding: 40px;
+
+  color: ${props => props.theme.colors.textHeaderTheme};
+`
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  
+  padding: 40px;
+  margin: 0 auto;
+`;

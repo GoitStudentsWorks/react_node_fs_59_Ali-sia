@@ -42,6 +42,14 @@ export const UserMenuButton = styled.button`
 
 export const UserMenuButtonAvatar = styled.img`
     object-fit: cover;
+    width: 32px;
+    height: 32px;
+
+    
+    ${() => greaterThan("tablet", `
+        width: 44px;
+        height: 44px;
+    `)};
 `
 
 export const UserMenuButtonChar = styled.p`
