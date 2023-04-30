@@ -12,7 +12,7 @@ const columnSlice = createSlice({
         // state.columns.isLoading = true;
       })
       .addCase(fetchColumns.fulfilled, (state, { payload }) => {
-        state.columns = payload;
+        state.columns.columns = payload;
         // state.columns.isLoading = false;
         state.columns.error = null;
       })

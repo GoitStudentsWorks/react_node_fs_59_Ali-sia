@@ -26,6 +26,7 @@ export default function ChoosedDay({
   console.log('columns: ', columns);
   const { tasks } = useTasks(); //isTasksLoading
   const columnData = [...columns];
+  console.log('columnData: ', columnData);
     // [
     
     // { title: 'To do', number: 1 },
@@ -34,6 +35,10 @@ export default function ChoosedDay({
     // { title: 'Notes', number: 5 },
     // { title: 'Other', number: 4 },
   // ];
+
+  // useEffect(() => {
+  //       dispatch(fetchColumns());
+  //   }, [dispatch]);
 
   const getSortedColumnList = columnData =>
     columnData.sort((a, b) => a.number - b.number);
