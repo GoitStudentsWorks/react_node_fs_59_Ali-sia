@@ -36,7 +36,6 @@ export const deleteTask = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const { data } = await privateApi.delete(`/api/tasks/${id}`);
-      console.log('RESSS', data.data.result._id);
       return data.data.result._id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
