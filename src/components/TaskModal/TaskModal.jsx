@@ -6,12 +6,10 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { editTask } from 'redux/tasks/tasks.operations';
 
-
 function TaskModal({ task, onClose, isModalOpen }) {
-  const handleSubmit = newData => {
-    // Get the Redux dispatch function
-    // const dispatch = useDispatch();
-
+  // const handleSubmit = newData => {
+  // Get the Redux dispatch function
+  const dispatch = useDispatch();
 
   const handleSubmit = newData => {
     if (!task) {
