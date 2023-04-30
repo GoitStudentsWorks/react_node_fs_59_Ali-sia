@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectTheme } from 'redux/auth/auth.selectors';
 import TaskModal from '../TaskModal/TaskModal';
-// import { createTask, updateTask, deleteTask, updateTaskColumn } from '../redux/tasksSlice';
+import { deleteTask, editTask } from 'redux/tasks/tasks.operations';
+import { toast } from 'react-hot-toast';
 
 import {
   Toolbar,
@@ -19,7 +20,7 @@ const TaskToolbar = ({ task, columns }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const menuRef = useRef(null);
-
+  const dispatch = useDispatch();
   const currentTheme = useSelector(selectTheme);
 
   useEffect(() => {
@@ -44,17 +45,28 @@ const TaskToolbar = ({ task, columns }) => {
     };
   }, []);
 
-  const handleMoveTask = column => {
+  const handleMoveTask = (category, task) => {
+    const newTask = { ...task, category: category };
+    dispatch(editTask(newTask))
+      .unwrap()
+      .catch(e => {
+        toast.error(`Unable to change category task`);
+      });
     setShowMenu(!showMenu);
-    // Get the Redux dispatch function
-    // const dispatch = useDispatch();
   };
 
   const handleEdit = () => {
     setOpenModal(!openModal);
   };
 
-  const handleDelete = () => {};
+  const handleDelete = id => {
+    dispatch(deleteTask(id))
+      .unwrap()
+      .then(() => toast.success(`Task deleted!`))
+      .catch(e => {
+        toast.error(`Unable to change category task`);
+      });
+  };
 
   const handleToggleMenu = () => {
     setShowMenu(!showMenu);
@@ -81,7 +93,7 @@ const TaskToolbar = ({ task, columns }) => {
         {otherColumns.map(column => (
           <ContextMenuItem
             key={'menu' + column.title}
-            onClick={() => handleMoveTask(column)}
+            onClick={() => handleMoveTask(column.title, task)}
           >
             {column.title}
             <MoveTaskIcon theme={currentTheme} />
@@ -91,10 +103,9 @@ const TaskToolbar = ({ task, columns }) => {
       <Button onClick={handleEdit}>
         <EditTaskIcon theme={currentTheme} />
       </Button>
-      <Button onClick={handleDelete}>
+      <Button onClick={() => handleDelete(task._id)}>
         <DeleteTaskIcon theme={currentTheme} />
       </Button>
-      {/* {openModal && <TaskModal task={task} onClose={handleCloseModal} />} */}
       <TaskModal
         task={task}
         onClose={handleCloseModal}
