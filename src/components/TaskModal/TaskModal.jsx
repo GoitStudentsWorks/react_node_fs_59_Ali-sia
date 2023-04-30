@@ -6,8 +6,12 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { editTask } from 'redux/tasks/tasks.operations';
 
-function TaskModal({ task, onClose }) {
-  const dispatch = useDispatch();
+
+function TaskModal({ task, onClose, isModalOpen }) {
+  const handleSubmit = newData => {
+    // Get the Redux dispatch function
+    // const dispatch = useDispatch();
+
 
   const handleSubmit = newData => {
     if (!task) {
@@ -33,7 +37,7 @@ function TaskModal({ task, onClose }) {
   };
 
   return (
-    <Modal onClose={handleClose}>
+    <Modal onClose={handleClose} isModalOpen={isModalOpen}>
       <TaskForm task={task} onSubmit={handleSubmit} onClose={handleClose} />
     </Modal>
   );

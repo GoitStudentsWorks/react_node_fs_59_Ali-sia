@@ -91,7 +91,12 @@ const TaskToolbar = ({ task }) => {
       <Button onClick={handleDelete}>
         <DeleteTaskIcon theme={currentTheme} />
       </Button>
-      {openModal && <TaskModal task={task} onClose={handleCloseModal} />}
+      {/* {openModal && <TaskModal task={task} onClose={handleCloseModal} />} */}
+      <TaskModal
+        task={task}
+        onClose={handleCloseModal}
+        isModalOpen={openModal}
+      />
     </Toolbar>
   );
 };

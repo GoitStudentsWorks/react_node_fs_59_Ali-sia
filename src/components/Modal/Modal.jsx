@@ -5,7 +5,7 @@ import { selectTheme } from 'redux/auth/auth.selectors';
 
 import { ModalWrapper, ModalContainer, CloseButton } from './Modal.styled';
 
-const Modal = ({ children, onClose }) => {
+const Modal = ({ children, onClose, isModalOpen }) => {
   const modalRoot = document.getElementById('modal-root');
 
   const currentTheme = useSelector(selectTheme);
@@ -32,7 +32,9 @@ const Modal = ({ children, onClose }) => {
   };
 
   const modalContent = (
-    <ModalWrapper onClick={e => handleClickOutside(e)}>
+
+    <ModalWrapper onClick={handleClickOutside} isModalOpen={isModalOpen}>
+
       <ModalContainer theme={currentTheme}>
         <CloseButton onClick={onClose} theme={currentTheme}>
           <svg
