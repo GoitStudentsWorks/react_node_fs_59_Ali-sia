@@ -4,7 +4,6 @@ import MonthCalendarHead from 'components/MonthCalendarHead/MonthCalendarHead';
 export default function ChoosedMonth({
   currentDate,
   activeDate,
-  toggleModal,
   changeActiveDay,
 }) {
   return (
@@ -13,7 +12,6 @@ export default function ChoosedMonth({
       <CalendarTable
         currentDate={currentDate}
         activeDate={activeDate}
-        toggleModal={toggleModal}
         changeActiveDay={changeActiveDay}
       />
     </div>
