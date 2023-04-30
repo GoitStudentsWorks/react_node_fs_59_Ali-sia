@@ -1,12 +1,17 @@
+import React, { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchColumns } from "redux/columns/columns.operations";
+import { selectColumns, selectError } from "redux/columns/columns.selectors";
+
 import DayCalendarHead from './DayCalendarHead/DayCalendarHead';
 import TasksColumn from './TasksColumn/TasksColumn';
-
 
 import {
   ChoosedDayWrapper,
   TasksColumnsList,
   TasksColumnsListWrapper,
 } from './ChooseDay.styled';
+
 import { endOfDay, getTime, parseJSON, startOfDay } from 'date-fns';
 import { useTasks } from 'hooks/useTasks';
 
@@ -15,14 +20,20 @@ export default function ChoosedDay({
   activeDate,
   changeActiveDay,
 }) {
+  const dispatch = useDispatch();
+  const error = useSelector(selectError);
+  const columns = useSelector(selectColumns);
+  console.log('columns: ', columns);
   const { tasks } = useTasks(); //isTasksLoading
-  const columnData = [
-    { title: 'To do', number: 1 },
-    { title: 'In progress', number: 2 },
-    { title: 'Done', number: 3 },
+  const columnData = [...columns];
+    // [
+    
+    // { title: 'To do', number: 1 },
+    // { title: 'In progress', number: 2 },
+    // { title: 'Done', number: 3 },
     // { title: 'Notes', number: 5 },
     // { title: 'Other', number: 4 },
-  ];
+  // ];
 
   const getSortedColumnList = columnData =>
     columnData.sort((a, b) => a.number - b.number);
