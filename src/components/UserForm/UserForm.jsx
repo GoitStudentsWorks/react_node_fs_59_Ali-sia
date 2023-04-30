@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from 'redux/auth/auth.operations';
 import { selectIsLoggedIn, selectUser } from 'redux/auth/auth.selectors';
-import { parseISO } from 'date-fns';
+import { isWeekend, addDays, parseISO, format } from 'date-fns';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 
@@ -69,6 +69,10 @@ export const UserForm = () => {
       .nullable()
       .transform(v => (v === '' ? null : v)),
   });
+
+  const highlightWeekends = date => {
+    return isWeekend(date);
+  };
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -185,10 +189,16 @@ export const UserForm = () => {
             <StyledCalendar>
               <StyledDatePicker
                 name="birthday"
-                placeholderText={new Date().toLocaleDateString()}
+                placeholderText={format(new Date(), 'dd/MM/yyyy')}
                 selected={values.birthday}
                 value={values.birthday}
                 onChange={handleDateChange}
+                dateFormat="dd/MM/yyyy"
+                showMonthDropdown
+                showYearDropdown
+                calendarStartDay={1}
+                maxDate={addDays(new Date(), 0)}
+                highlightDates={highlightWeekends}
               />
             </StyledCalendar>
           </Label>
