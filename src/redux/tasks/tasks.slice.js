@@ -49,7 +49,7 @@ const tasksSlice = createSlice({
       .addCase(deleteTask.rejected, handleRejected)
       .addCase(deleteTask.fulfilled, (state, { payload }) => {
         handleFulfiled(state);
-        state.tasks = state.tasks.filter(task => task.id !== payload);
+        state.tasks = state.tasks.filter(task => task._id !== payload);
       })
       .addCase(editTask.pending, handlePending)
       .addCase(editTask.rejected, handleRejected)

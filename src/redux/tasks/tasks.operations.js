@@ -36,7 +36,7 @@ export const deleteTask = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const { data } = await privateApi.delete(`/api/tasks/${id}`);
-      return data.id;
+      return data.data.result._id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -47,7 +47,7 @@ export const deleteTask = createAsyncThunk(
 export const editTask = createAsyncThunk(
   'tasks/editTask',
   async (data, thunkAPI) => {
-    const { _id, start, end, priority, title, date } = data;
+    const { _id, start, end, priority, title, category, date } = data;
     try {
       const { data } = await privateApi.patch(`/api/tasks/${_id}`, {
         start,
@@ -55,6 +55,7 @@ export const editTask = createAsyncThunk(
         priority,
         title,
         date,
+        category,
       });
       return data.data.result;
     } catch (error) {
