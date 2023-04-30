@@ -13,7 +13,7 @@ import storage from 'redux-persist/lib/storage';
 
 import { tasksReducer } from './tasks/tasks.slice';
 import { authReducer } from './auth/auth.slice';
-// import { columnsReducer } from './columns/columns.slice';
+import { columnsReducer } from './columns/columns.slice';
 
 // Persisting token field from auth slice to local storage
 const authPersistConfig = {
@@ -26,7 +26,7 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     tasks: tasksReducer,
-    // columns: columnsReducer,
+    columns: columnsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
