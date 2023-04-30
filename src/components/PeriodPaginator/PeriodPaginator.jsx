@@ -1,4 +1,11 @@
-import { addDays, addMonths, format, isSameDay } from 'date-fns';
+import {
+  addDays,
+  addMonths,
+  format,
+  parseISO,
+  startOfDay,
+  startOfMonth,
+} from 'date-fns';
 import {
   ButtonsWrapper,
   DateField,
@@ -7,14 +14,14 @@ import {
   StyledHiChevronRight,
   StyledLink,
 } from './PeriodPaginator.styled';
+import { useAuth } from 'hooks';
 
 export default function PeriodPaginator({
   activeDate,
   changeActiveDay,
   isDayPage,
 }) {
-  // const {createdAt} = useAuth()
-  const day = new Date();
+  const { user } = useAuth();
   const date = isDayPage
     ? format(activeDate, 'dd MMMM yyyy')
     : format(activeDate, 'MMMM yyyy');
@@ -26,7 +33,10 @@ export default function PeriodPaginator({
   const dateForLinkPrev = isDayPage
     ? format(addDays(activeDate, -1), 'ddMMMMyyyy')
     : format(addMonths(activeDate, -1), 'MMMMyyyy');
-  const isCreatedAtDay = isSameDay(activeDate, day);
+
+  const isCreatedAtDay = isDayPage
+    ? startOfDay(parseISO(user.createdAt)) >= startOfDay(activeDate)
+    : parseISO(user.createdAt) >= startOfMonth(activeDate);
 
   return (
     <PeriodPaginationWrapper>
