@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { selectToken } from 'redux/auth/auth.selectors';
+import { selectIsLoggedIn } from 'redux/auth/auth.selectors';
 
 import { setAuthHeader, privateApi } from 'services/http';
 
@@ -11,14 +11,13 @@ export const fetchColumns = createAsyncThunk(
     'columns/fetchAll',
     async (_, { getState, rejectWithValue }) => {
         try {
-            const stateToken = selectToken(getState()).token;
-
-            if (!stateToken) {
+            const isLoggedIn = selectIsLoggedIn();
+            if (!isLoggedIn) {
                 return rejectWithValue();
             }
 
-            setAuthHeader.set(stateToken);
             const { data } = await privateApi.get('/api/columns');
+            console.log('data from fetchColumns: ', data);
             return data;
         } catch (e) {
             return rejectWithValue(e.message);
@@ -31,12 +30,13 @@ export const addColumn = createAsyncThunk(
     async (currentColumn, { getState, rejectWithValue }) => {
         try {
             const { id, title, number } = currentColumn;
-            const stateToken = selectToken(getState()).token;
-            if (!stateToken) {
+            const isLoggedIn = selectIsLoggedIn();
+            if (!isLoggedIn) {
                 return rejectWithValue();
             }
-            setAuthHeader.set(stateToken);
             const { data } = await privateApi.post('/api/columns', { id, title, number });
+            console.log('data from addColumn: ', data);
+            
             return data;
         } catch (e) {
             return rejectWithValue(e.message);
@@ -48,12 +48,13 @@ export const deleteColumn = createAsyncThunk(
     'contacts/deleteColumn',
     async (columnId, { getState, rejectWithValue }) => {
         try {
-            const stateToken = selectToken(getState()).token;
-            if (!stateToken) {
+            const isLoggedIn = selectIsLoggedIn();
+            if (!isLoggedIn) {
                 return rejectWithValue();
             }
-            setAuthHeader.set(stateToken);
             const { data } = await privateApi.delete(`/api/columns/${columnId}`);
+            console.log('data from deleteColumn: ', data);
+            
             return data;
         } catch (e) {
             return rejectWithValue(e.message);
