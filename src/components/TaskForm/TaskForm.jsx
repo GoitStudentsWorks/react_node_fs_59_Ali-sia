@@ -21,19 +21,22 @@ import {
   RadioIconChecked,
 } from './TaskForm.styled';
 
-const TaskForm = ({ task, onSubmit, onClose }) => {
+const TaskForm = ({ task, onSubmit, onClose, activeDate }) => {
   const [formData, setFormData] = useState({
     title: task?.title || '',
-    start: task?.start || '',
-    end: task?.end || '',
+    start: task?.start || '10:00',
+    end: task?.end || '14:00',
     priority: task?.priority || 'low',
+    date: task?.date || activeDate,
   });
-
+  console.log('formData ', formData.start);
   const currentTheme = useSelector(selectTheme);
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(formData);
+    const newTask = { ...task, ...formData };
+    console.log('SUBMIT ', newTask);
+    onSubmit(newTask);
     onClose();
   };
 
@@ -82,14 +85,13 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
             Start
           </Label>
           <TimeInput
-            type="text"
+            type="time"
             id="start"
             name="start"
             theme={currentTheme}
             value={formData.start}
             onChange={handleChange}
-            placeholder="9:00"
-            mask={[/\d/, /\d/, ':', /\d/, /\d/]}
+            mask={[/[0-2]/, /\d/, ':', /[0-5]/, /\d/]}
             required
           />
         </InnerContainer>
@@ -98,14 +100,13 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
             End
           </Label>
           <TimeInput
-            type="text"
+            type="time"
             id="end"
             name="end"
             theme={currentTheme}
             value={formData.end}
             onChange={handleChange}
-            placeholder="14:00"
-            mask={[/\d/, /\d/, ':', /\d/, /\d/]}
+            mask={[/[0-2]/, /\d/, ':', /[0-5]/, /\d/]}
             required
           />
         </InnerContainer>

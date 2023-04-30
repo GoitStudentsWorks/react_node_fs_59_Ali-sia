@@ -2,13 +2,20 @@ import styled from 'styled-components';
 // import { greaterThan } from 'helpers/breakpoints.styled';
 // import { Link } from 'react-router-dom';
 import { ReactComponent as RoundBtnIcon } from './RoundBtnIcon.svg';
+import { greaterThan } from 'helpers/breakpoints.styled';
 
 
 export const ColumnHeadBarWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  margin-right: 12px;
+  ${greaterThan(
+    'tablet',
+    `
+   margin-right: 15px;
+`
+  )}
 `;
  
 export const ColumnHeadBarTitle = styled.h2`

@@ -1,4 +1,4 @@
-import { addDays, addMonths, format } from 'date-fns';
+import { addDays, addMonths, format, isSameDay } from 'date-fns';
 import {
   ButtonsWrapper,
   DateField,
@@ -13,6 +13,8 @@ export default function PeriodPaginator({
   changeActiveDay,
   isDayPage,
 }) {
+  // const {createdAt} = useAuth()
+  const day = new Date();
   const date = isDayPage
     ? format(activeDate, 'dd MMMM yyyy')
     : format(activeDate, 'MMMM yyyy');
@@ -24,6 +26,7 @@ export default function PeriodPaginator({
   const dateForLinkPrev = isDayPage
     ? format(addDays(activeDate, -1), 'ddMMMMyyyy')
     : format(addMonths(activeDate, -1), 'MMMMyyyy');
+  const isCreatedAtDay = isSameDay(activeDate, day);
 
   return (
     <PeriodPaginationWrapper>
@@ -34,6 +37,7 @@ export default function PeriodPaginator({
         {isDayPage ? (
           <>
             <StyledLink
+              disabled={isCreatedAtDay}
               onClick={() => changeActiveDay(-1)}
               to={`/calendar/day/${dateForLinkPrev}`}
             >
@@ -49,6 +53,7 @@ export default function PeriodPaginator({
         ) : (
           <>
             <StyledLink
+              disabled={isCreatedAtDay}
               to={`/calendar/month/${dateForLinkPrev}`}
               onClick={() => changeActiveDay(-1)}
             >
@@ -66,12 +71,3 @@ export default function PeriodPaginator({
     </PeriodPaginationWrapper>
   );
 }
-
-// 1. Компонент отримує в пропсах дату, тип періоду та метод для зміни дати.
-// 2. Компонент рендерить розмітку з відформатованим періодом дат в залежності від обраних дати та періоду та блок з кнопками для зміни дати, що збільшують або зменшують період до наступного/попереднього відповідно.
-// 3. Клік по кнопках змінює дату в залежності від типу періоду:
-//  - month - залишає число поточного дня місяця змінюючи місяць/рік попереднього/наступного місяця
-//  - day - змінює дату поточного дня  на дату попереднього/наступного дня
-// 4. Компонент форматує період:
-//  - month - MARCH 2023
-//  - day - 6 MARCH 2023
