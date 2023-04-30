@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { editTask } from 'redux/tasks/tasks.operations';
 
-function TaskModal({ task, onClose, isModalOpen }) {
+function TaskModal({ task, category, onClose, isModalOpen }) {
   const dispatch = useDispatch();
 
   const handleSubmit = newData => {
@@ -34,7 +34,12 @@ function TaskModal({ task, onClose, isModalOpen }) {
 
   return (
     <Modal onClose={handleClose} isModalOpen={isModalOpen}>
-      <TaskForm task={task} onSubmit={handleSubmit} onClose={handleClose} />
+      <TaskForm
+        task={task}
+        category={category}
+        onSubmit={handleSubmit}
+        onClose={handleClose}
+      />
     </Modal>
   );
 }
