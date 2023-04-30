@@ -59,6 +59,7 @@ const authSlice = createSlice({
       })
       .addCase(refreshUser.rejected, (state, { payload }) => {
         state.isRefreshing = false;
+        state.token = null;
       })
       .addCase(toggleTheme, (state, action) => {
         state.theme =
