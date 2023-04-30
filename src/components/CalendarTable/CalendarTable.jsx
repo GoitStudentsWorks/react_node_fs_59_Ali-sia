@@ -18,7 +18,6 @@ import {
   CurrentDayWrapper,
   CalendarWrapper,
   TasksWrapper,
-  TaskWrapper,
   MoreTasksLabel,
   CellLink,
   TableList,
@@ -26,10 +25,10 @@ import {
 import { useAuth } from 'hooks';
 import { useTasks } from 'hooks/useTasks';
 import LoaderForCalendar from 'components/Loader/LoaderForCalendar';
+import { TaskContainer } from './TaskContainer/TaskContainer';
 
 export default function CalendarTable({
   changeActiveDay,
-  toggleModal,
   activeDate,
   currentDate,
 }) {
@@ -61,19 +60,19 @@ export default function CalendarTable({
   };
 
   const handleClick = (e, item) => {
+    e.stopPropagation();
     const { nodeName } = e.target;
 
     if (nodeName === 'BUTTON') {
       e.preventDefault();
-      toggleModal();
       return;
     }
     changeActiveDay(0, item);
   };
+
   return (
     <div>
       <CalendarWrapper>
-        {/* <LoaderForCalendar /> */}
         {(!isLoggedIn || isTasksLoading) && <LoaderForCalendar />}
         <TableList>
           {visibleDaysArray.map(day => (
@@ -96,9 +95,7 @@ export default function CalendarTable({
                   <TasksWrapper>
                     {getDayTasks(day)}
                     {filteredTasks.slice(0, 2).map(task => (
-                      <TaskWrapper key={task._id} priority={task.priority}>
-                        {task.title}
-                      </TaskWrapper>
+                      <TaskContainer key={task._id} task={task} />
                     ))}
                     {filteredTasks.length > 2 && (
                       <MoreTasksLabel>

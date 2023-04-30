@@ -1,20 +1,27 @@
 import React from 'react';
-
 // import { createTask, updateTask } from 'redux/tasks/tasks.operations';
 import Modal from '../Modal/Modal';
 import TaskForm from '../TaskForm/TaskForm';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-hot-toast';
+import { editTask } from 'redux/tasks/tasks.operations';
 
 function TaskModal({ task, onClose }) {
-  const handleSubmit = newData => {
-    // Get the Redux dispatch function
-    // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
+  const handleSubmit = newData => {
     if (!task) {
       // If there's no initial data, we're creating a new task
       //   dispatch(createTask(newData));
     } else {
-      // If there is initial data, we're updating an existing task
-      //   dispatch(updateTask(newData));
+      console.log('DATA FOR DISPTACH', newData);
+      dispatch(editTask(newData))
+        .unwrap()
+        .then(() => toast.success(`Updated!`))
+        .catch(e => {
+          toast.error(`Unable to update task`);
+          console.log('ERRROOORRR', e);
+        });
     }
 
     // Close the modal

@@ -8,7 +8,6 @@ import {
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
-import TaskModal from 'components/TaskModal/TaskModal';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from 'hooks';
 import { fetchTasks } from 'redux/tasks/tasks.operations';
@@ -24,7 +23,6 @@ export default function CalendarPage() {
   const location = useLocation();
   const currentDate = new Date();
   const [activeDate, setActiveDate] = useState(currentDate);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { isLoggedIn } = useAuth();
   const { savedPeriod } = useTasks();
 
@@ -39,10 +37,6 @@ export default function CalendarPage() {
     } else {
       setActiveDate(addMonths(activeDate, value));
     }
-  };
-
-  const toggleModal = () => {
-    setIsModalOpen(prev => !prev);
   };
 
   const getPeriod = useCallback(
@@ -82,7 +76,7 @@ export default function CalendarPage() {
       .unwrap()
       .catch(e => {
         if (e !== 'canceled') {
-          toast.error(`Unable to load tasks`, e);
+          toast.error(`Unable to load tasks`);
         }
       });
 
@@ -103,18 +97,15 @@ export default function CalendarPage() {
         <ChoosedDay
           currentDate={currentDate}
           activeDate={activeDate}
-          toggleModal={toggleModal}
           changeActiveDay={changeActiveDay}
         />
       ) : (
         <ChoosedMonth
           currentDate={currentDate}
           activeDate={activeDate}
-          toggleModal={toggleModal}
           changeActiveDay={changeActiveDay}
         />
       )}
-      {isModalOpen && <TaskModal onClose={toggleModal} />}
     </Wrapper>
   );
 }

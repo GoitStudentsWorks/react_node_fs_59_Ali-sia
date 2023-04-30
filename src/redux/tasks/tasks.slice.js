@@ -43,7 +43,7 @@ const tasksSlice = createSlice({
       .addCase(addTask.rejected, handleRejected)
       .addCase(addTask.fulfilled, (state, { payload }) => {
         handleFulfiled(state);
-        state.items.push(payload);
+        state.tasks.push(payload);
       })
       .addCase(deleteTask.pending, handlePending)
       .addCase(deleteTask.rejected, handleRejected)
@@ -55,18 +55,8 @@ const tasksSlice = createSlice({
       .addCase(editTask.rejected, handleRejected)
       .addCase(editTask.fulfilled, (state, { payload }) => {
         handleFulfiled(state);
-        state.tasks = state.tasks.map(task => {
-          if (task.id === payload.id) {
-            task.name = payload.name;
-            task.number = payload.number;
-            //
-            // Додати і інші поля для редагування таски
-            //
-            //
-            //
-          }
-          return task;
-        });
+        const index = state.tasks.findIndex(task => task._id === payload._id);
+        state.tasks[index] = payload;
       });
   },
 });

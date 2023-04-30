@@ -78,6 +78,8 @@ export const StyledLink = styled(Link)`
    height: 34px;
 `
   )}
+  // disabled styles
+   ${p => p.disabled && `pointer-events: none; opacity: 0.5;`}
 `;
 export const StyledHiChevronLeft = styled(HiChevronLeft)`
   color: ${p => p.theme.colors.calendarDayNumbers};

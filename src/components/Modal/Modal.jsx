@@ -25,13 +25,14 @@ const Modal = ({ children, onClose }) => {
   }, [onClose]);
 
   const handleClickOutside = event => {
+    event.stopPropagation();
     if (event.target === event.currentTarget) {
       onClose();
     }
   };
 
   const modalContent = (
-    <ModalWrapper onClick={handleClickOutside}>
+    <ModalWrapper onClick={e => handleClickOutside(e)}>
       <ModalContainer theme={currentTheme}>
         <CloseButton onClick={onClose} theme={currentTheme}>
           <svg
