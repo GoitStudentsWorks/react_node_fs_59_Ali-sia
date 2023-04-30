@@ -13,11 +13,10 @@ const ModalWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 
   overflow: hidden;
+  pointer-events: ${({ isModalOpen }) => (isModalOpen ? 'auto' : 'none')};
   visibility: ${({ isModalOpen }) => (isModalOpen ? 'visible' : 'hidden')};
   opacity: ${({ isModalOpen }) => (isModalOpen ? '1' : '0')};
-
   transition: opacity 0.3s ease, visibility 0.3s ease;
-
   z-index: 100;
 `;
 

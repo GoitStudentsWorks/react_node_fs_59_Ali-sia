@@ -29,13 +29,13 @@ const TaskForm = ({ task, onSubmit, onClose, activeDate }) => {
     priority: task?.priority || 'low',
     date: task?.date || activeDate,
   });
-  console.log('formData ', formData.start);
+  // console.log('formData ', formData.start);
   const currentTheme = useSelector(selectTheme);
 
   const handleSubmit = e => {
     e.preventDefault();
     const newTask = { ...task, ...formData };
-    console.log('SUBMIT ', newTask);
+    // console.log('SUBMIT ', newTask);
     onSubmit(newTask);
     onClose();
   };

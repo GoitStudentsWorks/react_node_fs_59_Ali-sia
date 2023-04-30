@@ -7,8 +7,6 @@ import { toast } from 'react-hot-toast';
 import { editTask } from 'redux/tasks/tasks.operations';
 
 function TaskModal({ task, onClose, isModalOpen }) {
-  // const handleSubmit = newData => {
-  // Get the Redux dispatch function
   const dispatch = useDispatch();
 
   const handleSubmit = newData => {
@@ -16,13 +14,13 @@ function TaskModal({ task, onClose, isModalOpen }) {
       // If there's no initial data, we're creating a new task
       //   dispatch(createTask(newData));
     } else {
-      console.log('DATA FOR DISPTACH', newData);
+      // console.log('DATA FOR DISPTACH', newData);
       dispatch(editTask(newData))
         .unwrap()
         .then(() => toast.success(`Updated!`))
         .catch(e => {
           toast.error(`Unable to update task`);
-          console.log('ERRROOORRR', e);
+          // console.log('ERRROOORRR', e);
         });
     }
 

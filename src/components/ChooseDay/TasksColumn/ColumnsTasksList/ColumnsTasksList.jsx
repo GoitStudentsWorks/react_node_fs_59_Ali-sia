@@ -1,25 +1,16 @@
 import { TaskColumnCard } from './TaskColumnCard/TaskColumnCard';
-import {TasksListContainer} from './ColumnsTasksList.styled'
+import { TasksListContainer } from './ColumnsTasksList.styled';
 
-export default function ColumnTasksList({ tasks }) {
+export default function ColumnTasksList({ tasksForColumn, sortedColumnList }) {
   return (
     <TasksListContainer>
-      {/* TODO: коли в пропси будуть приходити таски, це розкоментувати: */}
-      {/* {tasks.map(task => (
-        <TaskColumnCard key={task.id} task={task} />
-      ))} */}
-
-      {/* TODO: коли в пропси будуть приходити таски, це видалити: */}
-      <TaskColumnCard />
-      <TaskColumnCard />
-      <TaskColumnCard />
-      <TaskColumnCard />
-      <TaskColumnCard />
-      <TaskColumnCard />
-      <TaskColumnCard />
-      <TaskColumnCard />
-      <TaskColumnCard />
-      <TaskColumnCard />
+      {tasksForColumn?.map(task => (
+        <TaskColumnCard
+          key={'task-' + task.id}
+          task={task}
+          sortedColumnList={sortedColumnList}
+        />
+      ))}
     </TasksListContainer>
   );
 }

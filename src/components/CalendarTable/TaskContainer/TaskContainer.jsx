@@ -18,11 +18,18 @@ export const TaskContainer = ({ task, activeDate }) => {
             onClose={handleEditClick}
             task={task}
             activeDate={activeDate}
+            isModalOpen={isEditOpen}
           />
         </StyledTaskContainer>
       ) : (
         <StyledTaskContainer onClick={e => handleEditClick()}>
           <StyledTask priority={task.priority}>{task.title}</StyledTask>
+          <TaskModal
+            onClose={handleEditClick}
+            task={task}
+            activeDate={activeDate}
+            isModalOpen={isEditOpen}
+          />
         </StyledTaskContainer>
       )}
     </>
