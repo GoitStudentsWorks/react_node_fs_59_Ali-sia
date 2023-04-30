@@ -5,10 +5,10 @@ import {
   RoundBtnIconSvg,
 } from './ColumnHeadBar.styled';
 
-export default function ColumnHeadBar({ toggleModal }) {
+export default function ColumnHeadBar({ title, toggleModal }) {
   return (
     <ColumnHeadBarWrapper>
-      <ColumnHeadBarTitle>ToDo</ColumnHeadBarTitle>
+      <ColumnHeadBarTitle>{title}</ColumnHeadBarTitle>
       <StyledRoundButton type="button" onClick={() => toggleModal()}>
         <RoundBtnIconSvg />
         {/* <img src={RoundBtnIconSvg} alt="+"></img> */}

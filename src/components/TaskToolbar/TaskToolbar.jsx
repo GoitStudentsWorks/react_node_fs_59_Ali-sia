@@ -15,7 +15,7 @@ import {
   MoveTaskIconBase,
 } from './TaskToolbar.styled';
 
-const TaskToolbar = ({ task }) => {
+const TaskToolbar = ({ task, columns }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const menuRef = useRef(null);
@@ -64,8 +64,8 @@ const TaskToolbar = ({ task }) => {
     setOpenModal(!openModal);
   };
 
-  const columns = ['To do', 'In progress', 'Done'];
-  const otherColumns = columns.filter(column => column !== task.column);
+  // const columns = ['To do', 'In progress', 'Done'];
+  const otherColumns = columns.filter(column => column.title !== task.category);
 
   return (
     <Toolbar>
@@ -79,8 +79,11 @@ const TaskToolbar = ({ task }) => {
         theme={currentTheme}
       >
         {otherColumns.map(column => (
-          <ContextMenuItem key={column} onClick={() => handleMoveTask(column)}>
-            {column}
+          <ContextMenuItem
+            key={'menu' + column.title}
+            onClick={() => handleMoveTask(column)}
+          >
+            {column.title}
             <MoveTaskIcon theme={currentTheme} />
           </ContextMenuItem>
         ))}

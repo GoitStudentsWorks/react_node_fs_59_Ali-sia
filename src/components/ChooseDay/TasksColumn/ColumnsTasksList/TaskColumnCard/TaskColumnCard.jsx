@@ -1,4 +1,3 @@
-
 import React from 'react';
 import TaskToolbar from 'components/TaskToolbar/TaskToolbar';
 import {
@@ -14,15 +13,13 @@ import {
 } from './TaskColumnCard.styled';
 import userAvatar from './user.jpg';
 
-export const TaskColumnCard = ({ task, avatarUrl }) => {
+export const TaskColumnCard = ({ task, avatarUrl, sortedColumnList }) => {
   //   const { description, priority } = task;
 
   //   TODO: замінити const description і const priority даними з пропсів
-  const description =
-    'А я вам сейчас покажу, звідки приходить цей текст: з ChooseDay -> TasksColumn -> ColumnTasksList -> TaskColumnCard';
-  const priority = 'medium';
-
-  const checkedPriority = priority.toUpperCase();
+  const description = task.description;
+  // 'А я вам сейчас покажу, звідки приходить цей текст: з ChooseDay -> TasksColumn -> ColumnTasksList -> TaskColumnCard';
+  const priority = task.priority;
 
   const getDescription = () => {
     if (description.length <= 26) {
@@ -35,25 +32,20 @@ export const TaskColumnCard = ({ task, avatarUrl }) => {
   return (
     <CardContainer>
       <TaskDescription> {getDescription()} </TaskDescription>
-
       <StatsContainer>
         <ImageContainer>
           <UserAvatar src={userAvatar} alt="U" />
-          {priority === 'LOW' && <LowPriority> {priority} </LowPriority>}
-          {checkedPriority === 'MEDIUM' && (
-            <MediumPriority> {priority} </MediumPriority>
-          )}
-          {priority === 'HIGH' && <HighPriority> {priority} </HighPriority>}
+          {priority === 'low' && <LowPriority>Low</LowPriority>}
+          {priority === 'medium' && <MediumPriority>Medium</MediumPriority>}
+          {priority === 'high' && <HighPriority>High</HighPriority>}
         </ImageContainer>
-
         <ToolbarContainer>
-          <TaskToolbar task={{ column: [] }} />
+          <TaskToolbar task={task} columns={sortedColumnList} />
         </ToolbarContainer>
       </StatsContainer>
     </CardContainer>
   );
 };
-
 
 // 1. Компонент отримує в пропсах дані необхідні для створення картки.
 // 2. Компонент підписаний на url аватару юзера

@@ -6,13 +6,42 @@ import {
   TasksColumnsListWrapper,
 } from './ChooseDay.styled';
 import TasksColumn from './TasksColumn/TasksColumn';
+import { endOfDay, getTime, parseJSON, startOfDay } from 'date-fns';
+import { useTasks } from 'hooks/useTasks';
 
 export default function ChoosedDay({
   currentDate,
   activeDate,
-  toggleModal,
   changeActiveDay,
 }) {
+  const { tasks } = useTasks(); //isTasksLoading
+  const columnData = [
+    { title: 'To do', number: 1 },
+    { title: 'In progress', number: 2 },
+    { title: 'Done', number: 3 },
+    // { title: 'Notes', number: 5 },
+    // { title: 'Other', number: 4 },
+  ];
+
+  const getSortedColumnList = columnData =>
+    columnData.sort((a, b) => a.number - b.number);
+
+  const sortedColumnList = getSortedColumnList(columnData);
+
+  const dayTasks = tasks
+    ?.filter(
+      task =>
+        getTime(parseJSON(task.date)) >= startOfDay(activeDate) &&
+        getTime(parseJSON(task.date)) <= endOfDay(activeDate)
+    )
+    ?.sort((a, b) => a.date - b.date);
+
+  let tasksForColumn = [];
+  function getTasksForColumn(columnTitle) {
+    tasksForColumn = dayTasks?.filter(task => task.category === columnTitle);
+    // console.log('FILTER TASKS FO COLUMN-------->>>', dayTasks);
+  }
+
   return (
     <>
       <ChoosedDayWrapper>
@@ -23,9 +52,17 @@ export default function ChoosedDay({
         />
         <TasksColumnsListWrapper>
           <TasksColumnsList>
-            <TasksColumn toggleModal={toggleModal} />
-            <TasksColumn toggleModal={toggleModal} />
-            <TasksColumn toggleModal={toggleModal} />
+            {sortedColumnList.map((column, idx) => {
+              getTasksForColumn(column.title);
+              return (
+                <TasksColumn
+                  key={idx}
+                  title={column.title}
+                  sortedColumnList={sortedColumnList}
+                  tasksForColumn={tasksForColumn}
+                />
+              );
+            })}
           </TasksColumnsList>
         </TasksColumnsListWrapper>
       </ChoosedDayWrapper>

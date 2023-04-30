@@ -5,7 +5,7 @@ export const TasksListContainer = styled.div`
   /* TODO: виставити padding і margin контейнера, а для цього перевірити стилі батьківського компонента */
   margin-top: 14px;
 
-  max-height: 80vh;
+  max-height: 65vh;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 6px;

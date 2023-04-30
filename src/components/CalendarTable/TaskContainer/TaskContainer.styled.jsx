@@ -17,8 +17,6 @@ const getTasksColor = p => {
 
 export const StyledTaskContainer = styled.div`
   display: flex;
-  /* flex-basis: 44px; */
-  flex-grow: 1;
   flex-direction: column;
   gap: 2px;
 `;

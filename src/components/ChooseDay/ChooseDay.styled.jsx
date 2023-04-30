@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { greaterThan } from 'helpers/breakpoints.styled';
 
 export const ChoosedDayWrapper = styled.div`
-overflow: hidden;
+  overflow: hidden;
 `;
 export const TasksColumnsListWrapper = styled.div`
   overflow-x: scroll;
@@ -19,14 +19,13 @@ export const TasksColumnsListWrapper = styled.div`
   width: 1087px;
 `
   )}
-
 `;
 export const TasksColumnsList = styled.div`
   display: flex;
   gap: 22px;
-  /* margin-bottom: ${p => p.theme.space[4]}px; */
-  width: fit-content;
-    ${greaterThan(
+  margin-bottom: ${p => p.theme.space[4]}px;
+  width: 100%;
+  ${greaterThan(
     'tablet',
     `
    gap: 16px;
@@ -37,6 +36,5 @@ export const TasksColumnsList = styled.div`
     `
   gap: 27px;
 `
-  )}
+  )};
 `;
-
