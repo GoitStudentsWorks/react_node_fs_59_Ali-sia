@@ -3,6 +3,8 @@ import { AuthNav } from 'components/AuthNavigate/AuthNavigate';
 import FeatureList from '../../components/FeatureList/FeatureList';
 import Reviews from '../../components/Reviews/Reviews';
 
+import { Container } from './HomePage.styled';
+
 export const HomePage = () => {
   const [showReviews, setShowReviews] = useState(false);
 
@@ -13,10 +15,11 @@ export const HomePage = () => {
   return (
     <div>
       <AuthNav />
-      <h1>home</h1>
-      <FeatureList />
-      <button onClick={toggleReviews}>Toggle Reviews</button>
-      {showReviews && <Reviews />}
+      <Container>
+        <FeatureList />
+        <button onClick={toggleReviews}>Toggle Reviews</button>
+        {showReviews && <Reviews />}
+      </Container>
     </div>
   );
 };

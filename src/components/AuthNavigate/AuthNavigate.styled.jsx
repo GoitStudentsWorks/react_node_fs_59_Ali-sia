@@ -9,7 +9,7 @@ export const AuthContainer = styled.div`
   align-items: center;
   justify-content: flex-end;
 
-  ${p =>
+  ${props =>
     greaterThan(
       'tablet',
       `
@@ -29,7 +29,7 @@ export const GooseTitle = styled.h1`
   line-height: 48px;
 
   margin-bottom: 32px;
-  ${p =>
+  ${props =>
     greaterThan(
       'tablet',
       `
@@ -50,7 +50,7 @@ export const GooseImg = styled.img`
   width: 142px;
   height: 142px;
 
-  ${p =>
+  ${props =>
     greaterThan(
       'tablet',
       `
@@ -63,7 +63,7 @@ export const GooseImg = styled.img`
 export const LinkContainer = styled.div`
   display: flex;
 
-  ${p =>
+  ${props =>
     lesserThan(
       'tablet',
       `
@@ -77,7 +77,7 @@ export const LinkContainer = styled.div`
      `
     )}
 
-  ${p =>
+  ${props =>
     greaterThan(
       'tablet',
       `
