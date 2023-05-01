@@ -14,10 +14,40 @@ export const List = styled.ul`
             margin-left:auto;
         `
       )}
+    ${props =>
+      greaterThan(
+        'laptop',
+        `
+        margin-left:228px;
+        margin-right:0;
+
+        `
+      )}
+  }
+
+  li:nth-child(2n) {
+    ${props =>
+      greaterThan(
+        'laptop',
+        `
+
+          flex-direction: row-reverse;
+          `
+      )}
   }
 `;
 export const ListItem = styled.li`
   margin-bottom: 64px;
+
+  ${props =>
+    greaterThan(
+      'laptop',
+      `
+      display:flex;
+    //   justify-content: space-around;
+        align-items: center;
+      `
+    )}
 `;
 export const ListDescriptionHolder = styled.div`
   ${props =>
@@ -26,6 +56,14 @@ export const ListDescriptionHolder = styled.div`
       `
         width: 275px
       `
+    )}
+
+  ${props =>
+    greaterThan(
+      'laptop',
+      `
+        margin-right:228px;
+        `
     )}
 `;
 export const ListNumber = styled.h3`
@@ -106,8 +144,9 @@ export const ListDescription = styled.p`
 export const ListImg = styled.img`
   ${props =>
     greaterThan(
-      'tablet',
+      'laptop',
       `
+      max-width:604px
       `
     )}
 `;
