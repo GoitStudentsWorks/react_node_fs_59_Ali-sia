@@ -25,15 +25,15 @@ export default function ChoosedDay({
   changeActiveDay,
 }) {
   const dispatch = useDispatch();
-  const error = useSelector(selectError);
+  // const error = useSelector(selectError);
   const columns = useSelector(selectColumns);
 
   const { tasks } = useTasks();
   const columnData = [...columns];
 
   useEffect(() => {
-    dispatch(fetchColumns())
-    }, [dispatch]);
+    dispatch(fetchColumns());
+  }, [dispatch]);
 
   const getSortedColumnList = columnData =>
     columnData.sort((a, b) => a.number - b.number);
