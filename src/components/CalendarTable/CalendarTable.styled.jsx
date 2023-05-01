@@ -2,33 +2,17 @@ import { between, greaterThan } from 'helpers/breakpoints.styled';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-// const getTasksColor = p => {
-//   const c = p.theme.colors;
-//   switch (p.priority) {
-//     case 'low':
-//       return `color: ${c.primary}; background-color: ${c.taskSecondaryLow};`;
-//     case 'medium':
-//       return `color: ${c.taskMainMedium}; background-color: ${c.taskSecondaryMedium};`;
-//     case 'high':
-//       return `color: ${c.taskMainHigh}; background-color: ${c.taskSecondaryHigh};`;
-//     default:
-//       return `color: ${c.black}; background-color: ${c.secondary};`;
-//   }
-// };
-
 export const CalendarWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 14px;
-
   height: 640px;
 
   ${greaterThan(
     'tablet',
     `
   height: 864px;
-    
 `
   )}
 
@@ -64,14 +48,14 @@ export const CellLink = styled(Link)`
   display: flex;
   gap: 8px;
   flex-direction: column;
-  background-color: ${p => p.theme.colors.bgcSecondaryTheme};
 
+  background-color: ${p => p.theme.colors.bgcSecondaryTheme};
   opacity: ${p => (p.issamemonth === 'false' ? '0.7' : 1)};
 
   &:hover {
     border: ${p =>
       `${p.theme.borders.normal} ${p.theme.colors.taskBorderTheme}`};
-    padding: 13px 3px 3px 3px;
+    box-shadow: ${props => props.theme.shadows.loginBtn};
   }
 
   ${greaterThan(
@@ -133,7 +117,6 @@ export const CurrentDayWrapper = styled(DayWrapper)`
   background-color: ${p => p.theme.colors.primary};
   border-radius: 6px;
   color: ${p => p.theme.colors.white};
-  /* padding-bottom: 1px; */
 
   ${greaterThan(
     'tablet',
@@ -153,7 +136,6 @@ export const TasksWrapper = styled.div`
 
 export const MoreTasksLabel = styled.div`
   margin-top: auto;
-
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;

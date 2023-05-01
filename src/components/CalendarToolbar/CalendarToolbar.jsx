@@ -7,6 +7,7 @@ export default function CalendarToolbar({
   changeActiveDay,
   isDayPage,
   togglePage,
+  currentDate,
 }) {
   return (
     <CalendarToolbarWrapper>
@@ -14,6 +15,7 @@ export default function CalendarToolbar({
         activeDate={activeDate}
         isDayPage={isDayPage}
         changeActiveDay={changeActiveDay}
+        currentDate={currentDate}
       ></PeriodPaginator>
       <PeriodTypeSelect
         activeDate={activeDate}

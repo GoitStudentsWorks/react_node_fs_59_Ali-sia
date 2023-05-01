@@ -47,7 +47,7 @@ export default function CalendarTable({
   const isCurrentDay = day => isSameDay(currentDate, day);
   const getIsSameMonth = day => currentMonth === getMonth(day);
   const getDayNumber = day => format(day, 'd');
-  const dayForLink = format(activeDate, 'ddMMMMyyyy');
+  const getDayForLink = day => format(day, 'ddMMMMyyyy');
 
   let filteredTasks = [];
   const getDayTasks = day => {
@@ -78,7 +78,7 @@ export default function CalendarTable({
           {visibleDaysArray.map(day => (
             <li key={format(day, 'ddMMyyyy')}>
               <CellLink
-                to={`/calendar/day/${dayForLink}`}
+                to={`/calendar/day/${getDayForLink(day)}`}
                 onClick={e => handleClick(e, day)}
                 issamemonth={getIsSameMonth(day).toString()}
               >

@@ -33,7 +33,6 @@ const Modal = ({ children, onClose, isModalOpen }) => {
   }, [onClose, isModalOpen]);
 
   const handleClickOutside = event => {
-    console.log(event);
     event.stopPropagation();
     if (event.target === event.currentTarget) {
       onClose();

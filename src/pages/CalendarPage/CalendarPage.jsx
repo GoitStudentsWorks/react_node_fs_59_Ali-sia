@@ -33,6 +33,9 @@ export default function CalendarPage() {
     if (day) {
       return setActiveDate(day);
     }
+    if (value === 0) {
+      return setActiveDate(currentDate);
+    }
     if (location.pathname.includes('day')) {
       return setActiveDate(addDays(activeDate, value));
     } else {
@@ -86,7 +89,7 @@ export default function CalendarPage() {
     };
   }, [dispatch, isLoggedIn, activeDate, getPeriod]);
 
-  useEffect (() => {
+  useEffect(() => {
     dispatch(setActiveDateStore(JSON.stringify(activeDate)));
   }, [activeDate, dispatch]);
 
@@ -96,6 +99,7 @@ export default function CalendarPage() {
         activeDate={activeDate}
         changeActiveDay={changeActiveDay}
         isDayPage={isDayPage}
+        currentDate={currentDate}
       />
 
       {isDayPage ? (
