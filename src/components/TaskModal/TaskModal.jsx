@@ -14,6 +14,7 @@ function TaskModal({ task, category, onClose, isModalOpen }) {
 
   const handleSubmit = newData => {
     if (!task) {
+      console.log(newData);
       // If there's no initial data, we're creating a new task
       dispatch(addTask({...newData, date: activeDate}))
         .unwrap()
