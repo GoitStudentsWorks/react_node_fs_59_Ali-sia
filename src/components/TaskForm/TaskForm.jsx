@@ -29,15 +29,13 @@ const TaskForm = ({ task, category, onSubmit, onClose, activeDate }) => {
     end: task?.end || '14:00',
     priority: task?.priority || 'low',
     date: task?.date || activeDate,
-    category: task?.category || category || '', // Add category to formData only if it doesn't already exist in task
+    category: task?.category || category || 'To do', // Add category to formData only if it doesn't already exist in task
   });
-  // console.log('formData ', formData.start);
   const currentTheme = useSelector(selectTheme);
 
   const handleSubmit = e => {
     e.preventDefault();
     const newTask = { ...task, ...formData };
-    // console.log('SUBMIT ', newTask);
     onSubmit(newTask);
     onClose();
   };

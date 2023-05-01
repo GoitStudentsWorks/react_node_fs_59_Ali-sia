@@ -45,7 +45,8 @@ export const StyledLink = styled(Link)`
       `${p.theme.borders.normal} ${p.theme.colors.borderDayMonthSelector}`};
   }
   &:hover {
-    scale: 1.05;
+    box-shadow: ${props => props.theme.shadows.loginBtn};
+    scale: 1.07;
   }
 
   ${greaterThan(

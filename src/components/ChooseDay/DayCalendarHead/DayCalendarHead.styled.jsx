@@ -45,7 +45,6 @@ export const DayNameAndNumberWrapper = styled.div`
   gap: 6px;
 `;
 
-//Day Name
 export const DayName = styled.span`
   display: none;
 
@@ -64,7 +63,6 @@ export const MobileDayName = styled.span`
   ${greaterThan('tablet', `display: none;`)}
 `;
 
-//Day Number
 export const DayNumber = styled(Link)`
   padding: 0;
   display: flex;
@@ -92,6 +90,7 @@ export const DayNumber = styled(Link)`
 
   &:hover {
     outline: ${p => `${p.theme.borders.medium} ${p.theme.colors.primary}`};
+    box-shadow: ${props => props.theme.shadows.loginBtn};
   }
 
   ${p =>

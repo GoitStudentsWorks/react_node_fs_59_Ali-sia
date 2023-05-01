@@ -15,7 +15,6 @@ export const Wrapper = styled.div`
   ${greaterThan(
     'tablet',
     `
-   
     max-width: 704px;
     height: 1032px;
     padding 0 0 42px;
@@ -30,7 +29,6 @@ export const Wrapper = styled.div`
     width: 1151px;
     max-width: 1151px;
     padding 0 32px 32px;
-
 `
   )}
 `;

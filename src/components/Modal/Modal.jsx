@@ -16,9 +16,9 @@ const Modal = ({ children, onClose, isModalOpen }) => {
     } else {
       document.body.style.overflow = 'auto';
     }
-    // if (!isModalOpen) {
-    //   return;
-    // }
+    if (!isModalOpen) {
+      return;
+    }
     const handleEscape = event => {
       if (event.key === 'Escape') {
         onClose();
@@ -33,7 +33,6 @@ const Modal = ({ children, onClose, isModalOpen }) => {
   }, [onClose, isModalOpen]);
 
   const handleClickOutside = event => {
-    console.log(event);
     event.stopPropagation();
     if (event.target === event.currentTarget) {
       onClose();

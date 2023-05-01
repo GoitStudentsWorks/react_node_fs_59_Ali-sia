@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 export const PeriodPaginationWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
   justify-content: space-between;
 
   ${greaterThan(
@@ -60,15 +62,16 @@ export const StyledLink = styled(Link)`
   &:first-of-type {
     border-radius: 8px 0px 0px 8px;
   }
-  &:last-of-type {
+  &:nth-of-type(2) {
     border-radius: 0px 8px 8px 0px;
     border-left: none;
   }
-  &:last-of-type:hover {
+  &:nth-of-type(2):hover {
     border-left: ${p =>
       `${p.theme.borders.normal} ${p.theme.colors.taskBorderTheme}`};
   }
   &:hover {
+    box-shadow: ${props => props.theme.shadows.loginBtn};
     scale: 1.05;
   }
 
@@ -86,4 +89,36 @@ export const StyledHiChevronLeft = styled(HiChevronLeft)`
 `;
 export const StyledHiChevronRight = styled(HiChevronRight)`
   color: ${p => p.theme.colors.calendarDayNumbers};
+`;
+
+export const StyledLinkToday = styled(Link)`
+  margin-left: 8px;
+  width: 74px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+
+  font-size: ${p => p.theme.fontSizes.s};
+  font-weight: ${p => p.theme.fontWeights.medium};
+  border-radius: 8px;
+
+  color: ${p => p.theme.colors.calendarDayNumbers};
+  border: ${p => `${p.theme.borders.normal} ${p.theme.colors.taskBorderTheme}`};
+  background-color: ${p => p.theme.colors.bgcSecondaryTheme};
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: ${props => props.theme.shadows.loginBtn};
+    scale: 1.07;
+  }
+
+  ${greaterThan(
+    'tablet',
+    `
+   height: 34px;
+  font-size: 16px;
+`
+  )}
 `;
