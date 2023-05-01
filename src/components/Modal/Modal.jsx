@@ -11,9 +11,14 @@ const Modal = ({ children, onClose, isModalOpen }) => {
   const currentTheme = useSelector(selectTheme);
 
   useEffect(() => {
-    if (!isModalOpen) {
-      return;
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
     }
+    // if (!isModalOpen) {
+    //   return;
+    // }
     const handleEscape = event => {
       if (event.key === 'Escape') {
         onClose();
