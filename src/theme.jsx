@@ -16,11 +16,18 @@ export const theme = {
     input: '1px solid rgba(220, 227, 229, 0.6)',
     container: '1px solid rgba(220, 227, 229, 0.8);',
     avatarTaskCard: '1.8px solid rgba(62, 133, 243, 1);',
+
+    formField: '1px solid rgba(17, 17, 17, 0.15);',
+    activeField: '1px solid rgba(17, 17, 17, 1);',
+    invalidField: '1px solid rgba(231, 74, 59, 1)',
+    validField: '1px solid rgba(60, 188, 129, 1);',
   },
 
   radii: {
     none: '0',
+    small: '4px',
     light: '8px',
+    medium: '12px',
     normal: '16px',
     round: '50%',
   },
@@ -98,6 +105,9 @@ export const theme = {
     btnLogout: 'rgba(62, 133, 243, 1)',
 
     moreTaskLabel: 'grey',
+
+    valid: 'rgba(60, 188, 129, 1);',
+    invalid: 'rgba(231, 74, 59, 1)',
   },
 };
 

@@ -38,7 +38,7 @@ export const TasksListContainer = styled.div`
     width: 6px;
     height: 112px;
 
-    border-radius: 5px;
+    border-radius: ${props => props.theme.radii.medium};
     background-color: ${props => props.theme.colors.scrollbarThumb};
 
     ${greaterThan(

@@ -6,7 +6,7 @@ export const CardContainer = styled.div`
   justify-content: space-between;
   height: 108px;
 
-  margin-bottom: 14px;
+  margin-bottom: ${p => p.theme.space[4]}px;
 
   padding-top: 14px;
   padding-bottom: 18px;
@@ -14,7 +14,7 @@ export const CardContainer = styled.div`
   padding-right: 12px;
 
   border: ${props => props.theme.borders.container};
-  border-radius: 8px;
+  border-radius: ${props => props.theme.radii.light};
 
   background-color: ${props => props.theme.colors.bgcMainTheme};
 `;
@@ -49,16 +49,16 @@ const PriorityIndicator = styled.div`
   align-items: center;
 
   height: 20px;
-  margin-left: 8px;
-  padding: 4px 12px;
+  margin-left: ${p => p.theme.space[3]}px;
+  padding: ${p => p.theme.space[2]}px ${p => p.theme.space[4] - 2}px;
 
-  border-radius: 4px;
+  border-radius: ${props => props.theme.radii.small};
 
   color: ${props => props.theme.colors.bgcMainTheme};
 
-  font-family: 'Inter';
-  font-weight: 600;
-  font-size: 10px;
+  font-family: ${props => props.theme.fonts.main};
+  font-weight: ${props => props.theme.fontWeights.semibold};
+  font-size: ${props => props.theme.fontSizes.xxs};
   cursor: default;
 
   text-transform: capitalize;
