@@ -13,10 +13,10 @@ export const CardContainer = styled.div`
   padding-left: 15px;
   padding-right: 12px;
 
-  border: 1px solid rgba(220, 227, 229, 0.8);
+  border: ${props => props.theme.borders.container};
   border-radius: 8px;
 
-  background-color: rgba(247, 246, 249, 1);
+  background-color: ${props => props.theme.colors.bgcMainTheme};
 `;
 
 export const StatsContainer = styled.div`
@@ -25,10 +25,10 @@ export const StatsContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const TaskDescription = styled.div`
+export const TaskTitle = styled.div`
   height: 16px;
-
   cursor: pointer;
+  color: ${props => props.theme.colors.taskTitle};
 `;
 
 export const ImageContainer = styled.div`
@@ -40,8 +40,8 @@ export const UserAvatar = styled.img`
   width: 32px;
   height: 32px;
 
-  border: 1.8px solid #3e85f3;
-  border-radius: 50%;
+  border: ${props => props.theme.borders.avatarTaskCard};
+  border-radius: ${props => props.theme.radii.round};
 `;
 
 const PriorityIndicator = styled.div`
@@ -54,7 +54,7 @@ const PriorityIndicator = styled.div`
 
   border-radius: 4px;
 
-  color: rgba(247, 246, 249, 1);
+  color: ${props => props.theme.colors.bgcMainTheme};
 
   font-family: 'Inter';
   font-weight: 600;
@@ -65,15 +65,15 @@ const PriorityIndicator = styled.div`
 `;
 
 export const LowPriority = styled(PriorityIndicator)`
-  background-color: rgba(114, 194, 248, 1);
+  background-color: ${props => props.theme.colors.taskMainLow};
 `;
 
 export const MediumPriority = styled(PriorityIndicator)`
-  background-color: rgba(243, 178, 73, 1);
+  background-color: ${props => props.theme.colors.taskMainMedium};
 `;
 
 export const HighPriority = styled(PriorityIndicator)`
-  background-color: rgba(234, 61, 101, 1);
+  background-color: ${props => props.theme.colors.taskMainHigh};
 `;
 
 export const ToolbarContainer = styled.div``;

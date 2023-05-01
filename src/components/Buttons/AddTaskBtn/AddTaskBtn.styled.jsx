@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { greaterThan } from 'helpers/breakpoints.styled';
 
-
 export const StyledButton = styled.button`
   display: flex;
   align-items: center;
@@ -10,8 +9,8 @@ export const StyledButton = styled.button`
   ${greaterThan(
     'tablet',
     `
-   margin-right: 15px;
-`
+  margin-right: 15px;
+  `
   )}
 
   padding: ${p => p.theme.space[4]}px;
@@ -19,7 +18,7 @@ export const StyledButton = styled.button`
   border: ${props => props.theme.borders.addTaskBTN};
   border-radius: ${props => props.theme.radii.normal};
 
-  background-color: ${props => props.theme.colors.btnMain};
+  background-color: ${props => props.theme.colors.addTaskBtn};
   box-shadow: ${props => props.theme.shadows.loginBtn};
 
   cursor: pointer;
@@ -32,5 +31,4 @@ export const StyledButton = styled.button`
   img {
     margin-right: ${p => p.theme.space[4] - 1}px;
   }
-
 `;

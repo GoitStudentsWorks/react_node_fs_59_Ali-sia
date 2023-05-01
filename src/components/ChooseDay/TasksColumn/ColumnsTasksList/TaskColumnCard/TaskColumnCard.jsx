@@ -3,7 +3,7 @@ import TaskToolbar from 'components/TaskToolbar/TaskToolbar';
 import {
   CardContainer,
   StatsContainer,
-  TaskDescription,
+  TaskTitle,
   ImageContainer,
   UserAvatar,
   LowPriority,
@@ -29,7 +29,7 @@ export const TaskColumnCard = ({ task, sortedColumnList }) => {
 
   return (
     <CardContainer>
-      <TaskDescription> {getDescription()} </TaskDescription>
+      <TaskTitle> {getDescription()} </TaskTitle>
       <StatsContainer>
         <ImageContainer>
           <UserAvatar src={userAvatar} alt="U" />
