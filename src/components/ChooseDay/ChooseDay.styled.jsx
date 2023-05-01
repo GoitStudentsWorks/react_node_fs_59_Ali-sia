@@ -5,7 +5,7 @@ export const ChoosedDayWrapper = styled.div`
   overflow: hidden;
 `;
 export const TasksColumnsListWrapper = styled.div`
-  overflow-x: scroll;
+  overflow-x: auto;
   width: 336px;
   ${greaterThan(
     'tablet',
