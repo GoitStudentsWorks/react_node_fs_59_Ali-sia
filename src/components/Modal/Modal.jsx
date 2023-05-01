@@ -16,9 +16,9 @@ const Modal = ({ children, onClose, isModalOpen }) => {
     } else {
       document.body.style.overflow = 'auto';
     }
-    // if (!isModalOpen) {
-    //   return;
-    // }
+    if (!isModalOpen) {
+      return;
+    }
     const handleEscape = event => {
       if (event.key === 'Escape') {
         onClose();
