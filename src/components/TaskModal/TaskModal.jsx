@@ -23,21 +23,17 @@ function TaskModal({ task, category, onClose, isModalOpen }) {
           toast.error(`Failed to add task!`);
         });
     } else {
-      // console.log('DATA FOR DISPTACH', newData);
       dispatch(editTask(newData))
         .unwrap()
         .then(() => toast.success(`Updated!`))
         .catch(e => {
           toast.error(`Unable to update task`);
-          // console.log('ERRROOORRR', e);
         });
     }
-
-    // Close the modal
     onClose();
   };
+
   const handleClose = () => {
-    // Close the modal
     onClose();
   };
 

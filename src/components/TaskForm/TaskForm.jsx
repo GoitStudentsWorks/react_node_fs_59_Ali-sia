@@ -208,7 +208,9 @@ const TaskForm = ({ task, category, onSubmit, onClose, activeDate }) => {
               </svg>
               Add
             </Button>
-            <Button onClick={() => onClose()}>Cancel</Button>
+            <Button type="button" onClick={() => onClose()}>
+              Cancel
+            </Button>
           </>
         )}
       </ButtonContainer>

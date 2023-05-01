@@ -1,4 +1,8 @@
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import { getTasks } from 'redux/tasks/tasks.selectors';
 
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import UserInfo from 'components/UserInfo/UserInfo';
@@ -26,8 +30,10 @@ const handleClick = ({ currentTarget }) => {
 const Header = () => {
   const { pathname } = useLocation();
 
+  const tasks = useSelector(getTasks);
+
   const isVisibleGoose =
-    pathname.split('/')[1] === 'calendar' && pathname.split('/')[2] === 'day';
+    tasks.some(task => new Date(task.date).setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0));
 
   return (
     <HeaderStyled>
@@ -35,21 +41,17 @@ const Header = () => {
         <BurgerSVGStyled />
       </ButtonStyled>
       <SiteNameContainer>
-        {isVisibleGoose && (
-          <GooseContainer>
-            <ForTheGloryOfMentors />
-          </GooseContainer>
-        )}
+        <GooseContainer isVisible={isVisibleGoose}>
+          <ForTheGloryOfMentors />
+        </GooseContainer>
         <PageContainer>
-          <PageName>
+          <PageName isVisible={isVisibleGoose}>
             {pathname === '/account' ? 'User Profile' : 'Calendar'}
           </PageName>
-          <TakeToWork>
-            {isVisibleGoose && (
-              <p>
+          <TakeToWork isVisible={isVisibleGoose}>
+            <p>
                 <span>Let go</span> of the past and focus on the present!
-              </p>
-            )}
+            </p>
           </TakeToWork>
         </PageContainer>
       </SiteNameContainer>
