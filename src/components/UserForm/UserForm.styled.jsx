@@ -493,6 +493,11 @@ export const StyledCalendar = styled.div`
   .react-datepicker__day--outside-month {
     visibility: hidden;
   }
+
+  .react-datepicker__day--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 `;
 
 export const Button = styled.button`

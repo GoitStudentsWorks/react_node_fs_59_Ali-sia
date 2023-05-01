@@ -194,8 +194,8 @@ export const UserForm = () => {
                 value={values.birthday}
                 onChange={handleDateChange}
                 dateFormat="dd/MM/yyyy"
-                showMonthDropdown
-                showYearDropdown
+                // showMonthDropdown
+                // showYearDropdown
                 calendarStartDay={1}
                 maxDate={addDays(new Date(), 0)}
                 highlightDates={highlightWeekends}
