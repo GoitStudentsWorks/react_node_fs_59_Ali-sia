@@ -39,14 +39,19 @@ const tasksSlice = createSlice({
       .addCase(fetchTasks.rejected, handleRejected)
       .addCase(fetchTasks.fulfilled, (state, { payload }) => {
         handleFulfiled(state);
-        state.tasks = [...state.tasks, ...payload.result];
+        state.tasks = payload.result.reduce((arr, task) => {
+          if (!arr.some(taskArr => task._id === taskArr._id)) {
+            arr.push(task);
+          };
+          return arr;
+        }, [...state.tasks]);
         state.savedPeriods.push(payload.start);
       })
       .addCase(addTask.pending, handlePending)
       .addCase(addTask.rejected, handleRejected)
       .addCase(addTask.fulfilled, (state, { payload }) => {
         handleFulfiled(state);
-        state.tasks.push(payload);
+        state.tasks.push(payload.data.result);
       })
       .addCase(deleteTask.pending, handlePending)
       .addCase(deleteTask.rejected, handleRejected)
