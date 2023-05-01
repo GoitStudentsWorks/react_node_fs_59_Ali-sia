@@ -30,11 +30,12 @@ const Header = () => {
   const { pathname } = useLocation();
 
   const tasks = useSelector(getTasks);
+  console.log(tasks);
 
   const isVisibleGoose = tasks.some(
     task =>
       new Date(task.date).setHours(0, 0, 0, 0) ===
-      new Date().setHours(0, 0, 0, 0)
+      new Date().setHours(0, 0, 0, 0) && task.category !== "Done"
   );
 
   return (
