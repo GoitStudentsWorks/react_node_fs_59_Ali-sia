@@ -9,6 +9,7 @@ export const TaskColumnsWrapper = styled.div`
   padding: 25px 6px 20px 18px;
 
   min-height: 155px;
+  height: fit-content;
   width: 336px;
 
   border-radius: ${p => p.theme.radii.light};
