@@ -1,5 +1,4 @@
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { getTasks } from 'redux/tasks/tasks.selectors';
@@ -32,8 +31,11 @@ const Header = () => {
 
   const tasks = useSelector(getTasks);
 
-  const isVisibleGoose =
-    tasks.some(task => new Date(task.date).setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0));
+  const isVisibleGoose = tasks.some(
+    task =>
+      new Date(task.date).setHours(0, 0, 0, 0) ===
+      new Date().setHours(0, 0, 0, 0)
+  );
 
   return (
     <HeaderStyled>
@@ -50,7 +52,7 @@ const Header = () => {
           </PageName>
           <TakeToWork isVisible={isVisibleGoose}>
             <p>
-                <span>Let go</span> of the past and focus on the present!
+              <span>Let go</span> of the past and focus on the present!
             </p>
           </TakeToWork>
         </PageContainer>
