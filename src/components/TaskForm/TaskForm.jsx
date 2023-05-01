@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectTheme } from 'redux/auth/auth.selectors';
 import { toast } from 'react-hot-toast';
@@ -22,20 +22,36 @@ import {
   RadioIconChecked,
 } from './TaskForm.styled';
 
-const TaskForm = ({ task, category, onSubmit, onClose, activeDate }) => {
-  const [formData, setFormData] = useState({
+const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
+  const initialFormData = {
     title: task?.title || '',
     start: task?.start || '10:00',
     end: task?.end || '14:00',
     priority: task?.priority || 'low',
-    date: task?.date || activeDate,
-    category: task?.category || category || 'To do', // Add category to formData only if it doesn't already exist in task
-  });
+    date: task?.date || '',
+    category: task?.category || category || '', // Add category to formData only if it doesn't already exist in task
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
+
+  useEffect(() => {
+    // Reset formData if isModalOpen changes
+    if (!isModalOpen) {
+      setFormData(initialFormData);
+    }
+  }, [isModalOpen]);
+
   const currentTheme = useSelector(selectTheme);
 
   const handleSubmit = e => {
     e.preventDefault();
     const newTask = { ...task, ...formData };
+
+    if (newTask.title.length < 3 || newTask.title.length >= 30) {
+      toast.error('Minimum 3 characters, maximum - 30!');
+      return;
+    }
+
     onSubmit(newTask);
     onClose();
   };
@@ -46,9 +62,10 @@ const TaskForm = ({ task, category, onSubmit, onClose, activeDate }) => {
       ...prevFormData,
       [name]: value,
     }));
-    if (name === 'title' && value.length >= 30) {
-      toast.error('Too much symbols');
-    }
+  };
+
+  const handleClose = () => {
+    onClose();
   };
 
   const getRadioColor = priority => {
@@ -74,7 +91,6 @@ const TaskForm = ({ task, category, onSubmit, onClose, activeDate }) => {
           type="text"
           id="title"
           name="title"
-          maxLength="30"
           theme={currentTheme}
           value={formData.title}
           onChange={handleChange}
@@ -211,7 +227,7 @@ const TaskForm = ({ task, category, onSubmit, onClose, activeDate }) => {
               </svg>
               Add
             </Button>
-            <Button type="button" onClick={() => onClose()}>
+            <Button type="button" onClick={handleClose}>
               Cancel
             </Button>
           </>

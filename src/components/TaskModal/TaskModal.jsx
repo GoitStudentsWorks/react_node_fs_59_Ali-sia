@@ -15,7 +15,7 @@ function TaskModal({ task, category, onClose, isModalOpen }) {
   const handleSubmit = newData => {
     if (!task) {
       // If there's no initial data, we're creating a new task
-      dispatch(addTask({...newData, date: activeDate}))
+      dispatch(addTask({ ...newData, date: activeDate }))
         .unwrap()
         .then(() => toast.success(`Created!`))
         .catch(e => {
@@ -43,6 +43,7 @@ function TaskModal({ task, category, onClose, isModalOpen }) {
         category={category}
         onSubmit={handleSubmit}
         onClose={handleClose}
+        isModalOpen={isModalOpen}
       />
     </Modal>
   );
