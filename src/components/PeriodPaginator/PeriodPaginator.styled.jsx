@@ -93,7 +93,7 @@ export const StyledHiChevronRight = styled(HiChevronRight)`
 
 export const StyledLinkToday = styled(Link)`
   margin-left: 8px;
-  width: 74px;
+  width: 72px;
   padding: 0;
   display: flex;
   justify-content: center;
