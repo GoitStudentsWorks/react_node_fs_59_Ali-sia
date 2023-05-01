@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAction } from '@reduxjs/toolkit';
 import { fetchTasks, addTask, deleteTask, editTask } from './tasks.operations';
 
 const handlePending = state => {
@@ -18,9 +18,12 @@ const handleFulfiled = state => {
 export const tasksInitState = {
   tasks: [],
   savedPeriods: [],
+  activeDate: null,
   isTasksLoading: false,
   error: null,
 };
+
+export const setActiveDateStore = createAction('setActiveDate');
 
 const tasksSlice = createSlice({
   name: 'tasks',
@@ -57,6 +60,9 @@ const tasksSlice = createSlice({
         handleFulfiled(state);
         const index = state.tasks.findIndex(task => task._id === payload._id);
         state.tasks[index] = payload;
+      })
+      .addCase(setActiveDateStore, (state, {payload}) => {
+        state.activeDate = payload;
       });
   },
 });
