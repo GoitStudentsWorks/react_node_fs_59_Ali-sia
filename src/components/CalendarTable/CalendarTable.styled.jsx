@@ -71,6 +71,7 @@ export const CellLink = styled(Link)`
   &:hover {
     border: ${p =>
       `${p.theme.borders.normal} ${p.theme.colors.taskBorderTheme}`};
+    padding: 13px 3px 3px 3px;
   }
 
   ${greaterThan(
