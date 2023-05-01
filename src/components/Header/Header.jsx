@@ -30,7 +30,6 @@ const Header = () => {
   const { pathname } = useLocation();
 
   const tasks = useSelector(getTasks);
-  console.log(tasks);
 
   const isVisibleGoose = tasks.some(
     task =>
