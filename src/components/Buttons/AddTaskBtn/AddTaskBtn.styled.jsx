@@ -16,10 +16,9 @@ export const StyledButton = styled.button`
   padding: ${p => p.theme.space[4]}px;
 
   border: ${props => props.theme.borders.addTaskBTN};
-  border-radius: ${props => props.theme.radii.normal};
+  border-radius: ${props => props.theme.radii.light};
 
   background-color: ${props => props.theme.colors.addTaskBtn};
-  box-shadow: ${props => props.theme.shadows.loginBtn};
 
   cursor: pointer;
 
