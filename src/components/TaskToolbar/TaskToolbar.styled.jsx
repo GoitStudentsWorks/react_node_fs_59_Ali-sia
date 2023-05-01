@@ -8,6 +8,7 @@ import { ReactComponent as MoveIcon } from './move-icon.svg';
 const Toolbar = styled.div`
   position: relative;
   width: 100%;
+
   display: flex;
   align-items: start;
 
@@ -25,6 +26,12 @@ const Button = styled.button`
 const ContextMenu = styled.div`
   position: absolute;
   z-index: 50;
+  top: 150%;
+  left: -60%;
+
+  width: 115px;
+  height: 70px;
+
   padding: 14px;
 
   background-color: ${({ theme }) =>
@@ -36,14 +43,15 @@ const ContextMenu = styled.div`
 
   opacity: ${({ open }) => (open ? 1 : 0)};
   visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
-  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 
   @media (min-width: 768px) {
-    padding: 20px 24px;
-  }
+    left: -100%;
 
-  top: 150%;
-  left: 0;
+    padding: 20px 24px;
+
+    width: 150px;
+    height: 90px;
+  }
 `;
 
 const ContextMenuItem = styled.div`
@@ -52,10 +60,9 @@ const ContextMenuItem = styled.div`
   justify-content: space-between;
   padding: 0;
   font-family: 'Inter';
-  font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  line-height: 14px;
+
   cursor: pointer;
 
   span {
