@@ -88,7 +88,7 @@ export const NavLinkStyled = styled(NavLink)`
   font-size: ${props => props.theme.fontSizes.s};
   line-height: 1.22;
 
-  color: ${props => props.theme.colors.userNavModalTheme};
+  color: ${props => props.theme.colors.userNavLinkActiveTheme};
 
   pointer-events: auto;
       
@@ -99,6 +99,7 @@ export const NavLinkStyled = styled(NavLink)`
   
   &.active {
       color: ${props => props.theme.colors.userNavLinkTheme};
+      background: ${props => props.theme.colors.userNavLinkBcgTheme};
       pointer-events: none;
   };
 
