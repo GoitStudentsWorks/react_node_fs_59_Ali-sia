@@ -94,8 +94,8 @@ export default function CalendarTable({
                 {isLoggedIn && !isRefresing && !isTasksLoading && (
                   <TasksWrapper>
                     {getDayTasks(day)}
-                    {filteredTasks.slice(0, 2).map(task => (
-                      <TaskContainer key={task._id} task={task} />
+                    {filteredTasks.slice(0, 2).map((task, idx) => (
+                      <TaskContainer key={idx + task._id} task={task} />
                     ))}
                     {filteredTasks.length > 2 && (
                       <MoreTasksLabel>

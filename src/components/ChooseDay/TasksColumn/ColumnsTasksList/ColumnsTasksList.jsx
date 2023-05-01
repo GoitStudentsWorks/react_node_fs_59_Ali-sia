@@ -6,7 +6,7 @@ export default function ColumnTasksList({ tasksForColumn, sortedColumnList }) {
     <TasksListContainer>
       {tasksForColumn?.map(task => (
         <TaskColumnCard
-          key={'task-' + task.id}
+          key={'task-' + task._id}
           task={task}
           sortedColumnList={sortedColumnList}
         />

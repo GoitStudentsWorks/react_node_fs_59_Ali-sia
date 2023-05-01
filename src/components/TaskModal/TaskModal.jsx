@@ -11,24 +11,18 @@ function TaskModal({ task, category, onClose, isModalOpen }) {
 
   const handleSubmit = newData => {
     if (!task) {
-      // If there's no initial data, we're creating a new task
-      //   dispatch(createTask(newData));
     } else {
-      // console.log('DATA FOR DISPTACH', newData);
       dispatch(editTask(newData))
         .unwrap()
         .then(() => toast.success(`Updated!`))
         .catch(e => {
           toast.error(`Unable to update task`);
-          // console.log('ERRROOORRR', e);
         });
     }
-
-    // Close the modal
     onClose();
   };
+
   const handleClose = () => {
-    // Close the modal
     onClose();
   };
 

@@ -11,6 +11,9 @@ const Modal = ({ children, onClose, isModalOpen }) => {
   const currentTheme = useSelector(selectTheme);
 
   useEffect(() => {
+    if (!isModalOpen) {
+      return;
+    }
     const handleEscape = event => {
       if (event.key === 'Escape') {
         onClose();
@@ -22,9 +25,10 @@ const Modal = ({ children, onClose, isModalOpen }) => {
     return () => {
       window.removeEventListener('keydown', handleEscape);
     };
-  }, [onClose]);
+  }, [onClose, isModalOpen]);
 
   const handleClickOutside = event => {
+    console.log(event);
     event.stopPropagation();
     if (event.target === event.currentTarget) {
       onClose();
@@ -32,9 +36,10 @@ const Modal = ({ children, onClose, isModalOpen }) => {
   };
 
   const modalContent = (
-
-    <ModalWrapper onClick={handleClickOutside} isModalOpen={isModalOpen}>
-
+    <ModalWrapper
+      onClick={event => handleClickOutside(event)}
+      isModalOpen={isModalOpen}
+    >
       <ModalContainer theme={currentTheme}>
         <CloseButton onClick={onClose} theme={currentTheme}>
           <svg
