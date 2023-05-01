@@ -7,7 +7,15 @@ export const AuthContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+
+  ${p =>
+    greaterThan(
+      'tablet',
+      `
+      justify-content: center;
+      `
+    )}
 
   height: 100vh;
 
@@ -21,6 +29,16 @@ export const GooseTitle = styled.h1`
   line-height: 48px;
 
   margin-bottom: 32px;
+  ${p =>
+    greaterThan(
+      'tablet',
+      `
+      margin-bottom: 40px;
+
+      font-size: 120px;
+      line-height: 150px;
+      `
+    )}
 
   color: #ffffff;
 
@@ -31,6 +49,15 @@ export const GooseTitle = styled.h1`
 export const GooseImg = styled.img`
   width: 142px;
   height: 142px;
+
+  ${p =>
+    greaterThan(
+      'tablet',
+      `
+      width: 150px;
+      height: 150px;
+      `
+    )}
 `;
 
 export const LinkContainer = styled.div`
@@ -45,6 +72,8 @@ export const LinkContainer = styled.div`
       align-items: center;
 
       max-height: 50vh;
+
+      margin-bottom: 20px;
      `
     )}
 
@@ -71,6 +100,21 @@ export const NavLinkStyledRegister = styled(NavLink)`
   text-decoration: underline;
   text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07),
     0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
+
+  ${props =>
+    lesserThan(
+      'tablet',
+      `
+        margin-top: 208px;
+       `
+    )}
+  ${props =>
+    greaterThan(
+      'tablet',
+      `
+      font-size: ${props.theme.fontSizes.s};
+       `
+    )}
 `;
 export const NavLinkStyledLogin = styled(NavLink)`
   display: flex;
