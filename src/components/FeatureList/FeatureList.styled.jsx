@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { greaterThan, lesserThan } from 'helpers/breakpoints.styled';
 
 export const List = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   font-weight: 500;
   font-size: 14px;
   color: rgba(17, 17, 17, 0.9);
@@ -18,8 +22,8 @@ export const List = styled.ul`
       greaterThan(
         'laptop',
         `
-        margin-left:228px;
-        margin-right:0;
+        // margin-left:228px;
+        // margin-right:0;
 
         `
       )}
@@ -30,8 +34,9 @@ export const List = styled.ul`
       greaterThan(
         'laptop',
         `
-
           flex-direction: row-reverse;
+          margin-left:77px;
+          margin-right:0;
           `
       )}
   }
@@ -43,9 +48,13 @@ export const ListItem = styled.li`
     greaterThan(
       'laptop',
       `
+      width: 1107px;
       display:flex;
-    //   justify-content: space-around;
+      justify-content: space-between;
         align-items: center;
+
+        margin-left:0;
+          margin-right:77px;
       `
     )}
 `;
@@ -62,7 +71,7 @@ export const ListDescriptionHolder = styled.div`
     greaterThan(
       'laptop',
       `
-        margin-right:228px;
+        // margin-right:228px;
         `
     )}
 `;
