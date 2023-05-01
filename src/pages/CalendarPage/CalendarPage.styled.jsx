@@ -16,7 +16,6 @@ export const Wrapper = styled.div`
     'tablet',
     `
     max-width: 704px;
-    height: 1032px;
     padding 0 0 42px;
     gap: 32x;
 `
@@ -25,7 +24,6 @@ export const Wrapper = styled.div`
   ${greaterThan(
     'laptop',
     `
-    height: 909px;
     width: 1151px;
     max-width: 1151px;
     padding 0 32px 32px;

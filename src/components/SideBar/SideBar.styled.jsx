@@ -50,9 +50,8 @@ export const SideBarStyled = styled.aside`
 
         padding-top: 32px;    
         padding-left: 24px;
-        padding-right: 24px;
-
-       
+        padding-right: 24px;       
+        height: 816px;
         min-height: 100%;
     `
     )};
