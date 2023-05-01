@@ -24,7 +24,7 @@ const columnSlice = createSlice({
         // state.columns.isLoading = true;
       })
       .addCase(addColumn.fulfilled, (state, { payload }) => {
-        state.columns.push(payload);
+        state.columns.columns.push(payload);
         // state.columns.isLoading = false;
         state.columns.error = null;
       })
