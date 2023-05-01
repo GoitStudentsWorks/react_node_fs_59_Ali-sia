@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { Carousel } from './Caorusel';
 
 function Reviews() {
-  const [showComments, setShowComments] = useState(false);
-
   const toggleReviews = () => {
     setShowComments(!showComments);
   };
@@ -23,4 +22,3 @@ function Reviews() {
 }
 
 export default Reviews;
-
