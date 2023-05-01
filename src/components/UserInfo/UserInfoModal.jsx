@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectUser } from 'redux/auth/auth.selectors'; 
@@ -25,7 +25,11 @@ const handleClose = (event, onClose) => {
 };
 
 const Modal = ({ onClose }) => {
+  const [ isShow, setIsShow ] = useState(false);
+
   useEffect(() => {
+    setIsShow(true);
+
     window.addEventListener('keydown', handleClose);
 
     return () => {
@@ -37,7 +41,7 @@ const Modal = ({ onClose }) => {
   
   return (
     <ModalWrapper onClick={event => handleClose(event, onClose)}>
-      <ModalContainer>
+      <ModalContainer isShow={isShow}>
         <HeadModal>
           <UserAvatarModal>
             {avatarURL
