@@ -12,7 +12,6 @@ const ModalWrapper = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 
-  overflow: hidden;
   pointer-events: ${({ isModalOpen }) => (isModalOpen ? 'auto' : 'none')};
   visibility: ${({ isModalOpen }) => (isModalOpen ? 'visible' : 'hidden')};
   opacity: ${({ isModalOpen }) => (isModalOpen ? '1' : '0')};

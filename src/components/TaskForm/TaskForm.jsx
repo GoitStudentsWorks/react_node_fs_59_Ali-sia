@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectTheme } from 'redux/auth/auth.selectors';
+import { toast } from 'react-hot-toast';
 
 import {
   Form,
@@ -47,6 +48,9 @@ const TaskForm = ({ task, category, onSubmit, onClose, activeDate }) => {
       ...prevFormData,
       [name]: value,
     }));
+    if (name === 'title' && value.length >= 30) {
+      toast.error('Too much symbols');
+    }
   };
 
   const getRadioColor = priority => {
@@ -72,6 +76,7 @@ const TaskForm = ({ task, category, onSubmit, onClose, activeDate }) => {
           type="text"
           id="title"
           name="title"
+          maxLength="30"
           theme={currentTheme}
           value={formData.title}
           onChange={handleChange}
