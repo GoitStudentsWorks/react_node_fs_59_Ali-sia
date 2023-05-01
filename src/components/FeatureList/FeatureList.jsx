@@ -11,9 +11,9 @@ import {
   ListImg,
 } from './FeatureList.styled';
 
-import CalendarImg from './CalendarImg.png';
-import SidebarImg from './SidebarImg.png';
-import AllInImg from './AllInImg.png';
+import CalendarImg from './CalendarImg3.png';
+import SidebarImg from './SidebarImg3.png';
+import AllInImg from './AllInImg3.png';
 
 function FeatureList() {
   return (
