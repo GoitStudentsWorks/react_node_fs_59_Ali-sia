@@ -3,7 +3,7 @@ import { greaterThan } from 'helpers/breakpoints.styled';
 
 export const TaskColumnsWrapper = styled.div`
   display: flex;
-  /* flex-grow: 1; */
+  flex-grow: 1;
   flex-direction: column;
   justify-content: space-between;
   padding: 25px 6px 20px 18px;
