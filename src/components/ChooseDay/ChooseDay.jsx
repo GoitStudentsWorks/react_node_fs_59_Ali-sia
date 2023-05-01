@@ -16,7 +16,8 @@ import {
 import { endOfDay, getTime, parseJSON, startOfDay } from 'date-fns';
 import { useTasks } from 'hooks/useTasks';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectColumns, selectError } from 'redux/columns/columns.selectors';
+import { selectColumns } from 'redux/columns/columns.selectors';
+// useSelector
 import { fetchColumns } from 'redux/columns/columns.operations';
 
 export default function ChoosedDay({
