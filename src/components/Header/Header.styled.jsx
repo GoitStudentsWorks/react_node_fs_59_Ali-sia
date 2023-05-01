@@ -78,6 +78,11 @@ export const PageName = styled.h1`
   line-height: 1;
 
   text-shadow: ${props => props.theme.shadows.headerText};
+
+  transition: transform 3s ease 3s;  
+  transform: translate(-72px, 14px);
+
+  ${({ isVisible }) => isVisible && 'transition: transform 3s ease;transform: translate(0, 0);'};
 `;
 
 export const BurgerSVGStyled = styled(BurgerSVG)`
@@ -134,7 +139,7 @@ export const SiteNameContainer = styled.div`
       'laptop',
       `
         display: flex;
-        align-items: center;
+        align-items: space-between;
         gap: 8px;
     `
     )};
@@ -143,6 +148,12 @@ export const SiteNameContainer = styled.div`
 export const GooseContainer = styled.div`
   width: 64px;
   height: 60px;
+
+  transition: opacity 3s ease 1.5s;
+  
+  opacity: 0;
+
+  ${({ isVisible }) => isVisible && 'transition: opacity 3s ease 1.5s;opacity: 1'};
 `;
 
 export const PageContainer = styled.div`
@@ -154,6 +165,12 @@ export const PageContainer = styled.div`
 export const TakeToWork = styled.div`
   font-size: ${props => props.theme.fontSizes.s};
   line-height: 1.29;
+
+  transition: opacity 3s ease;
+  
+  opacity: 0;
+
+  ${({ isVisible }) => isVisible && 'transition: opacity 3s ease 3s;opacity: 1'};
 
   & span {
     color: ${props => props.theme.colors.btnLogout};

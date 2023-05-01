@@ -11,21 +11,19 @@ import {
   HighPriority,
   ToolbarContainer,
 } from './TaskColumnCard.styled';
-import userAvatar from './user.jpg';
+import userAvatarDefault from './user.jpg';
+import { useAuth } from 'hooks';
 
-export const TaskColumnCard = ({ task, avatarUrl, sortedColumnList }) => {
-  //   const { description, priority } = task;
-
-  //   TODO: замінити const description і const priority даними з пропсів
-  const description = task.description;
-  // 'А я вам сейчас покажу, звідки приходить цей текст: з ChooseDay -> TasksColumn -> ColumnTasksList -> TaskColumnCard';
-  const priority = task.priority;
+export const TaskColumnCard = ({ task, sortedColumnList }) => {
+  const { user } = useAuth();
+  const { title, priority } = task;
+  const userAvatar = user.avatarURL ? user.avatarURL : userAvatarDefault;
 
   const getDescription = () => {
-    if (description.length <= 26) {
-      return description;
+    if (title.length <= 26) {
+      return title;
     } else {
-      return `${description.slice(0, 26)}...`;
+      return `${title.slice(0, 26)}...`;
     }
   };
 

@@ -11,10 +11,8 @@ import {
   DaysNamesWrapper,
   MobileDayName,
 } from './MonthCalendarHead.styled';
-// import { useOutletContext } from 'react-router-dom';
 
 export default function MonthCalendarHead({ currentDate }) {
-  // const { currentDate } = useOutletContext();
   const daysNamesArray = eachDayOfInterval({
     start: startOfWeek(currentDate),
     end: endOfWeek(currentDate),

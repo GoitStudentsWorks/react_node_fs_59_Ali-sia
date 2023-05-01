@@ -4,14 +4,13 @@ import { greaterThan } from 'helpers/breakpoints.styled';
 export const DaysNamesWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: ${p => p.theme.space[4 + 1]}px; //15px
+  margin-bottom: ${p => p.theme.space[4 + 1]}px;
 
   min-height: 50px;
   max-width: 336px;
 
-  border-radius: ${p => p.theme.radii.light}; //8px;
+  border-radius: ${p => p.theme.radii.light};
   border: ${p => `${p.theme.borders.normal} ${p.theme.colors.taskBorderTheme}`};
-  // 1px solid rgba(220, 227, 229, 0.8);
 
   font-size: ${p => p.theme.fontSizes.m};
   font-weight: ${p => p.theme.fontWeights.semibold};

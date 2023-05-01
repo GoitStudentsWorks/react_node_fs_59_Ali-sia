@@ -21,13 +21,14 @@ import {
   RadioIconChecked,
 } from './TaskForm.styled';
 
-const TaskForm = ({ task, onSubmit, onClose, activeDate }) => {
+const TaskForm = ({ task, category, onSubmit, onClose, activeDate }) => {
   const [formData, setFormData] = useState({
     title: task?.title || '',
     start: task?.start || '10:00',
     end: task?.end || '14:00',
     priority: task?.priority || 'low',
     date: task?.date || activeDate,
+    category: task?.category || category || '', // Add category to formData only if it doesn't already exist in task
   });
   // console.log('formData ', formData.start);
   const currentTheme = useSelector(selectTheme);
@@ -168,7 +169,7 @@ const TaskForm = ({ task, onSubmit, onClose, activeDate }) => {
       </RadioContainer>
 
       <ButtonContainer>
-        {formData ? (
+        {task ? (
           <Button type="submit" primary>
             <svg
               width="16"
@@ -207,7 +208,9 @@ const TaskForm = ({ task, onSubmit, onClose, activeDate }) => {
               </svg>
               Add
             </Button>
-            <Button onClick={() => onClose()}>Cancel</Button>
+            <Button type="button" onClick={() => onClose()}>
+              Cancel
+            </Button>
           </>
         )}
       </ButtonContainer>
