@@ -24,7 +24,7 @@ export const WrapperMain = styled.div`
 export const WrapperSideBarContent = styled.div`
   width: 289px;
   
-  ${() =>
+  ${({ theme }) =>
     greaterThan(
       'laptop',
       `
@@ -33,7 +33,7 @@ export const WrapperSideBarContent = styled.div`
     
     min-width: 289px;
     width: calc((100vw - 1440px) / 2 + 289px);
-    background-color: tomato;
+    background: ${theme.colors.bgcSideBarTheme};
   `
     )};
   `
