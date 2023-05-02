@@ -24,6 +24,7 @@ export const AuthContainer = styled.div`
 
 export const GooseTitle = styled.h1`
   font-family: 'Coolvetica';
+  font-style: italic;
   font-weight: 400;
   font-size: 44px;
   line-height: 48px;
@@ -93,6 +94,9 @@ export const NavLinkStyledRegister = styled(NavLink)`
 
   cursor: pointer;
 
+  padding: 3px 5px 1px;
+  border-radius: 10px;
+
   font-weight: ${props => props.theme.fontWeights.semibold};
   font-size: ${props => props.theme.fontSizes.xs};
 
@@ -115,6 +119,13 @@ export const NavLinkStyledRegister = styled(NavLink)`
       font-size: ${props.theme.fontSizes.s};
        `
     )}
+
+    transition: box-shadow 250ms linear;
+
+  &:hover,
+  &:focus {
+    box-shadow: 4px 4px 16px rgba(255, 255, 255, 0.7);
+  }
 `;
 export const NavLinkStyledLogin = styled(NavLink)`
   display: flex;
@@ -145,4 +156,11 @@ export const NavLinkStyledLogin = styled(NavLink)`
   }
 
   ${p => greaterThan('tablet', `margin-left: ${p.theme.space[6]}px;`)}
+
+  transition: box-shadow 250ms linear;
+
+  &:hover,
+  &:focus {
+    box-shadow: 4px 4px 16px rgba(255, 255, 255, 0.7);
+  }
 `;
