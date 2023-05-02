@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { greaterThan, lesserThan } from 'helpers/breakpoints.styled';
+import { greaterThan } from 'helpers/breakpoints.styled';
 
 export const List = styled.ul`
   display: flex;
