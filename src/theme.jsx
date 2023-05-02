@@ -103,6 +103,8 @@ export const theme = {
     btnMain: 'rgba(227, 243, 255, 1)',
     btnAccent: 'rgba(202, 232, 255, 1)',
     btnLogout: 'rgba(62, 133, 243, 1)',
+    btnLogoutNormal: '#3E85F3',
+    btnLogoutHover: '#2B78EF',
 
     moreTaskLabel: 'grey',
 

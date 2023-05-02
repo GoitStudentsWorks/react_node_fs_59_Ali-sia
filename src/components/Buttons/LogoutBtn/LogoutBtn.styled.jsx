@@ -10,7 +10,7 @@ export const StyledButton = styled.button`
   border: ${props => props.theme.borders.none};
   border-radius: ${props => props.theme.radii.normal};
 
-  background-color: ${props => props.theme.colors.primary};
+  background-color: ${props => props.theme.colors.btnLogoutNormal};
   box-shadow: ${props => props.theme.shadows.loginBtn};
 
   font-weight: ${props => props.theme.fontWeights.semibold};
@@ -20,6 +20,11 @@ export const StyledButton = styled.button`
 
   img {
     margin-left: ${p => p.theme.space[3]}px;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: ${props => props.theme.colors.btnLogoutHover};
   }
 
   @media (min-width: ${props => props.theme.breakpoints.tablet}) {
