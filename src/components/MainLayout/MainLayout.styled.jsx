@@ -5,8 +5,6 @@ import { greaterThan } from 'helpers/breakpoints.styled';
 export const StyledMain = styled.div`
   background-color: ${prop => prop.theme.colors.bgcMainTheme};
   min-height: 100vh;
-
-  
 `;
 
 export const WrapperMain = styled.div`
@@ -16,14 +14,14 @@ export const WrapperMain = styled.div`
       `
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    // justify-content: center;
   `
     )};
 `;
 
 export const WrapperSideBarContent = styled.div`
   width: 289px;
-  
+
   ${({ theme }) =>
     greaterThan(
       'laptop',
@@ -36,6 +34,6 @@ export const WrapperSideBarContent = styled.div`
     background: ${theme.colors.bgcSideBarTheme};
   `
     )};
-  `
+`;
 
 export const WrapperMainContent = styled.div``;

@@ -2,35 +2,13 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { createPortal } from 'react-dom';
 import { selectTheme } from 'redux/auth/auth.selectors';
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 import { ModalWrapper, ModalContainer, CloseButton } from './Modal.styled';
 
 const Modal = ({ children, onClose, isModalOpen }) => {
   const modalRoot = document.getElementById('modal-root');
-
   const currentTheme = useSelector(selectTheme);
-
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-    if (!isModalOpen) {
-      return;
-    }
-    const handleEscape = event => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    window.addEventListener('keydown', handleEscape);
-
-    return () => {
-      window.removeEventListener('keydown', handleEscape);
-    };
-  }, [onClose, isModalOpen]);
 
   const handleClickOutside = event => {
     event.stopPropagation();
@@ -38,6 +16,24 @@ const Modal = ({ children, onClose, isModalOpen }) => {
       onClose();
     }
   };
+
+  useEffect(() => {
+    if (!isModalOpen) {
+      return clearAllBodyScrollLocks();
+    }
+    disableBodyScroll(document.body, { reserveScrollBarGap: true });
+    const handleEscape = event => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+
+    return () => {
+      clearAllBodyScrollLocks();
+      window.removeEventListener('keydown', handleEscape);
+    };
+  }, [onClose, isModalOpen]);
 
   const modalContent = (
     <ModalWrapper

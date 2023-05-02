@@ -3,22 +3,81 @@ import { NavLink } from 'react-router-dom';
 
 import { greaterThan, lesserThan } from 'helpers/breakpoints.styled';
 
-export const NavContainer = styled.div`
+export const AuthContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  ${props =>
+    greaterThan(
+      'tablet',
+      `
+      justify-content: center;
+      `
+    )}
+
+  height: 100vh;
 
   background-color: ${p => p.theme.colors.btnLogout};
+`;
 
-  ${p =>
+export const GooseTitle = styled.h1`
+  font-family: 'Coolvetica';
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 48px;
+
+  margin-bottom: 32px;
+  ${props =>
+    greaterThan(
+      'tablet',
+      `
+      margin-bottom: 40px;
+
+      font-size: 120px;
+      line-height: 150px;
+      `
+    )}
+
+  color: #ffffff;
+
+  text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07),
+    0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
+`;
+
+export const GooseImg = styled.img`
+  width: 142px;
+  height: 142px;
+
+  ${props =>
+    greaterThan(
+      'tablet',
+      `
+      width: 150px;
+      height: 150px;
+      `
+    )}
+`;
+
+export const LinkContainer = styled.div`
+  display: flex;
+
+  ${props =>
     lesserThan(
       'tablet',
       `
       flex-direction: column-reverse;
       justify-content: space-between;
       align-items: center;
-      height: 268px;`
+
+      max-height: 50vh;
+
+      margin-bottom: 20px;
+     `
     )}
 
-  ${p =>
+  ${props =>
     greaterThan(
       'tablet',
       `
@@ -41,6 +100,21 @@ export const NavLinkStyledRegister = styled(NavLink)`
   text-decoration: underline;
   text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07),
     0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
+
+  ${props =>
+    lesserThan(
+      'tablet',
+      `
+        margin-top: 208px;
+       `
+    )}
+  ${props =>
+    greaterThan(
+      'tablet',
+      `
+      font-size: ${props.theme.fontSizes.s};
+       `
+    )}
 `;
 export const NavLinkStyledLogin = styled(NavLink)`
   display: flex;

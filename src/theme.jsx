@@ -12,13 +12,22 @@ export const theme = {
     normal: '1px solid',
     medium: '2px solid',
 
-    addTaskBTN: '1px dashed #3E85F3',
+    addTaskBTN: '1px dashed rgba(62, 133, 243, 1)',
     input: '1px solid rgba(220, 227, 229, 0.6)',
+    container: '1px solid rgba(220, 227, 229, 0.8);',
+    avatarTaskCard: '1.8px solid rgba(62, 133, 243, 1);',
+
+    formField: '1px solid rgba(17, 17, 17, 0.15);',
+    activeField: '1px solid rgba(17, 17, 17, 1);',
+    invalidField: '1px solid rgba(231, 74, 59, 1)',
+    validField: '1px solid rgba(60, 188, 129, 1);',
   },
 
   radii: {
     none: '0',
+    small: '4px',
     light: '8px',
+    medium: '12px',
     normal: '16px',
     round: '50%',
   },
@@ -93,9 +102,12 @@ export const theme = {
 
     btnMain: 'rgba(227, 243, 255, 1)',
     btnAccent: 'rgba(202, 232, 255, 1)',
-    btnLogout: '#3E85F3',
+    btnLogout: 'rgba(62, 133, 243, 1)',
 
     moreTaskLabel: 'grey',
+
+    valid: 'rgba(60, 188, 129, 1);',
+    invalid: 'rgba(231, 74, 59, 1)',
   },
 };
 
@@ -112,7 +124,7 @@ export const light = {
 
   textHeaderTheme: '#111111',
 
-  textLogoTheme: '#3E85F3',
+  textLogoTheme: ' rgba(62, 133, 243, 1)',
 
   bgcMainTheme: 'rgba(247, 246, 249, 1)',
   bgcSecondaryTheme: 'rgba(255, 255, 255, 1)',
@@ -137,6 +149,11 @@ export const light = {
   bgActiveBtnDayMonthSelector: 'rgba(202, 232, 255, 1)',
   textActiveDayMonthSelector: 'rgba(62, 133, 243, 1)',
   textDaysNameAtDaysPage: 'rgba(97, 97, 97, 1)',
+
+  taskTitle: 'rgba(17, 17, 17, 1)',
+  addTaskBtn: 'rgba(227, 243, 255, 1)',
+  scrollbarBgc: 'rgba(242, 242, 242, 1)',
+  scrollbarThumb: 'rgba(231, 229, 229, 1)',
 };
 
 export const dark = {
@@ -177,4 +194,9 @@ export const dark = {
   bgActiveBtnDayMonthSelector: 'rgba(62, 133, 243, 1)',
   textActiveDayMonthSelector: 'rgba(255, 255, 255, 1)',
   textDaysNameAtDaysPage: 'rgba(250, 250, 250, 0.3)',
+
+  taskTitle: 'rgba(255, 255, 255, 1)',
+  addTaskBtn: 'rgba(62, 133, 243, 1)',
+  scrollbarBgc: 'rgba(45, 48, 55, 1)',
+  scrollbarThumb: 'rgba(23, 24, 32, 1)',
 };

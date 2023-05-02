@@ -6,17 +6,17 @@ export const CardContainer = styled.div`
   justify-content: space-between;
   height: 108px;
 
-  margin-bottom: 14px;
+  margin-bottom: ${p => p.theme.space[4]}px;
 
   padding-top: 14px;
   padding-bottom: 18px;
   padding-left: 15px;
   padding-right: 12px;
 
-  border: 1px solid rgba(220, 227, 229, 0.8);
-  border-radius: 8px;
+  border: ${props => props.theme.borders.container};
+  border-radius: ${props => props.theme.radii.light};
 
-  background-color: rgba(247, 246, 249, 1);
+  background-color: ${props => props.theme.colors.bgcMainTheme};
 `;
 
 export const StatsContainer = styled.div`
@@ -25,10 +25,10 @@ export const StatsContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const TaskDescription = styled.div`
+export const TaskTitle = styled.div`
   height: 16px;
-
   cursor: pointer;
+  color: ${props => props.theme.colors.taskTitle};
 `;
 
 export const ImageContainer = styled.div`
@@ -40,8 +40,8 @@ export const UserAvatar = styled.img`
   width: 32px;
   height: 32px;
 
-  border: 1.8px solid #3e85f3;
-  border-radius: 50%;
+  border: ${props => props.theme.borders.avatarTaskCard};
+  border-radius: ${props => props.theme.radii.round};
 `;
 
 const PriorityIndicator = styled.div`
@@ -49,31 +49,31 @@ const PriorityIndicator = styled.div`
   align-items: center;
 
   height: 20px;
-  margin-left: 8px;
-  padding: 4px 12px;
+  margin-left: ${p => p.theme.space[3]}px;
+  padding: ${p => p.theme.space[2]}px ${p => p.theme.space[4] - 2}px;
 
-  border-radius: 4px;
+  border-radius: ${props => props.theme.radii.small};
 
-  color: rgba(247, 246, 249, 1);
+  color: ${props => props.theme.colors.bgcMainTheme};
 
-  font-family: 'Inter';
-  font-weight: 600;
-  font-size: 10px;
+  font-family: ${props => props.theme.fonts.main};
+  font-weight: ${props => props.theme.fontWeights.semibold};
+  font-size: ${props => props.theme.fontSizes.xxs};
   cursor: default;
 
   text-transform: capitalize;
 `;
 
 export const LowPriority = styled(PriorityIndicator)`
-  background-color: rgba(114, 194, 248, 1);
+  background-color: ${props => props.theme.colors.taskMainLow};
 `;
 
 export const MediumPriority = styled(PriorityIndicator)`
-  background-color: rgba(243, 178, 73, 1);
+  background-color: ${props => props.theme.colors.taskMainMedium};
 `;
 
 export const HighPriority = styled(PriorityIndicator)`
-  background-color: rgba(234, 61, 101, 1);
+  background-color: ${props => props.theme.colors.taskMainHigh};
 `;
 
 export const ToolbarContainer = styled.div``;
