@@ -100,12 +100,12 @@ const TimeContainer = styled.div`
 `;
 
 const InnerContainer = styled.div`
-  max-width: 126px;
+  min-width: 126px;
   display: flex;
   flex-direction: column;
 
   @media (min-width: 768px) {
-    max-width: 163px;
+    min-width: 163px;
   }
 `;
 

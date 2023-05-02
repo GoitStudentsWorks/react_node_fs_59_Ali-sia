@@ -5,7 +5,7 @@ export const ChoosedDayWrapper = styled.div`
   overflow: hidden;
 `;
 export const TasksColumnsListWrapper = styled.div`
-  overflow-x: scroll;
+  overflow-x: auto;
   width: 336px;
   ${greaterThan(
     'tablet',
@@ -37,4 +37,34 @@ export const TasksColumnsList = styled.div`
   gap: 27px;
 `
   )};
+`;
+
+export const AddNewColumn= styled.div`
+  /* display: flex; */
+  flex-grow: 1;
+  /* flex-direction: column; */
+  /* justify-content: space-between; */
+  padding: 25px 6px 25px 18px;
+
+  height: 74px;
+  width: 336px;
+
+  border-radius: ${p => p.theme.radii.light};
+  border: ${p => `${p.theme.borders.normal} ${p.theme.colors.taskBorderTheme}`};
+
+  font-size: ${p => p.theme.fontSizes.m};
+  font-weight: ${p => p.theme.fontWeights.semibold};
+  line-height: 1.12;
+
+  background-color: ${p => p.theme.colors.bgcSecondaryTheme};
+  color: ${p => p.theme.colors.textDaysNameAtDaysPage};
+
+  ${greaterThan(
+    'tablet',
+    `
+   height: 68px;
+   width: 344px;
+   padding: 27px 8px 27px 20px;
+`
+  )}
 `;

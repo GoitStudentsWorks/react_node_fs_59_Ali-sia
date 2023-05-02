@@ -2,27 +2,13 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { createPortal } from 'react-dom';
 import { selectTheme } from 'redux/auth/auth.selectors';
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 import { ModalWrapper, ModalContainer, CloseButton } from './Modal.styled';
 
 const Modal = ({ children, onClose, isModalOpen }) => {
   const modalRoot = document.getElementById('modal-root');
-
   const currentTheme = useSelector(selectTheme);
-
-  useEffect(() => {
-    const handleEscape = event => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    window.addEventListener('keydown', handleEscape);
-
-    return () => {
-      window.removeEventListener('keydown', handleEscape);
-    };
-  }, [onClose]);
 
   const handleClickOutside = event => {
     event.stopPropagation();
@@ -31,10 +17,28 @@ const Modal = ({ children, onClose, isModalOpen }) => {
     }
   };
 
+  useEffect(() => {
+    if (!isModalOpen) {
+      return clearAllBodyScrollLocks();
+    }
+    disableBodyScroll(document.body, { reserveScrollBarGap: true });
+    const handleEscape = event => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+
+    return () => {
+      window.removeEventListener('keydown', handleEscape);
+    };
+  }, [onClose, isModalOpen]);
+
   const modalContent = (
-
-    <ModalWrapper onClick={handleClickOutside} isModalOpen={isModalOpen}>
-
+    <ModalWrapper
+      onClick={event => handleClickOutside(event)}
+      isModalOpen={isModalOpen}
+    >
       <ModalContainer theme={currentTheme}>
         <CloseButton onClick={onClose} theme={currentTheme}>
           <svg

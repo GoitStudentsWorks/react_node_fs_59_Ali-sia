@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectTheme } from 'redux/auth/auth.selectors';
+import { toast } from 'react-hot-toast';
 
 import {
   Form,
@@ -21,21 +22,57 @@ import {
   RadioIconChecked,
 } from './TaskForm.styled';
 
-const TaskForm = ({ task, onSubmit, onClose, activeDate }) => {
-  const [formData, setFormData] = useState({
-    title: task?.title || '',
-    start: task?.start || '10:00',
-    end: task?.end || '14:00',
-    priority: task?.priority || 'low',
-    date: task?.date || activeDate,
-  });
-  // console.log('formData ', formData.start);
+const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
+  // const initialFormData = {
+  //   title: task?.title || '',
+  //   start: task?.start || '10:00',
+  //   end: task?.end || '14:00',
+  //   priority: task?.priority || 'low',
+  //   date: task?.date || '',
+  //   category: task?.category || category || '', // Add category to formData only if it doesn't already exist in task
+  // };
+  const initialFormData = useMemo(() => {
+    return {
+      title: task?.title || '',
+      start: task?.start || '10:00',
+      end: task?.end || '14:00',
+      priority: task?.priority || 'low',
+      date: task?.date || '',
+      category: task?.category || category || '', // Add category to formData only if it doesn't already exist in task
+    };
+  }, [task, category]);
+
+  const [formData, setFormData] = useState(initialFormData);
+  useEffect(() => {
+    // Set initial formData on mount
+    setFormData(initialFormData);
+  }, [initialFormData]);
+
+  useEffect(() => {
+    // Reset formData if isModalOpen changes
+    if (!isModalOpen) {
+      setFormData(initialFormData);
+    }
+  }, [isModalOpen, initialFormData]);
+
+  // useEffect(() => {
+  //   // Reset formData if isModalOpen changes
+  //   if (!isModalOpen) {
+  //     setFormData(initialFormData);
+  //   }
+  // }, [isModalOpen, initialFormData]);
+
   const currentTheme = useSelector(selectTheme);
 
   const handleSubmit = e => {
     e.preventDefault();
     const newTask = { ...task, ...formData };
-    // console.log('SUBMIT ', newTask);
+
+    if (newTask.title.length < 3 || newTask.title.length >= 30) {
+      toast.error('Minimum 3 characters, maximum - 30!');
+      return;
+    }
+
     onSubmit(newTask);
     onClose();
   };
@@ -46,6 +83,10 @@ const TaskForm = ({ task, onSubmit, onClose, activeDate }) => {
       ...prevFormData,
       [name]: value,
     }));
+  };
+
+  const handleClose = () => {
+    onClose();
   };
 
   const getRadioColor = priority => {
@@ -168,7 +209,7 @@ const TaskForm = ({ task, onSubmit, onClose, activeDate }) => {
       </RadioContainer>
 
       <ButtonContainer>
-        {formData ? (
+        {task ? (
           <Button type="submit" primary>
             <svg
               width="16"
@@ -207,7 +248,9 @@ const TaskForm = ({ task, onSubmit, onClose, activeDate }) => {
               </svg>
               Add
             </Button>
-            <Button onClick={() => onClose()}>Cancel</Button>
+            <Button type="button" onClick={handleClose}>
+              Cancel
+            </Button>
           </>
         )}
       </ButtonContainer>

@@ -21,4 +21,21 @@ export const WrapperMain = styled.div`
     )};
 `;
 
+export const WrapperSideBarContent = styled.div`
+  width: 289px;
+  
+  ${({ theme }) =>
+    greaterThan(
+      'laptop',
+      `
+    display: flex;
+    justify-content: end;
+    
+    min-width: 289px;
+    width: calc((100vw - 1440px) / 2 + 289px);
+    background: ${theme.colors.bgcSideBarTheme};
+  `
+    )};
+  `
+
 export const WrapperMainContent = styled.div``;

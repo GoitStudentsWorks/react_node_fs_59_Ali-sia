@@ -28,7 +28,7 @@ export default function DayCalendarHead({
   const getDayNumber = day => format(day, 'd');
   const isCurrentDay = day => isSameDay(currentDate, day);
   const isSelectedDay = day => isSameDay(activeDate, day);
-  const dayForLink = format(activeDate, 'ddMMMMyyyy');
+  const dayForLink = day => format(day, 'ddMMMMyyyy');
 
   return (
     <DaysWrapper>
@@ -41,7 +41,7 @@ export default function DayCalendarHead({
             iscurrentday={isCurrentDay(day).toString()}
             isselectedday={isSelectedDay(day).toString()}
             onClick={() => changeActiveDay(0, day)}
-            to={`/calendar/day/${dayForLink}`}
+            to={`/calendar/day/${dayForLink(day)}`}
           >
             {getDayNumber(day)}
           </DayNumber>

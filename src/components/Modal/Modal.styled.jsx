@@ -8,11 +8,10 @@ const ModalWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 
-  overflow: hidden;
   pointer-events: ${({ isModalOpen }) => (isModalOpen ? 'auto' : 'none')};
   visibility: ${({ isModalOpen }) => (isModalOpen ? 'visible' : 'hidden')};
   opacity: ${({ isModalOpen }) => (isModalOpen ? '1' : '0')};

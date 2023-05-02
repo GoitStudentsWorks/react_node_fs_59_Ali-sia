@@ -16,6 +16,7 @@ import {
   StyledField,
   ErrorMsgContainer,
 } from './RegisterForm.styled';
+import { addColumn } from 'redux/columns/columns.operations';
 
 export const RegisterForm = () => {
   const initialValues = {
@@ -23,6 +24,11 @@ export const RegisterForm = () => {
     email: '',
     password: '',
   };
+  const initColumns = [
+    { title: 'To do', number: 1 },
+    { title: 'In progress', number: 2 },
+    { title: 'Done', number: 3 },
+  ];
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -48,6 +54,8 @@ export const RegisterForm = () => {
           );
         successNotify();
         resetForm();
+        initColumns.forEach(column => { dispatch(addColumn(column))});
+    
       })
       .catch(error => {
         const errorNotify = () => toast.error(`${error.message}`);

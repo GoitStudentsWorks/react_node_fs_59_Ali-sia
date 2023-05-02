@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAction } from '@reduxjs/toolkit';
 import { fetchTasks, addTask, deleteTask, editTask } from './tasks.operations';
 
 const handlePending = state => {
@@ -18,9 +18,12 @@ const handleFulfiled = state => {
 export const tasksInitState = {
   tasks: [],
   savedPeriods: [],
+  activeDate: null,
   isTasksLoading: false,
   error: null,
 };
+
+export const setActiveDateStore = createAction('setActiveDate');
 
 const tasksSlice = createSlice({
   name: 'tasks',
@@ -36,20 +39,25 @@ const tasksSlice = createSlice({
       .addCase(fetchTasks.rejected, handleRejected)
       .addCase(fetchTasks.fulfilled, (state, { payload }) => {
         handleFulfiled(state);
-        state.tasks = [...state.tasks, ...payload.result];
+        state.tasks = payload.result.reduce((arr, task) => {
+          if (!arr.some(taskArr => task._id === taskArr._id)) {
+            arr.push(task);
+          };
+          return arr;
+        }, [...state.tasks]);
         state.savedPeriods.push(payload.start);
       })
       .addCase(addTask.pending, handlePending)
       .addCase(addTask.rejected, handleRejected)
       .addCase(addTask.fulfilled, (state, { payload }) => {
         handleFulfiled(state);
-        state.tasks.push(payload);
+        state.tasks.push(payload.data.result);
       })
       .addCase(deleteTask.pending, handlePending)
       .addCase(deleteTask.rejected, handleRejected)
       .addCase(deleteTask.fulfilled, (state, { payload }) => {
         handleFulfiled(state);
-        state.tasks = state.tasks.filter(task => task.id !== payload);
+        state.tasks = state.tasks.filter(task => task._id !== payload);
       })
       .addCase(editTask.pending, handlePending)
       .addCase(editTask.rejected, handleRejected)
@@ -57,6 +65,9 @@ const tasksSlice = createSlice({
         handleFulfiled(state);
         const index = state.tasks.findIndex(task => task._id === payload._id);
         state.tasks[index] = payload;
+      })
+      .addCase(setActiveDateStore, (state, {payload}) => {
+        state.activeDate = payload;
       });
   },
 });

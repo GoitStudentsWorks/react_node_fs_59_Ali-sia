@@ -1,4 +1,11 @@
-import { addDays, addMonths, format, isSameDay } from 'date-fns';
+import {
+  addDays,
+  addMonths,
+  format,
+  parseISO,
+  startOfDay,
+  startOfMonth,
+} from 'date-fns';
 import {
   ButtonsWrapper,
   DateField,
@@ -6,15 +13,17 @@ import {
   StyledHiChevronLeft,
   StyledHiChevronRight,
   StyledLink,
+  StyledLinkToday,
 } from './PeriodPaginator.styled';
+import { useAuth } from 'hooks';
 
 export default function PeriodPaginator({
   activeDate,
   changeActiveDay,
   isDayPage,
+  currentDate,
 }) {
-  // const {createdAt} = useAuth()
-  const day = new Date();
+  const { user } = useAuth();
   const date = isDayPage
     ? format(activeDate, 'dd MMMM yyyy')
     : format(activeDate, 'MMMM yyyy');
@@ -23,10 +32,17 @@ export default function PeriodPaginator({
     ? format(addDays(activeDate, 1), 'ddMMMMyyyy')
     : format(addMonths(activeDate, 1), 'MMMMyyyy');
 
+  const dateForLinkToday = isDayPage
+    ? format(currentDate, 'ddMMMMyyyy')
+    : format(currentDate, 'MMMMyyyy');
+
   const dateForLinkPrev = isDayPage
     ? format(addDays(activeDate, -1), 'ddMMMMyyyy')
     : format(addMonths(activeDate, -1), 'MMMMyyyy');
-  const isCreatedAtDay = isSameDay(activeDate, day);
+
+  const isCreatedAtDay = isDayPage
+    ? startOfDay(parseISO(user.createdAt)) >= startOfDay(activeDate)
+    : parseISO(user.createdAt) >= startOfMonth(activeDate);
 
   return (
     <PeriodPaginationWrapper>
@@ -49,6 +65,13 @@ export default function PeriodPaginator({
             >
               <StyledHiChevronRight />
             </StyledLink>
+
+            <StyledLinkToday
+              onClick={() => changeActiveDay(0)}
+              to={`/calendar/day/${dateForLinkToday}`}
+            >
+              Today
+            </StyledLinkToday>
           </>
         ) : (
           <>
@@ -59,12 +82,19 @@ export default function PeriodPaginator({
             >
               <StyledHiChevronLeft />
             </StyledLink>
+
             <StyledLink
               to={`/calendar/month/${dateForLinkNext}`}
               onClick={() => changeActiveDay(1)}
             >
               <StyledHiChevronRight />
             </StyledLink>
+            <StyledLinkToday
+              onClick={() => changeActiveDay(0)}
+              to={`/calendar/month/${dateForLinkToday}`}
+            >
+              Today
+            </StyledLinkToday>
           </>
         )}
       </ButtonsWrapper>

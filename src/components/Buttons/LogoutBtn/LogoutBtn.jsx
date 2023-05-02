@@ -14,7 +14,7 @@ export const LogoutBtn = () => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
-  const [ isModalOpen, setIsModalOpen ] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const ModalOpen = () => {
     setIsModalOpen(true);
@@ -22,15 +22,13 @@ export const LogoutBtn = () => {
 
   const ModalClose = event => {
     setIsModalOpen(false);
-    event.stopPropagation();
   };
 
-  const handleLogOut = async (event) => {
-    event.stopPropagation();
+  const handleLogOut = async event => {
     try {
       await dispatch(logOut()).unwrap();
       dispatch(resetTasksState());
-      console.log('Logout successful');
+      // console.log('Logout successful');
 
       // navigate.push('/login');
     } catch (error) {
@@ -44,13 +42,17 @@ export const LogoutBtn = () => {
         <span>Log Out </span>
         <img src={logoutIcon} alt="[->"></img>
       </StyledButton>
-      { isModalOpen && <Modal onClose={ModalClose}>
+      <Modal onClose={ModalClose} isModalOpen={isModalOpen}>
         <StyledP>Are you sure you want to log out?</StyledP>
         <ButtonsWrapper>
-          <StyledButton type='button' onClick={handleLogOut}>Yes</StyledButton>
-          <StyledButton type='button' onClick={ModalClose}>No</StyledButton>
+          <StyledButton type="button" onClick={handleLogOut}>
+            Yes
+          </StyledButton>
+          <StyledButton type="button" onClick={ModalClose}>
+            No
+          </StyledButton>
         </ButtonsWrapper>
-      </Modal>}
+      </Modal>
     </>
   );
 };

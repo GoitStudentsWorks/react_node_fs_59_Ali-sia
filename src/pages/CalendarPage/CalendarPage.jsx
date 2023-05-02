@@ -16,6 +16,7 @@ import ChoosedMonth from 'components/ChoosedMonth/ChoosedMonth';
 import ChoosedDay from 'components/ChooseDay/ChooseDay';
 import { useTasks } from 'hooks/useTasks';
 import { toast } from 'react-hot-toast';
+import { setActiveDateStore } from 'redux/tasks/tasks.slice';
 
 export default function CalendarPage() {
   setDefaultOptions({ weekStartsOn: 1 }); //for date-fns, to start count weeks from monday
@@ -31,6 +32,9 @@ export default function CalendarPage() {
   const changeActiveDay = (value, day) => {
     if (day) {
       return setActiveDate(day);
+    }
+    if (value === 0) {
+      return setActiveDate(currentDate);
     }
     if (location.pathname.includes('day')) {
       return setActiveDate(addDays(activeDate, value));
@@ -85,12 +89,17 @@ export default function CalendarPage() {
     };
   }, [dispatch, isLoggedIn, activeDate, getPeriod]);
 
+  useEffect(() => {
+    dispatch(setActiveDateStore(JSON.stringify(activeDate)));
+  }, [activeDate, dispatch]);
+
   return (
     <Wrapper>
       <CalendarToolbar
         activeDate={activeDate}
         changeActiveDay={changeActiveDay}
         isDayPage={isDayPage}
+        currentDate={currentDate}
       />
 
       {isDayPage ? (

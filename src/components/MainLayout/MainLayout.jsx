@@ -8,6 +8,7 @@ import Loader from 'components/Loader/Loader';
 import {
   StyledMain,
   WrapperMain,
+  WrapperSideBarContent,
   WrapperMainContent,
 } from './MainLayout.styled';
 
@@ -31,7 +32,9 @@ const MainLayout = () => {
   return (
     <StyledMain>
       <WrapperMain>
-        <SideBar />
+        <WrapperSideBarContent>
+          <SideBar />
+        </WrapperSideBarContent>
         <WrapperMainContent>
           <Header />
           <Suspense fallback={<Loader />}>
