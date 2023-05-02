@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectUser } from 'redux/auth/auth.selectors'; 
@@ -18,26 +18,25 @@ import { UserMenuButtonAvatar, UserMenuButtonChar } from './UserInfo.styled';
 
 import { LogoutBtn } from 'components/Buttons/LogoutBtn/LogoutBtn';
 
-const handleClose = (event, onClose) => {
-  if (event.key === 'Escape' || event.target === event.currentTarget) {
-    onClose();
-  }
-};
-
 const Modal = ({ onClose }) => {
-  useEffect(() => {
-    window.addEventListener('keydown', handleClose);
+  const [ isShow, setIsShow ] = useState(false);
 
-    return () => {
-      window.removeEventListener('keydown', handleClose);
-    };
+  const handleClose = (event, onClose) => {
+    if (event.target === event.currentTarget) {
+      setIsShow(false);
+      setTimeout(onClose, 500);
+    }
+  };
+
+  useEffect(() => {
+    setIsShow(true);
   }, []);
 
   const { name, avatarURL } = useSelector(selectUser);
   
   return (
     <ModalWrapper onClick={event => handleClose(event, onClose)}>
-      <ModalContainer>
+      <ModalContainer isShow={isShow}>
         <HeadModal>
           <UserAvatarModal>
             {avatarURL

@@ -29,6 +29,12 @@ export const ModalContainer = styled.div`
   box-shadow: ${props => props.theme.shadows.box};
   border-radius: 8px;
 
+  transition: transform 0.5s ease;
+  ${props => props.isShow
+    ? 'transform: translate(0, 0) scale(1);'
+    : 'transform: translate(50%, -50%) scale(0);'
+  };
+
   @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
     top: 75px;
     ${props => `right: calc((100vw - ${props.theme.breakpoints.tablet}) / 2 + 32px);`}
