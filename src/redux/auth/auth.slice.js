@@ -20,6 +20,7 @@ const initialState = {
   },
   token: null,
   isLoggedIn: false,
+  isLoading: false,
   isRefreshing: false,
   error: null,
   theme: localStorage.getItem('theme')
@@ -44,10 +45,20 @@ const authSlice = createSlice({
         state.token = payload.token;
         state.isLoggedIn = true;
       })
+      .addCase(logOut.pending, (state, { payload }) => {
+        state.isLoading = true;
+      })
       .addCase(logOut.fulfilled, (state, { payload }) => {
         state.user = { name: null, email: null };
         state.token = null;
         state.isLoggedIn = false;
+        state.isLoading = false;
+      })
+      .addCase(logOut.rejected, (state, { payload }) => {
+        state.user = { name: null, email: null };
+        state.token = null;
+        state.isLoggedIn = false;
+        state.isLoading = false;
       })
       .addCase(refreshUser.pending, (state, { payload }) => {
         state.isRefreshing = true;

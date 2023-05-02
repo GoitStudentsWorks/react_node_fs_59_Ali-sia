@@ -13,7 +13,7 @@ import {
 } from './MainLayout.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUser } from 'redux/auth/auth.selectors';
+import { selectUser, selectIsLoading } from 'redux/auth/auth.selectors';
 import { refreshUser } from 'redux/auth/auth.operations';
 
 const isUserNull = user => {
@@ -23,6 +23,7 @@ const isUserNull = user => {
 
 const MainLayout = () => {
   const user = useSelector(selectUser);
+  const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,19 +31,24 @@ const MainLayout = () => {
   }, [dispatch, user]);
 
   return (
-    <StyledMain>
-      <WrapperMain>
-        <WrapperSideBarContent>
-          <SideBar />
-        </WrapperSideBarContent>
-        <WrapperMainContent>
-          <Header />
-          <Suspense fallback={<Loader />}>
-            <Outlet />
-          </Suspense>
-        </WrapperMainContent>
-      </WrapperMain>
-    </StyledMain>
+    <>
+      {isLoading
+        ? <Loader />
+        : <StyledMain>
+            <WrapperMain>
+              <WrapperSideBarContent>
+                <SideBar />
+              </WrapperSideBarContent>
+              <WrapperMainContent>
+                <Header />
+                <Suspense fallback={<Loader />}>
+                  <Outlet />
+                </Suspense>
+              </WrapperMainContent>
+            </WrapperMain>
+          </StyledMain>
+        }
+    </>
   );
 };
 export default MainLayout;
