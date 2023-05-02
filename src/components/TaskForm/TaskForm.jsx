@@ -39,7 +39,7 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
     if (!isModalOpen) {
       setFormData(initialFormData);
     }
-  }, [isModalOpen]);
+  }, [isModalOpen, initialFormData]);
 
   const currentTheme = useSelector(selectTheme);
 
