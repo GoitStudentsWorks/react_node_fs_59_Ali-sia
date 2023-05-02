@@ -29,7 +29,7 @@ export const ModalContainer = styled.div`
   box-shadow: ${props => props.theme.shadows.box};
   border-radius: 8px;
 
-  transition: transform 1s ease;
+  transition: transform 0.5s ease;
   ${props => props.isShow
     ? 'transform: translate(0, 0) scale(1);'
     : 'transform: translate(50%, -50%) scale(0);'

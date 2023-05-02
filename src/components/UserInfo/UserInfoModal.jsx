@@ -18,23 +18,18 @@ import { UserMenuButtonAvatar, UserMenuButtonChar } from './UserInfo.styled';
 
 import { LogoutBtn } from 'components/Buttons/LogoutBtn/LogoutBtn';
 
-const handleClose = (event, onClose) => {
-  if (event.key === 'Escape' || event.target === event.currentTarget) {
-    onClose();
-  }
-};
-
 const Modal = ({ onClose }) => {
   const [ isShow, setIsShow ] = useState(false);
 
+  const handleClose = (event, onClose) => {
+    if (event.target === event.currentTarget) {
+      setIsShow(false);
+      setTimeout(onClose, 500);
+    }
+  };
+
   useEffect(() => {
     setIsShow(true);
-
-    window.addEventListener('keydown', handleClose);
-
-    return () => {
-      window.removeEventListener('keydown', handleClose);
-    };
   }, []);
 
   const { name, avatarURL } = useSelector(selectUser);
