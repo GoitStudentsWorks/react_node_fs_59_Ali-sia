@@ -4,8 +4,6 @@ import { Field, Form } from 'formik';
 import inputValidIcon from './SVG/inputValidIcon.svg';
 import inputInvalidIcon from './SVG/inputInvalidIcon.svg';
 
-// TODO: додати кольори в файл theme.jsx, а тут використовувати змінні
-
 export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -61,11 +59,11 @@ export const StyledLabel = styled.label`
   font-size: ${props => props.theme.fontSizes.xs};
 
   &[aria-invalid='true'] {
-    color: rgba(231, 74, 59, 1);
+    color: ${props => props.theme.colors.invalid};
   }
 
   &[data-valid='true'] {
-    color: rgba(60, 188, 129, 1);
+    color: ${props => props.theme.colors.valid};
   }
 `;
 
@@ -82,16 +80,16 @@ export const StyledField = styled(Field)`
 
   background-color: ${props => props.theme.colors.white};
 
-  border: 1px solid rgba(17, 17, 17, 0.15);
+  border: ${props => props.theme.borders.formField};
 
   &:focus,
   &:hover,
   &:active {
-    border: 1px solid rgba(17, 17, 17, 1);
+    border: ${props => props.theme.borders.activeField};
   }
 
   &[aria-invalid='true'] {
-    border: 1px solid rgba(231, 74, 59, 1);
+    border: ${props => props.theme.borders.invalidField};
 
     background: url(${inputInvalidIcon});
     background-repeat: no-repeat;
@@ -99,7 +97,7 @@ export const StyledField = styled(Field)`
   }
 
   &[data-valid='true'] {
-    border: 1px solid rgba(60, 188, 129, 1);
+    border: ${props => props.theme.borders.validField};
 
     background: url(${inputValidIcon});
     background-repeat: no-repeat;
@@ -108,6 +106,5 @@ export const StyledField = styled(Field)`
 `;
 
 export const ErrorMsgContainer = styled.div`
-  color: rgba(231, 74, 59, 1);
+  color: ${props => props.theme.colors.invalid};
 `;
-
