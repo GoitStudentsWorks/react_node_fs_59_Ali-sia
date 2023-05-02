@@ -52,6 +52,7 @@ export const InputContainer = styled.div`
 `;
 
 export const StyledLabel = styled.label`
+  position: relative;
   display: flex;
   flex-direction: column;
 
@@ -106,5 +107,13 @@ export const StyledField = styled(Field)`
 `;
 
 export const ErrorMsgContainer = styled.div`
+  position: absolute;
+  bottom: -22%;
+  right: 0;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+
   color: ${props => props.theme.colors.invalid};
 `;
