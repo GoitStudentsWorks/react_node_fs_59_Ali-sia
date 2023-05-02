@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import { ReviewsContainer } from './Reviews.styled';
+import { ReviewsContainer, SectionTitle, AuthorName } from './Reviews.styled';
+
+import arrowRight from './arrow-r.png';
+import arrowLeft from './arrow-l.png';
 
 function Reviews({ reviews }) {
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
@@ -17,24 +20,30 @@ function Reviews({ reviews }) {
 
   return (
     <div>
-      <h2>Reviews</h2>
+      <SectionTitle>Reviews</SectionTitle>
 
       <ReviewsContainer>
         <div>
-          <p>{reviews[currentReviewIndex].review}</p>
-          <p>{reviews[currentReviewIndex].author}</p>
           <img
             src={reviews[currentReviewIndex].authorAvatar}
             alt="user avatar"
           ></img>
-          <img
-            src={reviews[currentReviewIndex].rate}
-            alt="review star rate"
-          ></img>
+          <div>
+            <AuthorName>{reviews[currentReviewIndex].author}</AuthorName>
+            <img
+              src={reviews[currentReviewIndex].rate}
+              alt="review star rate"
+            ></img>
+          </div>
+          <p>{reviews[currentReviewIndex].review}</p>
         </div>
 
-        <button onClick={showPreviousReview}>Previous</button>
-        <button onClick={showNextReview}>Next</button>
+        <button onClick={showPreviousReview}>
+          <img src={arrowLeft} alt="arrow previous"></img>
+        </button>
+        <button onClick={showNextReview}>
+          <img src={arrowRight} alt="arrow next"></img>
+        </button>
       </ReviewsContainer>
     </div>
   );

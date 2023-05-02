@@ -11,15 +11,17 @@ import rateImg from './rate.png';
 
 const reviews = [
   {
-    review: "Дуже задоволений сервісом! Обов'язково скористаюся ще раз.",
-    author: 'Іван',
-    authorAvatar: authorImg2,
+    review:
+      'GooseTrack is impressive, the calendar view and filter options make it easy to stay organized and focused. Highly recommended.',
+    author: 'Olena Doe ',
+    authorAvatar: authorImg,
     rate: rateImg,
   },
   {
-    review: 'Якісний продукт за розумною ціною. Рекомендую.',
-    author: 'Олена',
-    authorAvatar: authorImg,
+    review:
+      'GooseTrack is incredibly helpful, the sidebar with account management, calendar, and filter options make navigation seamless. Great for staying organized.',
+    author: 'Alexander Hubbard ',
+    authorAvatar: authorImg2,
     rate: rateImg,
   },
   {
