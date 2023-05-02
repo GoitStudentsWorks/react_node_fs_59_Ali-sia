@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectTheme } from 'redux/auth/auth.selectors';
 import { toast } from 'react-hot-toast';
@@ -23,16 +23,30 @@ import {
 } from './TaskForm.styled';
 
 const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
-  const initialFormData = {
-    title: task?.title || '',
-    start: task?.start || '10:00',
-    end: task?.end || '14:00',
-    priority: task?.priority || 'low',
-    date: task?.date || '',
-    category: task?.category || category || '', // Add category to formData only if it doesn't already exist in task
-  };
+  // const initialFormData = {
+  //   title: task?.title || '',
+  //   start: task?.start || '10:00',
+  //   end: task?.end || '14:00',
+  //   priority: task?.priority || 'low',
+  //   date: task?.date || '',
+  //   category: task?.category || category || '', // Add category to formData only if it doesn't already exist in task
+  // };
+  const initialFormData = useMemo(() => {
+    return {
+      title: task?.title || '',
+      start: task?.start || '10:00',
+      end: task?.end || '14:00',
+      priority: task?.priority || 'low',
+      date: task?.date || '',
+      category: task?.category || category || '', // Add category to formData only if it doesn't already exist in task
+    };
+  }, [task, category]);
 
   const [formData, setFormData] = useState(initialFormData);
+  useEffect(() => {
+    // Set initial formData on mount
+    setFormData(initialFormData);
+  }, [initialFormData]);
 
   useEffect(() => {
     // Reset formData if isModalOpen changes
@@ -40,6 +54,13 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
       setFormData(initialFormData);
     }
   }, [isModalOpen, initialFormData]);
+
+  // useEffect(() => {
+  //   // Reset formData if isModalOpen changes
+  //   if (!isModalOpen) {
+  //     setFormData(initialFormData);
+  //   }
+  // }, [isModalOpen, initialFormData]);
 
   const currentTheme = useSelector(selectTheme);
 
