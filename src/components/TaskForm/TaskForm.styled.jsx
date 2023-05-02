@@ -49,6 +49,13 @@ const Input = styled.input`
   box-sizing: 'border-box';
 `;
 
+const ErrorMessage = styled.div`
+  bottom: -1.5rem;
+  left: 0;
+  color: red;
+  font-size: 0.8rem;
+`;
+
 const TitleContainer = styled.div`
   width: 100%;
   display: flex;
@@ -223,6 +230,7 @@ export {
   Form,
   Label,
   Input,
+  ErrorMessage,
   TimeInput,
   TitleContainer,
   TimeContainer,

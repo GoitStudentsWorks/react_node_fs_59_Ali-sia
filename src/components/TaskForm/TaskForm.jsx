@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectTheme } from 'redux/auth/auth.selectors';
-import { toast } from 'react-hot-toast';
 
 import {
   Form,
   Label,
   Input,
+  ErrorMessage,
   TimeInput,
   TitleContainer,
   TimeContainer,
@@ -23,14 +23,6 @@ import {
 } from './TaskForm.styled';
 
 const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
-  // const initialFormData = {
-  //   title: task?.title || '',
-  //   start: task?.start || '10:00',
-  //   end: task?.end || '14:00',
-  //   priority: task?.priority || 'low',
-  //   date: task?.date || '',
-  //   category: task?.category || category || '', // Add category to formData only if it doesn't already exist in task
-  // };
   const initialFormData = useMemo(() => {
     return {
       title: task?.title || '',
@@ -42,6 +34,8 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
     };
   }, [task, category]);
 
+  const [error, setError] = useState(null);
+
   const [formData, setFormData] = useState(initialFormData);
   useEffect(() => {
     // Set initial formData on mount
@@ -52,15 +46,9 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
     // Reset formData if isModalOpen changes
     if (!isModalOpen) {
       setFormData(initialFormData);
+      setError(null);
     }
   }, [isModalOpen, initialFormData]);
-
-  // useEffect(() => {
-  //   // Reset formData if isModalOpen changes
-  //   if (!isModalOpen) {
-  //     setFormData(initialFormData);
-  //   }
-  // }, [isModalOpen, initialFormData]);
 
   const currentTheme = useSelector(selectTheme);
 
@@ -68,8 +56,14 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
     e.preventDefault();
     const newTask = { ...task, ...formData };
 
-    if (newTask.title.length < 3 || newTask.title.length >= 30) {
-      toast.error('Minimum 3 characters, maximum - 30!');
+    if (newTask.title.length === 0) {
+      setError('Title is required!');
+      return;
+    } else if (newTask.title.length < 3) {
+      setError('Minimum 3 characters are required!');
+      return;
+    } else if (newTask.title.length > 30) {
+      setError('Maximum 30 characters are allowed!');
       return;
     }
 
@@ -116,8 +110,8 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
           value={formData.title}
           onChange={handleChange}
           placeholder="Enter text"
-          required
         />
+        {error && <ErrorMessage>{error}</ErrorMessage>}
       </TitleContainer>
 
       <TimeContainer>
