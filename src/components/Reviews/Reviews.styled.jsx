@@ -15,20 +15,12 @@ export const ReviewsContainer = styled.div`
   }
 `;
 
-export const ReviewsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  font-weight: 700;
-
+export const ReviewContent = styled.div`
   ${props =>
     greaterThan(
       'tablet',
       `
-      flex-direction: row;
-      justify-content: space-between;
+      
         `
     )}
 `;

@@ -1,6 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
-import { ReviewsContainer, SectionTitle, AuthorName } from './Reviews.styled';
+import {
+  ReviewsContainer,
+  SectionTitle,
+  AuthorName,
+  ReviewContent,
+} from './Reviews.styled';
 
 import arrowRight from './arrow-r.png';
 import arrowLeft from './arrow-l.png';
@@ -23,7 +28,7 @@ function Reviews({ reviews }) {
       <SectionTitle>Reviews</SectionTitle>
 
       <ReviewsContainer>
-        <div>
+        <ReviewContent>
           <img
             src={reviews[currentReviewIndex].authorAvatar}
             alt="user avatar"
@@ -36,7 +41,7 @@ function Reviews({ reviews }) {
             ></img>
           </div>
           <p>{reviews[currentReviewIndex].review}</p>
-        </div>
+        </ReviewContent>
 
         <button onClick={showPreviousReview}>
           <img src={arrowLeft} alt="arrow previous"></img>
