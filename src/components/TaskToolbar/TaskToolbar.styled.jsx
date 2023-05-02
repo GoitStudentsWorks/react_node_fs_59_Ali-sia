@@ -26,7 +26,7 @@ const Button = styled.button`
 const ContextMenu = styled.div`
   position: absolute;
   z-index: 50;
-  top: 150%;
+  top: -120%;
   left: -60%;
 
   width: 115px;
@@ -38,6 +38,8 @@ const ContextMenu = styled.div`
     theme === THEME_CONTEXT.LIGHT ? '#ffffff' : '#171820'};
   color: ${({ theme }) =>
     theme === THEME_CONTEXT.LIGHT ? '#616161' : '#ffffff'};
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   box-shadow: 0px 4px 16px rgba(17, 17, 17, 0.1);
 
@@ -45,6 +47,7 @@ const ContextMenu = styled.div`
   visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
 
   @media (min-width: 768px) {
+    top: -200%;
     left: -100%;
 
     padding: 20px 24px;
