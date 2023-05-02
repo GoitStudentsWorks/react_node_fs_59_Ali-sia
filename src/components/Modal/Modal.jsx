@@ -30,6 +30,7 @@ const Modal = ({ children, onClose, isModalOpen }) => {
     window.addEventListener('keydown', handleEscape);
 
     return () => {
+      clearAllBodyScrollLocks();
       window.removeEventListener('keydown', handleEscape);
     };
   }, [onClose, isModalOpen]);
