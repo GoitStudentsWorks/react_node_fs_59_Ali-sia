@@ -4,6 +4,7 @@ import ColumnTasksList from './ColumnsTasksList/ColumnsTasksList';
 import { TaskColumnsWrapper } from './TasksColumn.styled';
 
 export default function TasksColumn({
+  column,
   title,
   tasksForColumn,
   sortedColumnList,
@@ -14,12 +15,12 @@ export default function TasksColumn({
 
   return (
     <TaskColumnsWrapper>
-      <ColumnHeadBar title={title} />
+      <ColumnHeadBar column={column} />
       <ColumnTasksList
         tasksForColumn={tasksForColumn}
         sortedColumnList={sortedColumnList}
       />
-      <AddTaskBtn category={title} />
+      <AddTaskBtn category={column.title} />
     </TaskColumnsWrapper>
   );
 }

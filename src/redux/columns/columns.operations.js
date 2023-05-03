@@ -55,12 +55,13 @@ export const addColumn = createAsyncThunk(
 
 export const deleteColumn = createAsyncThunk(
   'contacts/deleteColumn',
-  async (columnId, { getState, rejectWithValue }) => {
+  async (id, { getState, rejectWithValue }) => {
+    console.log('id on deleteColumn operation: ', id);
     const state = getState();
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
-      return rejectWithValue('Unable to fetch columns');
+      return rejectWithValue('Unable to delete column');
     }
     try {
       const isLoggedIn = selectIsLoggedIn();
@@ -69,7 +70,7 @@ export const deleteColumn = createAsyncThunk(
       }
       setAuthHeader(persistedToken);
 
-      const { data } = await privateApi.delete(`/api/columns/${columnId}`);
+      const { data } = await privateApi.delete(`/api/columns/${id}`);
 
       return data;
     } catch (e) {

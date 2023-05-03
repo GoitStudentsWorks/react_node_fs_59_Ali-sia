@@ -65,7 +65,7 @@ export default function ChoosedDay({
               return (
                 <TasksColumn
                   key={'taskcolumn' + idx}
-                  title={column.title}
+                  column={column}
                   sortedColumnList={sortedColumnList}
                   tasksForColumn={tasksForColumn}
                 />
