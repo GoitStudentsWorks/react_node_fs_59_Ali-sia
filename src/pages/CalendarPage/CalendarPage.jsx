@@ -11,6 +11,7 @@ import {
 import { useLocation } from 'react-router-dom';
 import { useAuth } from 'hooks';
 import { fetchTasks } from 'redux/tasks/tasks.operations';
+import { fetchColumns } from 'redux/columns/columns.operations';
 import { useDispatch } from 'react-redux';
 import ChoosedMonth from 'components/ChoosedMonth/ChoosedMonth';
 import ChoosedDay from 'components/ChooseDay/ChooseDay';
