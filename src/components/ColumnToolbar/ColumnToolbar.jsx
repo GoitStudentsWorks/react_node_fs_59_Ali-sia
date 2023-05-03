@@ -15,7 +15,7 @@ import {
 //   MoveTaskIconBase,
 } from './ColumnToolbar.styled';
 
-const ColumnToolbar = (column) => {
+const ColumnToolbar = (column, tasksForColumn) => {
     // console.log("column in ColumnToolbar: ", column);
   const [showMenu, setShowMenu] = useState(false);
 //   const [openModal, setOpenModal] = useState(false);
@@ -59,8 +59,12 @@ const ColumnToolbar = (column) => {
 //     setOpenModal(!openModal);
 //   };
 
-    const handleDelete = id => {
-        console.log('id on handleDelete: ', id);
+  const handleDelete = id => {
+    console.log('tasksForColumn: ', tasksForColumn);
+    if (tasksForColumn.lenght !== 0) {
+      toast.error(`Unable to delete a column with tasks`);
+      return;
+    }
     dispatch(deleteColumn(id))
       .unwrap()
       .catch(e => {
