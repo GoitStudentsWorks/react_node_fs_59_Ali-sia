@@ -4,30 +4,21 @@ import { selectTheme } from 'redux/auth/auth.selectors';
 
 import {
   Form,
-  Label,
   Input,
   ErrorMessage,
-//   TimeInput,
   TitleContainer,
-//   TimeContainer,
-//   InnerContainer,
-//   RadioContainer,
-//   RadioLabel,
-//   RadioInput,
-//   StyledRadioLabel,
   ButtonContainer,
   Button,
-//   RadioIconContainer,
-//   RadioIcon,
-//   RadioIconChecked,
 } from './ColumnForm.styled';
 
 const ColumnForm = ({ column, onSubmit, onClose, isModalOpen }) => {
   const initialFormData = useMemo(() => {
     return {
       title: column?.title || '',
+      number: column?.length + 1 || 1
       };
   }, [column]);
+  // console.log('initialFormData: ', initialFormData);
 
   const [error, setError] = useState(null);
 
@@ -35,12 +26,14 @@ const ColumnForm = ({ column, onSubmit, onClose, isModalOpen }) => {
   useEffect(() => {
     // Set initial formData on mount
     setFormData(initialFormData);
+    // console.log('formData in Set initial formData on mount: ', formData);
   }, [initialFormData]);
 
   useEffect(() => {
     // Reset formData if isModalOpen changes
     if (!isModalOpen) {
       setFormData(initialFormData);
+      // console.log('formData in Reset formData if isModalOpen changes: ', formData);
       setError(null);
     }
   }, [isModalOpen, initialFormData]);
@@ -49,7 +42,10 @@ const ColumnForm = ({ column, onSubmit, onClose, isModalOpen }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const newColumn = { ...column, ...formData };
+    const newColumn = {
+      ...formData
+    };
+    console.log('newColumn: ', newColumn);
 
     if (newColumn.title.length === 0) {
       setError('Title is required!');
@@ -68,6 +64,7 @@ const ColumnForm = ({ column, onSubmit, onClose, isModalOpen }) => {
 
   const handleChange = e => {
     const { name, value } = e.target;
+    // console.log('e.target: ', e.target);
     setFormData(prevFormData => ({
       ...prevFormData,
       [name]: value,
@@ -81,9 +78,6 @@ const ColumnForm = ({ column, onSubmit, onClose, isModalOpen }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <TitleContainer>
-        <Label htmlFor="title" theme={currentTheme}>
-          Title
-        </Label>
         <Input
           type="text"
           id="title"
@@ -91,13 +85,13 @@ const ColumnForm = ({ column, onSubmit, onClose, isModalOpen }) => {
           theme={currentTheme}
           value={formData.title}
           onChange={handleChange}
-          placeholder="Enter category name"
+          placeholder="Enter new category title"
         />
         {error && <ErrorMessage>{error}</ErrorMessage>}
       </TitleContainer>
 
       <ButtonContainer>
-        {column ? (
+        {/* {column ? (
           <Button type="submit" primary>
             <svg
               width="16"
@@ -117,7 +111,7 @@ const ColumnForm = ({ column, onSubmit, onClose, isModalOpen }) => {
             Edit
           </Button>
         ) : (
-          <>
+          <> */}
             <Button type="submit" primary>
               <svg
                 width="20"
@@ -139,8 +133,8 @@ const ColumnForm = ({ column, onSubmit, onClose, isModalOpen }) => {
             <Button type="button" onClick={handleClose}>
               Cancel
             </Button>
-          </>
-        )}
+          {/* </> */}
+        {/* )} */}
       </ButtonContainer>
     </Form>
   );

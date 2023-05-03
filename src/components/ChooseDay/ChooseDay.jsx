@@ -72,7 +72,10 @@ export default function ChoosedDay({
               );
             })}
             <AddNewColumn>
-              <AddColumnBtn children="Add your own category"/>
+              <AddColumnBtn
+                children="Add your own category"
+                column={columnData}
+              />
             </AddNewColumn>
           </TasksColumnsList>
         </TasksColumnsListWrapper>

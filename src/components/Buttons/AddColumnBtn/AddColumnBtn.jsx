@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import AddTaskIcon from './AddTaskIcon.svg';
 import { StyledBtn } from './AddColumnBtn.styled';
-// import TaskModal from 'components/TaskModal/TaskModal';
 import ColumnModal from 'components/ColumnModal/ColumnModal';
 
-export const AddColumnBtn = ({ children }) => {
+export const AddColumnBtn = ({ children, column }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -25,6 +24,7 @@ export const AddColumnBtn = ({ children }) => {
             <ColumnModal
                 onClose={handleCloseModal}
                 isModalOpen={isModalOpen}
+                column={column}
             />
         </>
     );
