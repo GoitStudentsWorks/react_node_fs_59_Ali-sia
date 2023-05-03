@@ -8,15 +8,11 @@ export default function TasksColumn({
   tasksForColumn,
   sortedColumnList,
 }) {
-  // const toggleModal = () => {
-  //   console.log('TasksColumn open modal');
-  // };
 
   return (
     <TaskColumnsWrapper>
       <ColumnHeadBar
         column={column}
-        tasksForColumn={tasksForColumn}
       />
       <ColumnTasksList
         tasksForColumn={tasksForColumn}
