@@ -20,6 +20,8 @@ import {
   RadioIconContainer,
   RadioIcon,
   RadioIconChecked,
+  DescriptionContainer,
+  Textarea,
 } from './TaskForm.styled';
 
 const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
@@ -31,6 +33,7 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
       priority: task?.priority || 'low',
       date: task?.date || '',
       category: task?.category || category || '', // Add category to formData only if it doesn't already exist in task
+      description: task?.description || '',
     };
   }, [task, category]);
 
@@ -110,6 +113,7 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
           value={formData.title}
           onChange={handleChange}
           placeholder="Enter text"
+          maxLength={30}
         />
         {error && <ErrorMessage>{error}</ErrorMessage>}
       </TitleContainer>
@@ -201,7 +205,21 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
           <StyledRadioLabel theme={currentTheme}>High</StyledRadioLabel>
         </RadioLabel>
       </RadioContainer>
-
+      <DescriptionContainer>
+        <Label htmlFor="description" theme={currentTheme}>
+          Description
+        </Label>
+        <Textarea
+          id="description"
+          name="description"
+          theme={currentTheme}
+          value={formData.description}
+          onChange={handleChange}
+          placeholder="Please enter task description"
+          rows={4}
+          maxLength={120}
+        />
+      </DescriptionContainer>
       <ButtonContainer>
         {task ? (
           <Button type="submit" primary>

@@ -47,7 +47,8 @@ export const deleteTask = createAsyncThunk(
 export const editTask = createAsyncThunk(
   'tasks/editTask',
   async (data, thunkAPI) => {
-    const { _id, start, end, priority, title, category, date } = data;
+    const { _id, start, end, priority, title, category, date, description } =
+      data;
     try {
       const { data } = await privateApi.patch(`/api/tasks/${_id}`, {
         start,
@@ -56,6 +57,7 @@ export const editTask = createAsyncThunk(
         title,
         date,
         category,
+        description,
       });
       return data.data.result;
     } catch (error) {
