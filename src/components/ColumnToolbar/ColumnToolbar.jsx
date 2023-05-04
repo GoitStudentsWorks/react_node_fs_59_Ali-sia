@@ -14,7 +14,7 @@ const ColumnToolbar = ({column, tasksForColumn}) => {
   const dispatch = useDispatch();
   const currentTheme = useSelector(selectTheme);
   
-  const handleDelete = (id) => {
+  const handleDelete = id => {
     if (tasksForColumn.length !== 0) {
       toast.error(`Unable to delete column with tasks`);
       return;
@@ -22,7 +22,7 @@ const ColumnToolbar = ({column, tasksForColumn}) => {
     dispatch(deleteColumn(id))
       .unwrap()
       .catch(e => {
-        toast.error(`Unable to delete your column`);
+        toast.error(`Unable to delete column`);
       });
   };
 

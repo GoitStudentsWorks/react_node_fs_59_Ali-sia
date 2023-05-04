@@ -6,11 +6,7 @@ const { columnsInitState } = require('./columns.init-state');
 const columnSlice = createSlice({
   name: 'columns',
   initialState: columnsInitState,
-  // reducers: {
-  //   resetColumnState() {
-  //     return columnsInitState;
-  //   },
-  // },
+
   extraReducers: builder => {
     builder
       .addCase(fetchColumns.pending, state => {
@@ -18,27 +14,21 @@ const columnSlice = createSlice({
       })
       .addCase(fetchColumns.fulfilled, (state, { payload }) => {
         state.columns.columns = payload;
-        // state.columns.isLoading = false;
         state.columns.error = null;
       })
       .addCase(fetchColumns.rejected, (state, { payload }) => {
-        // state.columns.isLoading = false;
         state.columns.error = payload;
       })
       .addCase(addColumn.pending, state => {
-        // state.columns.isLoading = true;
       })
       .addCase(addColumn.fulfilled, (state, { payload }) => {
         state.columns.columns.push(payload);
-        // state.columns.isLoading = false;
         state.columns.error = null;
       })
       .addCase(addColumn.rejected, (state, { payload }) => {
-        // state.columns.isLoading = false;
         state.columns.error = payload;
       })
       .addCase(deleteColumn.pending, state => {
-        // state.columns.isLoading = true;
       })
       .addCase(deleteColumn.fulfilled, (state, { payload }) => {
         

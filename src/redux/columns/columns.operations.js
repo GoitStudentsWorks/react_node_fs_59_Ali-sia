@@ -66,7 +66,7 @@ export const deleteColumn = createAsyncThunk(
 
       const { data } = await privateApi.delete(`/api/columns/${id}`);
 
-      return data;
+      return data.data.result._id;
     } catch (e) {
       return rejectWithValue(e.message);
     }
