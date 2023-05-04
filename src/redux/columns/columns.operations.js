@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { selectIsLoggedIn } from 'redux/auth/auth.selectors';
+// import { selectIsLoggedIn } from 'redux/auth/auth.selectors';
 
 import { setAuthHeader, privateApi } from 'services/http';
 
@@ -45,7 +45,7 @@ export const addColumn = createAsyncThunk(
         number,
       });
 
-      return data;
+      return data.data.result;
     } catch (e) {
       return rejectWithValue(e.message);
     }
@@ -53,7 +53,7 @@ export const addColumn = createAsyncThunk(
 );
 
 export const deleteColumn = createAsyncThunk(
-  'contacts/deleteColumn',
+  'columns/deleteColumn',
   async (id, { getState, rejectWithValue }) => {
     const state = getState();
     const persistedToken = state.auth.token;
