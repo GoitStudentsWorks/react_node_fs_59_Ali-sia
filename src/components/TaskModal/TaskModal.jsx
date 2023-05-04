@@ -18,6 +18,7 @@ function TaskModal({ task, columnId, onClose, isModalOpen, readOnlyMode }) {
 //   isModalOpen,
 //   readOnlyMode,
 // }) {
+
   const dispatch = useDispatch();
   const activeDate = new Date(JSON.parse(useSelector(getActiveDate)));
 
