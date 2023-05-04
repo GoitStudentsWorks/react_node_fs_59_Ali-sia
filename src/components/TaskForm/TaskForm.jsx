@@ -24,7 +24,14 @@ import {
   Textarea,
 } from './TaskForm.styled';
 
-const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
+const TaskForm = ({
+  task,
+  category,
+  onSubmit,
+  onClose,
+  isModalOpen,
+  readOnlyMode = false,
+}) => {
   const initialFormData = useMemo(() => {
     return {
       title: task?.title || '',
@@ -114,6 +121,7 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
           onChange={handleChange}
           placeholder="Enter text"
           maxLength={30}
+          disabled={readOnlyMode}
         />
         {error && <ErrorMessage>{error}</ErrorMessage>}
       </TitleContainer>
@@ -132,6 +140,7 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
             onChange={handleChange}
             mask={[/[0-2]/, /\d/, ':', /[0-5]/, /\d/]}
             required
+            readOnly={readOnlyMode}
           />
         </InnerContainer>
         <InnerContainer>
@@ -147,6 +156,7 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
             onChange={handleChange}
             mask={[/[0-2]/, /\d/, ':', /[0-5]/, /\d/]}
             required
+            readOnly={readOnlyMode}
           />
         </InnerContainer>
       </TimeContainer>
@@ -158,6 +168,7 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
             value="low"
             checked={formData.priority === 'low'}
             onChange={handleChange}
+            disabled={readOnlyMode && formData.priority !== 'low'}
           />
           <RadioIconContainer>
             {formData.priority === 'low' ? (
@@ -174,6 +185,7 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
             value="medium"
             checked={formData.priority === 'medium'}
             onChange={handleChange}
+            disabled={readOnlyMode && formData.priority !== 'medium'}
           />
           <RadioIconContainer>
             {formData.priority === 'medium' ? (
@@ -192,6 +204,7 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
             value="high"
             checked={formData.priority === 'high'}
             onChange={handleChange}
+            disabled={readOnlyMode && formData.priority !== 'high'}
           />
           <RadioIconContainer>
             {formData.priority === 'high' ? (
@@ -218,10 +231,15 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
           placeholder="Please enter task description"
           rows={4}
           maxLength={120}
+          disabled={readOnlyMode}
         />
       </DescriptionContainer>
       <ButtonContainer>
-        {task ? (
+        {readOnlyMode ? (
+          <Button type="button" onClick={handleClose}>
+            Close
+          </Button>
+        ) : task ? (
           <Button type="submit" primary>
             <svg
               width="16"
