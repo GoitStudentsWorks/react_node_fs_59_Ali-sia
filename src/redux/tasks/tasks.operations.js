@@ -55,7 +55,7 @@ export const editTask = createAsyncThunk(
         priority,
         title,
         date,
-        category,
+        // category,
       });
       return data.data.result;
     } catch (error) {

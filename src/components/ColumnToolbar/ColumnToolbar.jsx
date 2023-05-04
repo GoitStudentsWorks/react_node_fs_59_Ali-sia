@@ -10,11 +10,15 @@ import {
   DeleteTaskIcon,
 } from './ColumnToolbar.styled';
 
-const ColumnToolbar = (column) => {
+const ColumnToolbar = ({column, tasksForColumn}) => {
   const dispatch = useDispatch();
   const currentTheme = useSelector(selectTheme);
-
+  
   const handleDelete = (id) => {
+    if (tasksForColumn.length !== 0) {
+      toast.error(`Unable to delete column with tasks`);
+      return;
+    }
     dispatch(deleteColumn(id))
       .unwrap()
       .catch(e => {
@@ -24,7 +28,7 @@ const ColumnToolbar = (column) => {
 
   return (
     <Toolbar>
-      <Button onClick={() => handleDelete(column.column._id)}>
+      <Button onClick={() => handleDelete(column._id)}>
         <DeleteTaskIcon theme={currentTheme} />
       </Button>
    </Toolbar>

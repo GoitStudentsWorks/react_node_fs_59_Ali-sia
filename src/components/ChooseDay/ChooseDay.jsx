@@ -46,8 +46,9 @@ export default function ChoosedDay({
     ?.sort((a, b) => a.date - b.date);
 
   let tasksForColumn = [];
-  function getTasksForColumn(columnTitle) {
-    tasksForColumn = dayTasks?.filter(task => task.category === columnTitle);
+  function getTasksForColumn(columnId) {
+    tasksForColumn = dayTasks?.filter(task => task.category === columnId);
+    console.log('tasksForColumn in getTasksForColumn: ', tasksForColumn);
   }
 
   return (
@@ -61,7 +62,7 @@ export default function ChoosedDay({
         <TasksColumnsListWrapper>
           <TasksColumnsList>
             {sortedColumnList.map((column, idx) => {
-              getTasksForColumn(column.title);
+              getTasksForColumn(column._id);
               return (
                 <TasksColumn
                   key={'taskcolumn' + idx}

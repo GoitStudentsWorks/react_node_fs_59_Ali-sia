@@ -5,7 +5,7 @@ import {
   ColumnHeadBarTitle,
 } from './ColumnHeadBar.styled';
 
-export default function ColumnHeadBar({ column }) {
+export default function ColumnHeadBar({ column, tasksForColumn }) {
   
   return (
     <ColumnHeadBarWrapper>
@@ -13,6 +13,7 @@ export default function ColumnHeadBar({ column }) {
       <div>
         <ColumnToolbar
           column={column}
+          tasksForColumn={tasksForColumn}
         />
       </div>
     </ColumnHeadBarWrapper>

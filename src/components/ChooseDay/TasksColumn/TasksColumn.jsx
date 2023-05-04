@@ -13,6 +13,7 @@ export default function TasksColumn({
     <TaskColumnsWrapper>
       <ColumnHeadBar
         column={column}
+        tasksForColumn={tasksForColumn}
       />
       <ColumnTasksList
         tasksForColumn={tasksForColumn}

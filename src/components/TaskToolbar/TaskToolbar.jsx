@@ -91,7 +91,7 @@ const TaskToolbar = ({ task, columns }) => {
       >
         {otherColumns.map(column => (
           <ContextMenuItem
-            key={'menu' + column._id}
+            key={'menu' + column.title}
             onClick={() => handleMoveTask(column._id, task)}
           >
             {column.title}
