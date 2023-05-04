@@ -42,8 +42,7 @@ const ColumnForm = ({ column, onSubmit, onClose, isModalOpen }) => {
     const newColumn = {
       ...formData
     };
-    console.log('newColumn: ', newColumn);
-
+    
     if (newColumn.title.length === 0) {
       setError('Title is required!');
       return;
