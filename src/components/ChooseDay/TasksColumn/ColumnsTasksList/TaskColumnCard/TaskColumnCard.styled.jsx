@@ -17,6 +17,13 @@ export const CardContainer = styled.div`
   border-radius: ${props => props.theme.radii.light};
 
   background-color: ${props => props.theme.colors.bgcMainTheme};
+
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.2s ease-in-out;
+  &:hover {
+    transform: scale(0.98);
+  }
 `;
 
 export const StatsContainer = styled.div`

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TaskToolbar from 'components/TaskToolbar/TaskToolbar';
 import {
   CardContainer,
@@ -13,13 +13,16 @@ import {
 } from './TaskColumnCard.styled';
 import userAvatarDefault from './user.jpg';
 import { useAuth } from 'hooks';
+import TaskModal from 'components/TaskModal/TaskModal';
 
 export const TaskColumnCard = ({ task, sortedColumnList }) => {
   const { user } = useAuth();
   const { title, priority } = task;
   const userAvatar = user.avatarURL ? user.avatarURL : userAvatarDefault;
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 
-  const getDescription = () => {
+  const getTitle = () => {
     if (title.length <= 26) {
       return title;
     } else {
@@ -27,9 +30,26 @@ export const TaskColumnCard = ({ task, sortedColumnList }) => {
     }
   };
 
+  const handleClick = e => {
+    if (isContextMenuOpen) {
+      setIsContextMenuOpen(false);
+      return;
+    }
+    if (
+      e.currentTarget === e.target.parentElement ||
+      e.currentTarget === e.target
+    ) {
+      setIsInfoOpen(true);
+    }
+  };
+
+  const handleClose = e => {
+    setIsInfoOpen(false);
+  };
+
   return (
-    <CardContainer>
-      <TaskTitle> {getDescription()} </TaskTitle>
+    <CardContainer onClick={e => handleClick(e)}>
+      <TaskTitle> {getTitle()} </TaskTitle>
       <StatsContainer>
         <ImageContainer>
           <UserAvatar src={userAvatar} alt="U" />
@@ -38,18 +58,19 @@ export const TaskColumnCard = ({ task, sortedColumnList }) => {
           {priority === 'high' && <HighPriority>High</HighPriority>}
         </ImageContainer>
         <ToolbarContainer>
-          <TaskToolbar task={task} columns={sortedColumnList} />
+          <TaskToolbar
+            task={task}
+            columns={sortedColumnList}
+            setIsContextMenuOpen={setIsContextMenuOpen}
+          />
         </ToolbarContainer>
       </StatsContainer>
+      <TaskModal
+        onClose={handleClose}
+        task={task}
+        isModalOpen={isInfoOpen}
+        readOnlyMode={true}
+      />
     </CardContainer>
   );
 };
-
-// 1. Компонент отримує в пропсах дані необхідні для створення картки.
-// 2. Компонент підписаний на url аватару юзера
-// 3. Компонент рендерить блоки:
-//  - розмітку з описом завдання, який має фіксовану висоту і текст з описом, якщо той не вміщається, обрізається та показуються три крапки.
-//  - аватар юзера.
-//  - пріоритет завдання, з фоном відповідного кольору.
-//  - TaskToolbar - інетрфейс для роботи з карткою
-//  - TaskModal - модалка з формою для редагування завдання.

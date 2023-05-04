@@ -180,6 +180,12 @@ const Button = styled.button`
     padding-top: 14px;
     padding-bottom: 14px;
   }
+
+  transform: scale(1);
+  transition: transform 0.2s ease-in-out;
+  &:hover {
+    transform: scale(0.97);
+  }
 `;
 
 const RadioIconContainer = styled.div`
