@@ -16,7 +16,7 @@ export const StyledForm = styled.form`
   justify-content: center;
   max-width: 335px;
   margin: 0 auto;
-  padding: 59px 18px 40px;
+  padding: 40px 18px 40px;
 
   background-color: ${({ theme }) => theme.colors.bgcUserProfileTheme};
   border-radius: ${({ theme }) => theme.radii.normal};
@@ -34,7 +34,7 @@ export const StyledForm = styled.form`
     max-width: 704px;
     padding-right: 175px;
     padding-left: 175px;
-    padding-top: 184px;
+    padding-top: 170px;
     `
   )}
 
@@ -44,7 +44,7 @@ export const StyledForm = styled.form`
     max-width: 1087px;
     padding-right: 175px;
     padding-left: 175px;
-    padding-top: 204px;
+    padding-top: 190px;
     `
   )}
 `;
@@ -159,7 +159,7 @@ export const PhotoSelection = styled.input`
 
 export const UserName = styled.h2`
   text-align: center;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
 
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   font-size: ${({ theme }) => theme.fontSizes.s};
@@ -169,8 +169,9 @@ export const UserName = styled.h2`
   ${greaterThan(
     'tablet',
     `
-    font-size: ${({ theme }) => theme.fontSizes.l};
+    font-size: 18px;
     line-height: 1;
+    margin-bottom: 6px;
     `
   )}
 `;
@@ -186,14 +187,14 @@ export const UserRole = styled.p`
   ${greaterThan(
     'tablet',
     `
-    font-size: ${({ theme }) => theme.fontSizes.s};
+      font-size: 14px;
     `
   )}
 
   ${greaterThan(
     'laptop',
     `
-    margin-bottom: 44px;
+      margin-bottom: 44px;
     `
   )}
 `;
@@ -202,12 +203,14 @@ export const Wrapper = styled.div`
   ${greaterThan(
     'laptop',
     `
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 50px;
-    justify-content: center;
-    width: 785px;
-    margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      height: 320px;
+
+      label:nth-child(-n+3) {
+        margin-right: 50px;
+      }
     `
   )}
 `;
@@ -236,14 +239,13 @@ export const Label = styled.label`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 18px;
 
   ${between(
     'tablet',
     'laptop',
     `
     max-width: 354px;
-    margin: 0 auto 24px;
+    margin: 0 auto 0;
     `
   )}
 `;
@@ -252,24 +254,25 @@ export const LabelName = styled.span`
   margin-bottom: 8px;
 
   font-style: normal;
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.fontWeights.normal};
+  font-size: 12px;
   line-height: 1.3;
   color: ${({ theme }) => theme.colors.textUserProfileLabelTheme};
 
   ${greaterThan(
     'tablet',
     `
-    font-size: ${({ theme }) => theme.fontSizes.s};
+    font-size: 14px;
     `
   )}
 `;
 
 export const Input = styled.input`
   padding: 12px 14px;
+  margin-bottom: 2px;
 
-  font-weight: ${({ theme }) => theme.fontWeights.normal};
-  font-size: ${({ theme }) => theme.fontSizes.s};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  font-size: 14px;
   line-height: 1.3;
   color: ${({ theme }) => theme.colors.textUserProfileInputTheme};
   background-color: inherit;
@@ -293,7 +296,7 @@ export const Input = styled.input`
   ${greaterThan(
     'tablet',
     `
-    font-size: ${({ theme }) => theme.fontSizes.m};
+    font-size: 16px;
     `
   )}
 `;
@@ -301,10 +304,10 @@ export const Input = styled.input`
 export const StyledDatePicker = styled(DatePicker)`
   width: 100%;
   padding: 12px 14px;
-  margin-bottom: -8px;
+  margin-bottom: 2px;
 
-  font-weight: ${({ theme }) => theme.fontWeights.semibold};
-  font-size: ${({ theme }) => theme.fontSizes.s};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  font-size: 14px;
   line-height: 1.3;
   color: ${({ theme }) => theme.colors.textUserProfileInputTheme};
   background-color: inherit;
@@ -328,7 +331,7 @@ export const StyledDatePicker = styled(DatePicker)`
   ${greaterThan(
     'tablet',
     `
-    font-size: ${({ theme }) => theme.fontSizes.m};
+    font-size: 16px;
     `
   )}
 `;
@@ -500,6 +503,39 @@ export const StyledCalendar = styled.div`
   }
 `;
 
+export const ErrorChoosingFileMessage = styled.div`
+  height: 10px;
+  margin-bottom: 4px;
+  text-align: center;
+
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  line-height: 1;
+  color: ${props => props.theme.colors.invalid};
+
+  ${greaterThan(
+    'tablet',
+    `
+      margin-bottom: 8px;
+      `
+  )}
+`;
+
+export const ErrorInputMessage = styled.div`
+  height: 10px;
+  margin-bottom: 6px;
+
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  line-height: 1;
+  color: ${props => props.theme.colors.invalid};
+
+  ${greaterThan(
+    'tablet',
+    `
+      margin-bottom: 14px;
+      `
+  )}
+`;
+
 export const Button = styled.button`
   width: 58%;
   height: 46px;
@@ -539,7 +575,7 @@ export const Button = styled.button`
     `
     width: 226px;
     height: 48px;
-    margin: 70px auto 60px;
+    margin: 40px auto 60px;
     `
   )}
 `;
