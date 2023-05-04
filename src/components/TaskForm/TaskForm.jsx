@@ -20,9 +20,20 @@ import {
   RadioIconContainer,
   RadioIcon,
   RadioIconChecked,
+  DescriptionContainer,
+  Textarea,
 } from './TaskForm.styled';
 
-const TaskForm = ({ task, onSubmit, onClose, isModalOpen, columnId }) => {
+
+const TaskForm = ({
+  task,
+  category,
+  onSubmit,
+  onClose,
+  isModalOpen,
+  readOnlyMode = false,
+}) => {
+
   const initialFormData = useMemo(() => {
     return {
       title: task?.title || '',
@@ -30,7 +41,8 @@ const TaskForm = ({ task, onSubmit, onClose, isModalOpen, columnId }) => {
       end: task?.end || '14:00',
       priority: task?.priority || 'low',
       date: task?.date || '',
-      category: task?.category || columnId || '', // Add category to formData only if it doesn't already exist in task
+      category: task?.category || category || '', // Add category to formData only if it doesn't already exist in task
+      description: task?.description || '',
     };
   }, [task, columnId]);
 
@@ -110,6 +122,8 @@ const TaskForm = ({ task, onSubmit, onClose, isModalOpen, columnId }) => {
           value={formData.title}
           onChange={handleChange}
           placeholder="Enter text"
+          maxLength={30}
+          disabled={readOnlyMode}
         />
         {error && <ErrorMessage>{error}</ErrorMessage>}
       </TitleContainer>
@@ -128,6 +142,7 @@ const TaskForm = ({ task, onSubmit, onClose, isModalOpen, columnId }) => {
             onChange={handleChange}
             mask={[/[0-2]/, /\d/, ':', /[0-5]/, /\d/]}
             required
+            readOnly={readOnlyMode}
           />
         </InnerContainer>
         <InnerContainer>
@@ -143,6 +158,7 @@ const TaskForm = ({ task, onSubmit, onClose, isModalOpen, columnId }) => {
             onChange={handleChange}
             mask={[/[0-2]/, /\d/, ':', /[0-5]/, /\d/]}
             required
+            readOnly={readOnlyMode}
           />
         </InnerContainer>
       </TimeContainer>
@@ -154,6 +170,7 @@ const TaskForm = ({ task, onSubmit, onClose, isModalOpen, columnId }) => {
             value="low"
             checked={formData.priority === 'low'}
             onChange={handleChange}
+            disabled={readOnlyMode && formData.priority !== 'low'}
           />
           <RadioIconContainer>
             {formData.priority === 'low' ? (
@@ -170,6 +187,7 @@ const TaskForm = ({ task, onSubmit, onClose, isModalOpen, columnId }) => {
             value="medium"
             checked={formData.priority === 'medium'}
             onChange={handleChange}
+            disabled={readOnlyMode && formData.priority !== 'medium'}
           />
           <RadioIconContainer>
             {formData.priority === 'medium' ? (
@@ -188,6 +206,7 @@ const TaskForm = ({ task, onSubmit, onClose, isModalOpen, columnId }) => {
             value="high"
             checked={formData.priority === 'high'}
             onChange={handleChange}
+            disabled={readOnlyMode && formData.priority !== 'high'}
           />
           <RadioIconContainer>
             {formData.priority === 'high' ? (
@@ -201,9 +220,28 @@ const TaskForm = ({ task, onSubmit, onClose, isModalOpen, columnId }) => {
           <StyledRadioLabel theme={currentTheme}>High</StyledRadioLabel>
         </RadioLabel>
       </RadioContainer>
-
+      <DescriptionContainer>
+        <Label htmlFor="description" theme={currentTheme}>
+          Description
+        </Label>
+        <Textarea
+          id="description"
+          name="description"
+          theme={currentTheme}
+          value={formData.description}
+          onChange={handleChange}
+          placeholder="Please enter task description"
+          rows={4}
+          maxLength={120}
+          disabled={readOnlyMode}
+        />
+      </DescriptionContainer>
       <ButtonContainer>
-        {task ? (
+        {readOnlyMode ? (
+          <Button type="button" onClick={handleClose}>
+            Close
+          </Button>
+        ) : task ? (
           <Button type="submit" primary>
             <svg
               width="16"

@@ -180,6 +180,12 @@ const Button = styled.button`
     padding-top: 14px;
     padding-bottom: 14px;
   }
+
+  transform: scale(1);
+  transition: transform 0.2s ease-in-out;
+  &:hover {
+    transform: scale(0.97);
+  }
 `;
 
 const RadioIconContainer = styled.div`
@@ -188,6 +194,45 @@ const RadioIconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const DescriptionContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 18px;
+  }
+`;
+
+const Textarea = styled.textarea`
+  display: block;
+  padding: 12px 14px;
+  resize: none;
+
+  background-color: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT ? '#F7F7F7' : 'transparent'};
+  color: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT ? '#616161' : '#FFFFFF'};
+  border-radius: 8px;
+  border-width: 0;
+  border: ${({ theme }) =>
+    theme === THEME_CONTEXT.LIGHT
+      ? 'none'
+      : '1px solid rgba(255, 255, 255, 0.15)'};
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+
+  ::placeholder {
+    opacity: 1;
+  }
+  box-sizing: 'border-box';
 `;
 
 const RadioIcon = ({ color }) => (
@@ -244,4 +289,6 @@ export {
   RadioIconContainer,
   RadioIcon,
   RadioIconChecked,
+  DescriptionContainer,
+  Textarea,
 };

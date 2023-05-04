@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from 'redux/auth/auth.operations';
-import { selectIsLoggedIn, selectUser } from 'redux/auth/auth.selectors';
+import {
+  selectIsLoggedIn,
+  selectUser,
+  selectIsUpdating,
+} from 'redux/auth/auth.selectors';
+
 import { isWeekend, addDays, parseISO, format } from 'date-fns';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 
@@ -19,6 +25,8 @@ import {
   Label,
   LabelName,
   Input,
+  ErrorChoosingFileMessage,
+  ErrorInputMessage,
   StyledDatePicker,
   StyledCalendar,
   Button,
@@ -28,18 +36,18 @@ import 'react-datepicker/dist/react-datepicker.css';
 export const UserForm = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isUpdating = useSelector(selectIsUpdating);
   const user = useSelector(selectUser);
 
-  const [values, setValues] = useState({
-    name: '',
-    birthday: '',
-    email: '',
-    phone: '',
-    telegram: '',
-    avatarFile: null,
-    avatarURL: '',
-  });
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  const [avatar, setAvatar] = useState('');
+  const initialValues = {
+    name: user.name ? user.name : '',
+    birthday: user.birthday ? parseISO(user.birthday) : '',
+    email: user.email ? user.email : '',
+    phone: user.phone ? user.phone : '',
+    telegram: user.telegram ? user.telegram : '',
+    avatarFile: '',
+  };
 
   const schema = Yup.object().shape({
     avatarFile: Yup.mixed().test(
@@ -47,76 +55,43 @@ export const UserForm = () => {
       'Invalid file type. Allowed .jpeg or .png',
       value => {
         if (!value) return true;
-        return ['image/jpeg', 'image/png'].includes(value.type);
+        return ['image/jpg', 'image/jpeg', 'image/png'].includes(value.type);
       }
     ),
     name: Yup.string()
-      .max(16, 'The name must be 16 characters or less.')
-      .required('Required'),
-    email: Yup.string().email('Invalid email address').required('Required'),
+      .min(3, 'The name must be at least 3 characters')
+      .max(16, 'The name must be 16 characters or less')
+      .required('The name is required'),
+    email: Yup.string()
+      .matches(/^[\w.%+-]+@(?:[\w-]+\.)+\w{2,}$/, 'Invalid email address')
+      .required('The email is required'),
     birthday: Yup.string()
       .nullable()
       .transform(v => (v === '' ? null : v)),
     phone: Yup.string()
-      .matches(
-        /^\+380\d{9}$/,
-        'The phone number must contain "+380" and 9 digits.'
-      )
+      .matches(/^\+380\d{9}$/, 'The phone must contain "+380" and 9 digits.')
       .nullable()
       .transform(v => (v === '' ? null : v)),
     telegram: Yup.string()
+      .min(3, 'The name must be at least 3 characters')
       .max(16, 'The telegram must be 16 characters or less')
       .nullable()
       .transform(v => (v === '' ? null : v)),
   });
-
-  const highlightWeekends = date => {
-    return isWeekend(date);
-  };
-
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-    setValues(prevValues => ({
-      ...prevValues,
-      [name]: value,
-    }));
-    setIsSubmitDisabled(false);
-  };
-
-  const handleDateChange = date => {
-    setValues(prevValues => ({
-      ...prevValues,
-      birthday: date,
-    }));
-    setIsSubmitDisabled(false);
-  };
 
   const handleImageUpload = e => {
     const file = e.target.files[0];
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      setValues(prevValues => ({
-        ...prevValues,
-        avatarFile: file,
-        avatarURL: reader.result,
-      }));
+      setFieldValue('avatarFile', file);
+      setAvatar(reader.result);
     };
 
     reader.readAsDataURL(file);
-    setIsSubmitDisabled(false);
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    try {
-      await schema.validate(values);
-    } catch (error) {
-      toast.error(error.message);
-      return;
-    }
-
+  const onSubmit = async (_, actions) => {
     const { name, birthday, email, phone, telegram, avatarFile } = values;
 
     const formData = new FormData();
@@ -133,22 +108,42 @@ export const UserForm = () => {
       .unwrap()
       .then(res => {
         toast.success('Your profile has been changed successfully.');
-        setIsSubmitDisabled(true);
+        actions.setSubmitting(true);
+        // actions.setSubmitting(false);
       })
       .catch(error => {
         toast.error(error.message);
       });
   };
 
+  const {
+    values,
+    errors,
+    touched,
+    dirty,
+    isSubmitting,
+    setFieldValue,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setSubmitting,
+  } = useFormik({
+    initialValues,
+    validationSchema: schema,
+    onSubmit,
+  });
+
   useEffect(() => {
     if (isLoggedIn) {
-      const modifiedUser = {
-        ...user,
-        birthday: user.birthday ? parseISO(user.birthday) : '',
-      };
-      setValues(modifiedUser);
+      const { name, birthday, email, phone, telegram, avatarURL } = user;
+      setAvatar(avatarURL);
+      setFieldValue('name', name);
+      setFieldValue('email', email);
+      setFieldValue('birthday', birthday ? parseISO(birthday) : '');
+      setFieldValue('phone', phone);
+      setFieldValue('telegram', telegram);
     }
-  }, [dispatch, isLoggedIn, user]);
+  }, [isLoggedIn, setFieldValue, user]);
 
   return (
     user.email && (
@@ -157,21 +152,19 @@ export const UserForm = () => {
         encType="multipart/form-data"
         onSubmit={handleSubmit}
       >
-        {values.avatarURL ? (
-          <Photo src={values.avatarURL} alt="User's photo" />
-        ) : (
-          <Plug />
-        )}
+        {avatar ? <Photo src={avatar} alt="User's photo" /> : <Plug />}
         <LabelPhotoSelection>
           <SelectionIcon />
           <PhotoSelection
             type="file"
             name="avatarFile"
+            onBlur={handleBlur}
             onChange={handleImageUpload}
           />
         </LabelPhotoSelection>
-        <UserName>{values.name}</UserName>
-        <UserRole>user</UserRole>
+        <ErrorChoosingFileMessage>{errors.avatarFile}</ErrorChoosingFileMessage>
+        <UserName>{values.name.length > 1 ? values.name : 'Name'}</UserName>
+        <UserRole>User</UserRole>
         <Wrapper>
           <Label>
             <LabelName>User Name</LabelName>
@@ -180,10 +173,20 @@ export const UserForm = () => {
               name="name"
               placeholder="Edit your name"
               value={values.name}
-              onChange={handleInputChange}
-              required
+              onBlur={handleBlur}
+              // onChange={handleChange}
+              onChange={event => {
+                handleChange(event);
+                setSubmitting(false);
+              }}
             />
+            {errors.name && touched.name ? (
+              <ErrorInputMessage>{errors.name}</ErrorInputMessage>
+            ) : (
+              <ErrorInputMessage />
+            )}
           </Label>
+
           <Label>
             <LabelName>Birthday</LabelName>
             <StyledCalendar>
@@ -192,15 +195,24 @@ export const UserForm = () => {
                 placeholderText={format(new Date(), 'dd/MM/yyyy')}
                 selected={values.birthday}
                 value={values.birthday}
-                onChange={handleDateChange}
+                onBlur={handleBlur}
+                onChange={date => {
+                  setFieldValue('birthday', date);
+                  setSubmitting(false);
+                }}
                 dateFormat="dd/MM/yyyy"
                 // showMonthDropdown
                 // showYearDropdown
                 calendarStartDay={1}
                 maxDate={addDays(new Date(), 0)}
-                highlightDates={highlightWeekends}
+                highlightDates={date => isWeekend(date)}
               />
             </StyledCalendar>
+            {errors.birthday && touched.birthday ? (
+              <ErrorInputMessage>{errors.birthday}</ErrorInputMessage>
+            ) : (
+              <ErrorInputMessage />
+            )}
           </Label>
           <Label>
             <LabelName>Email</LabelName>
@@ -209,9 +221,19 @@ export const UserForm = () => {
               name="email"
               placeholder="Edit your email"
               value={values.email}
-              onChange={handleInputChange}
+              onBlur={handleBlur}
+              // onChange={handleChange}
+              onChange={event => {
+                handleChange(event);
+                setSubmitting(false);
+              }}
               required
             />
+            {errors.email && touched.email ? (
+              <ErrorInputMessage>{errors.email}</ErrorInputMessage>
+            ) : (
+              <ErrorInputMessage />
+            )}
           </Label>
           <Label>
             <LabelName>Phone</LabelName>
@@ -220,8 +242,18 @@ export const UserForm = () => {
               name="phone"
               placeholder="Add a phone number"
               value={values.phone}
-              onChange={handleInputChange}
+              onBlur={handleBlur}
+              // onChange={handleChange}
+              onChange={event => {
+                handleChange(event);
+                setSubmitting(false);
+              }}
             />
+            {errors.phone && touched.phone ? (
+              <ErrorInputMessage>{errors.phone}</ErrorInputMessage>
+            ) : (
+              <ErrorInputMessage />
+            )}
           </Label>
           <Label>
             <LabelName>Telegram</LabelName>
@@ -230,13 +262,30 @@ export const UserForm = () => {
               name="telegram"
               placeholder="Add a link to Telegram"
               value={values.telegram}
-              onChange={handleInputChange}
+              onBlur={handleBlur}
+              // onChange={handleChange}
+              onChange={event => {
+                handleChange(event);
+                setSubmitting(false);
+              }}
             />
+            {errors.telegram && touched.telegram ? (
+              <ErrorInputMessage>{errors.telegram}</ErrorInputMessage>
+            ) : (
+              <ErrorInputMessage />
+            )}
           </Label>
         </Wrapper>
-        <Button type="submit" disabled={isSubmitDisabled}>
-          Save changes
-        </Button>
+
+        {isUpdating ? (
+          <Button type="submit" disabled>
+            Submitting...
+          </Button>
+        ) : (
+          <Button type="submit" disabled={!dirty || isSubmitting}>
+            Save change
+          </Button>
+        )}
       </StyledForm>
     )
   );
