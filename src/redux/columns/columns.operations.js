@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-// import { selectIsLoggedIn } from 'redux/auth/auth.selectors';
 
 import { setAuthHeader, privateApi } from 'services/http';
 
