@@ -12,7 +12,7 @@ const Toolbar = styled.div`
   display: flex;
   align-items: start;
 
-  gap: 10px;
+  gap: 8px;
 `;
 
 const Button = styled.button`
@@ -21,11 +21,6 @@ const Button = styled.button`
   cursor: pointer;
 
   border-width: 0;
-  transform: scale(1);
-  transition: transform 0.2s ease-in-out;
-  &:hover {
-    transform: scale(1.3);
-  }
 `;
 
 const ContextMenu = styled.div`
@@ -35,8 +30,7 @@ const ContextMenu = styled.div`
   left: -60%;
 
   width: 115px;
-  /* min-height: 70px; */
-  height: fit-content;
+  height: 70px;
 
   padding: 14px;
 
@@ -59,7 +53,7 @@ const ContextMenu = styled.div`
     padding: 20px 24px;
 
     width: 150px;
-    height: fit-content;
+    height: 90px;
   }
 `;
 
