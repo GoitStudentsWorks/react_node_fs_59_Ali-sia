@@ -43,7 +43,7 @@ const TaskForm = ({
       category: task?.category || category || '', // Add category to formData only if it doesn't already exist in task
       description: task?.description || '',
     };
-  }, [task, columnId]);
+  }, [task, category]);
 
   const [error, setError] = useState(null);
 
