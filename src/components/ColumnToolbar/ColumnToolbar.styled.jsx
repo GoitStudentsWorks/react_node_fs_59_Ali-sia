@@ -173,6 +173,7 @@ const IconWrapper = styled.div`
 const StyledP = styled.p`
   display: flex;
   justify-content: center;
+  text-align: center;
 
   padding: 40px;
 

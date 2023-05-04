@@ -42,7 +42,7 @@ const ColumnToolbar = ({column, tasksForColumn}) => {
         </Button>
       </Toolbar>
       <Modal onClose={() => setIsModalOpen(false)} isModalOpen={isModalOpen}>
-        <StyledP>Are you sure you want to log out?</StyledP>
+        <StyledP>Are you sure you want to delete? The column will be completely deleted with all tasks.</StyledP>
         <ButtonsWrapper>
           <StyledButton type="button" onClick={() => handleDelete(column._id)}>
             Yes
