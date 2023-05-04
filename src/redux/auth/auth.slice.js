@@ -21,6 +21,7 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   isLoading: false,
+  isUpdating: false,
   isRefreshing: false,
   error: null,
   theme: localStorage.getItem('theme')
@@ -81,9 +82,14 @@ const authSlice = createSlice({
       })
       .addCase(updateUser.fulfilled, (state, { payload }) => {
         state.user = payload.data.user;
+        state.isUpdating = false;
+      })
+      .addCase(updateUser.pending, (state, { payload }) => {
+        state.isUpdating = true;
       })
       .addCase(updateUser.rejected, (state, { payload }) => {
         state.error = payload;
+        state.isUpdating = false;
       });
   },
 });

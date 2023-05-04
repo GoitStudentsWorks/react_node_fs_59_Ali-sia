@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from 'redux/auth/auth.operations';
-import { selectIsLoggedIn, selectUser } from 'redux/auth/auth.selectors';
+import {
+  selectIsLoggedIn,
+  selectUser,
+  selectIsUpdating,
+} from 'redux/auth/auth.selectors';
+
 import { isWeekend, addDays, parseISO, format } from 'date-fns';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -31,6 +36,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 export const UserForm = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isUpdating = useSelector(selectIsUpdating);
   const user = useSelector(selectUser);
 
   const [avatar, setAvatar] = useState('');
@@ -270,10 +276,16 @@ export const UserForm = () => {
             )}
           </Label>
         </Wrapper>
-        <Button type="submit" disabled={!dirty || isSubmitting}>
-          {/* {isSubmitting ? 'Submiting...' : 'Save change'} */}
-          Save change
-        </Button>
+
+        {isUpdating ? (
+          <Button type="submit" disabled>
+            Submitting...
+          </Button>
+        ) : (
+          <Button type="submit" disabled={!dirty || isSubmitting}>
+            Save change
+          </Button>
+        )}
       </StyledForm>
     )
   );
