@@ -1,33 +1,21 @@
-import React, { useState } from 'react';
-import TaskModal from '../../../TaskModal/TaskModal';
+import ColumnToolbar from 'components/ColumnToolbar/ColumnToolbar';
+import React from 'react';
 import {
   ColumnHeadBarWrapper,
   ColumnHeadBarTitle,
-  StyledRoundButton,
-  RoundBtnIconSvg,
 } from './ColumnHeadBar.styled';
 
-export default function ColumnHeadBar({ title }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+export default function ColumnHeadBar({ column, tasksForColumn }) {
+  
   return (
     <ColumnHeadBarWrapper>
-      <ColumnHeadBarTitle>{title}</ColumnHeadBarTitle>
-      <StyledRoundButton type="button" onClick={handleOpenModal}>
-        <RoundBtnIconSvg />
-      </StyledRoundButton>
-      <TaskModal
-        category={title}
-        onClose={handleCloseModal}
-        isModalOpen={isModalOpen}
-      />
+      <ColumnHeadBarTitle>{column.title}</ColumnHeadBarTitle>
+      <div>
+        <ColumnToolbar
+          column={column}
+          tasksForColumn={tasksForColumn}
+        />
+      </div>
     </ColumnHeadBarWrapper>
   );
 }

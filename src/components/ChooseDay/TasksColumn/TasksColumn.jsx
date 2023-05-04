@@ -4,22 +4,22 @@ import ColumnTasksList from './ColumnsTasksList/ColumnsTasksList';
 import { TaskColumnsWrapper } from './TasksColumn.styled';
 
 export default function TasksColumn({
-  title,
+  column,
   tasksForColumn,
   sortedColumnList,
 }) {
-  // const toggleModal = () => {
-  //   console.log('TasksColumn open modal');
-  // };
 
   return (
     <TaskColumnsWrapper>
-      <ColumnHeadBar title={title} />
+      <ColumnHeadBar
+        column={column}
+        tasksForColumn={tasksForColumn}
+      />
       <ColumnTasksList
         tasksForColumn={tasksForColumn}
         sortedColumnList={sortedColumnList}
       />
-      <AddTaskBtn category={title} />
+      <AddTaskBtn columnId={column._id} />
     </TaskColumnsWrapper>
   );
 }
