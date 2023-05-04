@@ -2,16 +2,48 @@ import { AddTaskBtn } from 'components/Buttons/AddTaskBtn/AddTaskBtn';
 import ColumnHeadBar from './ColumnHeadBar/ColumnHeadBar';
 import ColumnTasksList from './ColumnsTasksList/ColumnsTasksList';
 import { TaskColumnsWrapper } from './TasksColumn.styled';
+import { editTask } from 'redux/tasks/tasks.operations';
+import { toast } from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 
 export default function TasksColumn({
   column,
   tasksForColumn,
   sortedColumnList,
-  tasksForDeleteColumn
+  tasksForDeleteColumn,
+  setDraggedTask,
+  draggedTask,
 }) {
+  const dispatch = useDispatch();
+
+  const handleDragStart = e => {
+    if (!draggedTask) {
+      return e.preventDefault();
+    }
+  };
+  const handleDragOver = e => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  const handleDrop = (e, colonka) => {
+    e.preventDefault();
+    const newData = { ...draggedTask, category: colonka._id };
+    dispatch(editTask(newData))
+      .unwrap()
+      .then(() => toast.success(`Updated!`))
+      .catch(e => {
+        toast.error(`Unable to update task`);
+      });
+    setDraggedTask(null);
+  };
 
   return (
-    <TaskColumnsWrapper>
+    <TaskColumnsWrapper
+      draggable={true}
+      onDragStart={e => handleDragStart(e)}
+      onDragOver={e => handleDragOver(e, column)}
+      onDrop={e => handleDrop(e, column)}
+    >
       <ColumnHeadBar
         column={column}
         tasksForDeleteColumn={tasksForDeleteColumn}
@@ -19,14 +51,9 @@ export default function TasksColumn({
       <ColumnTasksList
         tasksForColumn={tasksForColumn}
         sortedColumnList={sortedColumnList}
+        setDraggedTask={setDraggedTask}
       />
       <AddTaskBtn columnId={column._id} />
     </TaskColumnsWrapper>
   );
 }
-
-// 1. Компонент отримує в пропсах заголовок групи завданнь та колекцію завданнь цієї групи.
-// 2. Компонент рендерить:
-//  - ColumnHeadBar - компонент з назвою колонки та кнопою для створення завдання в цій колонці.
-//  - ColumnTasksList - компонент що показує список завдань, рендериться за умови, що відповідні завдання є в наявності.
-//  - AddTaskBtn - кнопка для додавання завдання в колонку.

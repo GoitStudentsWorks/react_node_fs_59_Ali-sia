@@ -7,16 +7,19 @@ export const ChoosedDayWrapper = styled.div`
 export const TasksColumnsListWrapper = styled.div`
   overflow-x: scroll;
   width: 336px;
+  min-height: 446px;
   ${greaterThan(
     'tablet',
     `
    width: 704px;
+   min-height: 512px;
 `
   )}
   ${greaterThan(
     'laptop',
     `
   width: 1087px;
+ min-height: 533px;
 `
   )}
 `;
@@ -39,7 +42,7 @@ export const TasksColumnsList = styled.div`
   )};
 `;
 
-export const AddNewColumn= styled.div`
+export const AddNewColumn = styled.div`
   flex-grow: 1;
   padding: 25px 6px 25px 18px;
 
@@ -54,14 +57,13 @@ export const AddNewColumn= styled.div`
   line-height: 1.12; */
 
   background-color: inherit
-  /* color: ${p => p.theme.colors.textDaysNameAtDaysPage}; */
-
-  ${greaterThan(
-    'tablet',
-    `
+    /* color: ${p => p.theme.colors.textDaysNameAtDaysPage}; */
+    ${greaterThan(
+      'tablet',
+      `
    height: 68px;
    width: 344px;
    padding: 27px 8px 27px 20px;
 `
-  )}
+    )};
 `;
