@@ -163,7 +163,7 @@ export const UserForm = () => {
           />
         </LabelPhotoSelection>
         <ErrorChoosingFileMessage>{errors.avatarFile}</ErrorChoosingFileMessage>
-        <UserName>{values.name}</UserName>
+        <UserName>{values.name.length > 1 ? values.name : 'Name'}</UserName>
         <UserRole>User</UserRole>
         <Wrapper>
           <Label>
