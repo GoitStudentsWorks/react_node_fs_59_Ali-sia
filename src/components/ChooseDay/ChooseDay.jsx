@@ -48,7 +48,6 @@ export default function ChoosedDay({
   let tasksForColumn = [];
   function getTasksForColumn(columnId) {
     tasksForColumn = dayTasks?.filter(task => task.category === columnId);
-    console.log('tasksForColumn in getTasksForColumn: ', tasksForColumn);
   }
 
   return (

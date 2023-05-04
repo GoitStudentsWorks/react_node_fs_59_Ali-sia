@@ -54,7 +54,6 @@ const TaskForm = ({ task, onSubmit, onClose, isModalOpen, columnId }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(e);
     const newTask = { ...task, ...formData };
 
     if (newTask.title.length === 0) {

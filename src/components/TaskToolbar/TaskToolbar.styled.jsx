@@ -30,7 +30,8 @@ const ContextMenu = styled.div`
   left: -60%;
 
   width: 115px;
-  height: 70px;
+  /* min-height: 70px; */
+  height: fit-content;
 
   padding: 14px;
 
@@ -53,7 +54,7 @@ const ContextMenu = styled.div`
     padding: 20px 24px;
 
     width: 150px;
-    height: 90px;
+    height: fit-content;
   }
 `;
 
