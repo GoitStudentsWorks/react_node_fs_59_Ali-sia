@@ -3,7 +3,7 @@ import AddTaskIcon from './AddTaskIcon.svg';
 import { StyledButton } from './AddTaskBtn.styled';
 import TaskModal from '../../TaskModal/TaskModal';
 
-export const AddTaskBtn = ({ category }) => {
+export const AddTaskBtn = ({ columnId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -21,7 +21,7 @@ export const AddTaskBtn = ({ category }) => {
         <span> Add task </span>
       </StyledButton>
       <TaskModal
-        category={category}
+        columnId={columnId}
         onClose={handleCloseModal}
         isModalOpen={isModalOpen}
       />

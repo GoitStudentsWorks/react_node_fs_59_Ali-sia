@@ -22,7 +22,7 @@ import {
   RadioIconChecked,
 } from './TaskForm.styled';
 
-const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
+const TaskForm = ({ task, onSubmit, onClose, isModalOpen, columnId }) => {
   const initialFormData = useMemo(() => {
     return {
       title: task?.title || '',
@@ -30,9 +30,9 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
       end: task?.end || '14:00',
       priority: task?.priority || 'low',
       date: task?.date || '',
-      category: task?.category || category || '', // Add category to formData only if it doesn't already exist in task
+      category: task?.category || columnId || '', // Add category to formData only if it doesn't already exist in task
     };
-  }, [task, category]);
+  }, [task, columnId]);
 
   const [error, setError] = useState(null);
 
@@ -54,6 +54,7 @@ const TaskForm = ({ task, category, onSubmit, onClose, isModalOpen }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    console.log(e);
     const newTask = { ...task, ...formData };
 
     if (newTask.title.length === 0) {

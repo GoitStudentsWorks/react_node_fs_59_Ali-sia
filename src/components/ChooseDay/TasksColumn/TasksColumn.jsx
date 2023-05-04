@@ -18,7 +18,7 @@ export default function TasksColumn({
         tasksForColumn={tasksForColumn}
         sortedColumnList={sortedColumnList}
       />
-      <AddTaskBtn category={column.title} />
+      <AddTaskBtn columnId={column._id} />
     </TaskColumnsWrapper>
   );
 }
