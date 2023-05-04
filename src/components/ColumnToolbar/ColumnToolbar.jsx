@@ -14,8 +14,9 @@ import {
   ButtonsWrapper,
   StyledButton,
 } from './ColumnToolbar.styled';
+import { deleteTask } from 'redux/tasks/tasks.operations';
 
-const ColumnToolbar = ({column, tasksForColumn}) => {
+const ColumnToolbar = ({column, tasksForDeleteColumn}) => {
   const [ isModalOpen, setIsModalOpen ] = useState(false)
 
   const dispatch = useDispatch();
@@ -23,12 +24,14 @@ const ColumnToolbar = ({column, tasksForColumn}) => {
   
   const handleDelete = id => {
     setIsModalOpen(false);
-    if (tasksForColumn.length !== 0) {
-      toast.error(`Unable to delete column with tasks`);
-      return;
-    }
     dispatch(deleteColumn(id))
       .unwrap()
+      .then(() => {
+        tasksForDeleteColumn.forEach(task => {
+          console.log('task: ', task)
+          dispatch(deleteTask(task._id));
+        })
+      })
       .catch(e => {
         toast.error(`Unable to delete column`);
       });

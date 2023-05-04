@@ -49,6 +49,10 @@ export default function ChoosedDay({
   function getTasksForColumn(columnId) {
     tasksForColumn = dayTasks?.filter(task => task.category === columnId);
   }
+  let tasksForDeleteColumn = [];
+  function getTasksForDeleteColumn(columnId) {
+    tasksForDeleteColumn = tasks?.filter(task => task.category === columnId);
+  }
 
   return (
     <>
@@ -62,12 +66,14 @@ export default function ChoosedDay({
           <TasksColumnsList>
             {sortedColumnList.map((column, idx) => {
               getTasksForColumn(column._id);
+              getTasksForDeleteColumn(column._id);
               return (
                 <TasksColumn
                   key={'taskcolumn' + idx}
                   column={column}
                   sortedColumnList={sortedColumnList}
                   tasksForColumn={tasksForColumn}
+                  tasksForDeleteColumn={tasksForDeleteColumn}
                 />
               );
             })}
