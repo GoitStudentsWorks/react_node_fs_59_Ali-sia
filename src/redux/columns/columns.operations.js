@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+// import axios from 'axios';
 
 import { setAuthHeader, privateApi } from 'services/http';
 
-axios.defaults.baseURL = 'https://goose-track-backend-8txo.onrender.com';
+// axios.defaults.baseURL = 'https://goose-track-backend-8txo.onrender.com';
 
 export const fetchColumns = createAsyncThunk(
   'columns/fetchAll',

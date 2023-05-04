@@ -24,7 +24,6 @@ import {
   Textarea,
 } from './TaskForm.styled';
 
-
 const TaskForm = ({
   task,
   category,
@@ -32,8 +31,8 @@ const TaskForm = ({
   onClose,
   isModalOpen,
   readOnlyMode = false,
+  columnId,
 }) => {
-
   const initialFormData = useMemo(() => {
     return {
       title: task?.title || '',
