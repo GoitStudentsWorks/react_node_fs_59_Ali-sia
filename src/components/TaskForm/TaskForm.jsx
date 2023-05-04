@@ -31,6 +31,7 @@ const TaskForm = ({
   onClose,
   isModalOpen,
   readOnlyMode = false,
+  columnId,
 }) => {
   const initialFormData = useMemo(() => {
     return {
