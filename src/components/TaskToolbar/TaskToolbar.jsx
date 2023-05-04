@@ -47,6 +47,7 @@ const TaskToolbar = ({ task, columns }) => {
 
   const handleMoveTask = (columnId, task) => {
     const newTask = { ...task, category: columnId };
+    console.log(`newTask: `, newTask);
     dispatch(editTask(newTask))
       .unwrap()
       .catch(e => {
