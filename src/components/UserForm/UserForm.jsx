@@ -103,6 +103,7 @@ export const UserForm = () => {
       .then(res => {
         toast.success('Your profile has been changed successfully.');
         actions.setSubmitting(true);
+        // actions.setSubmitting(false);
       })
       .catch(error => {
         toast.error(error.message);
@@ -119,6 +120,7 @@ export const UserForm = () => {
     handleBlur,
     handleChange,
     handleSubmit,
+    setSubmitting,
   } = useFormik({
     initialValues,
     validationSchema: schema,
@@ -166,7 +168,11 @@ export const UserForm = () => {
               placeholder="Edit your name"
               value={values.name}
               onBlur={handleBlur}
-              onChange={handleChange}
+              // onChange={handleChange}
+              onChange={event => {
+                handleChange(event);
+                setSubmitting(false);
+              }}
             />
             {errors.name && touched.name ? (
               <ErrorInputMessage>{errors.name}</ErrorInputMessage>
@@ -184,7 +190,10 @@ export const UserForm = () => {
                 selected={values.birthday}
                 value={values.birthday}
                 onBlur={handleBlur}
-                onChange={date => setFieldValue('birthday', date)}
+                onChange={date => {
+                  setFieldValue('birthday', date);
+                  setSubmitting(false);
+                }}
                 dateFormat="dd/MM/yyyy"
                 // showMonthDropdown
                 // showYearDropdown
@@ -207,7 +216,11 @@ export const UserForm = () => {
               placeholder="Edit your email"
               value={values.email}
               onBlur={handleBlur}
-              onChange={handleChange}
+              // onChange={handleChange}
+              onChange={event => {
+                handleChange(event);
+                setSubmitting(false);
+              }}
               required
             />
             {errors.email && touched.email ? (
@@ -224,7 +237,11 @@ export const UserForm = () => {
               placeholder="Add a phone number"
               value={values.phone}
               onBlur={handleBlur}
-              onChange={handleChange}
+              // onChange={handleChange}
+              onChange={event => {
+                handleChange(event);
+                setSubmitting(false);
+              }}
             />
             {errors.phone && touched.phone ? (
               <ErrorInputMessage>{errors.phone}</ErrorInputMessage>
@@ -240,7 +257,11 @@ export const UserForm = () => {
               placeholder="Add a link to Telegram"
               value={values.telegram}
               onBlur={handleBlur}
-              onChange={handleChange}
+              // onChange={handleChange}
+              onChange={event => {
+                handleChange(event);
+                setSubmitting(false);
+              }}
             />
             {errors.telegram && touched.telegram ? (
               <ErrorInputMessage>{errors.telegram}</ErrorInputMessage>
@@ -250,7 +271,8 @@ export const UserForm = () => {
           </Label>
         </Wrapper>
         <Button type="submit" disabled={!dirty || isSubmitting}>
-          Save changes
+          {/* {isSubmitting ? 'Submiting...' : 'Save change'} */}
+          Save change
         </Button>
       </StyledForm>
     )
