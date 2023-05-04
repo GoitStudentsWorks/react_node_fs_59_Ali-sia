@@ -53,10 +53,11 @@ export const UserForm = () => {
       }
     ),
     name: Yup.string()
+      .min(3, 'The name must be at least 3 characters')
       .max(16, 'The name must be 16 characters or less')
       .required('The name is required'),
     email: Yup.string()
-      .email('Invalid email address')
+      .matches(/^[\w.%+-]+@(?:[\w-]+\.)+\w{2,}$/, 'Invalid email address')
       .required('The email is required'),
     birthday: Yup.string()
       .nullable()
@@ -66,6 +67,7 @@ export const UserForm = () => {
       .nullable()
       .transform(v => (v === '' ? null : v)),
     telegram: Yup.string()
+      .min(3, 'The name must be at least 3 characters')
       .max(16, 'The telegram must be 16 characters or less')
       .nullable()
       .transform(v => (v === '' ? null : v)),
