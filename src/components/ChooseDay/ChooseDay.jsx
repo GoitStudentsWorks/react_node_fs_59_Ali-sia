@@ -1,4 +1,8 @@
 import React, { useEffect } from 'react';
+// , { useEffect, useMemo } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { fetchColumns } from 'redux/columns/columns.operations';
+// import { selectColumns, selectError } from 'redux/columns/columns.selectors';
 
 import DayCalendarHead from './DayCalendarHead/DayCalendarHead';
 import TasksColumn from './TasksColumn/TasksColumn';
@@ -7,15 +11,14 @@ import {
   ChoosedDayWrapper,
   TasksColumnsList,
   TasksColumnsListWrapper,
-  AddNewColumn
 } from './ChooseDay.styled';
 
 import { endOfDay, getTime, parseJSON, startOfDay } from 'date-fns';
 import { useTasks } from 'hooks/useTasks';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectColumns } from 'redux/columns/columns.selectors';
+// useSelector
 import { fetchColumns } from 'redux/columns/columns.operations';
-import { AddColumnBtn } from 'components/Buttons/AddColumnBtn/AddColumnBtn';
 
 export default function ChoosedDay({
   currentDate,
@@ -23,14 +26,15 @@ export default function ChoosedDay({
   changeActiveDay,
 }) {
   const dispatch = useDispatch();
+  // const error = useSelector(selectError);
   const columns = useSelector(selectColumns);
 
   const { tasks } = useTasks();
   const columnData = [...columns];
 
   useEffect(() => {
-    dispatch(fetchColumns())
-    }, [dispatch]);
+    dispatch(fetchColumns());
+  }, [dispatch]);
 
   const getSortedColumnList = columnData =>
     columnData.sort((a, b) => a.number - b.number);
@@ -46,8 +50,8 @@ export default function ChoosedDay({
     ?.sort((a, b) => a.date - b.date);
 
   let tasksForColumn = [];
-  function getTasksForColumn(columnId) {
-    tasksForColumn = dayTasks?.filter(task => task.category === columnId);
+  function getTasksForColumn(columnTitle) {
+    tasksForColumn = dayTasks?.filter(task => task.category === columnTitle);
   }
 
   return (
@@ -61,25 +65,26 @@ export default function ChoosedDay({
         <TasksColumnsListWrapper>
           <TasksColumnsList>
             {sortedColumnList.map((column, idx) => {
-              getTasksForColumn(column._id);
+              getTasksForColumn(column.title);
               return (
                 <TasksColumn
                   key={'taskcolumn' + idx}
-                  column={column}
+                  title={column.title}
                   sortedColumnList={sortedColumnList}
                   tasksForColumn={tasksForColumn}
                 />
               );
             })}
-            <AddNewColumn>
-              <AddColumnBtn
-                children="Add your own category"
-                column={columnData}
-              />
-            </AddNewColumn>
           </TasksColumnsList>
         </TasksColumnsListWrapper>
       </ChoosedDayWrapper>
     </>
   );
 }
+
+// 1. Компонент рендериться на розширеному маршруті сторінки /calendar/day/:currentDay
+// 2. Компонент підписаний на колекцію завдань з глобального стейту
+// 3. Компонент визначає завдання для обраного дня, фільтрує за ступенем віиконання To do | In progress | Done та показує і відповідних колонках.
+// 5. Компонент рендерить:
+//  - DayCalendarHead - дні тижня з датами, клік по дню з датою показує колинки з задачами за обраний день.
+//  - TasksColumnsList - блок з трьома колонками списків завданнь - TasksColumn (To do | In progress | Done). На мобільній та планшетній версії має горизонтальний скрол, якщо колонок більше ніж вміщає ширина екрану пристрою юзера.

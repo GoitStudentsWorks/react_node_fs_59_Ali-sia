@@ -1,9 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { selectIsLoggedIn } from 'redux/auth/auth.selectors';
 
 import { setAuthHeader, privateApi } from 'services/http';
 
 axios.defaults.baseURL = 'https://goose-track-backend-8txo.onrender.com';
+// axios.defaults.baseURL = 'http://localhost:4000';
 
 export const fetchColumns = createAsyncThunk(
   'columns/fetchAll',
@@ -44,7 +46,7 @@ export const addColumn = createAsyncThunk(
         number,
       });
 
-      return data.data.result;
+      return data;
     } catch (e) {
       return rejectWithValue(e.message);
     }
@@ -52,20 +54,24 @@ export const addColumn = createAsyncThunk(
 );
 
 export const deleteColumn = createAsyncThunk(
-  'columns/deleteColumn',
-  async (id, { getState, rejectWithValue }) => {
+  'contacts/deleteColumn',
+  async (columnId, { getState, rejectWithValue }) => {
     const state = getState();
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
-      return rejectWithValue('Unable to delete column');
+      return rejectWithValue('Unable to fetch columns');
     }
     try {
+      const isLoggedIn = selectIsLoggedIn();
+      if (!isLoggedIn) {
+        return rejectWithValue();
+      }
       setAuthHeader(persistedToken);
 
-      const { data } = await privateApi.delete(`/api/columns/${id}`);
+      const { data } = await privateApi.delete(`/api/columns/${columnId}`);
 
-      return data.data.result._id;
+      return data;
     } catch (e) {
       return rejectWithValue(e.message);
     }

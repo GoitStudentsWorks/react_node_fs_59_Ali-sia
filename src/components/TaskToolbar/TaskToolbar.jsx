@@ -49,8 +49,8 @@ const TaskToolbar = ({ task, columns, setIsContextMenuOpen }) => {
     };
   }, [setIsContextMenuOpen, showMenu]);
 
-  const handleMoveTask = (columnId, task) => {
-    const newTask = { ...task, category: columnId };
+  const handleMoveTask = (category, task) => {
+    const newTask = { ...task, category: category };
     dispatch(editTask(newTask))
       .unwrap()
       .catch(e => {
@@ -82,7 +82,7 @@ const TaskToolbar = ({ task, columns, setIsContextMenuOpen }) => {
   };
 
   // const columns = ['To do', 'In progress', 'Done'];
-  const otherColumns = columns.filter(column => column._id !== task.category);
+  const otherColumns = columns.filter(column => column.title !== task.category);
 
   return (
     <Toolbar>
@@ -98,7 +98,7 @@ const TaskToolbar = ({ task, columns, setIsContextMenuOpen }) => {
         {otherColumns.map(column => (
           <ContextMenuItem
             key={'menu' + column.title}
-            onClick={() => handleMoveTask(column._id, task)}
+            onClick={() => handleMoveTask(column.title, task)}
           >
             {column.title}
             <MoveTaskIcon theme={currentTheme} />
