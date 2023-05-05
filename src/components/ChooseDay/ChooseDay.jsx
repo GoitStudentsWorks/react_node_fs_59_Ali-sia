@@ -27,18 +27,14 @@ export default function ChoosedDay({
   const dispatch = useDispatch();
   const columns = useSelector(selectColumns);
   const isColumnsLoading = useSelector(isLoading);
-  const {  isLoggedIn } = useAuth();
+  const { isRefreshing, isLoggedIn } = useAuth();
   const { tasks } = useTasks();
   const columnData = [...columns];
   const [draggedTask, setDraggedTask] = useState();
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      return;
-    }
-
     dispatch(fetchColumns());
-  }, [dispatch, isLoggedIn]);
+  }, [dispatch]);
 
   const getSortedColumnList = columnData =>
     columnData.sort((a, b) => a.number - b.number);
@@ -71,9 +67,9 @@ export default function ChoosedDay({
           changeActiveDay={changeActiveDay}
         />
         <TasksColumnsListWrapper>
-          {(isColumnsLoading) && <LoaderForColumns />}
-        
-          <TasksColumnsList>
+          {isColumnsLoading && <LoaderForColumns />}
+          {!isColumnsLoading && 
+            <TasksColumnsList>
             {sortedColumnList.map((column, idx) => {
               getTasksForColumn(column._id);
               getTasksForDeleteColumn(column._id);
@@ -96,6 +92,30 @@ export default function ChoosedDay({
               />
             </AddNewColumn>
           </TasksColumnsList>
+          }
+          {/* <TasksColumnsList>
+            {sortedColumnList.map((column, idx) => {
+              getTasksForColumn(column._id);
+              getTasksForDeleteColumn(column._id);
+              return (
+                <TasksColumn
+                  key={'taskcolumn' + idx}
+                  column={column}
+                  sortedColumnList={sortedColumnList}
+                  tasksForColumn={tasksForColumn}
+                  tasksForDeleteColumn={tasksForDeleteColumn}
+                  setDraggedTask={setDraggedTask}
+                  draggedTask={draggedTask}
+                />
+              );
+            })}
+            <AddNewColumn>
+              <AddColumnBtn
+                children="Add your own category"
+                column={columnData}
+              />
+            </AddNewColumn>
+          </TasksColumnsList> */}
         </TasksColumnsListWrapper>
       </ChoosedDayWrapper>
     </>
