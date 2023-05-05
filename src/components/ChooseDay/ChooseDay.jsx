@@ -13,10 +13,11 @@ import {
 import { endOfDay, getTime, parseJSON, startOfDay } from 'date-fns';
 import { useTasks } from 'hooks/useTasks';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectColumns } from 'redux/columns/columns.selectors';
+import { isLoading, selectColumns } from 'redux/columns/columns.selectors';
 import { fetchColumns } from 'redux/columns/columns.operations';
 import { AddColumnBtn } from 'components/Buttons/AddColumnBtn/AddColumnBtn';
 import { useAuth } from 'hooks';
+import LoaderForColumns from 'components/Loader/LoaderForColumns';
 
 export default function ChoosedDay({
   currentDate,
@@ -25,7 +26,8 @@ export default function ChoosedDay({
 }) {
   const dispatch = useDispatch();
   const columns = useSelector(selectColumns);
-  const { isLoggedIn } = useAuth();
+  const isColumnsLoading = useSelector(isLoading);
+  const {  isLoggedIn } = useAuth();
   const { tasks } = useTasks();
   const columnData = [...columns];
   const [draggedTask, setDraggedTask] = useState();
@@ -69,6 +71,8 @@ export default function ChoosedDay({
           changeActiveDay={changeActiveDay}
         />
         <TasksColumnsListWrapper>
+          {(isColumnsLoading) && <LoaderForColumns />}
+        
           <TasksColumnsList>
             {sortedColumnList.map((column, idx) => {
               getTasksForColumn(column._id);
@@ -96,4 +100,4 @@ export default function ChoosedDay({
       </ChoosedDayWrapper>
     </>
   );
-}
+};

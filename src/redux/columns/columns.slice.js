@@ -10,15 +10,17 @@ const columnSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchColumns.pending, state => {
-        // state.columns.isLoading = true;
+        state.columns.isLoading = true;
       })
       .addCase(fetchColumns.fulfilled, (state, { payload }) => {
-        state.columns.columns = payload;
+        state.columns.isLoading = false;
         state.columns.error = null;
-      })
+        state.columns.columns = payload;
+        })
       .addCase(fetchColumns.rejected, (state, { payload }) => {
+        state.columns.isLoading = false;
         state.columns.error = payload;
-      })
+        })
       .addCase(addColumn.pending, state => {
       })
       .addCase(addColumn.fulfilled, (state, { payload }) => {
