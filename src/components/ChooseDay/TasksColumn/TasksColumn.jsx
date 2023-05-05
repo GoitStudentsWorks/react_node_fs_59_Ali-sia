@@ -27,6 +27,9 @@ export default function TasksColumn({
   };
   const handleDrop = (e, colonka) => {
     e.preventDefault();
+    if (draggedTask.category === colonka._id) {
+      return;
+    }
     const newData = { ...draggedTask, category: colonka._id };
     dispatch(editTask(newData))
       .unwrap()
