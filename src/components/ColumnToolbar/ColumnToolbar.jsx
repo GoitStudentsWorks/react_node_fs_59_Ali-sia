@@ -16,21 +16,20 @@ import {
 } from './ColumnToolbar.styled';
 import { deleteTask } from 'redux/tasks/tasks.operations';
 
-const ColumnToolbar = ({column, tasksForDeleteColumn}) => {
-  const [ isModalOpen, setIsModalOpen ] = useState(false)
+const ColumnToolbar = ({ column, tasksForDeleteColumn }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const dispatch = useDispatch();
   const currentTheme = useSelector(selectTheme);
-  
+
   const handleDelete = id => {
     setIsModalOpen(false);
     dispatch(deleteColumn(id))
       .unwrap()
       .then(() => {
         tasksForDeleteColumn.forEach(task => {
-          console.log('task: ', task)
           dispatch(deleteTask(task._id));
-        })
+        });
       })
       .catch(e => {
         toast.error(`Unable to delete column`);
@@ -45,7 +44,10 @@ const ColumnToolbar = ({column, tasksForDeleteColumn}) => {
         </Button>
       </Toolbar>
       <Modal onClose={() => setIsModalOpen(false)} isModalOpen={isModalOpen}>
-        <StyledP>Are you sure you want to delete? The column will be completely deleted with all tasks.</StyledP>
+        <StyledP>
+          Are you sure you want to delete? The column will be completely deleted
+          with all tasks.
+        </StyledP>
         <ButtonsWrapper>
           <StyledButton type="button" onClick={() => handleDelete(column._id)}>
             Yes

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import DayCalendarHead from './DayCalendarHead/DayCalendarHead';
 import TasksColumn from './TasksColumn/TasksColumn';
@@ -7,7 +7,7 @@ import {
   ChoosedDayWrapper,
   TasksColumnsList,
   TasksColumnsListWrapper,
-  AddNewColumn
+  AddNewColumn,
 } from './ChooseDay.styled';
 
 import { endOfDay, getTime, parseJSON, startOfDay } from 'date-fns';
@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectColumns } from 'redux/columns/columns.selectors';
 import { fetchColumns } from 'redux/columns/columns.operations';
 import { AddColumnBtn } from 'components/Buttons/AddColumnBtn/AddColumnBtn';
+import { useAuth } from 'hooks';
 
 export default function ChoosedDay({
   currentDate,
@@ -24,13 +25,18 @@ export default function ChoosedDay({
 }) {
   const dispatch = useDispatch();
   const columns = useSelector(selectColumns);
-
+  const { isLoggedIn } = useAuth();
   const { tasks } = useTasks();
   const columnData = [...columns];
+  const [draggedTask, setDraggedTask] = useState();
 
   useEffect(() => {
-    dispatch(fetchColumns())
-    }, [dispatch]);
+    if (!isLoggedIn) {
+      return;
+    }
+
+    dispatch(fetchColumns());
+  }, [dispatch, isLoggedIn]);
 
   const getSortedColumnList = columnData =>
     columnData.sort((a, b) => a.number - b.number);
@@ -74,6 +80,8 @@ export default function ChoosedDay({
                   sortedColumnList={sortedColumnList}
                   tasksForColumn={tasksForColumn}
                   tasksForDeleteColumn={tasksForDeleteColumn}
+                  setDraggedTask={setDraggedTask}
+                  draggedTask={draggedTask}
                 />
               );
             })}
@@ -89,4 +97,3 @@ export default function ChoosedDay({
     </>
   );
 }
-

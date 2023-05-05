@@ -15,7 +15,7 @@ import userAvatarDefault from './user.jpg';
 import { useAuth } from 'hooks';
 import TaskModal from 'components/TaskModal/TaskModal';
 
-export const TaskColumnCard = ({ task, sortedColumnList }) => {
+export const TaskColumnCard = ({ task, sortedColumnList, setDraggedTask }) => {
   const { user } = useAuth();
   const { title, priority } = task;
   const userAvatar = user.avatarURL ? user.avatarURL : userAvatarDefault;
@@ -46,9 +46,16 @@ export const TaskColumnCard = ({ task, sortedColumnList }) => {
   const handleClose = e => {
     setIsInfoOpen(false);
   };
-
+  const handleDragStart = (e, capturedTask) => {
+    e.stopPropagation();
+    setDraggedTask(capturedTask);
+  };
   return (
-    <CardContainer onClick={e => handleClick(e)}>
+    <CardContainer
+      onClick={e => handleClick(e)}
+      draggable={true}
+      onDragStart={e => handleDragStart(e, task)}
+    >
       <TaskTitle> {getTitle()} </TaskTitle>
       <StatsContainer>
         <ImageContainer>
