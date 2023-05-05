@@ -13,10 +13,11 @@ import {
 import { endOfDay, getTime, parseJSON, startOfDay } from 'date-fns';
 import { useTasks } from 'hooks/useTasks';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectColumns } from 'redux/columns/columns.selectors';
+import { isLoading, selectColumns } from 'redux/columns/columns.selectors';
 import { fetchColumns } from 'redux/columns/columns.operations';
 import { AddColumnBtn } from 'components/Buttons/AddColumnBtn/AddColumnBtn';
 import { useAuth } from 'hooks';
+import LoaderForColumns from 'components/Loader/LoaderForColumns';
 
 export default function ChoosedDay({
   currentDate,
@@ -25,18 +26,15 @@ export default function ChoosedDay({
 }) {
   const dispatch = useDispatch();
   const columns = useSelector(selectColumns);
-  const { isLoggedIn } = useAuth();
+  const isColumnsLoading = useSelector(isLoading);
+  const { isRefreshing, isLoggedIn } = useAuth();
   const { tasks } = useTasks();
   const columnData = [...columns];
   const [draggedTask, setDraggedTask] = useState();
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      return;
-    }
-
     dispatch(fetchColumns());
-  }, [dispatch, isLoggedIn]);
+  }, [dispatch]);
 
   const getSortedColumnList = columnData =>
     columnData.sort((a, b) => a.number - b.number);
@@ -69,7 +67,9 @@ export default function ChoosedDay({
           changeActiveDay={changeActiveDay}
         />
         <TasksColumnsListWrapper>
-          <TasksColumnsList>
+          {isColumnsLoading && <LoaderForColumns />}
+          {!isColumnsLoading && 
+            <TasksColumnsList>
             {sortedColumnList.map((column, idx) => {
               getTasksForColumn(column._id);
               getTasksForDeleteColumn(column._id);
@@ -92,8 +92,32 @@ export default function ChoosedDay({
               />
             </AddNewColumn>
           </TasksColumnsList>
+          }
+          {/* <TasksColumnsList>
+            {sortedColumnList.map((column, idx) => {
+              getTasksForColumn(column._id);
+              getTasksForDeleteColumn(column._id);
+              return (
+                <TasksColumn
+                  key={'taskcolumn' + idx}
+                  column={column}
+                  sortedColumnList={sortedColumnList}
+                  tasksForColumn={tasksForColumn}
+                  tasksForDeleteColumn={tasksForDeleteColumn}
+                  setDraggedTask={setDraggedTask}
+                  draggedTask={draggedTask}
+                />
+              );
+            })}
+            <AddNewColumn>
+              <AddColumnBtn
+                children="Add your own category"
+                column={columnData}
+              />
+            </AddNewColumn>
+          </TasksColumnsList> */}
         </TasksColumnsListWrapper>
       </ChoosedDayWrapper>
     </>
   );
-}
+};
