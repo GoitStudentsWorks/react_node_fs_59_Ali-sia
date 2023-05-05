@@ -69,7 +69,10 @@ export const UserForm = () => {
       .nullable()
       .transform(v => (v === '' ? null : v)),
     phone: Yup.string()
-      .matches(/^\+380\d{9}$/, 'The phone must contain "+380" and 9 digits.')
+      .matches(
+        /^[+]{0,1}[\d]+$/,
+        'Invalid number, cannot contain letters and symbols.'
+      )
       .nullable()
       .transform(v => (v === '' ? null : v)),
     telegram: Yup.string()
@@ -79,8 +82,8 @@ export const UserForm = () => {
       .transform(v => (v === '' ? null : v)),
   });
 
-  const handleImageUpload = e => {
-    const file = e.target.files[0];
+  const handleImageUpload = event => {
+    const file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onloadend = () => {
@@ -159,7 +162,10 @@ export const UserForm = () => {
             type="file"
             name="avatarFile"
             onBlur={handleBlur}
-            onChange={handleImageUpload}
+            onChange={event => {
+              handleImageUpload(event);
+              setSubmitting(false);
+            }}
           />
         </LabelPhotoSelection>
         <ErrorChoosingFileMessage>{errors.avatarFile}</ErrorChoosingFileMessage>
