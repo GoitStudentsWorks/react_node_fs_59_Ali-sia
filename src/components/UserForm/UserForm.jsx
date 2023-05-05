@@ -59,25 +59,22 @@ export const UserForm = () => {
       }
     ),
     name: Yup.string()
-      .min(3, 'The name must be at least 3 characters')
-      .max(16, 'The name must be 16 characters or less')
-      .required('The name is required'),
+      .min(3, 'The name must be at least 3 characters.')
+      .max(16, 'The name must be 16 characters or less.')
+      .required('The name is required.'),
     email: Yup.string()
-      .matches(/^[\w.%+-]+@(?:[\w-]+\.)+\w{2,}$/, 'Invalid email address')
+      .matches(/^[\w.%+-]+@(?:[\w-]+\.)+\w{2,}$/, 'Invalid email address.')
       .required('The email is required'),
     birthday: Yup.string()
       .nullable()
       .transform(v => (v === '' ? null : v)),
     phone: Yup.string()
-      .matches(
-        /^[+]{0,1}[\d]+$/,
-        'Invalid number, cannot contain letters and symbols.'
-      )
+      .matches(/^[+]{0,1}[\d]+$/, 'Invalid number.')
       .nullable()
       .transform(v => (v === '' ? null : v)),
     telegram: Yup.string()
-      .min(3, 'The name must be at least 3 characters')
-      .max(16, 'The telegram must be 16 characters or less')
+      .min(3, 'The name must be at least 3 characters.')
+      .max(16, 'The telegram must be 16 characters or less.')
       .nullable()
       .transform(v => (v === '' ? null : v)),
   });
