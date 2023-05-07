@@ -40,7 +40,7 @@ export const App = () => {
   return (
     <>
       <ThemeProvider theme={themeGlobal}>
-        <BrowserRouter basename="goose-track-team-4">
+        <BrowserRouter basename="react_node_fs_59_Ali-sia">
           <Suspense fallback={<Loader />}>
             <Toaster />
             <Routes>
