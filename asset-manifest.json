@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react_node_fs_59_Ali-sia/static/css/main.2e1c2691.css",
-    "main.js": "/react_node_fs_59_Ali-sia/static/js/main.fb22fbf1.js",
+    "main.js": "/react_node_fs_59_Ali-sia/static/js/main.8a9776a5.js",
     "static/js/151.81243729.chunk.js": "/react_node_fs_59_Ali-sia/static/js/151.81243729.chunk.js",
     "static/js/308.9b641bd8.chunk.js": "/react_node_fs_59_Ali-sia/static/js/308.9b641bd8.chunk.js",
     "static/js/791.ed1593e7.chunk.js": "/react_node_fs_59_Ali-sia/static/js/791.ed1593e7.chunk.js",
@@ -49,7 +49,7 @@
     "static/media/burger.svg": "/react_node_fs_59_Ali-sia/static/media/burger.3a432ea5c5360e99720e65aab7253b07.svg",
     "static/media/close.svg": "/react_node_fs_59_Ali-sia/static/media/close.c4d5fb5de4633ce0e3d635915e330628.svg",
     "main.2e1c2691.css.map": "/react_node_fs_59_Ali-sia/static/css/main.2e1c2691.css.map",
-    "main.fb22fbf1.js.map": "/react_node_fs_59_Ali-sia/static/js/main.fb22fbf1.js.map",
+    "main.8a9776a5.js.map": "/react_node_fs_59_Ali-sia/static/js/main.8a9776a5.js.map",
     "151.81243729.chunk.js.map": "/react_node_fs_59_Ali-sia/static/js/151.81243729.chunk.js.map",
     "308.9b641bd8.chunk.js.map": "/react_node_fs_59_Ali-sia/static/js/308.9b641bd8.chunk.js.map",
     "791.ed1593e7.chunk.js.map": "/react_node_fs_59_Ali-sia/static/js/791.ed1593e7.chunk.js.map",
@@ -63,6 +63,6 @@
   },
   "entrypoints": [
     "static/css/main.2e1c2691.css",
-    "static/js/main.fb22fbf1.js"
+    "static/js/main.8a9776a5.js"
   ]
 }
